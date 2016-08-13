@@ -1,0 +1,22 @@
+---
+- name: Firewall
+  hosts: linux
+  become: true
+  gather_facts: false
+
+  tasks:
+
+  - name: Mkdir /etc/iptables
+    action: file dest=/etc/iptables state=directory
+
+  - name: IPTables rulesets
+    action: copy src={{item}} dest=/etc/iptables/ mode=0644 owner=root group=root
+    with_items:
+    - files/rules
+    - files/rules.v6
+
+  - name: Create iptables-persistent service
+    action: copy src=files/iptables-persistent dest=/etc/init.d/ mode=0755 owner=root group=root
+
+  - name: Ensure iptables-persistent service is running
+    action: service name=iptables-persistent state=started enabled=yes

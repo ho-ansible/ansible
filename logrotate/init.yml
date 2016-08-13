@@ -1,0 +1,21 @@
+---
+- name: Rotate logs
+  hosts: log
+  become: true
+
+  tasks:
+
+  - name: Logrotate config
+    action: copy src=files/{{item}} dest=/etc/ mode=0644
+    with_items: 
+    - logrotate.conf
+    - logrotate.d
+
+  - name: Logrotate dirs
+    action: file path=/var/log/old owner=root group=adm mode=0770
+
+  - name: Logrotate package
+    action: apt pkg={{item}} state=present
+    with_items:
+    - logrotate
+    - cron

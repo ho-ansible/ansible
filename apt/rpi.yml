@@ -1,0 +1,13 @@
+---
+- name: Packages for Raspberry Pi
+  hosts: rpi
+  become: true
+  gather_facts: false
+
+  tasks:
+
+  - name: Install packages
+    action: apt pkg={{item}} state=present install_recommends=no
+    with_items:
+    - rpi-update
+

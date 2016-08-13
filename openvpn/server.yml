@@ -1,0 +1,13 @@
+---
+- name: OpenVPN server
+  hosts: vpnhub
+  become: true
+
+  tasks:
+
+  - name: OpenVPN server config
+    action: copy src=files/ho_server.conf dest=/etc/openvpn/ mode=0640
+
+  handlers:
+  - name: Restart OpenVPN
+    action: service name=openvpn state=restarted

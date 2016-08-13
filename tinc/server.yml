@@ -1,0 +1,9 @@
+---
+- name: tinc VPN server
+  hosts: vpn-server
+  become: yes
+
+  tasks:
+
+  - name: tinc public keys
+    copy: src=files/.private/hosts dest=/etc/tinc/ho/ mode=0644

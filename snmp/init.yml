@@ -1,0 +1,21 @@
+---
+- name: SNMP remote monitoring
+  hosts: linux
+  become: true
+
+  tasks:
+
+  - name: Install SNMPd
+    action: apt pkg=snmpd
+
+  - name: SNMPd config
+    action: template src=files/snmpd.conf dest=/etc/snmp/snmpd.conf
+    notify:
+    - Restart SNMPd
+
+  - name: SNMPd service
+    action: service name=snmpd state=started enabled=yes
+
+  handlers:
+  - name: Restart SNMPd
+    action: service name=snmpd state=restarted

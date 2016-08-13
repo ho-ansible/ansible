@@ -1,0 +1,63 @@
+#! /bin/sh
+### BEGIN INIT INFO
+# Provides:          tt-rss
+# Required-Start:    $remote_fs $syslog $time $network
+# Required-Stop:     $remote_fs $syslog $time $network
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Update RSS feeds for tt-RSS
+### END INIT INFO
+# /etc/init.d/tt-rss: start updater daemon for tt-RSS
+#
+
+PATH=/bin:/usr/bin:/sbin:/usr/sbin
+
+PHP=/usr/bin/php
+TTRSS=/var/www/tt-rss
+UPDATER=${TTRSS}/update.php
+MULTITHREAD="yes"
+TTUSER=www-data
+PIDFILE=/var/run/tt-rss.pid
+
+conf=/etc/default/tt-rss
+test -f $conf && . $conf
+
+[ "$MULTITHREAD" = "yes" ] && UPDATER=${TTRSS}/update_daemon2.php
+
+test -x "$PHP" || exit 0
+test -f "$UPDATER" || exit 0
+test -f "${TTRSS}/config.php" || exit 0
+
+. /lib/lsb/init-functions
+
+start() {
+    log_daemon_msg "Starting tt-RSS updater daemon" "tt-rss"
+    start-stop-daemon --start --background --make-pidfile --pidfile $PIDFILE --chuid $TTUSER --chdir $TTRSS --exec $PHP $UPDATER
+    log_end_msg 0
+}
+
+stop() {
+    log_daemon_msg "Stopping tt-RSS updater daemon" "tt-rss"
+    start-stop-daemon --stop --exec $PHP --pidfile $PIDFILE --oknodo 
+    rm -f $PIDFILE
+    log_end_msg 0
+}
+status() {
+    start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $PHP --test > /dev/null
+    case "$?" in
+        0) [ -e "$PIDFILE" ] && { echo "(dead, pid file $PIDFILE exists)"; return 1; }
+           echo "(not running)"; return 3 ;;
+        1) echo "(running)"; return 0 ;;
+        *) echo "(unknown)"; return 4 ;;
+    esac
+}
+
+case "$1" in
+  start)  start ;;
+  stop)   stop  ;;
+  restart|force-reload|reload) stop; start;;
+  status) status;;
+  *) echo "Usage: $0 {start|stop|restart|force-reload|reload}" exit 2;;
+esac
+
+exit 0

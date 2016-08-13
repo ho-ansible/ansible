@@ -1,0 +1,10 @@
+#! /bin/sh
+## /etc/tinc/ho/tinc-down
+## {{ansible_managed}}
+## Cleanup link config before shutting down tinc VPN connection
+
+ip=/sbin/ip
+dhcp=/sbin/dhcpcd
+
+$dhcp -k $INTERFACE
+$ip link set $INTERFACE down

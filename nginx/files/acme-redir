@@ -1,0 +1,5 @@
+# include in any ssl server that uses Let's Encrypt certs
+location /.well-known/acme-challenge {
+	return 302 http://wk.seanho.com$request_uri;
+}
+

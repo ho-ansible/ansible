@@ -1,0 +1,31 @@
+#!/bin/sh
+# {{ansible_managed}}
+#               Written by Simon Richter <sjr@debian.org>
+#
+### BEGIN INIT INFO
+# Provides:          iptables-persistent
+# Required-Start:    mountkernfs $local_fs
+# Required-Stop:     $local_fs
+# Default-Start:     S
+# Default-Stop:      
+# Short-Description: Set up iptables rules
+### END INIT INFO
+
+case "$1" in
+start|restart|reload)
+    if [ -f /etc/iptables/rules ]; then
+        iptables-restore </etc/iptables/rules
+    fi
+    if [ -f /etc/iptables/rules.v6 ]; then
+        ip6tables-restore </etc/iptables/rules.v6
+    fi
+    ;;
+stop|status)
+    ;;
+*)
+    echo "Usage: $0 {start|stop|restart|reload|status}" >&2
+    exit 1
+    ;;
+esac
+
+exit 0

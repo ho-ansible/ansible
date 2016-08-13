@@ -1,0 +1,52 @@
+---
+- name: nextCloud file sync server
+  hosts: cloud
+  become: true
+  gather_facts: no
+
+  tasks:
+
+  - name: nextCloud package
+    apt: pkg=nextcloud state=latest
+
+  - name: nextCloud config.php
+    copy: src=files/.private/config.php dest=/var/www/nextcloud/config/ owner=www-data group=www-data mode=0640
+
+  - name: nextCloud nginx config
+    copy: src=files/nextcloud dest=/etc/nginx/sites-available/
+
+  - name: Enable nextCloud
+    file: src=/etc/nginx/sites-available/nextcloud dest=/etc/nginx/sites-enabled/ state=link
+
+  - name: nextCloud directories
+    file: path={{item}} state=directory owner=www-data group=www-data mode=0750
+    with_items:
+    - /mnt/cloud
+    - /var/cache/nginx
+
+- name: nextCloud DB
+  hosts: cloud
+  become: true
+  become_user: postgres
+  gather_facts: no
+
+  vars:
+  - dbname: cloud
+  - dbuser: cloud
+
+  vars_files:
+  - .private/passwd.yml
+
+  tasks:
+
+  - name: Create nextCloud DB user
+    action: postgresql_user name={{dbuser}} password={{nextcloud_dbpw}} role_attr_flags=NOSUPERUSER,NOCREATEDB
+
+  - name: Create nextCloud DB
+    action: postgresql_db name={{dbname}} owner={{dbuser}}
+
+  # Dir permissions:
+  # root.www-data, o=
+  # www-data.www-data: apps assets config data themes updater
+  #
+  # See: https://gitlab.paragon-es.de/ansible-roles/nextcloud/blob/master/tasks/install.yml

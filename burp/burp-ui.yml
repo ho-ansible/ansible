@@ -1,0 +1,13 @@
+---
+- name: "Burp-UI: admin GUI"
+  hosts: backup-server
+  become: yes
+
+  tasks:
+
+  - name: "Burp-UI: config"
+    copy: src=files/burpui.cfg dest=/etc/burp/ mode=0640
+
+  - name: "Burp-UI: python package"
+    pip: name=burp-ui state=latest
+

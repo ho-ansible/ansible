@@ -1,0 +1,12 @@
+server {
+        listen 4343;
+        listen [::]:4343;
+	ssl on;
+
+        server_name ttrss.seanho.com;
+        root /var/www/tt-rss;
+
+	include acme-redir;
+
+        include nginx-php;
+}

@@ -1,0 +1,60 @@
+# {{ansible_managed}}
+
+*filter
+:INPUT DROP [0:0]
+:FORWARD DROP [0:0]
+:OUTPUT ACCEPT [0:0]
+
+# Loopback
+-A INPUT -i lo -j ACCEPT
+-A INPUT ! -i lo -d 127.0.0.0/8 -j REJECT
+
+# Quickly cull invalid packets
+-A INPUT -m state --state INVALID -j DROP
+
+# Accept all established inbound connections
+-A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+# Allow VPNs
+-A INPUT -p udp --dport 1194 -j ACCEPT
+-A INPUT -p udp --dport 655 -j ACCEPT
+-A INPUT -p tcp --dport 655 -j ACCEPT
+-A INPUT -i ho -j ACCEPT
+-A INPUT -i tun+ -j ACCEPT
+-A FORWARD -i ho -j ACCEPT
+-A FORWARD -o ho -j ACCEPT
+-A FORWARD -i tun+ -j ACCEPT
+-A FORWARD -o tun+ -j ACCEPT
+
+# Allow HTTP and HTTPS connections from anywhere
+-A INPUT -p tcp --dport 80 -j ACCEPT
+-A INPUT -p tcp --dport 443 -j ACCEPT
+-A INPUT -p tcp --dport 4343 -j ACCEPT
+
+# Allow SSH connections (only 3 attempts by an IP every minute)
+#-A INPUT -p tcp -m tcp --dport 26 -m state --state NEW -m recent --set --name DEFAULT --rsource
+#-A INPUT -p tcp -m tcp --dport 26 -m state --state NEW -m recent --update --seconds 60 --hitcount 3 --name DEFAULT --rsource -j DROP
+-A INPUT -p tcp -m state --state NEW --dport 26 -j ACCEPT
+
+# Allow ping et al.
+-A INPUT -p icmp -j ACCEPT
+
+# log iptables denied calls (Can grow log files fast!)
+#-A INPUT -m limit --limit 5/min -j LOG --log-prefix "iptables denied: " --log-level 7
+
+COMMIT
+
+*nat
+:PREROUTING ACCEPT [0:0]
+:POSTROUTING ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+COMMIT
+
+*mangle
+:PREROUTING ACCEPT [0:0]
+:INPUT ACCEPT [0:0]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+:POSTROUTING ACCEPT [0:0]
+COMMIT
+

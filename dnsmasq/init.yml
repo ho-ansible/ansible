@@ -1,0 +1,25 @@
+---
+- name: DNSMasq DHCP+DNS server
+  hosts: dns
+  become: true
+
+  tasks:
+
+  - name: DNSmasq config
+    action: template src=files/{{item}} dest=/etc/ mode=0644
+    with_items: 
+    - dnsmasq.conf
+    - dnsmasq.opts
+    - dnsmasq.hosts
+    notify:
+    - Restart DNSMasq
+
+  - name: DNSMasq package
+    action: apt pkg=dnsmasq state=present
+
+  - name: DNSMasq service
+    action: service name=dnsmasq state=started enabled=yes
+
+  handlers:
+  - name: Restart DNSMasq
+    action: service name=dnsmasq state=restarted

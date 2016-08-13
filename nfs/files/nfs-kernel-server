@@ -1,0 +1,2 @@
+RPCNFSDCOUNT=4
+RPCMOUNTDOPTS=--manage-gids

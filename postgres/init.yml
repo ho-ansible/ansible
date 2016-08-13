@@ -1,0 +1,32 @@
+---
+- name: PostgreSQL database
+  hosts: db
+  become: true
+  gather_facts: false
+
+  tasks:
+
+  - name: PostgreSQL APT key
+    apt_key: url=https://www.postgresql.org/media/keys/ACCC4CF8.asc
+
+  - name: PostgreSQL repository
+    apt_repository: repo='deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main' # filename='postgresql'
+
+  - name: PostgreSQL packages
+    apt: pkg={{item}} state=latest
+    with_items:
+    - postgresql
+    - postgresql-client
+    - libpq-dev
+    - python-psycopg2
+
+  - name: PostgreSQL config
+    copy: src={{item}} dest=/etc/postgresql/9.1/main/ mode=0640 owner=postgres group=postgres
+    with_items:
+    - files/pg_hba.conf
+    - files/postgresql.conf
+
+  - name: PostgreSQL service
+    service: name=postgresql state=started enabled=yes
+
+# mysql-server

@@ -1,0 +1,43 @@
+---
+- name: Nginx web server
+  hosts: web
+  become: true
+
+  tasks:
+
+  - name: NGINX APT key
+    apt_key: url=http://nginx.org/keys/nginx_signing.key
+     
+  - name: NGINX repository
+    apt_repository: repo='deb http://nginx.org/packages/mainline/debian/ jessie nginx' # filename='nginx'
+
+  - name: Nginx package
+    apt: pkg=nginx state=latest
+
+  - name: Nginx config
+    copy: src={{item}} dest=/etc/nginx/ owner=root group=root mode=0640
+    with_items:
+    - files/nginx.conf
+    - files/conf.d
+    - files/sites-available
+    - files/sites-enabled
+    - files/.private/ssl
+    - files/acme-redir
+    notify:
+    - Restart Nginx
+
+  - name: Enable default site
+    file: src=/etc/nginx/sites-available/default dest=/etc/nginx/sites-enabled/0default state=link
+
+  - name: Default directory for web host
+    file: path=/var/www/html state=directory
+
+  - name: Default index.html
+    template: src=files/index.html dest=/var/www/html/index.html owner=www-data group=www-data mode=0644
+
+  - name: Nginx service
+    service: name=nginx state=started enabled=yes
+
+  handlers:
+  - name: Restart Nginx
+    service: name=nginx state=restarted

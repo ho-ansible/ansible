@@ -1,0 +1,73 @@
+## {{ansible_managed}}
+### Nginx config for ownCloud
+
+# Prepare for PHP caching
+fastcgi_cache_path /var/cache/nginx/ levels=1:2 keys_zone=OWNCLOUD:20m inactive=4w max_size=200M use_temp_path=off;
+fastcgi_cache_key $http_cookie$request_method$host$request_uri;
+fastcgi_cache_valid 2w;
+fastcgi_cache_methods GET HEAD;
+fastcgi_cache_use_stale updating error timeout invalid_header http_500;
+fastcgi_cache_lock on;
+map $request_uri $skip_cache {
+	default 1;
+	~*/thumbnail.php 0;
+	~*/apps/galleryplus/ 0;
+	~*/apps/gallery/ 0;
+}
+fastcgi_cache_bypass $skip_cache;
+fastcgi_no_cache $skip_cache;
+fastcgi_ignore_headers Cache-Control Expires Set-Cookie;
+
+server {
+	listen 4343 ssl;
+	listen [::]:4343 ssl;
+	server_name cloud.seanho.com;
+	root /var/www/owncloud;
+
+	# See php.ini: upload_max_filesize, post_max_size, max_execution_time, max_input_time
+	client_max_body_size 10G;
+	fastcgi_buffers 64 4K;
+
+	fastcgi_cache OWNCLOUD;		# Enable PHP caching
+
+	error_page 403 /core/templates/403.php;
+	error_page 404 /core/templates/404.php;
+	rewrite ^/.well-known/carddav /remote.php/carddav/ permanent;
+	rewrite ^/.well-known/caldav  /remote.php/caldav/  permanent;
+
+	location = /robots.txt {
+		allow all;
+		log_not_found off;
+		access_log off;
+	}
+
+	include acme-redir;
+
+	location ~ ^/(build|tests|config|lib|3rdparty|templates|data)/ {
+		deny all;
+	}
+
+	location ~ ^/(?:\.|autotest|occ|issue|indie|db_|console) {
+		deny all;
+	}
+
+	location / {
+		rewrite ^/remote/(.*) /remote.php last;
+		try_files $uri $uri/ =404;
+	}
+
+	include nginx-php;
+
+	# Must be BELOW the "location ~ \.php(?:$|/)" block
+	location ~* \.(?:css|js)$ {
+		try_files $uri /index.php$uri$is_args$args;
+		access_log off;
+	}
+
+	# Other assets
+	location ~* \.(?:jpg|jpeg|gif|bmp|ico|png|swf)$ {
+		try_files $uri /index.php$uri$is_args$args;
+		access_log off;
+	}
+
+}

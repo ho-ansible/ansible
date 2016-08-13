@@ -1,0 +1,12 @@
+/var/log/debug
+/var/log/cron.log
+/var/log/mail.log
+/var/log/auth.log
+/var/log/tinc.log
+/var/log/messages
+{
+        sharedscripts
+        postrotate
+                invoke-rc.d rsyslog rotate > /dev/null
+        endscript
+}

@@ -1,0 +1,4 @@
+#! /etc/burp/upgrade/server/Debian/script
+## Burp auto-upgrade script: for Debian
+
+dpkg -i --force-overwrite --force-confdef /etc/burp/upgrade/package &> /dev/null

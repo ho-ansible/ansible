@@ -1,0 +1,13 @@
+---
+- name: Top-level Ansible playbook
+  hosts: all
+
+- include: apt/init.yml
+- include: bash/init.yml
+- include: tinc/init.yml
+- include: iptables/init.yml
+- include: syslog/init.yml
+- include: nginx/init.yml
+- include: php/init.yml
+- include: postgres/init.yml
+- include: ttrss/init.yml

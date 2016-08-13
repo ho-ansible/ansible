@@ -1,0 +1,28 @@
+---
+- name: OpenSSH
+  hosts: linux
+  become: true
+  gather_facts: false
+
+  tasks:
+
+  - name: OpenSSH config
+    copy: src={{item}} dest=/etc/ssh/ mode=0644 owner=root group=root
+    with_items:
+    - files/sshd_config
+
+  - name: OpenSSH package
+    apt: pkg=openssh-server state=present
+
+  - name: OpenSSH service
+    service: name=ssh state=started enabled=yes
+
+# ssh-keygen -G /tmp/moduli-cand -b 4096
+# ssh-keygen -T /tmp/moduli -f /tmp/moduli-cand          # slow!
+# mv /tmp/moduli /etc/ssh/moduli
+# rm /etc/ssh/ssh_host_*_key
+# ssh-keygen -t ed25519 -f /etc/ssh/ssh_host_ed25519_key
+# ssh-keygen -t rsa -b 4096 -f /etc/ssh/ssh_host_rsa_key
+
+# ssh-keygen -t ed25519 -o -a 100
+# ssh-keygen -t rsa -b 4096 -o -a 100

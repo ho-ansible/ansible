@@ -1,0 +1,46 @@
+---
+- name: tinc VPN client
+  hosts: debian:!tinc-server
+  become: yes
+
+  tasks:
+
+  - name: tinc directories
+    file: path={{item}} state=directory
+    with_items:
+    - /etc/tinc/ho/hosts
+    - /var/www
+
+  - name: tinc net.boot
+    copy: src=files/nets.boot dest=/etc/tinc/ mode=0644
+
+  - name: tinc config
+    template: src=files/tinc.conf dest=/etc/tinc/ho/ mode=0644
+
+  - name: tinc scripts
+    template: src=files/{{item}} dest=/etc/tinc/ho/ mode=0755
+    with_items:
+    - tinc-up
+    - tinc-down
+
+  - name: tinc client key
+    copy: src=files/.private/keys/{{ansible_hostname}}.priv dest=/etc/tinc/ho/rsa_key.priv mode=0400
+
+  - name: tinc public keys
+    copy: src=files/.private/hosts/{{item}} dest=/etc/tinc/ho/hosts/ mode=0644
+    with_items:
+    - tinc1
+    - tinc2
+    - "{{ansible_hostname}}"
+
+  - name: tinc package
+    apt: pkg={{item}} state=present
+    with_items:
+    - tinc
+    - dhcpcd5
+
+  - name: dhcpcd resolv.conf
+    copy: src=files/resolv.conf.tail dest=/etc/
+
+  - name: tinc service
+    service: name=tinc state=started enabled=yes

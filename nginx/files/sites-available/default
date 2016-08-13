@@ -1,0 +1,23 @@
+## Nginx master config
+server {
+	listen 80 default;
+	listen [::]:80 default ipv6only=on;
+
+	root /var/www/html;
+	index index.html index.htm;
+
+	include acme-redir;
+
+	location / {
+		try_files $uri $uri/ /index.html;
+	}
+
+        location /nginx_status {
+                stub_status on;
+                access_log off;
+                allow 127.0.0.1;
+		allow 10.100.0.0/16;
+                deny all;
+        }
+
+}

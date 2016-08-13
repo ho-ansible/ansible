@@ -1,0 +1,3 @@
+## /etc/default/nrpe
+## Referenced by /etc/init.d/nrpe
+DAEMON_ARGS="-c /etc/nagios/nrpe.cfg -d"

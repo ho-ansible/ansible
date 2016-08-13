@@ -1,0 +1,7 @@
+/var/log/dnsmasq
+{
+	create 640 dnsmasq adm
+        postrotate
+                [ ! -f /var/run/dnsmasq/dnsmasq.pid ] || kill -HUP `cat /var/run/dnsmasq/dnsmasq.pid`
+        endscript
+}

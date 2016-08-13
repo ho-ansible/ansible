@@ -1,0 +1,2 @@
+# sysklogd command line args
+SYSLOGD="-m 14400"

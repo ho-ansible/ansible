@@ -1,0 +1,58 @@
+---
+- name: tt-RSS
+  hosts: ttrss
+  become: true
+  gather_facts: false
+
+  vars_files:
+  - .private/passwd.yml
+
+  tasks:
+
+  - name: Install prerequisite packages
+    apt: pkg={{item}} state=present install_recommends=no force=yes
+    with_items:
+    - php5-cli
+    - php5-gd
+    - php5-curl
+    - php5-pgsql
+
+  - name: Git checkout from tt-RSS trunk
+    git: repo=https://tt-rss.org/git/tt-rss.git dest=/var/www/tt-rss depth=1 
+
+  - name: tt-RSS config.php
+    template: src=files/config.php dest=/var/www/tt-rss/
+
+  - name: tt-RSS nginx config
+    copy: src=files/tt-rss.nginx dest=/etc/nginx/sites-available/tt-rss owner=root group=root mode=0640
+
+  - name: Enable tt-RSS in nginx
+    file: src=/etc/nginx/sites-available/tt-rss dest=/etc/nginx/sites-enabled/tt-rss state=link
+
+  - name: tt-RSS updater init script
+    copy: src=files/tt-rss dest=/etc/init.d/ owner=root group=root mode=0755
+
+  - name: tt-RSS updater service
+    service: name=tt-rss state=started enabled=yes
+
+- name: tt-RSS DB
+  hosts: ttrss
+  become: true
+  become_user: postgres
+  gather_facts: no
+
+  vars:
+  - dbname: ttrss
+  - dbuser: ttrss
+
+  vars_files:
+  - .private/passwd.yml
+
+  tasks:
+
+  - name: Create tt-RSS DB user
+    postgresql_user: name={{dbuser}} password={{ttrss_dbpw}} role_attr_flags=NOSUPERUSER,NOCREATEDB
+
+  - name: Create tt-RSS DB
+    postgresql_db: name={{dbname}} owner={{dbuser}}
+

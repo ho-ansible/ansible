@@ -1,0 +1,25 @@
+---
+- name: Remote syslog
+  hosts: debian:!log
+  become: true
+  gather_facts: false
+
+  tasks:
+
+  - name: rsyslog packages
+    action: apt pkg={{item}} state=present
+    with_items:
+    - rsyslog
+    - rsyslog-relp
+
+  - name: rsyslog config
+    action: copy src=files/rsyslog.conf dest=/etc/
+    notify:
+    - Restart rsyslog
+
+  - name: rsyslog service
+    action: service name=rsyslog state=started enabled=yes
+
+  handlers:
+  - name: Restart rsyslog
+    action: service name=rsyslog state=restarted

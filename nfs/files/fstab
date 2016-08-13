@@ -1,0 +1,2 @@
+10.100.1.1:/srv/owncloud        /mnt/nfs/oc-enc nfs     rw,async,hard,intr       0 0
+encfs#/mnt/nfs/oc-enc           /mnt/oc-data    fuse    owner                   0 0
