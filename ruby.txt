@@ -1,2 +1,0 @@
-apt: ruby-dev
-gem install travis
