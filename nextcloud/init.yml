@@ -12,6 +12,9 @@
   - name: nextCloud config.php
     copy: src=files/.private/config.php dest=/var/www/nextcloud/config/ owner=www-data group=www-data mode=0640
 
+  - name: nextCloud PHP config
+    copy: src=files/.user.ini dest=/var/www/nextcloud/ owner=root group=www-data mode=0640
+
   - name: nextCloud nginx config
     copy: src=files/nextcloud dest=/etc/nginx/sites-available/
 
