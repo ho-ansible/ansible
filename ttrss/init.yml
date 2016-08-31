@@ -30,7 +30,7 @@
     file: src=/etc/nginx/sites-available/tt-rss dest=/etc/nginx/sites-enabled/tt-rss state=link
 
   - name: tt-RSS updater init script
-    copy: src=files/tt-rss dest=/etc/init.d/ owner=root group=root mode=0755
+    copy: src=files/tt-rss.service dest=/etc/systemd/system/ owner=root group=root mode=0644
 
   - name: tt-RSS updater service
     service: name=tt-rss state=started enabled=yes
