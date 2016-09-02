@@ -1,0 +1,37 @@
+<?php
+$CONFIG = array (
+  'trusted_domains' => 
+  array (
+    0 => 'cloud.seanho.com',
+  ),
+  'datadirectory' => '/mnt/cloud',
+  'overwrite.cli.url' => 'https://cloud.seanho.com:4343',
+  'htaccess.RewriteBase' => '/',
+  'dbtype' => 'pgsql',
+  'dbname' => 'cloud',
+  'dbhost' => 'localhost',
+  'dbtableprefix' => 'oc_',
+  'dbuser' => 'cloud',
+  'version' => '9.0.53.0',
+  'logtimezone' => 'UTC',
+  'installed' => true,
+  'maintenance' => false,
+  'memcache.local' => '\OC\Memcache\APCu',
+  'updatechecker' => true,
+  'loglevel' => 2,
+  'singleuser' => false,
+  'asset-pipeline.enabled' => true,
+  'part_file_in_storage' => false,
+  'filelocking.enabled' => false,
+  'enabledPreviewProviders' => array(
+    'OC\Preview\PNG',
+    'OC\Preview\JPEG',
+    'OC\Preview\GIF',
+    'OC\Preview\BMP',
+    'OC\Preview\XBitmap',
+    'OC\Preview\MP3',
+    'OC\Preview\TXT',
+    'OC\Preview\MarkDown',
+    'OC\Preview\Movie',
+  ),
+);
