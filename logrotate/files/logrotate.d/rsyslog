@@ -3,6 +3,7 @@
 /var/log/mail.log
 /var/log/auth.log
 /var/log/tinc.log
+/var/log/dhcpcd.log
 /var/log/messages
 {
         sharedscripts
