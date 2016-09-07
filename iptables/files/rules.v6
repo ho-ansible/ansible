@@ -12,15 +12,11 @@
 -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 
 # VPN access
--A INPUT -p udp --dport 1194 -j ACCEPT
 -A INPUT -p udp --dport 655 -j ACCEPT
 -A INPUT -p tcp --dport 655 -j ACCEPT
 -A INPUT -i ho -j ACCEPT
--A INPUT -i tun+ -j ACCEPT
 -A FORWARD -i ho -j ACCEPT
 -A FORWARD -o ho -j ACCEPT
--A FORWARD -i tun+ -j ACCEPT
--A FORWARD -o tun+ -j ACCEPT
 
 # Link-Local and multicast
 -A INPUT -s fe80::/10 -j ACCEPT
@@ -43,7 +39,7 @@
 -A INPUT -p udp -j DROP
 
 # IPv6 Forwarding
-#-A FORWARD -m state --state NEW -i tun+ -o venet0 -s <subnet-prefix>::/48 -j ACCEPT
+#-A FORWARD -m state --state NEW -i ho -o venet0 -s <subnet-prefix>::/48 -j ACCEPT
 #-A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
 
 COMMIT

@@ -16,15 +16,11 @@
 -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 
 # Allow VPNs
--A INPUT -p udp --dport 1194 -j ACCEPT
 -A INPUT -p udp --dport 655 -j ACCEPT
 -A INPUT -p tcp --dport 655 -j ACCEPT
 -A INPUT -i ho -j ACCEPT
--A INPUT -i tun+ -j ACCEPT
 -A FORWARD -i ho -j ACCEPT
 -A FORWARD -o ho -j ACCEPT
--A FORWARD -i tun+ -j ACCEPT
--A FORWARD -o tun+ -j ACCEPT
 
 # Allow HTTP and HTTPS connections from anywhere
 -A INPUT -p tcp --dport 80 -j ACCEPT
@@ -48,6 +44,10 @@ COMMIT
 :PREROUTING ACCEPT [0:0]
 :POSTROUTING ACCEPT [0:0]
 :OUTPUT ACCEPT [0:0]
+
+# NAT from VPN to internet
+#-A POSTROUTING -s 10.100.1.0/24 -o venet0 -j SNAT --to-source 107.191.110.109
+
 COMMIT
 
 *mangle
