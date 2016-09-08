@@ -24,5 +24,8 @@
   - name: "burp: config"
     template: src=files/burp.conf dest=/etc/burp/
 
+  - name: "burp: cron"
+    copy: src=files/burp.cron dest=/etc/cron.daily/ mode=0755
+
   - name: "burp: dependencies"
     apt: pkg=librsync-dev
