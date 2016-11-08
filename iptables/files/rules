@@ -35,6 +35,9 @@
 # Allow ping et al.
 -A INPUT -p icmp -j ACCEPT
 
+# Allow DHCP client
+-A INPUT -p udp --dport 68 -j ACCEPT
+
 # log iptables denied calls (Can grow log files fast!)
 #-A INPUT -m limit --limit 5/min -j LOG --log-prefix "iptables denied: " --log-level 7
 
