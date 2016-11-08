@@ -1,0 +1,4 @@
+#! /bin/sh
+
+umask 0027
+/usr/bin/sudo -u postgres /usr/bin/pg_dumpall -w > /var/www/pg_dumpall.sql 

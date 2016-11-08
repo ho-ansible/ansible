@@ -1,3 +1,9 @@
 #! /bin/sh
 
-/usr/sbin/burp -a t
+log=/var/log/burp
+
+echo -n "====== " >> $log
+date >> $log
+/usr/sbin/burp -a t >> $log 2>&1
+echo >> $log
+

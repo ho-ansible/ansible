@@ -26,6 +26,9 @@
     - files/pg_hba.conf
     - files/postgresql.conf
 
+  - name: "PostgreSQL: backup script"
+    copy: src=files/pg_backup dest=/etc/cron.daily/ mode=0755
+
   - name: PostgreSQL service
     service: name=postgresql state=started enabled=yes
 
