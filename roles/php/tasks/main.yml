@@ -1,6 +1,5 @@
 ---
 - name: PHP
-  hosts: php
   become: true
   gather_facts: false
 
@@ -14,10 +13,10 @@
     - php5-apcu
 
   - name: Nginx PHP-FPM config include
-    copy: src=files/nginx-php dest=/etc/nginx/ owner=root group=root mode=0644
+    copy: src=nginx-php dest=/etc/nginx/ owner=root group=root mode=0644
 
   - name: PHP-FPM config
-    copy: src=files/{{item}} dest=/etc/php5/fpm/ owner=root group=root mode=0644
+    copy: src={{item}} dest=/etc/php5/fpm/ owner=root group=root mode=0644
     with_items:
     - php.ini
     - php-fpm.conf
@@ -25,13 +24,9 @@
     - Restart PHP-FPM
 
   - name: PHP-FPM pool config
-    copy: src=files/www.conf dest=/etc/php5/fpm/pool.d/ owner=root group=root mode=0644
+    copy: src=www.conf dest=/etc/php5/fpm/pool.d/ owner=root group=root mode=0644
     notify:
     - Restart PHP-FPM
 
   - name: PHP-FPM service
     service: name=php5-fpm state=started enabled=yes
-
-  handlers:
-  - name: Restart PHP-FPM
-    service: name=php5-fpm state=restarted
