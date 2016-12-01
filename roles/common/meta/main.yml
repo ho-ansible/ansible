@@ -1,0 +1,10 @@
+---
+# Basic setup for all hosts
+- hosts: os_Debian
+  roles:
+    - apt
+    - bash
+    - iptables
+    - tinc
+    - syslog
+
