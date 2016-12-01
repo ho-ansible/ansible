@@ -22,8 +22,3 @@
   - name: Install packages
     apt: pkg={{item}} state=present install_recommends=no
     with_items: "{{install_pkgs}}"
-
-  - name: TMux config
-    copy: src=files/tmux.conf dest=/home/seanho/.tmux.conf
-
-- include: rpi.yml
