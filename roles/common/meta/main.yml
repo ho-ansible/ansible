@@ -6,4 +6,5 @@ dependencies:
   - { role: iptables }
   - { role: tinc }
   - { role: rsyslog }
+  - { role: burp }
 
