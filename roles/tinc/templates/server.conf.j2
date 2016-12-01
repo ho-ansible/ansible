@@ -1,12 +1,11 @@
 ## /etc/tinc/ho/tinc.conf
-## Configuration for tinc mesh VPN
+## Configuration for tinc mesh VPN: server
 ## {{ansible_managed}}
 
 Port = {{ tinc_port }}
 
-Name = {{ ansible_hostname }}
-ConnectTo = tinc1
-ConnectTo = tinc2
+Name = {{ tinc_name }}
+ConnectTo = {{ tinc_other }}
 
 Mode = switch
 Device = /dev/net/tun
