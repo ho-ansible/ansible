@@ -1,33 +1,29 @@
 ---
 - name: Standard packages
-  hosts: debian
+  hosts: os_Debian
   become: true
   gather_facts: false
 
-  vars_files:
-  - vars/remove.yaml
-  - vars/install.yaml
-
   tasks:
 
+  - name: Stop unneeded services
+    service: name={{item}} state=stopped
+    with_items: "{{stop_services}}"
+
   - name: Clean unneeded packages
-    action: apt pkg={{item}} state=absent purge=yes install_recommends=no
+    apt: pkg={{item}} state=absent purge=yes install_recommends=no
     with_items: "{{remove_pkgs}}"
 
   - name: Update APT cache
-    action: apt update_cache=yes
+    apt: update_cache=yes
     notify:
     - apt upgrade
 
   - name: Install packages
-    action: apt pkg={{item}} state=present install_recommends=no
+    apt: pkg={{item}} state=present install_recommends=no
     with_items: "{{install_pkgs}}"
 
   - name: TMux config
     copy: src=files/tmux.conf dest=/home/seanho/.tmux.conf
-
-  handlers:
-  - name: apt upgrade
-    action: apt upgrade=full
 
 - include: rpi.yml

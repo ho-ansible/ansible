@@ -1,0 +1,3 @@
+---
+- name: apt upgrade
+  apt: upgrade=full
