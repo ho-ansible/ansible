@@ -1,8 +1,10 @@
 nyc1,10.100.1.1
 bhs2,10.100.1.2
-vil1,10.100.1.8,3h
+wndr,10.100.1.4,6h
+vil1,10.100.1.8
+pi,10.100.1.13
 maguro,1h
 cheribum,3h
 kitsilano,3h
-su-x130e,3h
-william-pc,3h
+su_x130e,3h
+d_yoga,3h
