@@ -1,6 +1,6 @@
 ---
 - name: tinc VPN client
-  hosts: debian:!tinc-server
+  hosts: debian:!vpn
   become: yes
 
   tasks:
@@ -12,35 +12,47 @@
     - /var/www
 
   - name: tinc net.boot
-    copy: src=files/nets.boot dest=/etc/tinc/ mode=0644
+    copy: src=nets.boot dest=/etc/tinc/ mode=0644
+    notify:
+    - restart tinc
 
   - name: tinc config
-    template: src=files/tinc.conf dest=/etc/tinc/ho/ mode=0644
+    template: src=tinc.conf.j2 dest=/etc/tinc/ho/tinc.conf mode=0600
+    notify:
+    - restart tinc
 
   - name: tinc scripts
-    template: src=files/{{item}} dest=/etc/tinc/ho/ mode=0755
+    template: src={{item}} dest=/etc/tinc/ho/ mode=0700
     with_items:
     - tinc-up
     - tinc-down
+    notify:
+    - restart tinc
 
   - name: tinc client key
-    copy: src=files/.private/keys/{{ansible_hostname}}.priv dest=/etc/tinc/ho/rsa_key.priv mode=0400
+    copy: src=.private/keys/{{ansible_hostname}}.priv dest=/etc/tinc/ho/rsa_key.priv mode=0400
+    notify:
+    - restart tinc
 
   - name: tinc public keys
-    copy: src=files/.private/hosts/{{item}} dest=/etc/tinc/ho/hosts/ mode=0644
+    copy: src=.private/hosts/{{item}} dest=/etc/tinc/ho/hosts/ mode=0644
     with_items:
     - tinc1
     - tinc2
     - "{{ansible_hostname}}"
+    notify:
+    - restart tinc
 
   - name: tinc package
     apt: pkg={{item}} state=present
     with_items:
     - tinc
     - dhcpcd5
+    notify:
+    - restart tinc
 
   - name: dhcpcd resolv.conf
-    copy: src=files/resolv.conf.tail dest=/etc/
+    copy: src=resolv.conf.tail dest=/etc/
 
   - name: tinc service
     service: name=tinc state=started enabled=yes
