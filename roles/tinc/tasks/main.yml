@@ -1,6 +1,5 @@
 ---
 - name: Tinc VPN
-  hosts: all
 
 - include: client.yml
 - include: server.yml
