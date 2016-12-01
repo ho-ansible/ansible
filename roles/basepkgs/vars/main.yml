@@ -51,7 +51,4 @@ install_pkgs:
 - less
 - vim
 - htop
-- bind9-host
 - aptitude
-- dhcpcd5
-- tmux
