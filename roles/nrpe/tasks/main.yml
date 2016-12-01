@@ -1,33 +1,32 @@
 ---
 - name: Nagios Remote Plugin Executor
-  hosts: linux
   become: true
 
   tasks:
 
   - name: Nagios NRPE agent packages
-    action: apt pkg={{item}} state=present
+    apt: pkg={{item}} state=present
     with_items:
     - nagios-nrpe-server
     - nagios-plugins-basic
 
   - name: Nagios NRPE initscript
-    action: copy src=files/nrpe dest=/etc/init.d/nrpe mode=0755
+    copy: src=nrpe dest=/etc/init.d/nrpe mode=0755
     notify:
     - Restart NRPE
 
   - name: Nagios NRPE initscript config
-    action: copy src=files/default_nrpe dest=/etc/default/nrpe
+    copy: src=default_nrpe dest=/etc/default/nrpe
     notify:
     - Restart NRPE
 
   - name: Nagios NRPE config
-    action: template src=files/nrpe_local.cfg dest=/etc/nagios/nrpe_local.cfg
+    template: nrpe_local.cfg.j2 dest=/etc/nagios/nrpe_local.cfg
     notify:
     - Restart NRPE
 
   - name: NRPE custom plugins
-    action: copy src=files/{{item}} dest=/usr/lib/nagios/plugins/ mode=0755
+    copy: src={{item}} dest=/usr/lib/nagios/plugins/ mode=0755
     with_items:
     - check_mem.pl
     - check_vzmem
@@ -35,8 +34,4 @@
     - Restart NRPE
 
   - name: Nagios NRPE service
-    action: service name=nrpe state=started enabled=yes
-
-  handlers:
-  - name: Restart NRPE
-    action: service name=nrpe state=restarted
+    service: name=nrpe state=started enabled=yes

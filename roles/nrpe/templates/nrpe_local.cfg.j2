@@ -1,5 +1,5 @@
 server_address={{ ansible_ho['ipv4']['address'] }}
-allowed_hosts=127.0.0.1,10.100.0.1,10.100.1.1
+allowed_hosts=127.0.0.1,10.100.1.1
 
 command[check_load]=/usr/lib/nagios/plugins/check_load -w 15,10,5 -c 30,25,20
 command[check_vzmem]=/usr/lib/nagios/plugins/check_vzmem
