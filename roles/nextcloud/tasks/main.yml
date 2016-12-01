@@ -1,6 +1,5 @@
 ---
 - name: nextCloud file sync server
-  hosts: cloud
   become: true
   gather_facts: no
 
@@ -28,7 +27,6 @@
     - /var/cache/nginx
 
 - name: nextCloud DB
-  hosts: cloud
   become: true
   become_user: postgres
   gather_facts: no
