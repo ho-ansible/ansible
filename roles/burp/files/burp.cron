@@ -2,8 +2,10 @@
 
 log=/var/log/burp
 
+PATH=/usr/sbin:$PATH; export PATH
+
 echo -n "====== " >> $log
 date >> $log
-/usr/sbin/burp -a t >> $log 2>&1
+burp -a t >> $log 2>&1
 echo >> $log
 

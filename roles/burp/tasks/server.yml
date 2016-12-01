@@ -1,18 +1,15 @@
 ---
 - name: "Burp: backup server"
-  hosts: backup-server
+  hosts: backup
   become: yes
 
   tasks:
 
   - name: "Burp: server config"
-    copy: src=files/server.conf dest=/etc/burp/ mode=0640
-
-  - name: "Burp: autoupgrade scripts"
-    copy: src=files/upgrade dest=/etc/burp/upgrade/server/
+    copy: src=server.conf dest=/etc/burp/ mode=0640
 
   - name: "burp: DH params"
-    copy: src=files/.private/dhfile.pem dest=/etc/burp/keys/
+    copy: src=_dhfile.pem dest=/etc/burp/keys/dhfile.pem mode=0400
 
   # Restore /etc/burp/CA/ dir from backups
 

@@ -3,10 +3,10 @@
 
 mode = client
 
-server = 10.100.1.8
-port = 4971
-status_address = 10.100.1.8
-status_port = 4972
+server = {{ burp_server }}
+port = {{ burp_port }}
+status_address = {{ burp_server }}
+status_port = {{ burp_status_port }}
 
 password = {{ burp_pw }}
 cname = {{ ansible_hostname }}

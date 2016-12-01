@@ -1,6 +1,6 @@
 [Global]
-port = 5000
-bind = 10.100.1.8
+port = {{ burp_ui_port }}
+bind = {{ burp_server }}
 ssl = false
 sslcert = /etc/burp/keys/server.crt
 sslkey =  /etc/burp/keys/server.key
@@ -12,8 +12,8 @@ auth = basic
 refresh = 30
 
 [Burp1]
-bhost = 10.100.1.8
-bport = 4972
+bhost = {{ burp_server }}
+bport = {{ burp_status_port }}
 burpbin = /usr/sbin/burp
 stripbin = /usr/sbin/vss_strip
 tmpdir = /tmp/burpui-restore
@@ -26,5 +26,5 @@ bconfsrv = /etc/burp/server.conf
 tmpdir = /tmp/burpui-restore
 
 [BASIC]
-admin = "pass__96"
+admin = "{{ burp_pw }}"
 

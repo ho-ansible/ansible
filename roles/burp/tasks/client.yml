@@ -1,10 +1,6 @@
 ---
 - name: "burp: backup client"
-  hosts: all
   become: true
-
-  vars_files:
-  - .private/passwd.yml
 
   tasks:
 
@@ -15,17 +11,17 @@
     - /etc/burp/keys
     - /etc/burp/upgrade
 
+  - name: "burp: dependencies"
+    apt: pkg=librsync-dev state=installed
+
   - name: "burp: executables"
-    copy: src=files/sbin/{{item}} dest=/usr/sbin/ mode=0755
+    copy: src=sbin/{{item}} dest=/usr/sbin/ mode=0755
     with_items:
     - burp
     - burp_ca
 
   - name: "burp: config"
-    template: src=files/burp.conf dest=/etc/burp/
+    template: src=burp.conf.j2 dest=/etc/burp/burp.conf
 
   - name: "burp: cron"
-    copy: src=files/burp.cron dest=/etc/cron.daily/burp mode=0755
-
-  - name: "burp: dependencies"
-    apt: pkg=librsync-dev
+    copy: src=burp.cron dest=/etc/cron.daily/ mode=0755
