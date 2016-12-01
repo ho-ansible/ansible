@@ -1,4 +1,5 @@
 ## snmpd.conf
+## {{ ansible_managed }}
 #   Try using 'snmpconf' to generate an snmpd.conf
 
 # Listen: [transport=udp:]addr[:port=161]
@@ -11,9 +12,8 @@ maxGetbulkRepeats 50
 dontLogTCPWrappersConnects 1
 
 # proc <procname> [max=0 [min=0]]
-proc syslogd
+proc rsyslog
 proc sshd
-proc openvpn
 
 disk / 10%
 load 12 10 7
