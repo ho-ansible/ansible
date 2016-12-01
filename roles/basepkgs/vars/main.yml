@@ -1,3 +1,7 @@
+stop_services:
+- sendmail
+- apache2
+
 remove_pkgs:
 - acpid
 - acpi-fakekey
@@ -41,6 +45,13 @@ remove_pkgs:
 - exim4-base
 - exim4-config
 
-stop_svcs:
-- sendmail
-- apache2
+install_pkgs:
+- locales
+- git
+- less
+- vim
+- htop
+- bind9-host
+- aptitude
+- dhcpcd5
+- tmux
