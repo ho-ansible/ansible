@@ -7,7 +7,6 @@
   tasks:
     - group_by: key=os_{{ ansible_distribution }}
 
-- include: vpn.yml
 - include: backup.yml
 - include: www.yml
 - include: news.yml
