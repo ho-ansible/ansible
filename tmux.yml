@@ -1,0 +1,4 @@
+---
+- hosts: tmux
+  roles:
+    - tmux
