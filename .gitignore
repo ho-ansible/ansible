@@ -4,3 +4,4 @@
 .private/
 *.retry
 _*
+host_vars/
