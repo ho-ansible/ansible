@@ -1,0 +1,6 @@
+---
+- hosts: www
+  roles:
+    - common
+    - nginx
+    - php
