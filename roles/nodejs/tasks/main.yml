@@ -1,7 +1,6 @@
 ---
 # curl -sL https://deb.nodesource.com/setup_4.x | /bin/bash
 - name: Node.js
-  hosts: nodejs
   become: true
 
   tasks:
@@ -23,7 +22,7 @@
     - yo
 
   - name: Node.js: nginx config
-    copy: src=files/nodejs dest=/etc/nginx/sites-available/
+    copy: src=nodejs dest=/etc/nginx/sites-available/
 
   - name: Node.js: enable nginx host
     file: src=/etc/nginx/sites-available/nodejs dest=/etc/nginx/sites-enabled/nodejs state=link
