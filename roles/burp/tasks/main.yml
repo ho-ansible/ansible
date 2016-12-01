@@ -1,6 +1,5 @@
 ---
 - name: Burp backup server
-  hosts: all
 
 - include: client.yml
 - include: server.yml
