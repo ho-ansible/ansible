@@ -10,16 +10,13 @@
     apt: pkg=nextcloud state=latest
 
   - name: nextCloud config
-    copy: src=files/{{ item }} dest=/var/www/nextcloud/config/ owner=www-data group=www-data mode=0640
-    with_items:
-    - config.php
-    - .private/secret.config.php
+    template: src=config.php.j2 dest={{ cloud_www }}/config/ owner=www-data group=www-data mode=0640
 
   - name: nextCloud PHP config
-    copy: src=files/.user.ini dest=/var/www/nextcloud/ owner=root group=www-data mode=0640
+    copy: src=.user.ini dest={{ cloud_www }}/ owner=root group=www-data mode=0640
 
   - name: nextCloud nginx config
-    copy: src=files/nextcloud dest=/etc/nginx/sites-available/
+    template: src=nextcloud-nginx.j2 dest=/etc/nginx/sites-available/nextcloud
 
   - name: Enable nextCloud
     file: src=/etc/nginx/sites-available/nextcloud dest=/etc/nginx/sites-enabled/ state=link
@@ -35,13 +32,6 @@
   become: true
   become_user: postgres
   gather_facts: no
-
-  vars:
-  - dbname: cloud
-  - dbuser: cloud
-
-  vars_files:
-  - .private/passwd.yml
 
   tasks:
 

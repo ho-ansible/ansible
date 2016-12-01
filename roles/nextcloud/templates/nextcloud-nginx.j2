@@ -1,5 +1,5 @@
+## Nginx config for nextCloud
 ## {{ansible_managed}}
-### Nginx config for nextCloud
 
 # Prepare for PHP caching
 fastcgi_cache_path /var/cache/nginx/ levels=1:2 keys_zone=CLOUD:20m inactive=4w max_size=200M use_temp_path=off;
@@ -19,10 +19,10 @@ fastcgi_no_cache $skip_cache;
 fastcgi_ignore_headers Cache-Control Expires Set-Cookie;
 
 server {
-	listen 4343 ssl;
-	listen [::]:4343 ssl;
-	server_name cloud.seanho.com;
-	root /var/www/nextcloud;
+	listen {{ cloud_port }}ssl;
+	listen [::]:{{ cloud_port }} ssl;
+	server_name {{ cloud_server }};
+	root {{ cloud_www_dir }};
 
 	# See php.ini: upload_max_filesize, post_max_size, max_execution_time, max_input_time
 	client_max_body_size 10G;
