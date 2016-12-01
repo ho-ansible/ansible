@@ -1,0 +1,4 @@
+---
+- hosts: dns
+  roles:
+    - dnsmasq

@@ -1,6 +1,5 @@
 ---
 - name: DNSMasq DHCP+DNS server
-  hosts: dns
   become: true
 
   tasks:
