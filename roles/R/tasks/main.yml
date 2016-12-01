@@ -1,13 +1,12 @@
 ---
 - name: R statistical software
-  hosts: R
   become: true
   gather_facts: false
 
   tasks:
 
   - name: Add CRAN package repository
-    action: copy src=files/cran.list dest=/etc/apt/sources.list.d/cran.list
+    copy: src=cran.list dest=/etc/apt/sources.list.d/cran.list
     notify:
     - apt upgrade
 
@@ -15,25 +14,17 @@
 
 # gpg --no-default-keyring --keyring cran.gpg --keyserver subkeys.pgp.net --recv-key 381BA480
 # cp ~/.gnupg/cran.gpg files/
-  - name: Add CRAN Debian GPG key
-    action: copy src=files/cran.gpg dest=/etc/apt/trusted.gpg.d/cran.gpg
-    notify:
-    - apt upgrade
 
-  - name: Update APT cache
-    action: apt update_cache=yes
+  - name: Add CRAN Debian GPG key
+    copy: src=cran.gpg dest=/etc/apt/trusted.gpg.d/cran.gpg
     notify:
     - apt upgrade
 
   - name: Install packages
-    action: apt pkg={{item}} state=present install_recommends=no force=yes
+    apt: pkg={{item}} state=present install_recommends=no force=yes
     with_items:
     - r-base
     - r-base-dev
-
-  handlers:
-  - name: apt upgrade
-    action: command apt-get upgrade -qy
 
 # /usr/bin/Rscript -e 'install.packages("RcppEigen", repos="http://cran.us.r-project.org")'
 
