@@ -1,15 +1,17 @@
 ---
-- name: Bash defaults
-  become: true
-  gather_facts: false
 
-  tasks:
+- name: Install bash
+  apt:
+    pkg: bash
+    state: present
 
-  - name: Install bash
-    apt: pkg=bash state=present
+- name: Install system bashrc
+  copy:
+    src: bash.bashrc
+    dest: /etc/
 
-  - name: Install system bashrc
-    copy: src=bash.bashrc dest=/etc/
+- name: Install config for less
+  copy:
+    src: 71less.sh
+    dest: /etc/profile.d/
 
-  - name: Install config for less
-    copy: src=71less.sh dest=/etc/profile.d/
