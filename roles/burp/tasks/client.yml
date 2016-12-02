@@ -1,27 +1,36 @@
 ---
-- name: "burp: backup client"
-  become: true
 
-  tasks:
+- name: Burp | directories
+  file:
+    path: "{{item}}"
+    state: directory
+    mode: 0750
+  with_items:
+  - /etc/burp
+  - /etc/burp/keys
+  - /etc/burp/upgrade
 
-  - name: "burp: directories"
-    file: path={{item}} state=directory mode=0750
-    with_items:
-    - /etc/burp
-    - /etc/burp/keys
-    - /etc/burp/upgrade
+- name: Burp | dependencies
+  apt:
+    pkg: librsync-dev
+    state: installed
 
-  - name: "burp: dependencies"
-    apt: pkg=librsync-dev state=installed
+- name: Burp | executables
+  copy:
+    src: "sbin/{{item}}"
+    dest: /usr/sbin/
+    mode: 0755
+  with_items:
+  - burp
+  - burp_ca
 
-  - name: "burp: executables"
-    copy: src=sbin/{{item}} dest=/usr/sbin/ mode=0755
-    with_items:
-    - burp
-    - burp_ca
+- name: Burp | config
+  template:
+    src: burp.conf.j2
+    dest: /etc/burp/burp.conf
 
-  - name: "burp: config"
-    template: src=burp.conf.j2 dest=/etc/burp/burp.conf
-
-  - name: "burp: cron"
-    copy: src=burp.cron dest=/etc/cron.daily/ mode=0755
+- name: Burp | cronjob
+  copy:
+    src: burp.cron
+    dest: /etc/cron.daily/
+    mode: 0755

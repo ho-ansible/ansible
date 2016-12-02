@@ -1,15 +1,17 @@
 ---
-- name: "Burp: backup server"
-  hosts: backup
-  become: yes
 
-  tasks:
+- name: Burp | server config
+  copy:
+    src: server.conf
+    dest: /etc/burp/
+    mode: 0640
 
-  - name: "Burp: server config"
-    copy: src=server.conf dest=/etc/burp/ mode=0640
+- name: Burp | DH params
+  copy:
+    src: _dhfile.pem
+    dest: /etc/burp/keys/dhfile.pem
+    mode: 0400
 
-  - name: "burp: DH params"
-    copy: src=_dhfile.pem dest=/etc/burp/keys/dhfile.pem mode=0400
-
-  # Restore /etc/burp/CA/ dir from backups
+# Restore /etc/burp/CA/ dir from backups
+# TODO: store keys in ansible?
 

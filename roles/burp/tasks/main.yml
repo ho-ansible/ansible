@@ -1,6 +1,4 @@
 ---
-- name: Burp backup server
-
 - include: client.yml
 - include: server.yml
 - include: burp-ui.yml

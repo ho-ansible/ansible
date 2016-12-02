@@ -1,13 +1,13 @@
 ---
-- name: "Burp-UI: admin GUI"
-  hosts: backup
-  become: yes
 
-  tasks:
+- name: Burp | web UI config
+  template:
+    src: burpui.cfg.j2
+    dest: /etc/burp/burpui.cfg
+    mode: 0640
 
-  - name: "Burp-UI: config"
-    template: src=burpui.cfg.j2 dest=/etc/burp/burpui.cfg mode=0640
-
-  - name: "Burp-UI: python package"
-    pip: name=burp-ui state=latest
+- name: Burp | web UI
+  pip:
+    name: burp-ui
+    state: latest
 
