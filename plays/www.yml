@@ -1,6 +1,7 @@
 ---
-- hosts: www
+- name: www.yml | Roles for webservers
+  hosts: www
   roles:
-    - common
-    - nginx
-    - php
+  - { role: common, tags: ["common"] }
+  - { role: nginx, tags: ["nginx"] }
+  - { role: php, tags: ["php"] }
