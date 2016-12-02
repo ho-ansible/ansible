@@ -1,20 +1,22 @@
 ---
-- name: Rotate logs
-  become: true
 
-  tasks:
+- name: Logrotate | config
+  copy:
+    src: logrotate.conf
+    dest: /etc/
+    mode: 0644
 
-  - name: Logrotate config
-    copy: src={{item}} dest=/etc/ mode=0644
-    with_items: 
-    - logrotate.conf
-    - logrotate.d
+- name: Logrotate | storage dir for old logs
+  file:
+    path: /var/log/old
+    owner: root
+    group: adm
+    mode: 0770
 
-  - name: Storage dir for old logs
-    file: path=/var/log/old owner=root group=adm mode=0770
-
-  - name: Logrotate package
-    apt: pkg={{item}} state=present
-    with_items:
-    - logrotate
-    - cron
+- name: Logrotate | package
+  apt:
+    pkg: "{{item}}"
+    state: present
+  with_items:
+  - logrotate
+  - cron
