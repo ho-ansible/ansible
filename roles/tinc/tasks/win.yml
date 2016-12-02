@@ -1,7 +1,8 @@
 ---
 - name: tinc VPN client (Windows)
-  hosts: win
+  hosts: os_Windows
 
+## TODO: Merge this into regular config, using group vars to set config dir and tinc.conf
 # install new TAP device
 # run "tincd -n ho" as admin and it will auto-install as service
 
@@ -13,17 +14,23 @@
     - /etc/tinc/ho/hosts
 
   - name: tinc config
-    template: src=files/tinc-win.conf dest=/etc/tinc/ho/tinc.conf mode=0644
+    template: src=tinc-win.conf dest=/etc/tinc/ho/tinc.conf mode=0644
+    notify:
+      - restart tinc
 
   - name: tinc client key
-    copy: src=files/keys/{{ansible_hostname}}.priv dest=/etc/tinc/ho/rsa_key.priv mode=0400
+    copy: src=.private/keys/{{ansible_hostname}}.priv dest=/etc/tinc/ho/rsa_key.priv mode=0400
+    notify:
+      - restart tinc
 
   - name: tinc public keys
-    copy: src=files/hosts/{{item}} dest=/etc/tinc/ho/hosts/ mode=0644
+    copy: src=.private/hosts/{{item}} dest=/etc/tinc/ho/hosts/ mode=0644
     with_items:
     - tinc1
     - tinc2
-    - ${ansible_hostname}
+    - "{{ ansible_hostname }}"
+    notify:
+      - restart tinc
 
   - name: tinc service
     service: name=tinc state=started enabled=yes
