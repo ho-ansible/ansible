@@ -1,13 +1,7 @@
 ---
-- name: Update+Upgrade Packages
-  hosts: os_Debian
-  become: true
-  gather_facts: false
 
-  tasks:
-
-  - name: Update APT cache
-    apt: update_cache=yes
-    notify:
-    - apt upgrade
+- name: Update APT cache
+  apt:
+    update_cache: yes
+  notify: apt upgrade
 
