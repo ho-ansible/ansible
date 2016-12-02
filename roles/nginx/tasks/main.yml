@@ -1,38 +1,57 @@
 ---
-- name: Nginx web server
-  become: true
 
-  tasks:
+- name: Nginx | APT key
+  apt_key:
+    url: http://nginx.org/keys/nginx_signing.key
 
-  - name: NGINX APT key
-    apt_key: url=http://nginx.org/keys/nginx_signing.key
+- name: Nginx | repository
+  apt_repository:
+    repo: 'deb http://nginx.org/packages/mainline/debian/ jessie nginx'
+    filename: 'nginx.list'
 
-  - name: NGINX repository
-    apt_repository: repo='deb http://nginx.org/packages/mainline/debian/ jessie nginx' # filename='nginx'
+- name: Nginx | package
+  apt:
+    pkg: nginx
+    state: latest
 
-  - name: Nginx package
-    apt: pkg=nginx state=latest
+- name: Nginx | config
+  copy:
+    src: "{{item}}"
+    dest: /etc/nginx/
+    owner: root
+    group: root
+    mode: 0640
+  with_items:
+  - nginx.conf
+  - conf.d
+  - sites-available
+  - sites-enabled
+  - _priv/ssl
+  - acme-redir
+  notify: restart nginx
 
-  - name: Nginx config
-    copy: src={{item}} dest=/etc/nginx/ owner=root group=root mode=0640
-    with_items:
-    - nginx.conf
-    - conf.d
-    - sites-available
-    - sites-enabled
-    - _priv/ssl
-    - acme-redir
-    notify:
-    - Restart Nginx
+- name: Nginx | enable default site
+  file:
+    src: /etc/nginx/sites-available/default
+    dest: /etc/nginx/sites-enabled/0default
+    state: link
 
-  - name: Enable default site
-    file: src=/etc/nginx/sites-available/default dest=/etc/nginx/sites-enabled/0default state=link
+- name: Nginx | default directory for web host
+  file:
+    path: /var/www/html
+    state: directory
 
-  - name: Default directory for web host
-    file: path=/var/www/html state=directory
+- name: Nginx | default index.html
+  template:
+    src: index.html.j2
+    dest: /var/www/html/index.html
+    owner: www-data
+    group: www-data
+    mode: 0644
+  notify: restart nginx
 
-  - name: Default index.html
-    template: src=index.html.j2 dest=/var/www/html/index.html owner=www-data group=www-data mode=0644
-
-  - name: Nginx service
-    service: name=nginx state=started enabled=yes
+- name: Nginx | service
+  service:
+    name: nginx
+    state: started
+    enabled: yes
