@@ -7,9 +7,9 @@
   tasks:
     - group_by: key=os_{{ ansible_os_family }}
 
-- include: tmux.yml
-- include: dns.yml
-- include: www.yml
-- include: news.yml
-- include: cloud.yml
-- include: R.yml
+- include: plays/tmux.yml
+- include: plays/dns.yml
+- include: plays/www.yml
+- include: plays/news.yml
+- include: plays/cloud.yml
+- include: plays/R.yml
