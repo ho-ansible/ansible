@@ -1,3 +1,58 @@
 ---
-- include: client.yml
-- include: server.yml
+
+- name: tinc VPN | directories
+  file:
+    path: "/etc/tinc/{{ tinc_name }}/hosts"
+    state: directory
+
+- name: tinc VPN | nets.boot
+  template:
+    src: nets.boot.j2
+    dest: /etc/tinc/nets.boot
+    mode: 0644
+  notify: restart tinc
+
+- name: tinc VPN | config
+  template:
+    src: "{{ item }}.j2"
+    dest: "/etc/tinc/{{ tinc_name }}/{{ item }}"
+    mode: 0700
+  with_items:
+  - tinc.conf
+  - tinc-up
+  - tinc-down
+  notify: restart tinc
+
+- name: tinc VPN | private key
+  copy:
+    src: ".private/keys/{{ ansible_hostname }}.priv"
+    dest: "/etc/tinc/{{ tinc_name }}/rsa_key.priv"
+    mode: 0400
+  notify: restart tinc
+
+- name: tinc VPN | all public keys
+  hosts: vpn
+  copy:
+    src: .private/hosts
+    dest: "/etc/tinc/{{ tinc_name }}/"
+    mode: 0640
+
+- name: tinc VPN | packages
+  apt:
+    pkg: "{{ item }}"
+    state: present
+  with_items:
+  - tinc
+  - dhcpcd5
+  notify: restart tinc
+
+- name: dhcpcd | resolv.conf
+  copy:
+    src: resolv.conf.tail
+    dest: /etc/
+
+- name: tinc VPN | service
+  service:
+    name: tinc
+    state: started
+    enabled: yes
