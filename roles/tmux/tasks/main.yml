@@ -1,12 +1,11 @@
 ---
-- name: TMux terminal multiplexer
-  become: true
-  gather_facts: false
 
-  tasks:
+- name: TMux | package
+  apt:
+    pkg: tmux
+    state: latest
 
-  - name: TMux package
-    apt: pkg=tmux state=present
-
-  - name: TMux config
-    copy: src=tmux.conf dest=/home/{{ansible_remote_user}}/.tmux.conf
+- name: TMux | config
+  copy:
+    src: tmux.conf
+    dest: /home/{{ ansible_remote_user }}/.tmux.conf
