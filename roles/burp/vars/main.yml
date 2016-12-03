@@ -5,4 +5,3 @@ burp_status_port: 4972
 burp_ui_port: 5000
 
 burp_pw: ""
-- include: _password.yml
