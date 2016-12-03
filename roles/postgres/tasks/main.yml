@@ -1,33 +1,45 @@
 ---
-- name: PostgreSQL database
-  become: true
-  gather_facts: false
 
-  tasks:
+- name: PostgreSQL | apt key
+  apt_key:
+    url: "https://www.postgresql.org/media/keys/ACCC4CF8.asc"
 
-  - name: PostgreSQL APT key
-    apt_key: url=https://www.postgresql.org/media/keys/ACCC4CF8.asc
+- name: PostgreSQL | apt repo
+  apt_repository:
+    repo: 'deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main'
+    filename: 'postgresql.list'
 
-  - name: PostgreSQL repository
-    apt_repository: repo='deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main' # filename='postgresql'
+- name: PostgreSQL | packages
+  apt:
+    pkg: "{{ item }}"
+    state: latest
+  with_items:
+  - "postgresql-{{ postgresql_version }}"
+  - "postgresql-client-{{ postgresql_version }}"
+  - libpq-dev
+  - python-psycopg2
 
-  - name: PostgreSQL packages
-    apt: pkg={{item}} state=latest
-    with_items:
-    - postgresql
-    - postgresql-client
-    - libpq-dev
-    - python-psycopg2
+- name: PostgreSQL | config
+  copy:
+    src: "{{ item }}"
+    dest: /etc/postgresql/{{ postgresql_version }}/main/
+    owner: postgres
+    group: postgres
+    mode: 0640
+  with_items:
+  - pg_hba.conf
+  - postgresql.conf
+  notify: restart postgresql
 
-  - name: PostgreSQL config
-    copy: src={{item}} dest=/etc/postgresql/9.1/main/ mode=0640 owner=postgres group=postgres
-    with_items:
-    - pg_hba.conf
-    - postgresql.conf
+- name: PostgreSQL | backup script
+  copy:
+    src: pg_backup.cron
+    dest: /etc/cron.daily/
+    mode: 0750
 
-  - name: "PostgreSQL: backup script"
-    copy: src=pg_backup.cron dest=/etc/cron.daily/ mode=0755
-
-  - name: PostgreSQL service
-    service: name=postgresql state=started enabled=yes
+- name: PostgreSQL | service
+  service:
+    name: postgresql
+    state: started
+    enabled: yes
 
