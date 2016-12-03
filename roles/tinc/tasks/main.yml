@@ -1,5 +1,3 @@
 ---
-- name: Tinc VPN
-
 - include: client.yml
 - include: server.yml

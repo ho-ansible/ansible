@@ -1,58 +1,70 @@
 ---
-- name: tinc VPN client
+
+- name: tinc VPN | directories
+  file:
+    path: "/etc/tinc/{{ tinc_name }}/hosts"
+    state: directory
+
+- name: tinc VPN | nets.boot
+  template:
+    src: nets.boot.j2
+    dest: /etc/tinc/nets.boot
+    mode: 0644
+  notify: restart tinc
+
+- name: tinc VPN | config
   hosts: debian:!vpn
-  become: yes
+  template:
+    src: "{{ item }}.j2"
+    dest: "/etc/tinc/{{ tinc_name }}/{{ item }}"
+    mode: 0700
+  with_items:
+  - tinc.conf
+  - tinc-up
+  - tinc-down
+  notify: restart tinc
 
-  tasks:
+- name: tinc VPN | private key
+  copy:
+    src: ".private/keys/{{ ansible_hostname }}.priv"
+    dest: "/etc/tinc/{{ tinc_name }}/rsa_key.priv"
+    mode: 0400
+  notify: restart tinc
 
-  - name: tinc directories
-    file: path={{item}} state=directory
-    with_items:
-    - /etc/tinc/ho/hosts
-    - /var/www
+- name: tinc VPN | public keys
+  copy:
+    src: ".private/hosts/{{ item }}"
+    dest: "/etc/tinc/{{ tinc_name }}/hosts/"
+    mode: 0640
+  with_items:
+  - tinc1
+  - tinc2
+  - "{{ ansible_hostname }}"
+  notify: restart tinc
 
-  - name: tinc net.boot
-    copy: src=nets.boot dest=/etc/tinc/ mode=0644
-    notify:
-    - restart tinc
+- name: tinc VPN | all public keys
+  hosts: vpn
+  copy:
+    src: .private/hosts
+    dest: "/etc/tinc/{{ tinc_name }}/"
+    mode: 0640
 
-  - name: tinc config
-    template: src=tinc.conf.j2 dest=/etc/tinc/ho/tinc.conf mode=0600
-    notify:
-    - restart tinc
+- name: tinc VPN | packages
+  apt:
+    pkg: "{{ item }}"
+    state: present
+  with_items:
+  - tinc
+  - dhcpcd5
+  notify: restart tinc
 
-  - name: tinc scripts
-    template: src={{item}} dest=/etc/tinc/ho/ mode=0700
-    with_items:
-    - tinc-up
-    - tinc-down
-    notify:
-    - restart tinc
+- name: dhcpcd | resolv.conf
+  copy:
+    src: resolv.conf.tail
+    dest: /etc/
 
-  - name: tinc client key
-    copy: src=.private/keys/{{ansible_hostname}}.priv dest=/etc/tinc/ho/rsa_key.priv mode=0400
-    notify:
-    - restart tinc
-
-  - name: tinc public keys
-    copy: src=.private/hosts/{{item}} dest=/etc/tinc/ho/hosts/ mode=0644
-    with_items:
-    - tinc1
-    - tinc2
-    - "{{ansible_hostname}}"
-    notify:
-    - restart tinc
-
-  - name: tinc package
-    apt: pkg={{item}} state=present
-    with_items:
-    - tinc
-    - dhcpcd5
-    notify:
-    - restart tinc
-
-  - name: dhcpcd resolv.conf
-    copy: src=resolv.conf.tail dest=/etc/
-
-  - name: tinc service
-    service: name=tinc state=started enabled=yes
+- name: tinc VPN | service
+  service:
+    name: tinc
+    state: started
+    enabled: yes
