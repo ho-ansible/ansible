@@ -1,4 +1,5 @@
 ---
+cloud_version: 10.0.1
 cloud_server: cloud.seanho.com
 cloud_port: 4343
 cloud_www_dir: /var/www/nextcloud

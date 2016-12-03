@@ -1,0 +1,6 @@
+---
+
+- name: nextCloud | occ upgrade
+  become_user: www-data
+  ignore_errors: true
+  command: "php {{ cloud_www_dir }}/occ upgrade --no-app-disable --no-interaction --no-warnings"

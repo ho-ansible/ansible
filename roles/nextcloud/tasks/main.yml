@@ -1,10 +1,48 @@
 ---
+# See: https://gitlab.paragon-es.de/ansible-roles/nextcloud/blob/master/tasks/install.yml
 
-- name: nextCloud | installation
-  unarchive:
-    src: "https://download.nextcloud.com/server/releases/nextcloud-10.0.1.zip"
-    dest: "{{ cloud_www_dir }}"
-    remote_src: yes
+- name: nextCloud | installation (git)
+  git:
+    repo: 'https://github.com/nextcloud/server.git'
+    dest: '{{ cloud_www_dir }}'
+    track_submodules: yes
+    depth: 1
+    version: '{{ cloud_version }}'
+    umask: 0750
+
+- name: nextCloud | file permissions
+  file:
+    path: "{{ cloud_www_dir }}"
+    owner: root
+    group: www-data
+    mode: 'g-w,o='
+    recurse: yes
+
+- name: nextCloud | writable dirs
+  file:
+    path: "{{ cloud_www_dir }}/{{ item }}"
+    owner: www-data
+    group: www-data
+    mode: 'u+rw'
+    recurse: yes
+  with_items:
+  - apps
+  - assets
+  - config
+  - data
+  - themes
+  - updater
+
+- name: nextCloud | data directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: 0750
+  with_items:
+  - "{{ cloud_data_dir }}"
+  - "{{ cloud_cache_dir }}"
 
 - name: nextCloud | config
   template:
@@ -22,43 +60,34 @@
     group: www-data
     mode: 0640
 
+- name: nextCloud | cron
+  cron:
+    name: 'nextCloud cron'
+    special_time: hourly
+    user: www-data
+    job: 'php {{ cloud_www_dir }}/cron.php 2>&- >&-'
+
 - name: nextCloud | nginx config
   template:
     src: nextcloud-nginx.j2
     dest: /etc/nginx/sites-available/nextcloud
 
-- name: nextCloud | enable nginx site
+- name: nextCloud | nginx site enabled
   file:
     src: /etc/nginx/sites-available/nextcloud
     dest: /etc/nginx/sites-enabled/
     state: link
 
-- name: nextCloud | directories
-  file:
-    path: "{{ item }}"
-    state: directory
-    owner: www-data
-    group: www-data
-    mode: 0750
-  with_items:
-  - "{{ cloud_data_dir }}"
-  - "{{ cloud_cache_dir }}"
-
-- name: nextCloud | create DB user
+- name: nextCloud | DB user
   become_user: postgres
   postgresql_user:
     name: "{{ cloud_db_user }}"
     password: "{{ cloud_db_pw }}"
     role_attr_flags: NOSUPERUSER,NOCREATEDB
 
-- name: nextCloud | create DB
+- name: nextCloud | DB
   become_user: postgres
   postgresql_db:
     name: "{{ cloud_db }}"
     owner: "{{ cloud_db_user }}"
 
-  # Dir permissions:
-  # root.www-data, o=
-  # www-data.www-data: apps assets config data themes updater
-  #
-  # See: https://gitlab.paragon-es.de/ansible-roles/nextcloud/blob/master/tasks/install.yml
