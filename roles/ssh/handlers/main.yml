@@ -1,3 +1,5 @@
 ---
-- name: Restart ssh
-  service: name=ssh state=restarted
+- name: restart ssh
+  service:
+    name: ssh
+    state: restarted

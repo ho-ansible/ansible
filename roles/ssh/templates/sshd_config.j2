@@ -1,8 +1,7 @@
-# See the sshd_config(5) manpage for details
+## /etc/ssh/sshd_config
+# {{ ansible_managed }}
 
-Port 26
-#ListenAddress ::
-#ListenAddress 0.0.0.0
+Port {{ ssh_port }}
 Protocol 2
 
 # See https://cipherli.st/

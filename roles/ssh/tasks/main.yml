@@ -1,25 +1,25 @@
 ---
-- name: OpenSSH
-  become: true
-  gather_facts: false
 
-  tasks:
+- name: OpenSSH | config
+  template:
+    src: "{{ item }}.j2"
+    dest: "/etc/ssh/{{ item }}"
+  with_items:
+  - sshd_config
+  - ssh_config
+  notify: restart ssh
 
-  - name: OpenSSH config
-    copy: src={{item}} dest=/etc/ssh/ mode=0644 owner=root group=root
-    with_items:
-    - sshd_config
-    - ssh_config
-    notify:
-    - Restart ssh
+- name: OpenSSH | package
+  apt:
+    pkg: openssh-server
+    state: latest
+  notify: restart ssh
 
-  - name: OpenSSH package
-    apt: pkg=openssh-server state=latest
-    notify:
-    - Restart ssh
-
-  - name: OpenSSH service
-    service: name=ssh state=started enabled=yes
+- name: OpenSSH | service
+  service:
+    name: ssh
+    state: started
+    enabled: yes
 
 # ssh-keygen -G /tmp/moduli-cand -b 4096
 # ssh-keygen -T /tmp/moduli -f /tmp/moduli-cand          # slow!
