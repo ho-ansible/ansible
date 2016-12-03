@@ -1,32 +1,38 @@
 ---
-- name: PHP
-  become: true
-  gather_facts: false
 
-  tasks:
+- name: PHP-FPM | packages
+  apt:
+    pkg: "{{ item }}"
+    state: latest
+    install_recommends: no
+    force: yes
+  with_items:
+  - php5-fpm
+  - php5-sqlite
+  - php5-apcu
 
-  - name: Install PHP packages
-    apt: pkg={{item}} state=latest install_recommends=no force=yes
-    with_items:
-    - php5-fpm
-    - php5-sqlite
-    - php5-apcu
+- name: PHP-FPM | Nginx config
+  copy:
+    src: nginx-php
+    dest: /etc/nginx/
 
-  - name: Nginx PHP-FPM config include
-    copy: src=nginx-php dest=/etc/nginx/ owner=root group=root mode=0644
+- name: PHP-FPM | config
+  copy:
+    src: "{{ item }}"
+    dest: /etc/php5/fpm/
+  with_items:
+  - php.ini
+  - php-fpm.conf
+  notify: restart php-fpm
 
-  - name: PHP-FPM config
-    copy: src={{item}} dest=/etc/php5/fpm/ owner=root group=root mode=0644
-    with_items:
-    - php.ini
-    - php-fpm.conf
-    notify:
-    - Restart PHP-FPM
+- name: PHP-FPM | pool config
+  copy:
+    src: www.conf
+    dest: /etc/php5/fpm/pool.d/
+  notify: restart php-fpm
 
-  - name: PHP-FPM pool config
-    copy: src=www.conf dest=/etc/php5/fpm/pool.d/ owner=root group=root mode=0644
-    notify:
-    - Restart PHP-FPM
-
-  - name: PHP-FPM service
-    service: name=php5-fpm state=started enabled=yes
+- name: PHP-FPM | service
+  service:
+    name: php5-fpm
+    state: started
+    enabled: yes
