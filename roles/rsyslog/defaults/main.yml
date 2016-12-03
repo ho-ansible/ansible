@@ -1,0 +1,3 @@
+---
+log_server: 127.0.0.1
+log_port: 2514

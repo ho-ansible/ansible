@@ -1,35 +1,31 @@
 ---
-- name: rsyslog: system logger
-  become: true
-  gather_facts: false
 
-  tasks:
+- name: rsyslog | packages
+  apt:
+    pkg: "{{ item }}"
+    state: present
+  with_items:
+  - rsyslog
+  - rsyslog-relp
 
-  - name: rsyslog packages
-    apt: pkg={{item}} state=present
-    with_items:
-    - rsyslog
-    - rsyslog-relp
+- name: rsyslog | client config
+  hosts: all:!log
+  template:
+    src: rsyslog.conf.j2
+    dest: /etc/rsyslog.conf
+    mode: 0600
+  notify: restart rsyslog
 
-  - name: rsyslog service
-    service: name=rsyslog state=started enabled=yes
-
-- name: rsyslog: client
-  hosts: debian:!log
-  become: true
-  gather_facts: false
-
-  - name: rsyslog config
-    template: src=rsyslog.conf.j2 dest=/etc/rsyslog.conf mode=0600
-    notify:
-    - Restart rsyslog
-
-- name: rsyslog: server
+- name: rsyslog | server config
   hosts: log
-  become: true
-  gather_facts: false
+  copy:
+    src: server.conf
+    dest: /etc/rsyslog.conf
+    mode: 0600
+  notify: restart rsyslog
 
-  - name: rsyslog server config
-    copy: src=server.conf dest=/etc/rsyslog.conf mode=0600
-    notify:
-    - Restart rsyslog
+- name: rsyslog | service
+  service:
+    name: rsyslog
+    state: started
+    enabled: yes
