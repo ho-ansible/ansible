@@ -51,4 +51,6 @@ install_pkgs:
 - less
 - vim
 - htop
+- unzip
+- unattended-upgrades
 - aptitude
