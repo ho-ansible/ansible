@@ -1,43 +1,66 @@
 ---
-- name: nextCloud file sync server
-  become: true
-  gather_facts: no
 
-  tasks:
+- name: nextCloud | utilities
+  apt:
+    pkg: unzip
+    state: present
 
-  - name: nextCloud package
-    apt: pkg=nextcloud state=latest
+- name: nextCloud | installation
+  unarchive:
+    src: "https://download.nextcloud.com/server/releases/nextcloud-10.0.1.zip"
+    dest: "{{ cloud_www_dir }}"
+    remote_src: yes
 
-  - name: nextCloud config
-    template: src=config.php.j2 dest={{ cloud_www }}/config/ owner=www-data group=www-data mode=0640
+- name: nextCloud | config
+  template:
+    src: config.php.j2
+    dest: "{{ cloud_www_dir }}/config/"
+    owner: www-data
+    group: www-data
+    mode: 0640
 
-  - name: nextCloud PHP config
-    copy: src=.user.ini dest={{ cloud_www }}/ owner=root group=www-data mode=0640
+- name: nextCloud | PHP config
+  copy:
+    src: .user.ini
+    dest: "{{ cloud_www_dir }}/"
+    owner: root
+    group: www-data
+    mode: 0640
 
-  - name: nextCloud nginx config
-    template: src=nextcloud-nginx.j2 dest=/etc/nginx/sites-available/nextcloud
+- name: nextCloud | nginx config
+  template:
+    src: nextcloud-nginx.j2
+    dest: /etc/nginx/sites-available/nextcloud
 
-  - name: Enable nextCloud
-    file: src=/etc/nginx/sites-available/nextcloud dest=/etc/nginx/sites-enabled/ state=link
+- name: nextCloud | enable nginx site
+  file:
+    src: /etc/nginx/sites-available/nextcloud
+    dest: /etc/nginx/sites-enabled/
+    state: link
 
-  - name: nextCloud directories
-    file: path={{item}} state=directory owner=www-data group=www-data mode=0750
-    with_items:
-    - /mnt/cloud
-    - /var/cache/nginx
+- name: nextCloud | directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: 0750
+  with_items:
+  - "{{ cloud_data_dir }}"
+  - "{{ cloud_cache_dir }}"
 
-- name: nextCloud DB
-  become: true
+- name: nextCloud | create DB user
   become_user: postgres
-  gather_facts: no
+  postgresql_user:
+    name: "{{ cloud_db_user }}"
+    password: "{{ cloud_db_pw }}"
+    role_attr_flags: NOSUPERUSER,NOCREATEDB
 
-  tasks:
-
-  - name: Create nextCloud DB user
-    action: postgresql_user name={{dbuser}} password={{nextcloud_dbpw}} role_attr_flags=NOSUPERUSER,NOCREATEDB
-
-  - name: Create nextCloud DB
-    action: postgresql_db name={{dbname}} owner={{dbuser}}
+- name: nextCloud | create DB
+  become_user: postgres
+  postgresql_db:
+    name: "{{ cloud_db }}"
+    owner: "{{ cloud_db_user }}"
 
   # Dir permissions:
   # root.www-data, o=

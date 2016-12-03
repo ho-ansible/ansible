@@ -3,13 +3,14 @@ cloud_server: cloud.seanho.com
 cloud_port: 4343
 cloud_www_dir: /var/www/nextcloud
 cloud_data_dir: /mnt/nextcloud
+cloud_cache_dir: /var/cache/nginx
 
 cloud_db: cloud
 cloud_db_user: cloud
 
 cloud_pw: ''
 cloud_secret: ''
-cloud_db_pw: ''
 cloud_id: ''
+cloud_db_pw: ''
 
 - include: _password.yml

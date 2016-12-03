@@ -2,7 +2,7 @@
 ## {{ansible_managed}}
 
 # Prepare for PHP caching
-fastcgi_cache_path /var/cache/nginx/ levels=1:2 keys_zone=CLOUD:20m inactive=4w max_size=200M use_temp_path=off;
+fastcgi_cache_path {{ cloud_cache_dir }} levels=1:2 keys_zone=CLOUD:20m inactive=4w max_size=200M use_temp_path=off;
 fastcgi_cache_key $http_cookie$request_method$host$request_uri;
 fastcgi_cache_valid 2w;
 fastcgi_cache_methods GET HEAD;
@@ -19,7 +19,7 @@ fastcgi_no_cache $skip_cache;
 fastcgi_ignore_headers Cache-Control Expires Set-Cookie;
 
 server {
-	listen {{ cloud_port }}ssl;
+	listen {{ cloud_port }} ssl;
 	listen [::]:{{ cloud_port }} ssl;
 	server_name {{ cloud_server }};
 	root {{ cloud_www_dir }};
