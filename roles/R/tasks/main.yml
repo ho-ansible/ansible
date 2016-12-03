@@ -9,14 +9,11 @@
   apt_repository:
     repo: 'deb http://ftp.osuosl.org/pub/cran/bin/linux/debian jessie-cran3/'
     filename: 'cran.list'
-  notify: apt upgrade
 
 - name: R | Install packages
   apt:
     pkg: "{{item}}"
-    state: present
-    install_recommends: no
-    force: yes
+    state: latest
   with_items:
   - r-base
   - r-base-dev
