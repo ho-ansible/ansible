@@ -28,9 +28,10 @@
   template:
     src: burp.conf.j2
     dest: /etc/burp/burp.conf
+    mode: 0640
 
 - name: Burp | cronjob
   copy:
     src: burp.cron
     dest: /etc/cron.daily/
-    mode: 0755
+    mode: 0750
