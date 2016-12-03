@@ -9,7 +9,6 @@
   - rsyslog-relp
 
 - name: rsyslog | client config
-  hosts: all:!log
   template:
     src: rsyslog.conf.j2
     dest: /etc/rsyslog.conf
@@ -17,7 +16,6 @@
   notify: restart rsyslog
 
 - name: rsyslog | server config
-  hosts: log
   copy:
     src: server.conf
     dest: /etc/rsyslog.conf
