@@ -1,0 +1,14 @@
+---
+- name: plays/main.yml | Top-level playbook
+  roles:
+    - common
+
+  tasks:
+    - group_by: key=os_{{ ansible_os_family }}
+
+- include: tmux.yml
+- include: dns.yml
+- include: www.yml
+- include: news.yml
+- include: cloud.yml
+- include: R.yml
