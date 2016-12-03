@@ -30,12 +30,16 @@
     mode: 0400
   notify: restart tinc
 
-- name: tinc VPN | all public keys
-  hosts: vpn
+- name: tinc VPN | public keys
   copy:
-    src: .private/hosts
-    dest: "/etc/tinc/{{ tinc_name }}/"
+    src: ".private/hosts/{{ item }}"
+    dest: "/etc/tinc/{{ tinc_name }}/hosts/"
     mode: 0640
+  with_items:
+  - tinc1
+  - tinc2
+  - "{{ ansible_hostname }}"
+  notify: restart tinc
 
 - name: tinc VPN | packages
   apt:
