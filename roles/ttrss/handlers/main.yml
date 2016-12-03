@@ -1,0 +1,6 @@
+---
+
+- name: restart tt-rss
+  service:
+    name: tt-rss
+    state: restarted
