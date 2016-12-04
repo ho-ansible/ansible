@@ -1,6 +1,6 @@
-stop_services:
-- sendmail
-- apache2
+stop_services: []
+        #- sendmail
+        #- apache2
 
 remove_pkgs:
 - acpid
