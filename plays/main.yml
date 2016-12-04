@@ -1,5 +1,6 @@
 ---
 - name: plays/main.yml | Top-level playbook
+  hosts: all
   roles:
     - common
 

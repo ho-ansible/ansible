@@ -2,6 +2,9 @@
 - name: www.yml | Roles for webservers
   hosts: www
   roles:
-  - { role: common, tags: ["common"] }
-  - { role: nginx, tags: ["nginx"] }
-  - { role: php, tags: ["php"] }
+  - nginx
+
+- name: www.yml | Roles for PHP-enabled webservers
+  hosts: php
+  roles:
+  - php

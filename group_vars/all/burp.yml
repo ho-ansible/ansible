@@ -1,7 +1,0 @@
----
-burp_server: 10.100.1.8
-burp_port: 4971
-
-burp_server_CN: burp_srv
-
-burp_pw: "{{ burp_pw_CRYPT }}"

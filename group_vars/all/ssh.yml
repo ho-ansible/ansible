@@ -1,2 +1,0 @@
----
-ssh_port: "{{ ssh_port_CRYPT }}"

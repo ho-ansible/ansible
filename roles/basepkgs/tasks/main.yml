@@ -1,12 +1,16 @@
 ---
 
 - name: Stop unneeded services
+  tags:
+  - service
   service:
     name: "{{item}}"
     state: stopped
   with_items: "{{stop_services}}"
 
 - name: Clean unneeded packages
+  tags:
+  - pkgs
   apt:
     pkg: "{{item}}"
     state: absent
@@ -15,11 +19,15 @@
   with_items: "{{remove_pkgs}}"
 
 - name: Update APT cache
+  tags:
+  - pkgs
   apt:
     update_cache: yes
   notify: apt upgrade
 
 - name: Install packages
+  tags:
+  - pkgs
   apt:
     pkg: "{{item}}"
     state: present

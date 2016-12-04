@@ -1,6 +1,10 @@
 ---
 
 - name: Update APT cache
+  tags:
+  - common
+  - pkgs
+  - update
   apt:
     update_cache: yes
   notify: apt upgrade

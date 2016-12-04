@@ -1,11 +1,19 @@
 ---
 
 - name: Burp | server config
+  tags:
+  - burp
+  - server
+  - config
   template:
     src: server.conf.j2
     dest: /etc/burp/server.conf
 
 - name: Burp | DH params
+  tags:
+  - burp
+  - server
+  - secret
   copy:
     src: _dhfile.pem
     dest: /etc/burp/keys/dhfile.pem

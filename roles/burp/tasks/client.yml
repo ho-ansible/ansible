@@ -1,6 +1,9 @@
 ---
 
 - name: Burp | directories
+  tags:
+  - burp
+  - dirs
   file:
     path: "{{item}}"
     state: directory
@@ -11,11 +14,17 @@
   - /etc/burp/upgrade
 
 - name: Burp | dependencies
+  tags:
+  - burp
+  - pkgs
   apt:
     pkg: librsync-dev
     state: installed
 
 - name: Burp | executables
+  tags:
+  - burp
+  - bin
   copy:
     src: "sbin/{{item}}"
     dest: /usr/sbin/
@@ -25,12 +34,18 @@
   - burp_ca
 
 - name: Burp | config
+  tags:
+  - burp
+  - config
   template:
     src: burp.conf.j2
     dest: /etc/burp/burp.conf
     mode: 0640
 
 - name: Burp | cronjob
+  tags:
+  - burp
+  - cron
   copy:
     src: burp.cron
     dest: /etc/cron.daily/
