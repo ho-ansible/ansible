@@ -1,0 +1,56 @@
+stop_services:
+- sendmail
+- apache2
+
+remove_pkgs:
+- acpid
+- acpi-fakekey
+- acpi-support
+- acpi-support-base
+- apache2
+- apache2-doc
+- apache2-utils
+- apache2.2-common
+- apache2.2-bin
+- bind9
+- bind9utils
+- isc-dhcp-common
+- ttf-dejavu-extra
+- ttf-freefont
+- finger
+- fontconfig
+- fontconfig-config
+- fonts-freefont-ttf
+- ftp
+- lynx
+- lynx-cur
+- procmail
+- screen
+- tcpdump
+- telnet
+- ttf-dejavu
+- ttf-dejavu-core
+- samba
+- samba-common
+- portmap
+- rpcbind
+- sasl2-bin
+- xinetd
+- update-inetd
+- sendmail-base
+- sendmail-cf
+- sendmail-doc
+- tcsh
+- fetchmail
+- exim4-base
+- exim4-config
+
+install_pkgs:
+- locales
+- git
+- less
+- vim
+- htop
+- python-apt
+- unattended-upgrades
+- aptitude
