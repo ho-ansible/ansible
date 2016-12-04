@@ -1,15 +1,16 @@
-# /etc/burp/server.conf: burp backup server config
+## /etc/burp/server.conf: burp backup server config
 # burp -c /etc/burp/server.conf
+# {{ ansible_managed }}
 
 mode = server
 protocol = 1
 
-address = 10.100.1.8
-port = 4971
-status_address = 10.100.1.8
-status_port = 4972
+address = {{ burp_server }}
+port = {{ burp_port }}
+status_address = {{ burp_server }}
+status_port = {{ burp_status_port }}
 
-directory = /mnt/burp
+directory = {{ burp_data_dir }}
 dedup_group = global
 pidfile = /var/run/burp-server.pid
 clientconfdir = /etc/burp/clients
@@ -27,7 +28,7 @@ soft_quota = 50G
 
 version_warn = 1
 
-client_can_delete = 1
+client_can_delete = 0
 client_can_force_backup = 1
 client_can_list = 1
 client_can_restore = 1
@@ -35,8 +36,8 @@ client_can_verify = 1
 
 ca_conf         = /etc/burp/CA/CA.conf
 ca_burp_ca      = /usr/sbin/burp_ca
-ca_name         = seanho_burp
-ca_server_name  = burp_srv
+ca_name         = {{ burp_ca_name }}
+ca_server_name  = {{ burp_server_CN }}
 ssl_dhfile      = /etc/burp/keys/dhfile.pem
 ssl_cert_ca     = /etc/burp/keys/ca.crt
 ssl_cert        = /etc/burp/keys/server.crt
@@ -51,5 +52,6 @@ timer_script = /etc/burp/scripts/timer
 timer_arg = 20h
 timer_arg = Mon,Tue,Wed,Thu,Fri,Sat,Sun,00,01,02,03,04,05,06,07,08,09,10,11,12,13,14,15,16,17,18,19,20,21,22,23
 
-restore_client = kitsilano
-restore_client = vil1
+{%- for host in burp_restore_clients %}
+restore_client = {{ host }}
+{%- endfor %}

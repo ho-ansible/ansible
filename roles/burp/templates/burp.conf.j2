@@ -5,8 +5,6 @@ mode = client
 
 server = {{ burp_server }}
 port = {{ burp_port }}
-status_address = {{ burp_server }}
-status_port = {{ burp_status_port }}
 
 password = {{ burp_pw }}
 cname = {{ ansible_hostname }}
@@ -20,7 +18,7 @@ stdout = 1
 progress_counter = 1
 randomise = 1200
 
-server_can_restore = 1
+server_can_restore = 0
 
 ca_burp_ca      = /usr/sbin/burp_ca
 ca_csr_dir      = /etc/burp/keys/
@@ -28,4 +26,4 @@ ssl_cert_ca     = /etc/burp/keys/ca.crt
 ssl_cert        = /etc/burp/keys/{{ ansible_hostname }}.crt
 ssl_key         = /etc/burp/keys/{{ ansible_hostname }}.key
 ssl_key_password = password
-ssl_peer_cn = burp_srv
+ssl_peer_cn	= {{ burp_server_CN }}

@@ -1,10 +1,9 @@
 ---
 
 - name: Burp | server config
-  copy:
-    src: server.conf
-    dest: /etc/burp/
-    mode: 0640
+  template:
+    src: server.conf.j2
+    dest: /etc/burp/server.conf
 
 - name: Burp | DH params
   copy:

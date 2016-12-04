@@ -4,7 +4,6 @@
   template:
     src: burpui.cfg.j2
     dest: /etc/burp/burpui.cfg
-    mode: 0640
 
 - name: Burp | web UI
   pip:

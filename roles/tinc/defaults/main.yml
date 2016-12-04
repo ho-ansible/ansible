@@ -1,2 +1,3 @@
 ---
-vpn_name: vpn
+tinc_name: vpn
+tinc_port: 655
