@@ -11,26 +11,16 @@
 - name: Clean unneeded packages
   tags:
   - pkgs
-  apt:
-    pkg: "{{item}}"
+  package:
+    name: "{{item}}"
     state: absent
-    purge: yes
-    install_recommends: no
   with_items: "{{remove_pkgs}}"
-
-- name: Update APT cache
-  tags:
-  - pkgs
-  apt:
-    update_cache: yes
-  notify: apt upgrade
 
 - name: Install packages
   tags:
   - pkgs
-  apt:
-    pkg: "{{item}}"
-    state: present
-    install_recommends: no
+  package:
+    name: "{{item}}"
+    state: latest
   with_items: "{{install_pkgs}}"
 
