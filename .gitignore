@@ -1,7 +1,5 @@
 ~*
-*.swp
-*.swo
-.private/
+.*.sw?
 *.retry
-_*
+.private/
 host_vars/
