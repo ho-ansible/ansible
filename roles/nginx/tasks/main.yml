@@ -27,7 +27,6 @@
     path: /etc/nginx/ssl
     state: directory
     mode: 0750
-  - /var/www/html
 
 - name: Nginx | config
   tags:
