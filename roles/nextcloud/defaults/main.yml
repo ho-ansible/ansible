@@ -8,6 +8,7 @@ cloud_cache_dir: /var/cache/nginx
 
 cloud_db: nextcloud
 cloud_db_user: nextcloud
+cloud_db_prefix: 'oc_'
 
 cloud_pw: ''
 cloud_secret: ''
