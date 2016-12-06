@@ -1,4 +1,5 @@
 # ansible
-Ansible-managed configuration files for Debian VPSes
+Ansible roles for VM configuration,
+mostly for Debian VPS
 
-`ansible-playbook -i inv plays/main.yml`
+`ansible-playbook -b -i inv plays/main.yml`
