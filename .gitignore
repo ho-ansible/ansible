@@ -2,4 +2,3 @@
 .*.sw?
 *.retry
 .private/
-host_vars/
