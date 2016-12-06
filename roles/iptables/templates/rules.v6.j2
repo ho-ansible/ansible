@@ -1,3 +1,5 @@
+## /etc/iptables/rules.v6
+# Firewall rules for IPv6
 # {{ansible_managed}}
 
 *filter
@@ -12,11 +14,11 @@
 -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 
 # VPN access
--A INPUT -p udp --dport 655 -j ACCEPT
--A INPUT -p tcp --dport 655 -j ACCEPT
--A INPUT -i ho -j ACCEPT
--A FORWARD -i ho -j ACCEPT
--A FORWARD -o ho -j ACCEPT
+-A INPUT -p udp --dport {{ tinc_port }} -j ACCEPT
+-A INPUT -p tcp --dport {{ tinc_port }} -j ACCEPT
+-A INPUT -i {{ tinc_net }} -j ACCEPT
+-A FORWARD -i {{ tinc_net } -j ACCEPT
+-A FORWARD -o {{ tinc_net } -j ACCEPT
 
 # Link-Local and multicast
 -A INPUT -s fe80::/10 -j ACCEPT
@@ -30,16 +32,18 @@
 -A INPUT -p tcp --dport  80 -j ACCEPT
 -A INPUT -p tcp --dport 443 -j ACCEPT
 
-# Allow (rate-limited) SSH on port 26
-#-A INPUT -p tcp --dport 26 -m state --state NEW -m recent --set --name DEFAULT --rsource
-#-A INPUT -p tcp --dport 26 -m state --state NEW -m recent --update --seconds 60 --hitcount 3 --name DEFAULT --rsource -j DROP
--A INPUT -p tcp --dport 26 -m state --state NEW -j ACCEPT
+# Allow rate-limited SSH
+#-A INPUT -p tcp --dport {{ ssh_port }} -m state --state NEW -m recent --set --name DEFAULT --rsource
+#-A INPUT -p tcp --dport {{ ssh_port }} -m state --state NEW -m recent --update --seconds 60 --hitcount 3 --name DEFAULT --rsource -j DROP
+
+# Allow SSH
+-A INPUT -p tcp --dport {{ ssh_port }} -m state --state NEW -j ACCEPT
 
 # Block all other UDPv6, e.g., Squid ICP/HTCP
 -A INPUT -p udp -j DROP
 
 # IPv6 Forwarding
-#-A FORWARD -m state --state NEW -i ho -o venet0 -s <subnet-prefix>::/48 -j ACCEPT
+#-A FORWARD -m state --state NEW -i {{ tinc_net } -o venet0 -s <subnet-prefix>::/48 -j ACCEPT
 #-A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
 
 COMMIT

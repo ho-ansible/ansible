@@ -1,3 +1,5 @@
+## /etc/iptables/rules.v4
+# Firewall rules for IPv4
 # {{ansible_managed}}
 
 *filter
@@ -15,22 +17,24 @@
 # Accept all established inbound connections
 -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 
-# Allow VPNs
--A INPUT -p udp --dport 655 -j ACCEPT
--A INPUT -p tcp --dport 655 -j ACCEPT
--A INPUT -i ho -j ACCEPT
--A FORWARD -i ho -j ACCEPT
--A FORWARD -o ho -j ACCEPT
+# Allow VPN
+-A INPUT -p udp --dport {{ tinc_port }} -j ACCEPT
+-A INPUT -p tcp --dport {{ tinc_port }} -j ACCEPT
+-A INPUT -i {{ tinc_net }} -j ACCEPT
+-A FORWARD -i {{ tinc_net }} -j ACCEPT
+-A FORWARD -o {{ tinc_net }} -j ACCEPT
 
-# Allow HTTP and HTTPS connections from anywhere
+# Allow HTTP and HTTPS connections
 -A INPUT -p tcp --dport 80 -j ACCEPT
 -A INPUT -p tcp --dport 443 -j ACCEPT
 -A INPUT -p tcp --dport 4343 -j ACCEPT
 
-# Allow SSH connections (only 3 attempts by an IP every minute)
-#-A INPUT -p tcp -m tcp --dport 26 -m state --state NEW -m recent --set --name DEFAULT --rsource
-#-A INPUT -p tcp -m tcp --dport 26 -m state --state NEW -m recent --update --seconds 60 --hitcount 3 --name DEFAULT --rsource -j DROP
--A INPUT -p tcp -m state --state NEW --dport 26 -j ACCEPT
+# Allow rate-limited SSH connections
+#-A INPUT -p tcp -m tcp --dport {{ ssh_port }} -m state --state NEW -m recent --set --name DEFAULT --rsource
+#-A INPUT -p tcp -m tcp --dport {{ ssh_port }} -m state --state NEW -m recent --update --seconds 60 --hitcount 3 --name DEFAULT --rsource -j DROP
+
+# Allow SSH connections
+-A INPUT -p tcp -m state --state NEW --dport {{ ssh_port }} -j ACCEPT
 
 # Allow ping et al.
 -A INPUT -p icmp -j ACCEPT
@@ -48,9 +52,6 @@ COMMIT
 :POSTROUTING ACCEPT [0:0]
 :OUTPUT ACCEPT [0:0]
 
-# NAT from VPN to internet
-#-A POSTROUTING -s 10.100.1.0/24 -o venet0 -j SNAT --to-source 107.191.110.109
-
 COMMIT
 
 *mangle
@@ -60,4 +61,3 @@ COMMIT
 :OUTPUT ACCEPT [0:0]
 :POSTROUTING ACCEPT [0:0]
 COMMIT
-
