@@ -1,6 +1,0 @@
----
-- name: OpenVPN
-  hosts: all
-
-- include: client.yml
-- include: server.yml

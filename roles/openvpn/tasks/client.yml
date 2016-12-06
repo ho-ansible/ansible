@@ -1,6 +1,0 @@
----
-- name: OpenVPN client setup
-  hosts: all
-
-- include: client-deb.yml
-- include: client-win.yml
