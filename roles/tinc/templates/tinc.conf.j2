@@ -1,6 +1,7 @@
-## /etc/tinc/{{ tinc_name }}/tinc.conf
-# Configuration for tinc mesh VPN
+##
+# /etc/tinc/{{ tinc_name }}/tinc.conf
 # {{ ansible_managed }}
+# Configuration for tinc mesh VPN
 
 Port = {{ tinc_port }}
 
@@ -12,7 +13,7 @@ Mode = switch
 Device = /dev/net/tun
 
 ProcessPriority = high
-GraphDumpFile = /var/www/tinc-graph.dot
+GraphDumpFile = /tmp/tinc-{{ tinc_net }}.dot
 LocalDiscovery = yes
 PriorityInheritance = yes
 PingInterval = 120

@@ -1,2 +1,4 @@
-## This file contains all names of the networks to be started on system startup.
-{{ tinc_name }}
+## /etc/nets.boot
+# Tinc VPNs to auto-start: /etc/tinc/*/
+# {{ ansible_managed }}
+{{ tinc_net }}

@@ -1,11 +1,7 @@
 #! /bin/sh
-## /etc/tinc/ho/tinc-up
+## /etc/tinc/{{ tinc_net }}/tinc-up
 ## {{ansible_managed}}
 ## Link configuration once tinc VPN connection has been established
 
-ip=/sbin/ip
-dhcp=/sbin/dhcpcd
-
-$ip link set $INTERFACE up
-
-$dhcp -L $INTERFACE &
+ip link set $INTERFACE up
+dhcpcd -Gw $INTERFACE
