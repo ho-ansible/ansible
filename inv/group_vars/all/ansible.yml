@@ -1,3 +1,4 @@
 ---
 ansible_port: "{{ ssh_port }}"
 ansible_user: seanho
+become: true
