@@ -1,16 +1,18 @@
 ---
 
 - name: Firewall | package
-  apt:
-    pkg: iptables-persistent
+  tags:
+  - pkgs
+  package:
+    name: iptables-persistent
     state: present
 
 - name: Firewall | rulesets
-  copy:
-    src: "{{item}}"
-    dest: /etc/iptables/
-    owner: root
-    group: root
+  tags:
+  - config
+  template:
+    src: "{{item}}.j2"
+    dest: "/etc/iptables/{{item}}"
     mode: 0600
   with_items:
   - rules.v4
@@ -18,6 +20,8 @@
   notify: restart iptables
 
 - name: Firewall | service
+  tags:
+  - service
   service:
     name: iptables-persistent
     state: started
