@@ -1,5 +1,3 @@
 ---
-remote_port: "{{ ssh_port_CRYPT }}"
-remote_user: seanho
-ansible_port: "{{ ssh_port_CRYPT }}"
+ansible_port: "{{ ssh_port }}"
 ansible_user: seanho
