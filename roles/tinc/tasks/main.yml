@@ -4,7 +4,7 @@
   tags:
   - dir
   file:
-    path: "/etc/tinc/{{ tinc_name }}/hosts"
+    path: "/etc/tinc/{{ tinc_net }}/hosts"
     state: directory
 
 - name: tinc VPN | nets.boot
@@ -21,7 +21,7 @@
   - config
   template:
     src: "{{ item }}.j2"
-    dest: "/etc/tinc/{{ tinc_name }}/{{ item }}"
+    dest: "/etc/tinc/{{ tinc_net }}/{{ item }}"
     mode: 0700
   with_items:
   - tinc.conf
@@ -35,7 +35,7 @@
   - crypt
   copy:
     src: ".private/keys/{{ ansible_hostname }}.priv"
-    dest: "/etc/tinc/{{ tinc_name }}/rsa_key.priv"
+    dest: "/etc/tinc/{{ tinc_net }}/rsa_key.priv"
     mode: 0400
   notify: restart tinc
 
@@ -45,7 +45,7 @@
   - crypt
   copy:
     src: ".private/hosts/{{ item }}"
-    dest: "/etc/tinc/{{ tinc_name }}/hosts/"
+    dest: "/etc/tinc/{{ tinc_net }}/hosts/"
     mode: 0640
   with_items:
   - tinc1
