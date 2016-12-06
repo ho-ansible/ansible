@@ -25,9 +25,11 @@
 -A FORWARD -o {{ tinc_net }} -j ACCEPT
 
 # Allow HTTP and HTTPS connections
+{%- if 'www' in group_names %}
 -A INPUT -p tcp --dport 80 -j ACCEPT
 -A INPUT -p tcp --dport 443 -j ACCEPT
 -A INPUT -p tcp --dport 4343 -j ACCEPT
+{%- endif %}
 
 # Allow rate-limited SSH connections
 #-A INPUT -p tcp -m tcp --dport {{ ssh_port }} -m state --state NEW -m recent --set --name DEFAULT --rsource

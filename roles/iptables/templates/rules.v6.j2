@@ -29,8 +29,10 @@
 -A FORWARD -p icmpv6 -j ACCEPT
 
 # Allow HTTP/S
+{%- if 'www' in group_names %}
 -A INPUT -p tcp --dport  80 -j ACCEPT
 -A INPUT -p tcp --dport 443 -j ACCEPT
+{%- endif %}
 
 # Allow rate-limited SSH
 #-A INPUT -p tcp --dport {{ ssh_port }} -m state --state NEW -m recent --set --name DEFAULT --rsource
