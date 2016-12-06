@@ -1,11 +1,11 @@
 ---
 
-- name: Burp | web UI config
+- name: Burp | web UI prerequisites
   tags:
-  - config
-  template:
-    src: burpui.cfg.j2
-    dest: /etc/burp/burpui.cfg
+  - package
+  package:
+    name: python-pip
+    state: latest
 
 - name: Burp | web UI
   tags:
@@ -13,3 +13,10 @@
   pip:
     name: burp-ui
     state: latest
+
+- name: Burp | web UI config
+  tags:
+  - config
+  template:
+    src: burpui.cfg.j2
+    dest: /etc/burp/burpui.cfg
