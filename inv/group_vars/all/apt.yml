@@ -3,10 +3,6 @@ stop_services: []
 #- apache2
 
 remove_pkgs:
-- acpid
-- acpi-fakekey
-- acpi-support
-- acpi-support-base
 - apache2
 - apache2-doc
 - apache2-utils
