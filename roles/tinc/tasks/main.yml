@@ -1,11 +1,15 @@
 ---
 
 - name: tinc VPN | directories
+  tags:
+  - dir
   file:
     path: "/etc/tinc/{{ tinc_name }}/hosts"
     state: directory
 
 - name: tinc VPN | nets.boot
+  tags:
+  - config
   template:
     src: nets.boot.j2
     dest: /etc/tinc/nets.boot
@@ -13,6 +17,8 @@
   notify: restart tinc
 
 - name: tinc VPN | config
+  tags:
+  - config
   template:
     src: "{{ item }}.j2"
     dest: "/etc/tinc/{{ tinc_name }}/{{ item }}"
@@ -24,6 +30,9 @@
   notify: restart tinc
 
 - name: tinc VPN | private key
+  tags:
+  - config
+  - crypt
   copy:
     src: ".private/keys/{{ ansible_hostname }}.priv"
     dest: "/etc/tinc/{{ tinc_name }}/rsa_key.priv"
@@ -31,6 +40,9 @@
   notify: restart tinc
 
 - name: tinc VPN | public keys
+  tags:
+  - config
+  - crypt
   copy:
     src: ".private/hosts/{{ item }}"
     dest: "/etc/tinc/{{ tinc_name }}/hosts/"
@@ -42,20 +54,26 @@
   notify: restart tinc
 
 - name: tinc VPN | packages
-  apt:
-    pkg: "{{ item }}"
-    state: present
+  tags:
+  - package
+  package:
+    name: "{{ item }}"
+    state: latest
   with_items:
   - tinc
   - dhcpcd5
   notify: restart tinc
 
 - name: dhcpcd | resolv.conf
+  tags:
+  - config
   copy:
     src: resolv.conf.tail
     dest: /etc/
 
 - name: tinc VPN | service
+  tags:
+  - service
   service:
     name: tinc
     state: started

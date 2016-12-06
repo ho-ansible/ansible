@@ -1,6 +1,8 @@
 ---
 
 - name: OpenSSH | config
+  tags:
+  - config
   template:
     src: "{{ item }}.j2"
     dest: "/etc/ssh/{{ item }}"
@@ -10,12 +12,16 @@
   notify: restart ssh
 
 - name: OpenSSH | package
-  apt:
-    pkg: openssh-server
+  tags:
+  - package
+  package:
+    name: openssh-server
     state: latest
   notify: restart ssh
 
 - name: OpenSSH | service
+  tags:
+  - service
   service:
     name: ssh
     state: started

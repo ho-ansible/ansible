@@ -1,12 +1,15 @@
 ---
 
 - name: Logrotate | config
+  tags:
+  - config
   copy:
     src: logrotate.conf
     dest: /etc/
-    mode: 0644
 
 - name: Logrotate | storage dir for old logs
+  tags:
+  - dir
   file:
     path: /var/log/old
     owner: root
@@ -14,8 +17,10 @@
     mode: 0770
 
 - name: Logrotate | package
-  apt:
-    pkg: "{{item}}"
+  tags:
+  - package
+  package:
+    name: "{{ item }}"
     state: present
   with_items:
   - logrotate

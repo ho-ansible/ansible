@@ -1,5 +1,7 @@
 ---
 - name: restart postgresql
+  tags:
+  - service
   service:
     name: postgresql
     state: restarted

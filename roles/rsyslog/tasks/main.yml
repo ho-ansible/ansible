@@ -1,14 +1,18 @@
 ---
 
 - name: rsyslog | packages
-  apt:
-    pkg: "{{ item }}"
-    state: present
+  tags:
+  - package
+  package:
+    name: "{{ item }}"
+    state: latest
   with_items:
   - rsyslog
   - rsyslog-relp
 
 - name: rsyslog | client config
+  tags:
+  - config
   template:
     src: rsyslog.conf.j2
     dest: /etc/rsyslog.conf
@@ -16,6 +20,8 @@
   notify: restart rsyslog
 
 - name: rsyslog | server config
+  tags:
+  - config
   copy:
     src: server.conf
     dest: /etc/rsyslog.conf
@@ -23,6 +29,8 @@
   notify: restart rsyslog
 
 - name: rsyslog | service
+  tags:
+  - service
   service:
     name: rsyslog
     state: started

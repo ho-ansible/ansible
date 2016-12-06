@@ -2,7 +2,6 @@
 
 - name: Burp | server config
   tags:
-  - burp
   - server
   - config
   template:
@@ -11,9 +10,8 @@
 
 - name: Burp | DH params
   tags:
-  - burp
   - server
-  - secret
+  - crypt
   copy:
     src: _dhfile.pem
     dest: /etc/burp/keys/dhfile.pem

@@ -2,28 +2,23 @@
 
 - name: R | APT key (CRAN)
   tags:
-  - R
-  - key
-  - pkgs
+  - apt
   apt_key:
     keyserver: keys.gnupg.net
     id: 6212B7B7931C4BB16280BA1306F90DE5381BA480
 
 - name: R | repository (CRAN)
   tags:
-  - R
-  - pkgs
+  - apt
   apt_repository:
     repo: 'deb http://ftp.osuosl.org/pub/cran/bin/linux/debian jessie-cran3/'
     filename: 'cran.list'
 
 - name: R | Install packages
   tags:
-  - R
-  - pkgs
-  - update
-  apt:
-    pkg: "{{item}}"
+  - package
+  package:
+    name: "{{ item }}"
     state: latest
   with_items:
   - r-base

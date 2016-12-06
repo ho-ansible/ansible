@@ -2,9 +2,9 @@
 
 - name: Install bash
   tags:
-  - pkgs
-  apt:
-    pkg: bash
+  - package
+  package:
+    name: bash
     state: present
 
 - name: Install system bashrc

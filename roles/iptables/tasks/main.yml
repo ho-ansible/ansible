@@ -2,7 +2,7 @@
 
 - name: Firewall | package
   tags:
-  - pkgs
+  - package
   package:
     name: iptables-persistent
     state: present

@@ -1,10 +1,12 @@
 ---
 
 - name: DNSmasq | config
+  tags:
+  - config
   copy:
     src: "{{item}}"
     dest: /etc/
-    mode: 0644
+    mode: 0640
   with_items: 
   - dnsmasq.conf
   - dnsmasq.opts
@@ -12,11 +14,15 @@
   notify: restart dnsmasq
 
 - name: DNSMasq | package
-  apt:
-    pkg: dnsmasq
+  tags:
+  - package
+  package:
+    name: dnsmasq
     state: present
 
 - name: DNSMasq | service
+  tags:
+  - service
   service:
     name: dnsmasq
     state: started

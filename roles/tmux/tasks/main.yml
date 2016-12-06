@@ -1,11 +1,15 @@
 ---
 
 - name: TMux | package
-  apt:
-    pkg: tmux
+  tags:
+  - package
+  package:
+    name: tmux
     state: latest
 
 - name: TMux | config
+  tags:
+  - config
   copy:
     src: tmux.conf
     dest: /home/{{ ansible_remote_user }}/.tmux.conf

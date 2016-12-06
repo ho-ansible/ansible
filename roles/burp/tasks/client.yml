@@ -2,7 +2,6 @@
 
 - name: Burp | directories
   tags:
-  - burp
   - dirs
   file:
     path: "{{item}}"
@@ -15,15 +14,13 @@
 
 - name: Burp | dependencies
   tags:
-  - burp
-  - pkgs
-  apt:
-    pkg: librsync-dev
+  - package
+  package:
+    name: librsync-dev
     state: installed
 
 - name: Burp | executables
   tags:
-  - burp
   - bin
   copy:
     src: "sbin/{{item}}"
@@ -35,7 +32,6 @@
 
 - name: Burp | config
   tags:
-  - burp
   - config
   template:
     src: burp.conf.j2
@@ -44,7 +40,6 @@
 
 - name: Burp | cronjob
   tags:
-  - burp
   - cron
   copy:
     src: burp.cron

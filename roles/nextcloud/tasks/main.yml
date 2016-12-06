@@ -2,6 +2,9 @@
 # See: https://gitlab.paragon-es.de/ansible-roles/nextcloud/blob/master/tasks/install.yml
 
 - name: nextCloud | installation (git)
+  tags:
+  - package
+  - git
   git:
     repo: 'https://github.com/nextcloud/server.git'
     dest: '{{ cloud_www_dir }}'
@@ -11,6 +14,8 @@
     umask: 0750
 
 - name: nextCloud | file permissions
+  tags:
+  - permissions
   file:
     path: "{{ cloud_www_dir }}"
     owner: root
@@ -19,8 +24,11 @@
     recurse: yes
 
 - name: nextCloud | writable dirs
+  tags:
+  - permissions
   file:
     path: "{{ cloud_www_dir }}/{{ item }}"
+    state: directory
     owner: www-data
     group: www-data
     mode: 'u+rw'
@@ -34,6 +42,8 @@
   - updater
 
 - name: nextCloud | data directories
+  tags:
+  - dir
   file:
     path: "{{ item }}"
     state: directory
@@ -45,14 +55,18 @@
   - "{{ cloud_cache_dir }}"
 
 - name: nextCloud | config
+  tags:
+  - config
   template:
     src: config.php.j2
-    dest: "{{ cloud_www_dir }}/config/"
+    dest: "{{ cloud_www_dir }}/config/config.php"
     owner: www-data
     group: www-data
     mode: 0640
 
 - name: nextCloud | PHP config
+  tags:
+  - config
   copy:
     src: .user.ini
     dest: "{{ cloud_www_dir }}/"
@@ -61,6 +75,8 @@
     mode: 0640
 
 - name: nextCloud | cron
+  tags:
+  - cron
   cron:
     name: 'nextCloud cron'
     special_time: hourly
@@ -68,17 +84,24 @@
     job: 'php {{ cloud_www_dir }}/cron.php 2>&- >&-'
 
 - name: nextCloud | nginx config
+  tags:
+  - config
+  - site
   template:
     src: nextcloud-nginx.j2
-    dest: /etc/nginx/sites-available/nextcloud
+    dest: /etc/nginx/sites-available/nextcloud.nginx
 
 - name: nextCloud | nginx site enabled
+  tags:
+  - site
   file:
-    src: /etc/nginx/sites-available/nextcloud
+    src: /etc/nginx/sites-available/nextcloud.nginx
     dest: /etc/nginx/sites-enabled/
     state: link
 
 - name: nextCloud | DB user
+  tags:
+  - db
   become_user: postgres
   postgresql_user:
     name: "{{ cloud_db_user }}"
@@ -86,6 +109,8 @@
     role_attr_flags: NOSUPERUSER,NOCREATEDB
 
 - name: nextCloud | DB
+  tags:
+  - db
   become_user: postgres
   postgresql_db:
     name: "{{ cloud_db }}"

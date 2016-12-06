@@ -1,17 +1,23 @@
 ---
 
 - name: PostgreSQL | apt key
+  tags:
+  - apt
   apt_key:
     url: "https://www.postgresql.org/media/keys/ACCC4CF8.asc"
 
 - name: PostgreSQL | apt repo
+  tags:
+  - apt
   apt_repository:
     repo: 'deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main'
     filename: 'postgresql.list'
 
 - name: PostgreSQL | packages
-  apt:
-    pkg: "{{ item }}"
+  tags:
+  - package
+  package:
+    name: "{{ item }}"
     state: latest
   with_items:
   - "postgresql-{{ postgresql_version }}"
@@ -20,6 +26,8 @@
   - python-psycopg2
 
 - name: PostgreSQL | config
+  tags:
+  - config
   copy:
     src: "{{ item }}"
     dest: /etc/postgresql/{{ postgresql_version }}/main/
@@ -31,13 +39,17 @@
   - postgresql.conf
   notify: restart postgresql
 
-- name: PostgreSQL | backup script
+- name: PostgreSQL | backup cron job
+  tags:
+  - cron
   copy:
     src: pg_backup.cron
     dest: /etc/cron.daily/
     mode: 0750
 
 - name: PostgreSQL | service
+  tags:
+  - service
   service:
     name: postgresql
     state: started

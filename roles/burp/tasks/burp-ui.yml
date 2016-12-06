@@ -1,12 +1,15 @@
 ---
 
 - name: Burp | web UI config
+  tags:
+  - config
   template:
     src: burpui.cfg.j2
     dest: /etc/burp/burpui.cfg
 
 - name: Burp | web UI
+  tags:
+  - package
   pip:
     name: burp-ui
     state: latest
-

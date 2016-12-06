@@ -1,37 +1,32 @@
 ---
 
 - name: PHP-FPM | packages
-  apt:
-    pkg: "{{ item }}"
+  tags:
+  - package
+  package:
+    name: "{{ item }}"
     state: latest
-    install_recommends: no
-    force: yes
   with_items:
   - php5-fpm
   - php5-sqlite
   - php5-apcu
 
-- name: PHP-FPM | Nginx config
-  copy:
-    src: nginx-php
-    dest: /etc/nginx/
-
 - name: PHP-FPM | config
+  tags:
+  - config
   copy:
-    src: "{{ item }}"
-    dest: /etc/php5/fpm/
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
   with_items:
-  - php.ini
-  - php-fpm.conf
-  notify: restart php-fpm
-
-- name: PHP-FPM | pool config
-  copy:
-    src: www.conf
-    dest: /etc/php5/fpm/pool.d/
+  - { src: nginx-php, dest: /etc/nginx/ }
+  - { src: php.ini, dest: /etc/php5/fpm/ }
+  - { src: php-fpm.conf, dest: /etc/php5/fpm/ }
+  - { src: www.conf, dest: /etc/php5/fpm/pool.d/ }
   notify: restart php-fpm
 
 - name: PHP-FPM | service
+  tags:
+  - service
   service:
     name: php5-fpm
     state: started
