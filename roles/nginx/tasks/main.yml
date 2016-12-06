@@ -1,47 +1,76 @@
 ---
 
 - name: Nginx | APT key
+  tags:
+  - apt
   apt_key:
     url: http://nginx.org/keys/nginx_signing.key
 
 - name: Nginx | repository
+  tags:
+  - apt
   apt_repository:
     repo: 'deb http://nginx.org/packages/mainline/debian/ jessie nginx'
     filename: 'nginx.list'
 
 - name: Nginx | package
-  apt:
-    pkg: nginx
+  tags:
+  - package
+  package:
+    name: nginx
     state: latest
 
-- name: Nginx | config
+- name: Nginx | directories
+  tags:
+  - dir
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+  - /etc/nginx/ssl
+  - /etc/nginx/sites-available
+  - /etc/nginx/sites-enabled
+  - /var/www/html
+
+- name: Nginx | SSL certs
+  tags:
+  - config
+  - crypt
   copy:
     src: "{{item}}"
-    dest: /etc/nginx/
-    owner: root
-    group: root
+    dest: /etc/nginx/ssl/
     mode: 0640
   with_items:
-  - nginx.conf
+  - _dhparams.pem
+  - _ssl.crt
+  - _ssl.key
+  notify: restart nginx
+
+- name: Nginx | config
+  tags:
+  - config
+  copy:
+    src: "{{ item.src }}"
+    dest: "/etc/nginx/{{ item.dest }}"
+    mode: 0640
+  with_items:
+  - { src: nginx.conf, dest: "" }
+  - { src: acme-redir, dest: "" }
+  - { src: default.nginx, dest: "sites-available" }
   - conf.d
-  - sites-available
-  - sites-enabled
-  - _priv/ssl
-  - acme-redir
   notify: restart nginx
 
 - name: Nginx | enable default site
+  tags:
+  - site
   file:
-    src: /etc/nginx/sites-available/default
+    src: /etc/nginx/sites-available/default.nginx
     dest: /etc/nginx/sites-enabled/0default
     state: link
 
-- name: Nginx | default directory for web host
-  file:
-    path: /var/www/html
-    state: directory
-
 - name: Nginx | default index.html
+  tags:
+  - site
   template:
     src: index.html.j2
     dest: /var/www/html/index.html
@@ -51,6 +80,8 @@
   notify: restart nginx
 
 - name: Nginx | service
+  tags:
+  - service
   service:
     name: nginx
     state: started
