@@ -20,55 +20,41 @@
     name: nginx
     state: latest
 
-- name: Nginx | directories
+- name: Nginx | SSL dir and perms
   tags:
   - dir
   file:
-    path: "{{ item }}"
+    path: /etc/nginx/ssl
     state: directory
-  with_items:
-  - /etc/nginx/ssl
-  - /etc/nginx/sites-available
-  - /etc/nginx/sites-enabled
+    mode: 0750
   - /var/www/html
-
-- name: Nginx | SSL certs
-  tags:
-  - config
-  - crypt
-  copy:
-    src: "{{item}}"
-    dest: /etc/nginx/ssl/
-    mode: 0640
-  with_items:
-  - _dhparams.pem
-  - _ssl.crt
-  - _ssl.key
-  notify: restart nginx
 
 - name: Nginx | config
   tags:
   - config
   copy:
-    src: "{{ item.src }}"
-    dest: "/etc/nginx/{{ item.dest }}"
-    mode: 0640
+    src: "{{ item }}"
+    dest: "/etc/nginx/"
   with_items:
-  - { src: nginx.conf, dest: "" }
-  - { src: acme-redir, dest: "" }
-  - { src: default.nginx, dest: "sites-available" }
+  - nginx.conf
+  - acme-redir
   - conf.d
+  - ssl
+  - sites-available
   notify: restart nginx
 
-- name: Nginx | enable default site
+- name: Nginx | default site dir
   tags:
+  - dir
   - site
   file:
-    src: /etc/nginx/sites-available/default.nginx
-    dest: /etc/nginx/sites-enabled/0default
-    state: link
+    path: /var/www/html
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: 0750
 
-- name: Nginx | default index.html
+- name: Nginx | default site index.html
   tags:
   - site
   template:
@@ -76,8 +62,17 @@
     dest: /var/www/html/index.html
     owner: www-data
     group: www-data
-    mode: 0644
+    mode: 0640
   notify: restart nginx
+
+- name: Nginx | enable default site
+  tags:
+  - config
+  - site
+  file:
+    src: /etc/nginx/sites-available/default.nginx
+    dest: /etc/nginx/sites-enabled/0default
+    state: link
 
 - name: Nginx | service
   tags:
@@ -86,3 +81,4 @@
     name: nginx
     state: started
     enabled: yes
+
