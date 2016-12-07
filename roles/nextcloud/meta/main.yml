@@ -1,4 +1,4 @@
 ---
 dependencies:
-  - { role: php }
-  - { role: postgres }
+  - php
+  - postgres
