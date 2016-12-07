@@ -3,8 +3,9 @@ dependencies:
   - { role: basepkgs }
   - { role: bash }
   - { role: ssh }
-  - { role: iptables }
   - { role: tinc }
+  - { role: ntp, when: ansible_virtualization_type != 'openvz' }
   - { role: rsyslog }
+  - { role: iptables }
   - { role: burp }
 
