@@ -32,12 +32,12 @@
 - name: main.yml | RSS news server
   hosts: news
   roles:
-  - { role: ttrss, tags: [ttrss] }
+  - { role: ttrss, tags: [news] }
 
 - name: main.yml | nextCloud servers
   hosts: cloud
   roles:
-  - { role: nextcloud, tags: [nextcloud] }
+  - { role: nextcloud, tags: [cloud] }
 
 - name: main.yml | R servers
   hosts: R
