@@ -6,8 +6,16 @@
   - update
 
   tasks:
-  - name: Upgrade packages (apt)
+
+  - name: Upgrade packages (Debian)
     when: ansible_os_family == "Debian"
     apt:
       update_cache: yes
       upgrade: full
+
+  - name: Upgrade packages (RedHat)
+    when: ansible_os_family == "RedHat"
+    yum:
+      update_cache: yes
+      name: '*'
+      state: latest
