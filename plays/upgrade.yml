@@ -6,7 +6,7 @@
   - update
 
   tasks:
-  - name: apt upgrade
+  - name: Upgrade packages (apt)
     when: ansible_os_family == "Debian"
     apt:
       update_cache: yes
