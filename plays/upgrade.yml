@@ -1,0 +1,13 @@
+---
+- name: plays/upgrade.yml | Upgrade all packages
+  hosts: all
+  tags:
+  - package
+  - update
+
+  tasks:
+  - name: apt upgrade
+    when: ansible_os_family == "Debian"
+    apt:
+      update_cache: yes
+      upgrade: full
