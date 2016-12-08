@@ -4,13 +4,14 @@
   tags:
   - apt
   apt_key:
+    id: 7BD9BF62
     url: http://nginx.org/keys/nginx_signing.key
 
 - name: Nginx | repository
   tags:
   - apt
   apt_repository:
-    repo: 'deb http://nginx.org/packages/mainline/debian/ jessie nginx'
+    repo: 'deb http://nginx.org/packages/mainline/{{ ansible_distribution | lower }}/ {{ ansible_lsb.codename }} nginx'
     filename: 'nginx.list'
 
 - name: Nginx | package
