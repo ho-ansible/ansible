@@ -1,6 +1,6 @@
 ---
 
-- name: tinc VPN | all public keys
+- name: tinc VPN server | all public keys
   tags:
   - config
   - crypt

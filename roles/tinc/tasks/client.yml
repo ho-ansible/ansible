@@ -1,0 +1,85 @@
+---
+
+- name: tinc VPN | directories
+  tags:
+  - dir
+  file:
+    path: "/etc/tinc/{{ tinc_net }}/hosts"
+    state: directory
+
+- name: tinc VPN | nets.boot
+  tags:
+  - config
+  template:
+    src: nets.boot.j2
+    dest: /etc/tinc/nets.boot
+    mode: 0644
+  notify: restart tinc
+
+- name: tinc VPN | config
+  tags:
+  - config
+  template:
+    src: "{{ item }}.j2"
+    dest: "/etc/tinc/{{ tinc_net }}/{{ item }}"
+    mode: 0700
+  with_items:
+  - tinc.conf
+  - tinc-up
+  - tinc-down
+  notify: restart tinc
+
+- name: tinc VPN | private key
+  tags:
+  - config
+  - crypt
+  copy:
+    src: ".private/keys/{{ ansible_hostname }}.priv"
+    dest: "/etc/tinc/{{ tinc_net }}/rsa_key.priv"
+    mode: 0400
+  notify: restart tinc
+
+- name: tinc VPN | public keys
+  tags:
+  - config
+  - crypt
+  copy:
+    src: ".private/hosts/{{ item }}"
+    dest: "/etc/tinc/{{ tinc_net }}/hosts/"
+    mode: 0640
+  with_items:
+  - tinc1
+  - tinc2
+  - "{{ ansible_hostname }}"
+  notify: restart tinc
+
+- name: tinc VPN | packages
+  tags:
+  - package
+  package:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+  - tinc
+  - dhcpcd5
+  notify: restart tinc
+
+- name: dhcpcd | resolv.conf
+  tags:
+  - config
+  copy:
+    src: resolv.conf.tail
+    dest: /etc/
+
+- name: tinc VPN | service
+  tags:
+  - service
+  service:
+    name: tinc
+    state: started
+    enabled: yes
+
+# on Windows:
+# + install new TAP device
+# + run as admin: "tincd -n ho"
+# + it will install as service

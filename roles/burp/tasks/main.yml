@@ -1,4 +1,6 @@
 ---
 - include: client.yml
 - include: server.yml
+  when: "'backup' in group_names"
 - include: burp-ui.yml
+  when: "'backup' in group_names"
