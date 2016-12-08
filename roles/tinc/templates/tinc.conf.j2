@@ -5,7 +5,14 @@
 
 Port = {{ tinc_port }}
 
+{% if 'tinc1' in cname %}
+Name = tinc1
+{% elif 'tinc2' in cname %}
+Name = tinc2
+{% else %}
 Name = {{ ansible_hostname }}
+{% endif %}
+
 ConnectTo = tinc1
 ConnectTo = tinc2
 
