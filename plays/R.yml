@@ -1,4 +1,0 @@
----
-- hosts: R
-  roles:
-    - R

@@ -1,15 +1,45 @@
 ---
-- name: plays/main.yml | Top-level playbook
+- name: main.yml | Common setup
   hosts: all
   roles:
-    - common
+  - common
 
-  tasks:
-    - group_by: key=os_{{ ansible_os_family }}
+- name: main.yml | TMux hosts
+  hosts: tmux
+  roles:
+  - { role: tmux, tags: [tmux] }
 
-- include: tmux.yml
-- include: dns.yml
-- include: www.yml
-- include: news.yml
-- include: cloud.yml
-- include: R.yml
+- name: main.yml | VPN servers
+  hosts: vpn
+  roles:
+  - { role: tinc, tags: [vpn] }
+
+- name: main.yml | DNS servers
+  hosts: dns
+  roles:
+  - { role: dnsmasq, tags: [dns] }
+
+- name: main.yml | Web servers
+  hosts: www
+  roles:
+  - { role: nginx, tags: [www] }
+
+- name: main.yml | PHP-enabled webservers
+  hosts: php
+  roles:
+  - { role: php, tags: [php] }
+
+- name: main.yml | RSS news server
+  hosts: news
+  roles:
+  - { role: ttrss, tags: [ttrss] }
+
+- name: main.yml | nextCloud servers
+  hosts: cloud
+  roles:
+  - { role: nextcloud, tags: [nextcloud] }
+
+- name: main.yml | R servers
+  hosts: R
+  roles:
+  - { role: R, tags: [R] }
