@@ -1,0 +1,10 @@
+---
+
+- name: rsyslog | client config
+  tags:
+  - config
+  template:
+    src: rsyslog.conf.j2
+    dest: /etc/rsyslog.conf
+    mode: 0600
+  notify: restart rsyslog
