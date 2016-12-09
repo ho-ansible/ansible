@@ -1,0 +1,43 @@
+#! /system/bin/sh
+## /sdcard/Android/tinc/tinc-up
+## Link configuration once VPN interface started
+## + tinc doesn't connect to hosts until this finishes
+## + dhcpcd can't get IP until DHCP server reachable
+## + dhcpcd adds default route (w/o -G) to "main" table
+## + old default route in "wlan0" rule
+## + "main" rule lower priority than "wlan0"
+
+echo "Starting DHCP client on $INTERFACE"
+dhcpcd -bA $INTERFACE
+
+VPN_GW=10.100.1.1
+VPN_NS=10.100.1.1
+VPN_SRV="tinc1.seanho.com tinc2.seanho.com"
+
+gethost() {
+  nslookup $1 | tail -n +4 | egrep '^Address' | awk '{print $3}'
+}
+
+echo "Adding static routes to VPN servers"
+OLD_GW=$(ip route get 8.8.8.8 | awk '{print $3, $4, $5}')
+tid=100
+ip ro flush table $tid
+for node in $VPN_SRV; do
+  ip ro add table $tid $(gethost $node) via $OLD_GW
+done
+
+echo "Enabling routing tables $tid and main"
+ip ru del pri 5055 2>&-
+ip ru add pri 5055 from all lookup $tid
+ip ru del pri 5056 2>&-
+ip ru add pri 5056 from all lookup main
+
+echo "Redirecting DNS traffic to $VPN_NS"
+chain="out_dns"
+nat="iptables -t nat"
+rule="--dport 53 -j DNAT --to-destination ${VPN_NS}:53"
+$nat -L $chain 1 >&- || $nat -N $chain
+$nat -F $chain
+$nat -A $chain -p udp $rule
+$nat -A $chain -p tcp $rule
+#$nat -C OUTPUT -j $chain 2>&- || $nat -I OUTPUT -j $chain
