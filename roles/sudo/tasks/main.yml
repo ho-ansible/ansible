@@ -1,0 +1,21 @@
+---
+
+- name: sudo | packages
+  tags:
+  - package
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+  - sudo
+
+- name: sudo | user
+  tags:
+  - user
+  user:
+    name: "{{ ansible_user }}"
+    groups: sudo
+
+- name: sudo | SSH keys
+  tags:
+  - ssh
