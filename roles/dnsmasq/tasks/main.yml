@@ -6,7 +6,8 @@
   copy:
     src: "{{item}}"
     dest: /etc/
-    mode: 0640
+    owner: dnsmasq
+    mode: 0440
   with_items: 
   - dnsmasq.conf
   - dnsmasq.opts
