@@ -1,4 +1,8 @@
 ---
+# Add host to inv/_master.yml
+# Create tinc keys in roles/tinc/files/.private/{hosts,keys}/
+# ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -k -e ansible_user=root -e ssh_port=22 -D -l host plays/setup.yml
+
 - name: setup.yml | Provision new VPS
   hosts: all
   roles:
