@@ -23,6 +23,6 @@
   tags:
   - service
   service:
-    name: iptables-persistent
+    name: netfilter-persistent
     state: started
     enabled: yes
