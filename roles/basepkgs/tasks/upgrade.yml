@@ -1,5 +1,12 @@
 ---
 
+- name: Install aptitude (for package upgrade)
+  tags:
+  - package
+  package:
+    name: aptitude
+    state: latest
+
 - name: Upgrade packages (Debian)
   when: ansible_os_family == "Debian"
   tags:
