@@ -1,5 +1,16 @@
 ---
 
+- name: tinc VPN | packages
+  tags:
+  - package
+  package:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+  - tinc
+  - dhcpcd5
+  notify: restart tinc
+
 - name: tinc VPN | directories
   tags:
   - dir
@@ -51,17 +62,6 @@
   - tinc1
   - tinc2
   - "{{ ansible_hostname }}"
-  notify: restart tinc
-
-- name: tinc VPN | packages
-  tags:
-  - package
-  package:
-    name: "{{ item }}"
-    state: latest
-  with_items:
-  - tinc
-  - dhcpcd5
   notify: restart tinc
 
 - name: dhcpcd | resolv.conf
