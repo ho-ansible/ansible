@@ -30,9 +30,7 @@
   - user
   user:
     name: "{{ ansible_user }}"
-    groups:
-    - sudo
-    - adm
+    groups: "sudo, adm"
 
 - name: sudo | SSH keys
   tags:
@@ -40,4 +38,4 @@
   authorized_key:
     user: "{{ ansible_user }}"
     key: "{{ item }}"
-  with_item: "{{ ssh_authorized_keys }}"
+  with_items: "{{ ssh_authorized_keys }}"
