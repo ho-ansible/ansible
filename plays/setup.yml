@@ -1,6 +1,6 @@
 ---
 - name: setup.yml | Provision new VPS
-  hosts: new
+  hosts: all
   roles:
   - { role: sudo, tags: [new] }
   - { role: ssh, tags: [new] }
