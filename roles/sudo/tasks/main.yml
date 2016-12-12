@@ -13,8 +13,11 @@
   tags:
   - group
   group:
-    name: sudo
+    name: "{{ item }}"
     state: present
+  with_items:
+  - sudo
+  - adm
 
 - name: sudo | /etc/sudoers
   tags:
@@ -29,13 +32,14 @@
   tags:
   - user
   user:
-    name: "{{ ansible_user }}"
-    groups: "sudo, adm"
+    name: "{{ sudo_user }}"
+    groups: "sudo,adm"
+    shell: /bin/bash
 
 - name: sudo | SSH keys
   tags:
   - ssh
   authorized_key:
-    user: "{{ ansible_user }}"
+    user: "{{ sudo_user }}"
     key: "{{ item }}"
   with_items: "{{ ssh_authorized_keys }}"
