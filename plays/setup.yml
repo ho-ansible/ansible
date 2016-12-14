@@ -1,14 +1,19 @@
 ---
+
+# Spin up new VM: get IP and root password
 # Add host to inv/_master.yml
 # Create tinc keys in roles/tinc/files/.private/{hosts,keys}/
 # ansible-playbook -l vpn -t vpn plays/main.yml
-# ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -k -e ansible_user=root -e ssh_port=22 -D -l host plays/setup.yml
-# Manually set root password
+# ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -k -l host plays/setup.yml
 # ansible-playbook -l host plays/main.yml
+# Manually set root password
 # Create entry on burp server
 
 - name: setup.yml | Provision new VPS
   hosts: all
+  vars:
+  - ansible_user: root
+  - ssh_port: 22
   roles:
   - { role: sudo, tags: [new] }
   - { role: ssh, tags: [new] }
