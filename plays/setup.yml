@@ -1,13 +1,15 @@
 ---
 
 # Spin up new VM: get IP and root password
-# Add host to inv/_master.yml
-# Create tinc keys in roles/tinc/files/.private/{hosts,keys}/
+# Add HOST to inv/_master.yml
+# /usr/sbin/tinc generate-rsa-keys 4096:
+#   roles/tinc/files/.private/{hosts/HOST,keys/HOST.priv}
 # ansible-playbook -l vpn -t vpn plays/main.yml
-# ansible-playbook -k -l host plays/setup.yml
-# ansible-playbook -l host plays/main.yml
+# ansible-playbook -k -l HOST plays/setup.yml
+# ansible-playbook -l HOST plays/main.yml
 # Manually set root password
 # Create entry on burp server
+# Manually set CNAME in DNS
 
 - name: setup.yml | Provision new VPS
   hosts: all
