@@ -11,7 +11,7 @@
     track_submodules: yes
     depth: 1
     version: '{{ cloud_version }}'
-    umask: 0750
+    umask: "0750"
 
 - name: nextCloud | file permissions
   tags:
