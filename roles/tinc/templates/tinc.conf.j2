@@ -10,7 +10,7 @@ Name = tinc1
 {% elif 'tinc2' in cname | default("") %}
 Name = tinc2
 {% else %}
-Name = {{ ansible_hostname }}
+Name = {{ inventory_hostname }}
 {% endif %}
 
 ConnectTo = tinc1

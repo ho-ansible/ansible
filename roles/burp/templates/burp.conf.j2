@@ -7,7 +7,7 @@ server = {{ burp_server }}
 port = {{ burp_port }}
 
 password = {{ burp_pw }}
-cname = {{ ansible_hostname }}
+cname = {{ inventory_hostname }}
 
 pidfile = /var/run/burp.pid
 autoupgrade_dir = /etc/burp/upgrade/
@@ -23,7 +23,7 @@ server_can_restore = 0
 ca_burp_ca      = /usr/sbin/burp_ca
 ca_csr_dir      = /etc/burp/keys/
 ssl_cert_ca     = /etc/burp/keys/ca.crt
-ssl_cert        = /etc/burp/keys/{{ ansible_hostname }}.crt
-ssl_key         = /etc/burp/keys/{{ ansible_hostname }}.key
+ssl_cert        = /etc/burp/keys/{{ inventory_hostname }}.crt
+ssl_key         = /etc/burp/keys/{{ inventory_hostname }}.key
 ssl_key_password = password
 ssl_peer_cn	= {{ burp_server_CN }}
