@@ -1,17 +1,14 @@
 ---
 # See: https://gitlab.paragon-es.de/ansible-roles/nextcloud/blob/master/tasks/install.yml
 
-- name: nextCloud | installation (git)
-  tags:
-  - package
-  - git
-  git:
-    repo: 'https://github.com/nextcloud/server.git'
-    dest: '{{ cloud_www_dir }}'
-    track_submodules: yes
-    depth: 1
-    version: '{{ cloud_version }}'
-    umask: "0750"
+#- name: nextCloud | installation (git)
+#  tags:
+#  - package
+#  - git
+#  git:
+#    repo: 'https://github.com/nextcloud/server.git'
+#    dest: '{{ cloud_www_dir }}'
+#    version: 'v{{ cloud_version }}'
 
 - name: nextCloud | file permissions
   tags:
@@ -96,7 +93,7 @@
   - site
   file:
     src: /etc/nginx/sites-available/nextcloud.nginx
-    dest: /etc/nginx/sites-enabled/
+    dest: /etc/nginx/sites-enabled/nextcloud.nginx
     state: link
 
 - name: nextCloud | DB user
