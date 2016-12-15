@@ -1,11 +1,11 @@
 ---
 
-- name: Burp | web UI prerequisites
-  tags:
-  - package
-  package:
-    name: python-pip
-    state: latest
+#- name: Burp | web UI prerequisites
+#  tags:
+#  - package
+#  package:
+#    name: python-pip
+#    state: latest
 
 - name: Burp | web UI
   tags:
