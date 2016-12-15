@@ -45,7 +45,7 @@
   - config
   - crypt
   copy:
-    src: ".private/keys/{{ ansible_hostname }}.priv"
+    src: ".private/keys/{{ inventory_hostname }}.priv"
     dest: "/etc/tinc/{{ tinc_net }}/rsa_key.priv"
     mode: 0400
   notify: restart tinc
@@ -61,7 +61,7 @@
   with_items:
   - tinc1
   - tinc2
-  - "{{ ansible_hostname }}"
+  - "{{ inventory_hostname }}"
   notify: restart tinc
 
 - name: dhcpcd | resolv.conf
