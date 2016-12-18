@@ -88,9 +88,18 @@
   - cron
   cron:
     name: 'nextCloud cron'
-    special_time: hourly
+    minute: '4-49/15'
     user: www-data
     job: 'php {{ cloud_www_dir }}/cron.php 2>&- >&-'
+
+- name: nextCloud | thumbnail cron
+  tags:
+  - cron
+  cron:
+    name: 'nextCloud thumbnail cron'
+    minute: '6-51/15'
+    user: www-data
+    job: 'php {{ cloud_www_dir }}/occ preview:pre-generate 2>&- >&-'
 
 - name: nextCloud | nginx config
   tags:
