@@ -1,0 +1,29 @@
+## {{ postgresql_dir }}/postgresql.conf
+# {{ ansible_managed }}
+
+data_directory = '/var/lib/postgresql/{{ postgresql_version }}/main'
+hba_file = '{{ postgresql_dir }}/pg_hba.conf'
+ident_file = '{{ postgresql_dir }}/pg_ident.conf'
+external_pid_file = '/var/run/postgresql/{{ postgresql_version }}-main.pid'
+unix_socket_directories = '/var/run/postgresql'
+
+listen_addresses = ''
+
+max_connections = 20
+
+shared_buffers = 20MB
+#temp_buffers = 8MB
+#work_mem = 1MB
+#maintenance_work_mem = 16MB
+#max_stack_depth = 2MB
+max_files_per_process = 200
+
+log_rotation_size = 10MB
+
+lc_messages = 'C'
+lc_monetary = 'C'
+lc_numeric = 'C'
+lc_time = 'C'
+
+default_text_search_config = 'pg_catalog.english'
+

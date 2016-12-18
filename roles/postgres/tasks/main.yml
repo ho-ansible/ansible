@@ -28,9 +28,9 @@
 - name: PostgreSQL | config
   tags:
   - config
-  copy:
-    src: "{{ item }}"
-    dest: /etc/postgresql/{{ postgresql_version }}/main/
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ postgresql_dir }}/{{ item }}"
     owner: postgres
     group: postgres
     mode: 0640
