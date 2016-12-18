@@ -1,6 +1,18 @@
 ---
 # See: https://gitlab.paragon-es.de/ansible-roles/nextcloud/blob/master/tasks/install.yml
 
+- name: nextCloud | dependencies
+  tags:
+  - package
+  package:
+    name: "{{ item }}"
+    state: installed
+  with_items:
+  - php5-pgsql
+  - php5-curl
+  - php5-gd
+  - php5-apcu
+
 #- name: nextCloud | installation (git)
 #  tags:
 #  - package
