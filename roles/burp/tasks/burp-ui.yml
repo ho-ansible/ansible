@@ -9,6 +9,7 @@
   with_items:
   - python-pip
   - libpython-dev
+  - libffi-dev
 
 - name: Burp | web UI
   tags:
