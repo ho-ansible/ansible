@@ -1,6 +1,6 @@
 ---
 - name: main.yml | Common setup
-  hosts: all
+  hosts: linux
   roles:
   - common
 
@@ -8,11 +8,6 @@
   hosts: tmux
   roles:
   - { role: tmux, tags: [tmux] }
-
-- name: main.yml | VPN servers
-  hosts: vpn
-  roles:
-  - { role: tinc, tags: [vpn] }
 
 - name: main.yml | DNS servers
   hosts: dns

@@ -3,9 +3,9 @@ dependencies:
   - { role: basepkgs, tags: [basepkgs] }
   - { role: bash, tags: [bash] }
   - { role: ssh, tags: [ssh] }
-  - { role: tinc, tags: [tinc] }
+  - { role: tinc, tags: [tinc, vpn] }
   - { role: ntp, tags: [ntp], when: ansible_virtualization_type != 'openvz' }
   - { role: rsyslog, tags: [rsyslog] }
   - { role: iptables, tags: [iptables] }
-  - { role: burp, tags: [burp] }
+  - { role: burp, tags: [burp, backup] }
 
