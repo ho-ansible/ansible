@@ -18,7 +18,7 @@ ConnectTo = tinc2
 
 Mode = switch
 
-{% if 'CYGWIN_NT-6.3' is not ansible_distribution %}
+{% if 'win' not in group_names %}
 Device = /dev/net/tun
 GraphDumpFile = /tmp/tinc-{{ tinc_net }}.dot
 PriorityInheritance = yes
