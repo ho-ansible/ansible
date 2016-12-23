@@ -17,12 +17,15 @@ ConnectTo = tinc1
 ConnectTo = tinc2
 
 Mode = switch
+
+{% if 'CYGWIN_NT-6.3' is not ansible_distribution %}
 Device = /dev/net/tun
+GraphDumpFile = /tmp/tinc-{{ tinc_net }}.dot
+PriorityInheritance = yes
+{% endif %}
 
 ProcessPriority = high
-GraphDumpFile = /tmp/tinc-{{ tinc_net }}.dot
 LocalDiscovery = yes
-PriorityInheritance = yes
 PingInterval = 120
 PingTimeout = 10
 MaxTimeout = 300
