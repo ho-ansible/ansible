@@ -21,15 +21,28 @@
   - "/etc/tinc/{{ tinc_net }}/hosts"
   - /usr/local/sbin
 
+# Compiled from git:
+# git clone https://github.com/gsliepen/tinc && cd tinc/
+# git checkout release-{{ tinc_version }}
+# sudo apt-get install libreadline-dev liblzo2-dev
+# autoreconf -fis && ./configure && make
+
 - name: tinc VPN | binaries (v1.1)
   tags:
   - binary
   copy:
-    src: "bin/{{ item }}"
+    src: "bin/{{ tinc_version }}/{{ item }}"
     dest: /usr/local/sbin/
   with_items:
   - tinc
   - tincd
+
+- name: tinc VPN | /etc/default/
+  tags:
+  - config
+  copy:
+    src: tinc
+    dest: /etc/default/tinc
 
 - name: tinc VPN | nets.boot
   tags:
