@@ -37,7 +37,7 @@
   - tinc
   - tincd
 
-- name: tinc VPN | /etc/default/
+- name: tinc VPN | init script config
   tags:
   - config
   copy:
