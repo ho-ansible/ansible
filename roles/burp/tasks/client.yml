@@ -19,16 +19,24 @@
     name: librsync-dev
     state: installed
 
+# Binaries compiled on a Debian host from git:
+# git clone https://github.com/grke/burp && cd burp/
+# sudo apt-get install make pkg-config check g++ librsync-dev libz-dev libssl-dev uthash-dev libyajl-dev
+# sudo apt-get install autoconf automake libtool
+# autoreconf -vif
+# ./configure && make
+
 - name: Burp | executables
   tags:
   - bin
   copy:
-    src: "sbin/{{item}}"
+    src: "bin/{{ burp_version }}/{{ item }}"
     dest: /usr/sbin/
     mode: 0755
   with_items:
   - burp
   - burp_ca
+  - vss_strip
 
 - name: Burp | config
   tags:
