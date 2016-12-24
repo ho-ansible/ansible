@@ -48,6 +48,7 @@ install_pkgs:
 - vim
 - htop
 - cron
+- file
 - python-apt
 - aptitude
 - unattended-upgrades
