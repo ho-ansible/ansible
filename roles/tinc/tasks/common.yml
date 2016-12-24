@@ -15,8 +15,21 @@
   tags:
   - dir
   file:
-    path: "/etc/tinc/{{ tinc_net }}/hosts"
+    dest: "{{ item }}"
     state: directory
+  with_items:
+  - "/etc/tinc/{{ tinc_net }}/hosts"
+  - /usr/local/sbin
+
+- name: tinc VPN | binaries (v1.1)
+  tags:
+  - binary
+  copy:
+    src: "bin/{{ item }}"
+    dest: /usr/local/sbin/
+  with_items:
+  - tinc
+  - tincd
 
 - name: tinc VPN | nets.boot
   tags:
