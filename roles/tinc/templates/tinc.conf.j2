@@ -20,10 +20,10 @@ Mode = switch
 
 {% if 'win' not in group_names %}
 Device = /dev/net/tun
-GraphDumpFile = /tmp/tinc-{{ tinc_net }}.dot
 PriorityInheritance = yes
 {% endif %}
 
+DeviceStandby = yes
 ProcessPriority = high
 LocalDiscovery = yes
 PingInterval = 120
