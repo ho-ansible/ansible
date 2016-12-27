@@ -20,6 +20,7 @@
   with_items:
   - "/etc/tinc/{{ tinc_net }}/hosts"
   - /usr/local/sbin
+  - /usr/local/etc
 
 # Compiled from git:
 # git clone https://github.com/gsliepen/tinc && cd tinc/
@@ -33,9 +34,18 @@
   copy:
     src: "bin/{{ tinc_version }}/{{ item }}"
     dest: /usr/local/sbin/
+    mode: 0755
   with_items:
   - tinc
   - tincd
+
+- name: tinc VPN | softlink config dir
+  tags:
+  - config
+  file:
+    src: /etc/tinc
+    dest: /usr/local/etc/tinc
+    state: link
 
 - name: tinc VPN | init script config
   tags:
