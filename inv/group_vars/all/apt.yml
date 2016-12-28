@@ -49,6 +49,7 @@ install_pkgs:
 - htop
 - cron
 - file
+- bind9-host
 - python-apt
 - aptitude
 - unattended-upgrades
