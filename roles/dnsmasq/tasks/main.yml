@@ -1,25 +1,36 @@
 ---
 
-- name: DNSmasq | config
-  tags:
-  - config
-  copy:
-    src: "{{item}}"
-    dest: /etc/
-    owner: dnsmasq
-    mode: 0440
-  with_items: 
-  - dnsmasq.conf
-  - dnsmasq.opts
-  - dnsmasq.hosts
-  notify: restart dnsmasq
-
 - name: DNSMasq | package
   tags:
   - package
   package:
     name: dnsmasq
     state: present
+
+- name: DNSmasq | config (copy)
+  tags:
+  - config
+  copy:
+    src : "{{ item.src  }}"
+    dest: "{{ item.dest }}"
+    owner: dnsmasq
+    mode: 0440
+  with_items: 
+  - { src: _dnsmasq.hosts, dest: /etc/dnsmasq.hosts }
+  - { src: dnsmasq.opts, dest: /etc/ }
+  notify: restart dnsmasq
+
+- name: DNSmasq | config (template)
+  tags:
+  - config
+  template:
+    src : "{{ item.src  }}.j2"
+    dest: "{{ item.dest }}"
+    owner: dnsmasq
+    mode: 0440
+  with_items:
+  - { src: dnsmasq.conf, dest: /etc/ }
+  notify: restart dnsmasq
 
 - name: DNSMasq | service
   tags:
