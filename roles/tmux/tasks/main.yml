@@ -12,4 +12,4 @@
   - config
   copy:
     src: tmux.conf
-    dest: /home/{{ ansible_remote_user }}/.tmux.conf
+    dest: /home/{{ ansible_user }}/.tmux.conf
