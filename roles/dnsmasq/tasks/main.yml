@@ -29,7 +29,7 @@
     owner: dnsmasq
     mode: 0440
   with_items:
-  - { src: dnsmasq.conf, dest: /etc/ }
+  - { src: dnsmasq.conf, dest: /etc/dnsmasq.conf }
   notify: restart dnsmasq
 
 - name: DNSMasq | service
