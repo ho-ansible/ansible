@@ -1,4 +1,5 @@
 ---
 dependencies:
-  - php
-  - postgres
+  - { role: nginx, tags: [news, www, nginx] }
+  - { role: php, tags: [news, php] }
+  - { role: postgres, tags: [news, db, postgres] }
