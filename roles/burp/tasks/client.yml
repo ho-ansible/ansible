@@ -28,9 +28,9 @@
 
 - name: Burp | executables
   tags:
-  - bin
+  - binary
   copy:
-    src: "bin/{{ burp_version }}/{{ item }}"
+    src: "bin/{{ burp_version }}/{{ ansible_os_family }}/{{ item }}"
     dest: /usr/sbin/
     mode: 0755
   with_items:
