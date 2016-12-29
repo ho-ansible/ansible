@@ -24,28 +24,27 @@
 -A FORWARD -i {{ tinc_net }} -j ACCEPT
 -A FORWARD -o {{ tinc_net }} -j ACCEPT
 
-# Allow HTTP and HTTPS connections
 {%- if 'www' in group_names %}
+# Allow HTTP/S
 -A INPUT -p tcp --dport 80 -j ACCEPT
 -A INPUT -p tcp --dport 443 -j ACCEPT
 -A INPUT -p tcp --dport 4343 -j ACCEPT
 {%- endif %}
 
-# Allow rate-limited SSH connections
-#-A INPUT -p tcp -m tcp --dport {{ ssh_port }} -m state --state NEW -m recent --set --name DEFAULT --rsource
-#-A INPUT -p tcp -m tcp --dport {{ ssh_port }} -m state --state NEW -m recent --update --seconds 60 --hitcount 3 --name DEFAULT --rsource -j DROP
-
-# Allow SSH connections
+# Allow SSH
 -A INPUT -p tcp -m state --state NEW --dport {{ ssh_port }} -j ACCEPT
+
+{%- if 0 %}
+# Allow rate-limited SSH
+-A INPUT -p tcp -m tcp --dport {{ ssh_port }} -m state --state NEW -m recent --set --name DEFAULT --rsource
+-A INPUT -p tcp -m tcp --dport {{ ssh_port }} -m state --state NEW -m recent --update --seconds 60 --hitcount 3 --name DEFAULT --rsource -j DROP
+%}
 
 # Allow ping et al.
 -A INPUT -p icmp -j ACCEPT
 
 # Allow DHCP client
 -A INPUT -p udp --dport 68 -j ACCEPT
-
-# log iptables denied calls (Can grow log files fast!)
-#-A INPUT -m limit --limit 5/min -j LOG --log-prefix "iptables denied: " --log-level 7
 
 COMMIT
 
