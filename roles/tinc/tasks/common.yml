@@ -1,13 +1,27 @@
 ---
 
-- name: tinc VPN | packages
+# Compile from git:
+# git clone https://github.com/gsliepen/tinc && cd tinc/
+# git checkout release-{{ tinc_version }}
+# sudo apt-get install libreadline-dev liblzo2-dev
+# autoreconf -fis && ./configure && make
+
+- name: tinc VPN | remove default package
+  tags:
+  - package
+  package:
+    name: tinc
+    state: absent
+
+- name: tinc VPN | dependencies
   tags:
   - package
   package:
     name: "{{ item }}"
     state: latest
   with_items:
-  - tinc
+  - openssl
+  - liblzo2-2
   - dhcpcd5
   notify: restart tinc
 
@@ -19,52 +33,27 @@
     state: directory
   with_items:
   - "/etc/tinc/{{ tinc_net }}/hosts"
-  - /usr/local/sbin
-  - /usr/local/etc
-
-# Compiled from git:
-# git clone https://github.com/gsliepen/tinc && cd tinc/
-# git checkout release-{{ tinc_version }}
-# sudo apt-get install libreadline-dev liblzo2-dev
-# autoreconf -fis && ./configure && make
 
 - name: tinc VPN | binaries (v1.1)
   tags:
   - binary
   copy:
     src: "bin/{{ tinc_version }}/{{ item }}"
-    dest: /usr/local/sbin/
+    dest: /usr/sbin/
     mode: 0755
   with_items:
   - tinc
   - tincd
 
-- name: tinc VPN | softlinks in /usr/local/
+- name: tinc VPN | systemd unit files
   tags:
-  - config
-  file:
-    src: "{{ item }}"
-    dest: "/usr/local/{{ item }}"
-    state: link
-  with_items:
-  - /etc/tinc
-  - /var
-
-- name: tinc VPN | init script config
-  tags:
-  - config
+  - init
   copy:
-    src: tinc
-    dest: /etc/default/tinc
-
-- name: tinc VPN | nets.boot
-  tags:
-  - config
-  template:
-    src: nets.boot.j2
-    dest: /etc/tinc/nets.boot
-    mode: 0644
-  notify: restart tinc
+    src: "{{ item }}"
+    dest: /lib/systemd/system/
+  with_items:
+  - tinc.service
+  - tinc@.service
 
 - name: tinc VPN | config
   tags:
@@ -117,9 +106,12 @@
   tags:
   - service
   service:
-    name: tinc
+    name: "{{ item }}"
     state: started
     enabled: yes
+  with_items:
+  - tinc
+  - tinc@ho
 
 # on Windows:
 # + install new TAP device
