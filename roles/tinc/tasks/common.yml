@@ -41,7 +41,7 @@
   tags:
   - binary
   copy:
-    src: "bin/{{ tinc_version }}/{{ ansible_os_family }}/{{ item }}"
+    src: "bin/{{ tinc_version }}/{{ ansible_architecture }}/{{ item }}"
     dest: /usr/sbin/
     mode: 0755
   with_items:
