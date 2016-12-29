@@ -39,13 +39,16 @@
   - tinc
   - tincd
 
-- name: tinc VPN | softlink config dir
+- name: tinc VPN | softlinks in /usr/local/
   tags:
   - config
   file:
-    src: /etc/tinc
-    dest: /usr/local/etc/tinc
+    src: "{{ item }}"
+    dest: "/usr/local/{{ item }}"
     state: link
+  with_items:
+  - /etc/tinc
+  - /var
 
 - name: tinc VPN | init script config
   tags:
