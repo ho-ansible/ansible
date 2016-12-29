@@ -17,7 +17,6 @@
   pip:
     name: "burp-ui[sql]"
     state: latest
-  with_items:
 
 - name: Burp | web UI config
   tags:
