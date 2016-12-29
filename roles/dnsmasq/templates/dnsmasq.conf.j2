@@ -32,8 +32,8 @@ server=4.2.2.1		# Upstream DNS: Level3
 # Allow DHCP to hand out these domains
 domain=ho.vpn,10.100.1.0/24,local
 
-dhcp-range=interface:ho,10.100.1.128,10.100.1.250,255.255.255.0,24h
-dhcp-range=interface:ho,fde7:3bf4:efbb:cc91::,64,24h
+dhcp-range=interface:ho,10.100.1.128,10.100.1.250,255.255.255.0,3h
+dhcp-range=interface:ho,fde7:3bf4:efbb:cc91::,64,3h
 
 dhcp-hostsfile=/etc/dnsmasq.hosts
 dhcp-optsfile=/etc/dnsmasq.opts
