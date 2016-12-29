@@ -4,7 +4,9 @@
 # git clone https://github.com/gsliepen/tinc && cd tinc/
 # git checkout release-{{ tinc_version }}
 # sudo apt-get install libreadline-dev liblzo2-dev
-# autoreconf -fis && ./configure && make
+# autoreconf -fis
+# ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var
+# make
 
 - name: tinc VPN | remove default package
   tags:
