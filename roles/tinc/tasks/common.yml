@@ -3,7 +3,7 @@
 # Compile from git:
 # git clone https://github.com/gsliepen/tinc && cd tinc/
 # git checkout release-{{ tinc_version }}
-# sudo apt-get install autoconf libreadline-dev liblzo2-dev
+# sudo apt-get install autoconf libncurses-dev libreadline-dev liblzo2-dev
 # autoreconf -fis
 # ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var
 # make
