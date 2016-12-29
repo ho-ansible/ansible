@@ -1,22 +1,11 @@
 [Global]
 port = {{ burp_ui_port }}
 bind = {{ burp_server }}
-ssl = false
-sslcert = /etc/burp/keys/server.crt
-sslkey =  /etc/burp/keys/server.key
-version = 2
 standalone = true
 auth = basic
 
 [UI]
 refresh = 30
-
-[Burp1]
-bhost = {{ burp_server }}
-bport = {{ burp_status_port }}
-burpbin = /usr/sbin/burp
-stripbin = /usr/sbin/vss_strip
-tmpdir = /tmp/burpui-restore
 
 [Burp2]
 burpbin = /usr/sbin/burp
@@ -26,5 +15,5 @@ bconfsrv = /etc/burp/server.conf
 tmpdir = /tmp/burpui-restore
 
 [BASIC]
-admin = "{{ burp_pw }}"
+admin = "{{ burpui_pw_hash }}"
 
