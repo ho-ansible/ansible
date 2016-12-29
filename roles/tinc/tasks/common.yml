@@ -25,6 +25,7 @@
   - openssl
   - liblzo2-2
   - dhcpcd5
+  - resolvconf
   notify: restart tinc
 
 - name: tinc VPN | directories
@@ -40,7 +41,7 @@
   tags:
   - binary
   copy:
-    src: "bin/{{ tinc_version }}/{{ item }}"
+    src: "bin/{{ tinc_version }}/{{ ansible_os_family }}/{{ item }}"
     dest: /usr/sbin/
     mode: 0755
   with_items:
@@ -97,12 +98,18 @@
   - "{{ inventory_hostname }}"
   notify: restart tinc
 
-- name: dhcpcd | resolv.conf
+- name: tinc VPN | resolvconf
   tags:
   - config
   copy:
     src: resolv.conf.tail
-    dest: /etc/
+    dest: /etc/resolvconf/resolv.conf.d/tail
+
+- name: tinc VPN | enable resolvconf
+  file:
+    src: /etc/resolvconf/run/resolv.conf
+    dest: /etc/resolv.conf
+    state: link
 
 - name: tinc VPN | service
   tags:
