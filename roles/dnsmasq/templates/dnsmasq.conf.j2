@@ -5,7 +5,7 @@
 log-facility=/var/log/dnsmasq
 log-async
 
-domain-needed	# Only forward names with domains to upstream DNS
+domain-needed	# Only forward FQDNs to upstream DNS
 bogus-priv	# Never forward private-IP reverse lookups
 bogus-nxdomain=64.94.110.11	# Verisign
 stop-dns-rebind	# Reject private IPs coming from upstream DNS servers
@@ -13,7 +13,6 @@ rebind-localhost-ok	# ... except for 127.0.0.0/8 (for ad/spam blockers)
 filterwin2k	# Filter useless requests from Windows
 
 localmx		# Mailhost is this server
-enable-dbus	# Notify of upstream DNS server change
 expand-hosts	# Add domain to names from /etc/hosts
 cache-size=200	# Number of DNS results
 #local-ttl=600	# Clients cache DNS results for this long
@@ -25,6 +24,8 @@ group=dip
 interface={{ tinc_net }}	# Interfaces to listen on (plus lo)
 
 # Upstream DNS
+# TODO: set in /etc/resolv.conf instead? 
+no-resolv		# only use the following servers
 server=84.200.69.80	# DNS.Watch
 server=72.80.25.34	# ORSN
 server=4.2.2.1		# Level3
