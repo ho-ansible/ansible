@@ -6,34 +6,34 @@ log-facility=/var/log/dnsmasq
 log-async
 
 domain-needed	# Only forward names with domains to upstream DNS
-bogus-priv	# Never forward addresses in the non-routed address spaces.
-bogus-nxdomain=64.94.110.11	# Verisign's annoying traps of invalid domains
+bogus-priv	# Never forward private-IP reverse lookups
+bogus-nxdomain=64.94.110.11	# Verisign
 stop-dns-rebind	# Reject private IPs coming from upstream DNS servers
 rebind-localhost-ok	# ... except for 127.0.0.0/8 (for ad/spam blockers)
-filterwin2k	# Filter useless windows-originated DNS requests and SRV
+filterwin2k	# Filter useless requests from Windows
 
-localmx		# Mailhost is dnsmasq server (or mx-target)
-enable-dbus	# Use DBus to notify us of upstream DNS server change
+localmx		# Mailhost is this server
+enable-dbus	# Notify of upstream DNS server change
 expand-hosts	# Add domain to names from /etc/hosts
-localise-queries	# For multihomed hosts, return IP from source subnet
-cache-size=200	# We cache this many DNS results
+cache-size=200	# Number of DNS results
 #local-ttl=600	# Clients cache DNS results for this long
-#conntrack	# Make upstream query/answers compatible with firewall (segfaults!)
+#conntrack	# Allow replies from upstream through  firewall (segfaults?)
 
 user=dnsmasq	# Drop privs
 group=dip
 
 interface={{ tinc_net }}	# Interfaces to listen on (plus lo)
 
-server=84.200.69.80	# Upstream DNS: DNS.Watch
-server=72.80.25.34	# Upstream DNS: ORSN
-server=4.2.2.1		# Upstream DNS: Level3
+# Upstream DNS
+server=84.200.69.80	# DNS.Watch
+server=72.80.25.34	# ORSN
+server=4.2.2.1		# Level3
 
 # Allow DHCP to hand out these domains
-domain=ho.vpn,10.100.1.0/24,local
+domain={{ tinc_net }}.vpn,10.100.1.0/24,local
 
-dhcp-range=interface:ho,10.100.1.128,10.100.1.250,255.255.255.0,3h
-dhcp-range=interface:ho,fde7:3bf4:efbb:cc91::,64,3h
+dhcp-range=interface:{{ tinc_net }},10.100.1.128,10.100.1.250,255.255.255.0,3h
+dhcp-range=interface:{{ tinc_net }},fde7:3bf4:efbb:cc91::,64,3h
 
 dhcp-hostsfile=/etc/dnsmasq.hosts
 dhcp-optsfile=/etc/dnsmasq.opts
