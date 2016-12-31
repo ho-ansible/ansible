@@ -33,7 +33,8 @@ server=4.2.2.1		# Level3
 domain={{ tinc_net }}.vpn,10.100.1.0/24,local
 
 dhcp-range=interface:{{ tinc_net }},10.100.1.128,10.100.1.250,255.255.255.0,3h
-dhcp-range=interface:{{ tinc_net }},fde7:3bf4:efbb:cc91::,64,3h
+dhcp-range=interface:{{ tinc_net }},::128,::250,constructor:venet0,64,3h
+dhcp-range=
 
 dhcp-hostsfile=/etc/dnsmasq.hosts
 dhcp-optsfile=/etc/dnsmasq.opts
