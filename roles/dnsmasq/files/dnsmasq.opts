@@ -8,6 +8,6 @@ option:netbios-ns,0.0.0.0
 option:netbios-dd,0.0.0.0
 option:netbios-nodetype,8
 
-option:252,""		# Windows requires WPAD proxy URL
+252,""		# Windows requires WPAD proxy URL
 vendor:MSFT,2,1i	# Remind Windows to release DHCP lease on shutdown
 
