@@ -26,7 +26,7 @@
   roles:
   - { role: nginx, tags: [www] }
 
-- name: main.yml | PHP-enabled webservers
+- name: main.yml | PHP app servers
   hosts: php
   roles:
   - { role: php, tags: [php] }
