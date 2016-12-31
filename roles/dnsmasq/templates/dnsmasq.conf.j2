@@ -33,13 +33,17 @@ server=4.2.2.1		# Level3
 domain={{ tinc_net }}.vpn,10.100.1.0/24,local
 
 dhcp-range=interface:{{ tinc_net }},10.100.1.128,10.100.1.250,255.255.255.0,3h
-dhcp-range=interface:{{ tinc_net }},::128,::250,constructor:venet0,64,3h
-dhcp-range=
+dhcp-range=::128,::250,constructor:venet0,3h
 
 dhcp-hostsfile=/etc/dnsmasq.hosts
 dhcp-optsfile=/etc/dnsmasq.opts
 
-#dhcp-authoritative	# Override other/old DHCP leases
+{% if 'tinc1' in cname %}
+dhcp-authoritative	# Override other/old DHCP leases
+auth-zone={{ tinc_net }}.vpn,10.100.1.0/24
+auth-sec-servers=10.100.1.2
+{% else %}
+{% endif %}
+
 enable-ra		# IPv6 router advertisements
 dhcp-generate-names	# Use MAC to make a name if not supplied by client
-
