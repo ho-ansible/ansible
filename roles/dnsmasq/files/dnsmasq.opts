@@ -1,5 +1,5 @@
-option:router,0.0.0.0
-option:dns-server,0.0.0.0,4.2.2.1
+#option:router,0.0.0.0
+#option:dns-server,0.0.0.0,4.2.2.1
 option:ntp-server,0.0.0.0
 option:nis-domain,ho_family
 option:nis-server,0.0.0.0
