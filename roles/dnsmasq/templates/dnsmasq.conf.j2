@@ -2,48 +2,47 @@
 # See "/usr/sbin/dnsmasq --help" or "man 8 dnsmasq" for details.
 # {{ansible_managed}}
 
-log-facility=/var/log/dnsmasq
-log-async
-
-domain-needed	# Only forward FQDNs to upstream DNS
-bogus-priv	# Never forward private-IP reverse lookups
-bogus-nxdomain=64.94.110.11	# Verisign
-stop-dns-rebind	# Reject private IPs coming from upstream DNS servers
-rebind-localhost-ok	# ... except for 127.0.0.0/8 (for ad/spam blockers)
-filterwin2k	# Filter useless requests from Windows
-
-localmx		# Mailhost is this server
-expand-hosts	# Add domain to names from /etc/hosts
-cache-size=200	# Number of DNS results
-#local-ttl=600	# Clients cache DNS results for this long
+interface={{ tinc_net }}	# listen (+ lo)
 
 user=dnsmasq	# Drop privs
 group=dip
 
-interface={{ tinc_net }}	# Interfaces to listen on (plus lo)
+log-facility=/var/log/dnsmasq
+log-async
 
-# Upstream DNS
-# TODO: set in /etc/resolv.conf instead? 
+# DNS
+domain-needed		# Only forward FQDNs to upstream DNS
+bogus-priv		# Never forward private-IP reverse lookups
+bogus-nxdomain=64.94.110.11	# Verisign
+stop-dns-rebind		# Reject private IPs from upstream servers
+rebind-localhost-ok	# ... except for 127.0.0.0/8 (for ad/spam blockers)
+filterwin2k		# Filter useless requests from Windows
+expand-hosts		# Add domain to names from /etc/hosts
+cache-size=200		# Number of DNS results
+#local-ttl=600		# Clients cache DNS results for this long
+
+# Upstream DNS servers
 no-resolv		# only use the following servers
 server=84.200.69.80	# DNS.Watch
 server=72.80.25.34	# ORSN
 server=4.2.2.1		# Level3
 
-# Allow DHCP to hand out these domains
+# DHCP
 domain={{ tinc_net }}.vpn,10.100.1.0/24,local
 
+{% if 'tinc1' in cname %}
 dhcp-range=interface:{{ tinc_net }},10.100.1.128,10.100.1.250,255.255.255.0,3h
 dhcp-range=::128,::250,constructor:venet0,3h
 
 dhcp-hostsfile=/etc/dnsmasq.hosts
 dhcp-optsfile=/etc/dnsmasq.opts
 
-{% if 'tinc1' in cname %}
-dhcp-authoritative	# Override other/old DHCP leases
+dhcp-authoritative
 auth-zone={{ tinc_net }}.vpn,10.100.1.0/24
-auth-sec-servers=10.100.1.2
-{% else %}
-{% endif %}
+#auth-sec-servers=10.100.1.2
 
+localmx			# Mailhost is this server
 enable-ra		# IPv6 router advertisements
 dhcp-generate-names	# Use MAC to make a name if not supplied by client
+
+{% endif %}
