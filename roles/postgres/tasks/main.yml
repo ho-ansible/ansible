@@ -39,13 +39,14 @@
   - postgresql.conf
   notify: restart postgresql
 
-- name: PostgreSQL | backup cron job
+- name: PostgreSQL | backup cron
   tags:
   - cron
-  copy:
-    src: pg_backup.cron
-    dest: /etc/cron.daily/
-    mode: 0750
+  cron:
+    name: 'postgresql cron'
+    special_time: daily
+    user: postgres
+    job: '/usr/bin/pg_dumpall -w > /etc/postgresql/pg_dumpall.sql'
 
 - name: PostgreSQL | service
   tags:
