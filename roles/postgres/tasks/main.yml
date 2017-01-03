@@ -31,8 +31,8 @@
   template:
     src: "{{ item }}.j2"
     dest: "{{ postgresql_dir }}/{{ item }}"
-    owner: postgres
-    group: postgres
+    owner: "{{ postgreql_user }}"
+    group: "{{ postgreql_user }}"
     mode: 0640
   with_items:
   - pg_hba.conf
@@ -45,8 +45,8 @@
   cron:
     name: 'postgresql cron'
     special_time: daily
-    user: postgres
-    job: '/usr/bin/pg_dumpall -w > /etc/postgresql/pg_dumpall.sql'
+    user: "{{ postgreql_user }}"
+    job: "/usr/bin/pg_dumpall -w > {{ postgresql_dump }}"
 
 - name: PostgreSQL | service
   tags:
