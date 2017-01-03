@@ -25,7 +25,7 @@
 # git clone https://github.com/grke/burp && cd burp/
 # git checkout {{ burp_version }}
 # autoreconf -fis
-# ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var
+# ./configure --prefix=/usr --sysconfdir=/etc/burp --localstatedir=/var
 # make
 
 - name: burp backup | executables
