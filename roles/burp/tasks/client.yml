@@ -1,6 +1,6 @@
 ---
 
-- name: Burp | directories
+- name: burp backup | directories
   tags:
   - dirs
   file:
@@ -12,7 +12,7 @@
   - /etc/burp/keys
   - /etc/burp/upgrade
 
-- name: Burp | dependencies
+- name: burp backup | dependencies
   tags:
   - package
   package:
@@ -26,7 +26,7 @@
 # autoreconf -vif
 # ./configure && make
 
-- name: Burp | executables
+- name: burp backup | executables
   tags:
   - binary
   copy:
@@ -38,7 +38,7 @@
   - burp_ca
   - vss_strip
 
-- name: Burp | config
+- name: burp backup | config
   tags:
   - config
   template:
@@ -46,10 +46,10 @@
     dest: /etc/burp/burp.conf
     mode: 0640
 
-- name: Burp | cronjob
+- name: burp backup | cron
   tags:
   - cron
-  copy:
-    src: burp.cron
-    dest: /etc/cron.daily/
-    mode: 0750
+  cron:
+    name: 'burp cron'
+    special_time: daily
+    job: 'burp -a t'
