@@ -20,11 +20,13 @@
     state: installed
 
 # Binaries compiled on a Debian host from git:
-# git clone https://github.com/grke/burp && cd burp/
 # sudo apt-get install make pkg-config check g++ librsync-dev libz-dev libssl-dev uthash-dev libyajl-dev
 # sudo apt-get install autoconf automake libtool
-# autoreconf -vif
-# ./configure && make
+# git clone https://github.com/grke/burp && cd burp/
+# git checkout {{ burp_version }}
+# autoreconf -fis
+# ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var
+# make
 
 - name: burp backup | executables
   tags:
