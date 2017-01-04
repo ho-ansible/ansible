@@ -12,6 +12,7 @@
   - dir
   file:
     path: /var/log/old
+    state: directory
     owner: root
     group: adm
     mode: 0770
