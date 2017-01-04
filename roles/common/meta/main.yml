@@ -8,4 +8,5 @@ dependencies:
   - { role: rsyslog, tags: [rsyslog] }
   - { role: iptables, tags: [iptables] }
   - { role: burp, tags: [burp, backup] }
+  - { role: logrotate, tags: [logrotate] }
 
