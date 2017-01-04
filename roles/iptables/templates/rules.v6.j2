@@ -40,6 +40,12 @@
 -A INPUT -p tcp --dport {{ ssh_port }} -m state --state NEW -m recent --update --seconds 60 --hitcount 3 --name DEFAULT --rsource -j DROP
 {% endif %}
 
+{% for port in iptables_ports | default("") %}
+# Custom ports
+-A INPUT -p udp --dport port -j ACCEPT
+-A INPUT -p tcp --dport port -j ACCEPT
+{% endfor %}
+
 # ICMPv6
 -A INPUT   -p icmpv6 -j ACCEPT
 -A FORWARD -p icmpv6 -j ACCEPT
