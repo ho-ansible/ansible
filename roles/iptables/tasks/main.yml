@@ -19,6 +19,14 @@
   - rules.v6
   notify: restart iptables
 
+- name: Firewall | enable IP forwarding
+  tags:
+  - sysctl
+  when: "'gw' in group_names"
+  sysctl:
+    name: net.ipv4.ip_forward
+    value: 1
+
 - name: Firewall | service
   tags:
   - service
