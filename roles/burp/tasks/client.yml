@@ -37,8 +37,13 @@
     mode: 0755
   with_items:
   - burp
-  - burp_ca
   - vss_strip
+
+- name: burp backup | scripts
+  copy:
+    src: burp_ca
+    dest: /usr/sbin/
+    mode: 0755
 
 - name: burp backup | config
   tags:
