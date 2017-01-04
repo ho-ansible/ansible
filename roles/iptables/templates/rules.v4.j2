@@ -59,6 +59,10 @@ COMMIT
 :POSTROUTING ACCEPT [0:0]
 :OUTPUT ACCEPT [0:0]
 
+{% if 'gw' in group_names %}
+-A POSTROUTING -o {{ ansible_default_ipv4.interface }} -j SNAT --to {{ ansible_default_ipv4.address }}
+{% endif %}
+
 COMMIT
 
 *mangle
