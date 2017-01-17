@@ -43,6 +43,7 @@ alias pm="ps auxk -vsz"
 alias where="type -all"
 
 export PAGER="/usr/bin/less"
+export EDITOR="/usr/bin/vi"
 
 # enable bash completion in interactive shells
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
