@@ -35,6 +35,7 @@ nomail
 	endscript
 }
 
+{% if 'dns' in group_names %}
 # dnsmasq
 /var/log/dnsmasq {
 	create 640 dnsmasq adm
@@ -42,12 +43,14 @@ nomail
 		[ ! -f /var/run/dnsmasq/dnsmasq.pid ] || kill -HUP `cat /var/run/dnsmasq/dnsmasq.pid`
 	endscript
 }
+{% endif %}
 
 # burp backup
 /var/log/burp.log {
 	create 0640 root adm
 }
 
+{% if 'www' in group_names %}
 # nginx web server
 /var/log/nginx/*.log {
         create 0640 www-data adm
@@ -61,4 +64,5 @@ nomail
                 [ -s /run/nginx.pid ] && kill -USR1 `cat /run/nginx.pid`
         endscript
 }
+{% endif %}
 
