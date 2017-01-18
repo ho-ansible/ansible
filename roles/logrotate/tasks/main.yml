@@ -1,11 +1,21 @@
 ---
 
+- name: Logrotate | package
+  tags:
+  - package
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+  - logrotate
+  - cron
+
 - name: Logrotate | config
   tags:
   - config
-  copy:
-    src: logrotate.conf
-    dest: /etc/
+  template:
+    src: logrotate.conf.j2
+    dest: /etc/logrotate.conf
 
 - name: Logrotate | storage dir for old logs
   tags:
@@ -16,13 +26,3 @@
     owner: root
     group: adm
     mode: 0770
-
-- name: Logrotate | package
-  tags:
-  - package
-  package:
-    name: "{{ item }}"
-    state: present
-  with_items:
-  - logrotate
-  - cron
