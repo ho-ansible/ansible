@@ -120,7 +120,7 @@
     enabled: yes
   with_items:
   - tinc
-  - tinc@ho
+  - "tinc@{{ tinc_net }}"
 
 # on Windows:
 # + install new TAP device
