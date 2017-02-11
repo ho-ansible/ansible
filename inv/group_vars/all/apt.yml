@@ -47,7 +47,6 @@ install_pkgs:
 - less
 - vim
 - htop
-- cron
 - file
 - bind9-host
 - python-apt

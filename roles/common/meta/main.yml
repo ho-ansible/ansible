@@ -1,6 +1,7 @@
 ---
 dependencies:
   - { role: basepkgs, tags: [basepkgs] }
+  - { role: cron, tags: [cron] }
   - { role: bash, tags: [bash] }
   - { role: ssh, tags: [ssh] }
   - { role: tinc, tags: [tinc, vpn] }
