@@ -1,6 +1,6 @@
 ---
 cloud_version: 11.0.1
-cloud_db_version: 11.0.0.10
+cloud_db_version: 11.0.1.2
 cloud_server: cloud.example.com
 cloud_port: 443
 cloud_www_dir: /var/www/nextcloud
