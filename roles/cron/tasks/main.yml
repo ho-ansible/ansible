@@ -11,7 +11,7 @@
     - cron
   lineinfile:
     dest: /etc/crontab
-    regexp: "cron\.hourly"
+    regexp: 'cron\.hourly'
     state: absent
   notify: reload crontab
 
