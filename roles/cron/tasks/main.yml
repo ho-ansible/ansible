@@ -4,14 +4,22 @@
   tags:
     - package
   package:
-    - name: cron
+    name: cron
 
 - name: cron | disable hourly
   tags:
     - cron
   lineinfile:
-    - dest: /etc/crontab
-    - regexp: cron\.hourly
-    - state: absent
-  notify:
-    - reset crontab
+    dest: /etc/crontab
+    regexp: "cron\.hourly"
+    state: absent
+  notify: reload crontab
+
+- name: cron | service
+  tags:
+    - service
+  service:
+    name: cron
+    state: started
+    enabled: yes
+
