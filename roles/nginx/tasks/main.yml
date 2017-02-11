@@ -21,7 +21,7 @@
     name: nginx
     state: latest
 
-- name: Nginx | SSL dir and perms
+- name: Nginx | config dirs
   tags:
   - dir
   file:
@@ -47,6 +47,16 @@
   - ssl
   - sites-available
   notify: restart nginx
+
+- name: Nginx | log archive dir
+  tags:
+  - dir
+  file:
+    path: /var/log/nginx/old
+    state: directory
+    owner: nginx
+    group: adm
+    mode: 0750
 
 - name: Nginx | default site dir
   tags:

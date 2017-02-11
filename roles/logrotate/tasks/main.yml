@@ -25,13 +25,3 @@
     owner: root
     group: adm
     mode: 0770
-
-- name: Logrotate | nginx log archive dir
-  tags:
-  - dir
-  file:
-    path: /var/log/nginx/old
-    state: directory
-    owner: nginx
-    group: adm
-    mode: 0770
