@@ -44,6 +44,7 @@
   - cron
   cron:
     name: 'postgresql cron'
+    cron_file: postgres
     special_time: daily
     user: "{{ postgreql_user }}"
     job: "/usr/bin/pg_dumpall -w > {{ postgresql_dump }}"
