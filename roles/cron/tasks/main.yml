@@ -1,0 +1,17 @@
+---
+
+- name: cron | package
+  tags:
+    - package
+  package:
+    - name: cron
+
+- name: cron | disable hourly
+  tags:
+    - cron
+  lineinfile:
+    - dest: /etc/crontab
+    - regexp: cron\.hourly
+    - state: absent
+  notify:
+    - reset crontab
