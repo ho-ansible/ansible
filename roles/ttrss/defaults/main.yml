@@ -1,4 +1,5 @@
 ---
+ttrss_www: /var/www/tt-rss
 ttrss_db: ttrss
 ttrss_db_user: ttrss
 ttrss_db_pw: ''

@@ -18,7 +18,7 @@
   - git
   git:
     repo: 'https://tt-rss.org/git/tt-rss.git'
-    dest: /var/www/tt-rss
+    dest: "{{ ttrss_www }}"
     depth: 1 
   notify: restart tt-rss
 

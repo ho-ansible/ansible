@@ -4,7 +4,7 @@ server {
 	ssl on;
 
         server_name ttrss.seanho.com;
-        root /var/www/tt-rss;
+        root {{ ttrss_www }};
 
 	include acme-redir;
 
