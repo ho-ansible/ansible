@@ -59,5 +59,6 @@
   cron:
     name: 'burp cron'
     cron_file: burp
+    user: root
     special_time: daily
     job: 'burp -a t'
