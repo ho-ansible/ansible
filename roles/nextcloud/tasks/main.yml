@@ -88,6 +88,7 @@
   - cron
   cron:
     name: 'nextCloud cron'
+    cron_file: nextcloud
     minute: '4-49/15'
     user: www-data
     job: 'php {{ cloud_www_dir }}/cron.php 2>&- >&-'
@@ -97,6 +98,7 @@
   - cron
   cron:
     name: 'nextCloud thumbnail cron'
+    cron_file: nextCloud_thumbs
     minute: '6-51/15'
     user: www-data
     job: 'php {{ cloud_www_dir }}/occ preview:pre-generate 2>&- >&-'
