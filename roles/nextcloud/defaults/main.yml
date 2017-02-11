@@ -1,5 +1,5 @@
 ---
-cloud_version: 11.0.0
+cloud_version: 11.0.1
 cloud_db_version: 11.0.0.10
 cloud_server: cloud.example.com
 cloud_port: 443
