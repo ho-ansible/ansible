@@ -1,0 +1,32 @@
+---
+# Check / renew SSL certificate with Let's Encrypt
+
+- name: letsencrypt | request challenge
+  tags:
+    - ssl
+  letsencrypt:
+    account_email: "{{ letsencrypt_email }}"
+    account_key: _account_key.p12
+    csr: _domain_csr.p12
+    dest: _domain_crt.p12
+    acme_directory: "https://acme-staging.api.letsencrypt.org/directory"
+    challenge: http-01
+    remaining_days: 14
+  register: domain_challenge
+
+- name: letsencrypt | fulfill challenge
+  tags:
+    - ssl
+  copy:
+    dest: /var/www/html/{{ domain_challenge['challenge_data']['sample.com']['http-01']['resource'] }}
+    content: "{{ domain_challenge['challenge_data']['sample.com']['http-01']['resource_value'] }}"
+  when: domain_challenge | changed 
+
+- name: letsencrypt | complete challenge
+  tags:
+    - ssl
+  letsencrypt:
+    account_key: _account_key.p12
+    csr: _domain_csr.p12
+    dest: _domain_crt.p12
+    data: "{{ domain_challenge }}"
