@@ -1,0 +1,25 @@
+---
+# Add DNS entry in Cloudflare
+
+- name: cloudflare | A record
+  tags:
+    - dns
+  cloudflare:
+    account_email: "{{ cloudflare_email }}"
+    account_api_token: "{{ cloudflare_token }}"
+    zone: "{{ dns_domain }}"
+    type: A
+    record: "{{ ansible_hostname }}"
+    value: "{{ ansible_host }}"
+
+- name: cloudflare | CNAME
+  tags:
+    - dns
+  cloudflare:
+    account_email: "{{ cloudflare_email }}"
+    account_api_token: "{{ cloudflare_token }}"
+    zone: "{{ dns_domain }}"
+    type: CNAME
+    record: "{{ item }}"
+    value: "{{ ansible_hostname }}"
+  with_items: "{{ cname }}"
