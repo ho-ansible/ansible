@@ -1,3 +1,4 @@
 ---
 cloudflare_email: cloudflare@example.com
-cloudflare_token: 00MYCLOUDFLARETOKEN
+cloudflare_token: api_token_from_cloudflare
+cloudflare_zone_id: zone_id_from_cloudflare

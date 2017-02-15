@@ -7,7 +7,7 @@
   cloudflare:
     account_email: "{{ cloudflare_email }}"
     account_api_token: "{{ cloudflare_token }}"
-    zone: "{{ dns_domain }}"
+    zone: "{{ cloudflare_zone_id }}"
     type: A
     record: "{{ ansible_hostname }}"
     value: "{{ ansible_host }}"
@@ -18,7 +18,7 @@
   cloudflare:
     account_email: "{{ cloudflare_email }}"
     account_api_token: "{{ cloudflare_token }}"
-    zone: "{{ dns_domain }}"
+    zone: "{{ cloudflare_zone_id }}"
     type: CNAME
     record: "{{ item }}"
     value: "{{ ansible_hostname }}"
