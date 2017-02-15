@@ -9,7 +9,7 @@
     account_api_token: "{{ cloudflare_token }}"
     zone: "{{ cloudflare_zone_id }}"
     type: A
-    record: "{{ ansible_hostname }}"
+    record: "{{ inventory_hostname }}"
     value: "{{ ansible_host }}"
 
 - name: cloudflare | CNAME
@@ -21,5 +21,5 @@
     zone: "{{ cloudflare_zone_id }}"
     type: CNAME
     record: "{{ item }}"
-    value: "{{ ansible_hostname }}"
+    value: "{{ inventory_hostname }}"
   with_items: "{{ cname }}"
