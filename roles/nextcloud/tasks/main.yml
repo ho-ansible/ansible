@@ -98,7 +98,7 @@
   - cron
   cron:
     name: 'nextCloud thumbnail cron'
-    cron_file: nextCloud_thumbs
+    cron_file: nextcloud_thumbs
     minute: '6-51/15'
     user: www-data
     job: 'php {{ cloud_www_dir }}/occ preview:pre-generate 2>&- >&-'
