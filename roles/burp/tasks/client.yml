@@ -62,4 +62,4 @@
     user: root
     minute: 37
     hour: 2
-    job: 'burp -a t'
+    job: '/usr/sbin/burp -a t'
