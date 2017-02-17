@@ -4,7 +4,7 @@
 - name: cloudflare | A record
   tags:
     - dns
-  cloudflare:
+  cloudflare_dns:
     account_email: "{{ cloudflare_email }}"
     account_api_token: "{{ cloudflare_token }}"
     zone: "{{ cloudflare_zone_id }}"
@@ -15,7 +15,7 @@
 - name: cloudflare | CNAME
   tags:
     - dns
-  cloudflare:
+  cloudflare_dns:
     account_email: "{{ cloudflare_email }}"
     account_api_token: "{{ cloudflare_token }}"
     zone: "{{ cloudflare_zone_id }}"
