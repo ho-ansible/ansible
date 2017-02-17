@@ -1,0 +1,7 @@
+---
+- name: cloud.yml | Instantiate cloud VMs
+  hosts: cloud
+  roles:
+    - { role: cloud, tag: [cloud] }
+  environment:
+    CLOUDSTACK_CONFIG: "{{ inventory_dir }}/group_vars/cloud/_cloudstack.ini"
