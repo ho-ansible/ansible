@@ -4,10 +4,10 @@
 - name: cloudflare | A record
   tags:
     - dns
-  cloudflare:
+  cloudflare_dns:
     account_email: "{{ cloudflare_email }}"
     account_api_token: "{{ cloudflare_token }}"
-    zone: "{{ cloudflare_zone_id }}"
+    zone: "{{ dns_domain }}"
     type: A
     record: "{{ inventory_hostname }}"
     value: "{{ ansible_host }}"
@@ -15,11 +15,11 @@
 - name: cloudflare | CNAME
   tags:
     - dns
-  cloudflare:
+  cloudflare_dns:
     account_email: "{{ cloudflare_email }}"
     account_api_token: "{{ cloudflare_token }}"
-    zone: "{{ cloudflare_zone_id }}"
+    zone: "{{ dns_domain }}"
     type: CNAME
     record: "{{ item }}"
-    value: "{{ inventory_hostname }}"
+    value: "{{ inventory_hostname }}.{{ dns_domain }}"
   with_items: "{{ cname }}"

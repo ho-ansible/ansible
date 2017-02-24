@@ -43,9 +43,9 @@
 -A INPUT -p udp --dport 68 -j ACCEPT
 
 {% for port in iptables_ports | default("") %}
-# Custom ports
--A INPUT -p udp --dport port -j ACCEPT
--A INPUT -p tcp --dport port -j ACCEPT
+# Open custom port: {{ port }}
+-A INPUT -p udp --dport {{ port }} -j ACCEPT
+-A INPUT -p tcp --dport {{ port }} -j ACCEPT
 {% endfor %}
 
 # Allow ping et al.
