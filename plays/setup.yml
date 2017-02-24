@@ -4,7 +4,7 @@
 # Add HOST to inv/_master.yml:
 #   HOST ansible_host=IP
 # Add HOST to inv/_roles.yml
-# /usr/sbin/tinc generate-rsa-keys 4096:
+# /usr/sbin/tinc generate-keys 4096:
 #   roles/tinc/files/.private/{hosts/HOST,keys/HOST.priv}
 # ansible-playbook -l vpn -t vpn plays/main.yml
 # ansible-playbook -k -l HOST plays/setup.yml
