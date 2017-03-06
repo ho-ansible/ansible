@@ -19,8 +19,8 @@ fastcgi_no_cache $skip_cache;
 fastcgi_ignore_headers Cache-Control Expires Set-Cookie;
 
 server {
-	listen {{ cloud_port }} ssl;
-	listen [::]:{{ cloud_port }} ssl;
+	listen {{ cloud_port }} ssl http2;
+	listen [::]:{{ cloud_port }} ssl http2;
 	server_name {{ cloud_server }};
 	root {{ cloud_www_dir }};
 
