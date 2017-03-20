@@ -17,6 +17,23 @@
     dest: /etc/burp/keys/dhfile.pem
     mode: 0400
 
+- name: Burp | systemd service file
+  tags:
+  - server
+  - systemd
+  copy:
+    src: burp.service
+    dest: /etc/systemd/system
+
+- name: Burp | service
+  tags:
+  - server
+  - service
+  service:
+    name: burp
+    state: started
+    daemon_reload: yes
+
 # Restore /etc/burp/CA/ dir from backups
-# TODO: store keys in ansible?
+# TODO #21: store keys in ansible?
 
