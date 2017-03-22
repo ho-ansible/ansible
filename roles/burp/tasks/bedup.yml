@@ -1,0 +1,22 @@
+---
+
+- name: Burp | bedup prereqs
+  tags:
+  - package
+  package:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+  - python3-pip
+  - python3-dev
+  - libffi-dev
+
+- name: Burp | bedup packages
+  tags:
+  - package
+  pip:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+  - cffi
+  - bedup

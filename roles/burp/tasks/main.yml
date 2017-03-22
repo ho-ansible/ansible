@@ -4,3 +4,5 @@
   when: "'backup' in group_names"
 - include: burp-ui.yml
   when: "'backup' in group_names"
+- include: bedup.yml
+  when: "'backup' in group_names"
