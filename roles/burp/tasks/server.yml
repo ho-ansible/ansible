@@ -1,5 +1,12 @@
 ---
 
+- name: Burp | server user
+  tags:
+  - user
+  user:
+    name: "{{ burp_user }}"
+    shell: /bin/false
+
 - name: Burp | server config
   tags:
   - server
@@ -7,6 +14,7 @@
   template:
     src: server.conf.j2
     dest: /etc/burp/server.conf
+    owner: "{{ burp_user }}"
 
 - name: Burp | DH params
   tags:
@@ -16,6 +24,17 @@
     src: _dhfile.pem
     dest: /etc/burp/keys/dhfile.pem
     mode: 0400
+    owner: "{{ burp_user }}"
+
+- name: Burp | storage directory
+  tags:
+  - dir
+  file:
+    path: "{{ burp_data_dir }}"
+    state: directory
+    owner: "{{ burp_user }}"
+    mode: 0750
+
 
 - name: Burp | systemd service file
   tags:

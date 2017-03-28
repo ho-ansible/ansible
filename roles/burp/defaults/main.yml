@@ -6,6 +6,7 @@ burp_port: 4971
 burp_status_port: 4972
 burp_ui_port: 5000
 
+burp_user: burp
 burp_data_dir: /var/burp
 burp_ca_name: burp
 burp_server_CN: burp

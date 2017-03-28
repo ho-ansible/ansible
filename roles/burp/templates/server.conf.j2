@@ -16,6 +16,7 @@ pidfile = /var/run/burp-server.pid
 clientconfdir = /etc/burp/clients
 autoupgrade_dir = /etc/burp/upgrade/server
 
+user = {{ burp_user }}
 hardlinked_archive = 0
 working_dir_recovery_method = resume
 max_children = 15
