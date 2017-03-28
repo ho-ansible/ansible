@@ -1,13 +1,13 @@
 ---
 
-- name: Burp | server user
+- name: Burp server | unprivileged user
   tags:
   - user
   user:
     name: "{{ burp_user }}"
     shell: /bin/false
 
-- name: Burp | server config
+- name: Burp server | config
   tags:
   - server
   - config
@@ -16,7 +16,7 @@
     dest: /etc/burp/server.conf
     owner: "{{ burp_user }}"
 
-- name: Burp | DH params
+- name: Burp server | DH params
   tags:
   - server
   - crypt
@@ -26,7 +26,7 @@
     mode: 0400
     owner: "{{ burp_user }}"
 
-- name: Burp | storage directory
+- name: Burp server | storage directory
   tags:
   - dir
   file:
@@ -36,7 +36,7 @@
     mode: 0750
 
 
-- name: Burp | systemd service file
+- name: Burp server | systemd service
   tags:
   - server
   - systemd
@@ -44,7 +44,7 @@
     src: burp.service
     dest: /etc/systemd/system
 
-- name: Burp | service
+- name: Burp server | service
   tags:
   - server
   - service
