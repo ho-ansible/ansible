@@ -3,14 +3,12 @@
 	// *** Database configuration (important!) ***
 	// *******************************************
 
-        define('DB_TYPE', "pgsql"); // or mysql
+        define('DB_TYPE', "pgsql");
         define('DB_HOST', "localhost");
-        define('DB_USER', "ttrss");
-        define('DB_NAME', "ttrss");
+        define('DB_USER', "{{ ttrss_db_user }}");
+        define('DB_NAME', "{{ ttrss_db }}");
         define('DB_PASS', "{{ ttrss_db_pw }}");
-        define('DB_PORT', ''); // usually 5432 for PostgreSQL, 3306 for MySQL
-
-	define('MYSQL_CHARSET', 'UTF8');
+        define('DB_PORT', '');	// local socket
 
 	// ***********************************
 	// *** Basic settings (important!) ***
@@ -18,7 +16,7 @@
 
 	define('SELF_URL_PATH', 'https://ttrss.seanho.com:4343/');
 	define('FEED_CRYPT_KEY', '');
-	define('SINGLE_USER_MODE', false);
+	define('SINGLE_USER_MODE', true);
 	define('SIMPLE_UPDATE_MODE', false);
 
 	// *****************************
@@ -35,31 +33,20 @@
 	// *** Authentication ***
 	// **********************
 
-	define('AUTH_AUTO_CREATE', true);
-	define('AUTH_AUTO_LOGIN', true);
+	define('AUTH_AUTO_CREATE', false);
+	define('AUTH_AUTO_LOGIN', false);
 
 	// *********************
 	// *** Feed settings ***
 	// *********************
 
 	define('FORCE_ARTICLE_PURGE', 0);
-	define('PUBSUBHUBBUB_HUB', '');
-	define('PUBSUBHUBBUB_ENABLED', false);
-
-	// ****************************
-	// *** Sphinx search plugin ***
-	// ****************************
-
-	define('SPHINX_SERVER', 'localhost:9312');
-	define('SPHINX_INDEX', 'ttrss, delta');
 
 	// ***********************************
 	// *** Self-registrations by users ***
 	// ***********************************
 
 	define('ENABLE_REGISTRATION', false);
-	define('REG_NOTIFY_ADDRESS', 'ttrss@seanho.com');
-	define('REG_MAX_USERS', 10);
 
 	// **********************************
 	// *** Cookies and login sessions ***
