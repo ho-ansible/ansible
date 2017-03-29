@@ -16,25 +16,18 @@ clientconfdir = /etc/burp/clients
 autoupgrade_dir = /etc/burp/upgrade/server
 
 user = {{ burp_user }}
-hardlinked_archive = 0
-working_dir_recovery_method = resume
 max_children = 15
-max_status_children = 15
-umask = 0022
+umask = 0027
 syslog = 1
-stdout = 1
 soft_quota = 50G
 #hard_quota = 100G
 network_timeout = 1800
 monitor_browse_cache = 1
-
-version_warn = 1
+cname_lowercase = 1
+cname_fqdn = 0
 
 client_can_delete = 0
-client_can_force_backup = 1
-client_can_list = 1
-client_can_restore = 1
-client_can_verify = 1
+client_can_restore = 0
 
 ca_conf         = /etc/burp/CA/CA.conf
 ca_burp_ca      = /usr/sbin/burp_ca
