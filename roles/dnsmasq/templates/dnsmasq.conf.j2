@@ -33,7 +33,7 @@ domain={{ tinc_net }}.vpn,10.100.1.0/24,local
 
 {% if 'tinc1' in cname %}
 dhcp-range=interface:{{ tinc_net }},10.100.1.128,10.100.1.250,255.255.255.0,3h
-dhcp-range=::128,::250,constructor:venet0,3h
+dhcp-range=::,constructor:eth0,ra-names,slaac,3h
 
 dhcp-hostsfile=/etc/dnsmasq.hosts
 dhcp-optsfile=/etc/dnsmasq.opts
