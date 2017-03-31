@@ -39,7 +39,7 @@ dhcp-hostsfile=/etc/dnsmasq.hosts
 dhcp-optsfile=/etc/dnsmasq.opts
 
 dhcp-authoritative
-auth-zone={{ tinc_net }}.vpn,10.100.1.0/24
+auth-zone={{ tinc_net }}.vpn,{{ tinc_net }}/6
 #auth-sec-servers=10.100.1.2
 
 localmx			# Mailhost is this server
