@@ -18,6 +18,7 @@
   with_items: 
   - { src: _dnsmasq.hosts, dest: /etc/dnsmasq.hosts }
   - { src: dnsmasq.opts, dest: /etc/ }
+  - { src: dnsmasq.servers, dest: /etc/ }
   notify: restart dnsmasq
 
 - name: DNSmasq | config (template)

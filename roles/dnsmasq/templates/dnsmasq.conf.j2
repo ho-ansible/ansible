@@ -23,10 +23,8 @@ cache-size=200		# Number of DNS results
 #local-ttl=600		# Clients cache DNS results for this long
 
 # Upstream DNS servers
-no-resolv		# only use the following servers
-server=84.200.69.80	# DNS.Watch: resolver1.dns.watch
-server=72.80.25.34	# ORSN
-server=52.175.214.157	# OpenNIC: ns5.wa.us
+no-resolv		# only use specified servers
+servers-file=/etc/dnsmasq.servers
 
 # DHCP
 domain={{ tinc_net }}.vpn,10.100.1.0/24,local
