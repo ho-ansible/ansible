@@ -38,7 +38,7 @@
   tags:
   - site
   file:
-    src: /etc/nginx/sites-available/tt-rss
+    src: /etc/nginx/sites-available/tt-rss.nginx
     dest: /etc/nginx/sites-enabled/tt-rss
     state: link
 
@@ -62,6 +62,7 @@
 - name: tt-RSS | DB
   tags:
   - db
+  become_user: postgres
   postgresql_db:
     name: "{{ ttrss_db }}"
     owner: "{{ ttrss_db_user }}"
