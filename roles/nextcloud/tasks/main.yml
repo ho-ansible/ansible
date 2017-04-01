@@ -13,14 +13,14 @@
   - php5-gd
   - php5-apcu
 
-#- name: nextCloud | installation (git)
-#  tags:
-#  - package
-#  - git
-#  git:
-#    repo: 'https://github.com/nextcloud/server.git'
-#    dest: '{{ cloud_www_dir }}'
-#    version: 'v{{ cloud_version }}'
+- name: nextCloud | installation (git)
+  tags:
+  - package
+  - git
+  git:
+    repo: 'https://github.com/nextcloud/server.git'
+    dest: '{{ cloud_www_dir }}'
+    version: 'v{{ cloud_version }}'
 
 - name: nextCloud | file permissions
   tags:
