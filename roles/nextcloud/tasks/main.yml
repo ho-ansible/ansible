@@ -21,6 +21,8 @@
     repo: 'https://github.com/nextcloud/server.git'
     dest: '{{ cloud_www_dir }}'
     version: 'v{{ cloud_version }}'
+    depth: 1
+    force: yes
 
 - name: nextCloud | file permissions
   tags:
