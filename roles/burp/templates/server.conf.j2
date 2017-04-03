@@ -16,8 +16,9 @@ clientconfdir = /etc/burp/clients
 autoupgrade_dir = /etc/burp/upgrade/server
 
 user = {{ burp_user }}
-max_children = 15
+dedup_group = linux
 umask = 0027
+max_children = 15
 syslog = 1
 soft_quota = 50G
 #hard_quota = 100G
