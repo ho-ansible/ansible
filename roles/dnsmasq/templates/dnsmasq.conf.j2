@@ -15,6 +15,8 @@ log-async
 domain-needed		# Only forward FQDNs to upstream DNS
 bogus-priv		# Never forward private-IP reverse lookups
 bogus-nxdomain=64.94.110.11	# Verisign
+bogus-nxdomain=104.239.213.7	# Level3
+bogus-nxdomain=198.105.254.11	# Level3
 stop-dns-rebind		# Reject private IPs from upstream servers
 rebind-localhost-ok	# ... except for 127.0.0.0/8 (for ad/spam blockers)
 filterwin2k		# Filter useless requests from Windows
