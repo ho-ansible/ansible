@@ -33,6 +33,7 @@
     path: "{{ item }}"
     state: directory
     owner: "{{ burp_user }}"
+    group: "{{ burp_user }}"
     mode: 0750
   with_items:
   - "{{ burp_data_dir }}"
