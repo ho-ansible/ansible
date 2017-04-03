@@ -22,6 +22,21 @@
     depth: 1 
   notify: restart tt-rss
 
+- name: tt-RSS | writable dirs
+  tags:
+  - permissions
+  file:
+    path: "{{ ttrss_www }}/{{ item }}"
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: 'u+rw'
+    recurse: yes
+  with_items:
+  - cache
+  - feed-icons
+  - lock
+
 - name: tt-RSS | config files
   tags:
   - config
