@@ -73,7 +73,7 @@
   - site
   file:
     src: /etc/nginx/sites-available/{{ item }}
-    dest: /etc/nginx/sites-enabled/
+    dest: /etc/nginx/sites-enabled/{{ item }}
     state: link
   with_items:
   - tt-rss
