@@ -26,15 +26,17 @@
     mode: 0400
     owner: "{{ burp_user }}"
 
-- name: Burp server | storage directory
+- name: Burp server | directories
   tags:
   - dir
   file:
-    path: "{{ burp_data_dir }}"
+    path: "{{ item }}"
     state: directory
     owner: "{{ burp_user }}"
     mode: 0750
-
+  with_items:
+  - "{{ burp_data_dir }}"
+  - "{{ burp_pid_dir }}"
 
 - name: Burp server | systemd service
   tags:

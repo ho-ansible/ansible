@@ -11,7 +11,7 @@ status_address = {{ burp_server }}
 status_port = {{ burp_status_port }}
 
 directory = {{ burp_data_dir }}
-pidfile = /var/run/burp-server.pid
+pidfile = {{ burp_pid_dir }}/server.pid
 clientconfdir = /etc/burp/clients
 autoupgrade_dir = /etc/burp/upgrade/server
 

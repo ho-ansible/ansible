@@ -8,6 +8,7 @@ burp_ui_port: 5000
 
 burp_user: burp
 burp_data_dir: /var/burp
+burp_pid_dir: /var/run/burp
 burp_ca_name: burp
 burp_server_CN: burp
 
