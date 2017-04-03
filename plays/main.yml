@@ -19,12 +19,12 @@
 - name: main.yml | DNS servers
   hosts: dns
   roles:
-  - { role: dnsmasq, tags: [dns] }
+  - { role: dnsmasq, tags: [dns, dnsmasq] }
 
 - name: main.yml | Web servers
   hosts: www
   roles:
-  - { role: nginx, tags: [www] }
+  - { role: nginx, tags: [www, nginx] }
 
 - name: main.yml | PHP app servers
   hosts: php
@@ -34,12 +34,12 @@
 - name: main.yml | RSS news server
   hosts: news
   roles:
-  - { role: ttrss, tags: [news] }
+  - { role: ttrss, tags: [news, ttrss] }
 
 - name: main.yml | nextCloud servers
   hosts: cloud
   roles:
-  - { role: nextcloud, tags: [cloud] }
+  - { role: nextcloud, tags: [cloud, nextcloud] }
 
 - name: main.yml | R servers
   hosts: R
