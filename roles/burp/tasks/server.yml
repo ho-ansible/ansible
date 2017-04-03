@@ -6,6 +6,8 @@
   user:
     name: "{{ burp_user }}"
     shell: /bin/false
+    createhome: no
+    system: yes
 
 - name: Burp server | config
   tags:
