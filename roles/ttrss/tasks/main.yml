@@ -70,7 +70,7 @@
   - db
   become_user: postgres
   postgresql_user:
-    name: "{{ ttrss_db_user }}"
+    name: "{{ ttrss_user }}"
     password: "{{ ttrss_db_pw }}"
     role_attr_flags: NOSUPERUSER,NOCREATEDB
 
@@ -79,6 +79,6 @@
   - db
   become_user: postgres
   postgresql_db:
-    name: "{{ ttrss_db }}"
-    owner: "{{ ttrss_db_user }}"
+    name: "{{ ttrss_user }}"
+    owner: "{{ ttrss_user }}"
 
