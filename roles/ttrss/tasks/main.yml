@@ -55,17 +55,28 @@
     dest: "{{ item.dest }}/{{ item.src }}"
   with_items:
   - { src: config.php, dest: "{{ ttrss_www }}" }
-  - { src: tt-rss.nginx, dest: /etc/nginx/sites-available }
   - { src: tt-rss.service, dest: /etc/systemd/system }
   notify: restart tt-rss
 
-- name: tt-RSS | site enabled
+- name: tt-RSS | nginx config
+  tags:
+  - config
+  - site
+  template:
+    src: {{ item }}-nginx.j2
+    dest: /etc/nginx/sites-available/{{ item }}
+  with_items:
+  - tt-rss
+
+- name: tt-RSS | nginx site enabled
   tags:
   - site
   file:
-    src: /etc/nginx/sites-available/tt-rss.nginx
-    dest: /etc/nginx/sites-enabled/tt-rss
+    src: /etc/nginx/sites-available/{{ item }}
+    dest: /etc/nginx/sites-enabled/
     state: link
+  with_items:
+  - tt-rss
 
 - name: tt-RSS | updater service
   tags:

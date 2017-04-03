@@ -111,16 +111,20 @@
   - config
   - site
   template:
-    src: nextcloud-nginx.j2
-    dest: /etc/nginx/sites-available/nextcloud.nginx
+    src: {{ item }}-nginx.j2
+    dest: /etc/nginx/sites-available/{{ item }}
+  with_items:
+  - nextcloud
 
 - name: nextCloud | nginx site enabled
   tags:
   - site
   file:
-    src: /etc/nginx/sites-available/nextcloud.nginx
-    dest: /etc/nginx/sites-enabled/nextcloud.nginx
+    src: /etc/nginx/sites-available/{{ item }}
+    dest: /etc/nginx/sites-enabled/
     state: link
+  with_items:
+  - nextcloud
 
 - name: nextCloud | DB user
   tags:
