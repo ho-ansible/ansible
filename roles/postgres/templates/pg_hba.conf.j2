@@ -2,6 +2,6 @@
 # {{ ansible_managed }}
 
 # TYPE  DATABASE    USER        CIDR-ADDRESS          METHOD
-local   all         postgres                          ident
-local   all         all                               md5
+local   all         postgres                          peer
+local   sameuser    all                               md5
 
