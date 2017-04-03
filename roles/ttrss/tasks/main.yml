@@ -22,6 +22,16 @@
     depth: 1 
   notify: restart tt-rss
 
+- name: tt-RSS | file permissions
+  tags:
+  - permissions
+  file:
+    path: "{{ ttrss_www }}"
+    owner: root
+    group: www-data
+    mode: 'g-w,o='
+    recurse: yes
+
 - name: tt-RSS | writable dirs
   tags:
   - permissions
