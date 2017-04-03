@@ -1,9 +1,8 @@
 server {
-        listen 4343;
-        listen [::]:4343;
-	ssl on;
+        listen {{ ttrss_port }} ssl;
+        listen [::]:{{ ttrss_port }} ssl;
 
-        server_name ttrss.seanho.com;
+        server_name {{ ttrss_host }};
         root {{ ttrss_www }};
 
 	include acme-redir;
