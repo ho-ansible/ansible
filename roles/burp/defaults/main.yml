@@ -1,5 +1,5 @@
 ---
-burp_version: 2.1.0
+burp_version: 2.1.6
 
 burp_server: 127.0.0.1
 burp_port: 4971
