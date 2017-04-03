@@ -81,12 +81,13 @@
 
 - name: Nginx | enable default site
   tags:
-  - config
   - site
   file:
-    src: /etc/nginx/sites-available/default.nginx
-    dest: /etc/nginx/sites-enabled/0default
+    src: /etc/nginx/sites-available/{{ item }}
+    dest: /etc/nginx/sites-enabled/
     state: link
+  with_items:
+  - 0default
 
 - name: Nginx | service
   tags:
