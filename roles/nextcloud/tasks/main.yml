@@ -25,6 +25,33 @@
     depth: 1
     force: yes
 
+- name: nextCloud | PHP config
+  tags:
+  - config
+  copy:
+    src: .user.ini
+    dest: "{{ cloud_www_dir }}/"
+    owner: root
+    group: www-data
+    mode: 0640
+
+- name: nextCloud | config
+  tags:
+  - config
+  template:
+    src: config.php.j2
+    dest: "{{ cloud_www_dir }}/config/config.php"
+
+- name: nextCloud | mimetype config
+  tags:
+  - config
+  copy:
+    src: "{{ item }}"
+    dest: "{{ cloud_www_dir }}/config/"
+  with_items:
+  - mimetypemapping.json
+  - mimetypealiases.json
+
 - name: nextCloud | secure file perms
   tags:
   - permissions
@@ -64,26 +91,6 @@
   with_items:
   - "{{ cloud_data_dir }}"
   - "{{ cloud_cache_dir }}"
-
-- name: nextCloud | config
-  tags:
-  - config
-  template:
-    src: config.php.j2
-    dest: "{{ cloud_www_dir }}/config/config.php"
-    owner: www-data
-    group: www-data
-    mode: 0640
-
-- name: nextCloud | PHP config
-  tags:
-  - config
-  copy:
-    src: .user.ini
-    dest: "{{ cloud_www_dir }}/"
-    owner: root
-    group: www-data
-    mode: 0640
 
 - name: nextCloud | cron
   tags:
