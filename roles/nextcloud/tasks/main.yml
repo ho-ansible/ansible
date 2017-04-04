@@ -12,7 +12,7 @@
   - php5-curl
   - php5-gd
   - php5-apcu
-  - libav-tools # or ffmpeg for non-Debian8
+  - ffmpeg
 
 - name: nextCloud | installation (git)
   tags:
