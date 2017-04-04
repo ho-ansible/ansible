@@ -12,7 +12,7 @@
   - apt
   apt_repository:
     repo: 'deb http://ftp.osuosl.org/pub/cran/bin/linux/debian jessie-cran3/'
-    filename: 'cran.list'
+    filename: 'cran'
 
 - name: R | Install packages
   tags:
