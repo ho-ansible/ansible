@@ -25,7 +25,7 @@
     depth: 1
     force: yes
 
-- name: nextCloud | file permissions
+- name: nextCloud | secure file perms
   tags:
   - permissions
   file:
@@ -35,12 +35,11 @@
     mode: 'g-w,o='
     recurse: yes
 
-- name: nextCloud | writable dirs
+- name: nextCloud | allow file perms
   tags:
   - permissions
   file:
     path: "{{ cloud_www_dir }}/{{ item }}"
-    state: directory
     owner: www-data
     group: www-data
     mode: 'u+rw'
@@ -49,9 +48,9 @@
   - apps
   - assets
   - config
-  - data
   - themes
   - updater
+  - core/js/mimetypelist.js
 
 - name: nextCloud | data directories
   tags:
