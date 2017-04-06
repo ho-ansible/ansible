@@ -42,6 +42,7 @@ install_pkgs:
 - htop
 - file
 - bind9-host
+- rsync
 - python-apt
 - aptitude
 - unattended-upgrades
