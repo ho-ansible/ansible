@@ -4,7 +4,7 @@ After=network.target mysql.service postgresql.service
 
 [Service]
 User=www-data
-ExecStart={{ ttrss_www }}/update_daemon2.php
+ExecStart={{ ttrss_www }}/update_daemon2.php --quiet
 
 [Install]
 WantedBy=multi-user.target
