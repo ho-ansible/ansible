@@ -62,7 +62,7 @@
     mode: 'g-w,o='
     recurse: yes
 
-- name: nextCloud | allow file perms
+- name: nextCloud | allow dir perms
   tags:
   - permissions
   file:
@@ -77,6 +77,16 @@
   - config
   - themes
   - updater
+
+- name: nextCloud | allow file perms
+  tags:
+  - permissions
+  file:
+    path: "{{ cloud_www_dir }}/{{ item }}"
+    owner: www-data
+    group: www-data
+    mode: 'u+rw'
+  with_items:
   - core/js/mimetypelist.js
 
 - name: nextCloud | data directories
