@@ -45,3 +45,13 @@
   hosts: R
   roles:
   - { role: R, tags: [R] }
+
+- name: main.yml | xnbd servers
+  hosts: xnbd-server
+  roles:
+  - { role: xnbd, tags: [xnbd-server] }
+
+- name: main.yml | xnbd clients
+  hosts: xnbd-client
+  roles:
+  - { role: xnbd, tags: [xnbd-client] }
