@@ -1,5 +1,8 @@
 ---
 
+# Create 200GB sparse file:
+# dd if=/dev/zero of=/srv/nbd0.img bs=1K count=1 seek=200M
+
 - name: network block device (server) | config
   tags:
   - config
