@@ -43,6 +43,7 @@
     line: "user_ini.filename = '.user.ini~'"
     insertafter: "[PHP]"
     validate: /usr/sbin/php5-fpm -t
+  notify: restart php-fpm
 
 - name: nextCloud | config
   tags:
