@@ -25,15 +25,24 @@
     depth: 1
     force: yes
 
-- name: nextCloud | PHP config
+- name: nextCloud | custom PHP config
   tags:
   - config
   copy:
-    src: .user.ini
+    src: ".user.ini~"
     dest: "{{ cloud_www_dir }}/"
     owner: root
     group: www-data
     mode: 0640
+
+- name: nextCloud | enable custom PHP config
+  tags:
+  - config
+  lineinfile:
+    path: /etc/php5/fpm/php.ini
+    line: "user_ini.filename = '.user.ini~'"
+    insertafter: "[PHP]"
+    validate: /usr/sbin/php5-fpm -t
 
 - name: nextCloud | config
   tags:
