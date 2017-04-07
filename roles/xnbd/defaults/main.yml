@@ -1,2 +1,4 @@
 ---
 
+xnbd_port: 8250
+xnbd_img: /srv/nbd0.img

@@ -4,5 +4,15 @@
 # Network block device: server
 
 {
-
+  "wrapper": {
+    "address": "{{ ansible_ho['ipv4']['address'] }}",
+    "port": "{{ xnbd_port }}",
+    "socket": "/var/run/xnbd.ctl",
+    "logpath": "/var/log/xnbd.log",
+    "max_buf_size": "0",
+    "max_queue_size": "0",
+    "volumes": {
+      "0": "{{ xnbd_img }}"
+    }
+  }
 }

@@ -4,5 +4,13 @@
 # Network block device: client
 
 {
-
+{% set nbd_idx = 0 %}
+{% for host in groups['xnbd-server'] %}
+  "nbd{{ nbd_idx }}": {
+    "host": "{{ hostvars[host]['ansible_' ~ tinc_net]['ipv4']['address'] }}",
+    "port": "{{ xnbd_port }}",
+    "name": "{{ host }}"
+  }
+{% set nbd_idx = nbd_idx + 1 %}
+{% endfor %}
 }
