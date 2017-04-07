@@ -48,7 +48,7 @@
     minute: 18
     hour: 3
     user: "{{ postgresql_user }}"
-    job: "/usr/bin/pg_dumpall -w > {{ postgresql_dump }}"
+    job: "/usr/bin/pg_dumpall -w | gzip -c --rsyncable > {{ postgresql_dump }}"
 
 - name: PostgreSQL | service
   tags:
