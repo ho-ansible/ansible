@@ -1,0 +1,6 @@
+---
+- include: common.yml
+- include: server.yml
+  when: '"xnbd-server" in group_names'
+- include: client.yml
+  when: '"xnbd-client" in group_names'

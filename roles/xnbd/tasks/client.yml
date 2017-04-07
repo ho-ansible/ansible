@@ -1,0 +1,9 @@
+---
+
+- name: network block device (client) | config
+  tags:
+  - config
+  template:
+    src: client.conf.j2
+    dest: /etc/xnbd.conf
+  notify: restart xnbd
