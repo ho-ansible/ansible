@@ -5,7 +5,7 @@
 
 {
   "wrapper": {
-    "address": "{{ ansible_ho['ipv4']['address'] }}",
+    "address": "{{ hostvars[inventory_hostname]['ansible_' ~ tinc_net]['ipv4']['address'] }}",
     "port": "{{ xnbd_port }}",
     "socket": "/var/run/xnbd.ctl",
     "logpath": "/var/log/xnbd.log",
