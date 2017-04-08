@@ -1,2 +1,6 @@
 ---
-letsencrypt_email: letsencrypt@example.com
+acme_name: example.com
+acme_altnames: []
+acme_account: letsencrypt@example.com
+acme_url: https://acme-v01.api.letsencrypt.org/directory
+acme_dir: /etc/letsencrypt
