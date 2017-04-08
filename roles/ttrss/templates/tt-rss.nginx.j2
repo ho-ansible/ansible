@@ -1,6 +1,6 @@
 server {
-        listen {{ ttrss_port }} ssl;
-        listen [::]:{{ ttrss_port }} ssl;
+        listen {{ ttrss_port }} ssl http2;
+        listen [::]:{{ ttrss_port }} ssl http2;
 
         server_name {{ ttrss_host }};
         root {{ ttrss_www }};
