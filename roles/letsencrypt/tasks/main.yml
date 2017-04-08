@@ -5,11 +5,11 @@
   tags:
     - ssl
   letsencrypt:
-    account_email: "{{ letsencrypt_email }}"
-    account_key: _account_key.p12
-    csr: _domain_csr.p12
-    dest: _domain_crt.p12
-    acme_directory: "https://acme-staging.api.letsencrypt.org/directory"
+    account_email: "{{ acme_account }}"
+    account_key: "{{ acme_dir }}/letsencrypt.key"
+    csr: "{{ acme_dir }}/{{ acme_name }}.csr"
+    dest: "{{ acme_dir }}/{{ acme_name }}.crt"
+    acme_directory: "{{ acme_url }}"
     challenge: http-01
     remaining_days: 14
   register: domain_challenge
