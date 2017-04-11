@@ -37,9 +37,9 @@
   - { role: ttrss, tags: [news, ttrss] }
 
 - name: main.yml | nextCloud servers
-  hosts: cloud
+  hosts: nextcloud
   roles:
-  - { role: nextcloud, tags: [cloud, nextcloud] }
+  - { role: nextcloud, tags: [nextcloud] }
 
 - name: main.yml | R servers
   hosts: R
