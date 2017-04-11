@@ -5,7 +5,7 @@
 
 {
 {% for host in groups['xnbd-server'] %}
-  "nbd{{ loop.index }}": {
+  "nbd{{ loop.index-1 }}": {
     "host": "{{ hostvars[host]['ansible_' ~ tinc_net]['ipv4']['address'] }}",
     "port": "{{ xnbd_port }}",
     "name": "{{ host }}"
