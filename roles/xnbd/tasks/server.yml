@@ -3,6 +3,23 @@
 # Create 200GB sparse file:
 # dd if=/dev/zero of=/srv/nbd0.img bs=1K count=1 seek=200M
 
+- name: network block device | packages
+  tags:
+  - package
+  package:
+   name: "{{ item }}"
+   state: latest
+  notify: restart xnbd
+  with_items:
+  - xnbd-server
+
+- name: network block device | service
+  tags:
+  - service
+  service:
+    name: xnbd-common
+    enabled: yes
+
 - name: network block device (server) | config
   tags:
   - config
