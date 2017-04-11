@@ -25,6 +25,7 @@
     depth: 1
     force: yes
 
+# See /etc/php5/fpm/php.ini for line enabling this
 - name: nextCloud | custom PHP config
   tags:
   - config
@@ -34,16 +35,6 @@
     owner: root
     group: www-data
     mode: 0640
-
-- name: nextCloud | enable custom PHP config
-  tags:
-  - config
-  lineinfile:
-    path: /etc/php5/fpm/php.ini
-    line: "user_ini.filename = '.user.ini~'"
-    insertafter: "[PHP]"
-    validate: /usr/sbin/php5-fpm -t
-  notify: restart php-fpm
 
 - name: nextCloud | config
   tags:
