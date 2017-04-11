@@ -8,7 +8,7 @@
   "nbd{{ loop.index-1 }}": {
     "host": "{{ hostvars[host]['ansible_' ~ tinc_net]['ipv4']['address'] }}",
     "port": {{ xnbd_port }},
-    "name": "{{ host }}"
+    "name": "0"
   }
 {% endfor %}
 }
