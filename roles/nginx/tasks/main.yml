@@ -42,7 +42,6 @@
     dest: "/etc/nginx/"
   with_items:
   - nginx.conf
-  - acme-redir
   - conf.d
   - ssl
   - sites-available

@@ -5,7 +5,5 @@ server {
         server_name {{ ttrss_host }};
         root {{ ttrss_www }};
 
-	include acme-redir;
-
         include nginx-php;
 }

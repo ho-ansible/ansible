@@ -41,8 +41,6 @@ server {
 		access_log off;
 	}
 
-	include acme-redir;
-
 	location ~ ^/(build|tests|config|lib|3rdparty|templates|data)/ {
 		deny all;
 	}
