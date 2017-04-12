@@ -15,8 +15,13 @@
   tags:
   - package
   pip:
-    name: "burp-ui[sql]"
+    name: "{{ item }}"
     state: latest
+  with_items:
+  - markupsafe
+  - alembic
+  - functools32
+  - "burp-ui[sql]"
 
 - name: Burp | web UI config
   tags:
