@@ -5,12 +5,12 @@
 
 {
   "wrapper": {
-    "address": "{{ hostvars[inventory_hostname]['ansible_' ~ tinc_net]['ipv4']['address'] }}",
-    "port": "{{ xnbd_port }}",
+    "address": "{{ vars['ansible_' ~ tinc_net]['ipv4']['address'] }}",
+    "port": {{ xnbd_port }},
     "socket": "/var/run/xnbd.ctl",
     "logpath": "/var/log/xnbd.log",
-    "max_buf_size": "0",	# https://bitbucket.org/hirofuchi/xnbd/issues/11/
-    "max_queue_size": "0",
+    "max_buf_size": 0,	# https://bitbucket.org/hirofuchi/xnbd/issues/11/
+    "max_queue_size": 0,
     "volumes": {
       "0": "{{ xnbd_img }}"
     }
