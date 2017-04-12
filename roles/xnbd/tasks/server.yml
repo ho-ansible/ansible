@@ -1,7 +1,7 @@
 ---
 
-# Create 200GB sparse file:
-# dd if=/dev/zero of=/srv/nbd0.img bs=1K count=1 seek=200M
+# Create 200GB image (cannot be sparse file)
+# ionice -c 3 dd if=/dev/zero of=/srv/nbd0.img bs=1M count=200K
 
 - name: network block device | packages
   tags:
