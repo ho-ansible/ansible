@@ -11,8 +11,11 @@
   tags:
   - apt
   apt_repository:
-    repo: 'deb http://nginx.org/packages/mainline/{{ ansible_distribution | lower }}/ {{ ansible_lsb.codename }} nginx'
+    repo: "{{ item }} http://nginx.org/packages/mainline/{{ ansible_distribution | lower }}/ {{ ansible_lsb.codename }} nginx"
     filename: 'nginx'
+  with_items:
+  - deb
+  - deb-src
 
 - name: Nginx | package
   tags:
