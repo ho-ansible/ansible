@@ -7,6 +7,7 @@
 # /usr/sbin/tinc generate-keys 4096:
 #   roles/tinc/files/.private/{hosts/HOST,keys/HOST.priv}
 # ansible-playbook -l vpn -t vpn plays/main.yml
+# ansible-playbook -k -l HOST -t update plays/main.yml
 # ansible-playbook -k -l HOST plays/setup.yml
 # ansible-playbook -l HOST plays/main.yml
 # Manually set root password
