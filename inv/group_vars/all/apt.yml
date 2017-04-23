@@ -33,6 +33,7 @@ remove_pkgs:
 - fetchmail
 - exim4-base
 - exim4-config
+- w3m
 
 install_pkgs:
 - locales
