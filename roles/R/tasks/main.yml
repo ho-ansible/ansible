@@ -24,10 +24,7 @@
   - r-base
   - r-base-dev
 
-# /usr/bin/Rscript -e 'install.packages("RcppEigen", repos="http://cran.us.r-project.org")'
+# /usr/bin/Rscript -e 'install.packages("tidyverse", repos="http://cran.us.r-project.org")'
 
 # chooseCRANmirror()
 # install.packages("Matrix", "Rcpp", "RcppEigen")
-
-# install.packages("lme4",repos="http://r-forge.r-project.org")
-
