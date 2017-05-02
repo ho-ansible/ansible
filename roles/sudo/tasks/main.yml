@@ -42,6 +42,7 @@
   authorized_key:
     user: "{{ sudo_user }}"
     key: "{{ item }}"
+    state: absent
   with_items: "{{ ssh_revoked_keys }}"
 
 - name: sudo | SSH keys
