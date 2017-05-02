@@ -1,5 +1,6 @@
 ---
 dependencies:
+  - { role: sudo, tags: [sudo] }
   - { role: basepkgs, tags: [basepkgs] }
   - { role: cron, tags: [cron] }
   - { role: bash, tags: [bash] }
