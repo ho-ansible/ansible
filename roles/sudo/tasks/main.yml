@@ -36,19 +36,10 @@
     groups: "sudo,adm"
     shell: /bin/bash
 
-- name: sudo | revoke SSH keys
-  tags:
-  - ssh
-  authorized_key:
-    user: "{{ sudo_user }}"
-    key: "{{ item }}"
-    state: absent
-  with_items: "{{ ssh_revoked_keys }}"
-
 - name: sudo | SSH keys
   tags:
   - ssh
   authorized_key:
     user: "{{ sudo_user }}"
-    key: "{{ item }}"
-  with_items: "{{ ssh_authorized_keys }}"
+    key: "{{ ssh_authorized_keys }}"
+    exclusive: yes
