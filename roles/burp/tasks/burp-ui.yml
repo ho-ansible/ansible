@@ -10,6 +10,7 @@
   - python-pip
   - libpython-dev
   - libffi-dev
+  - libssl-dev
 
 - name: Burp | web UI
   tags:
