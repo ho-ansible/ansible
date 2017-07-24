@@ -1,0 +1,9 @@
+---
+
+- name: password | randomize
+  tags:
+    - password
+  user:
+    name: "{{ item }}"
+    password: "{{ lookup('password', '/dev/null') }}"
+  with_items: random_pw

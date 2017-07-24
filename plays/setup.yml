@@ -21,5 +21,6 @@
   - ansible_port: 22
   - ansible_ssh_extra_args: "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
   roles:
+  - { role: password, tags: [new,password] }
   - { role: sudo, tags: [new,sudo] }
   - { role: ssh, tags: [new,ssh] }
