@@ -1,0 +1,21 @@
+---
+
+- name: msmtp | package
+  tags:
+    - package
+  package:
+    name: msmtp-mta
+
+- name: msmtp | config
+  tags:
+    config
+  template:
+    src: msmtprc.j2
+    dest: /etc/msmtprc
+  notify: restart msmtp
+
+- name: msmtp | service
+  tags:
+    service
+  service:
+    name: msmtp
