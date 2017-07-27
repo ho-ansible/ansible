@@ -10,8 +10,13 @@
   tags:
     - config
   template:
-    src: msmtprc.j2
-    dest: /etc/msmtprc
+    src: "{{ item }}.j2"
+    dest: "/etc/{{ item }}"
+    group: www-data
+    mode: 0640
+  with_items:
+    - msmtprc
+    - aliases
   notify: restart msmtp
 
 - name: msmtp | service
