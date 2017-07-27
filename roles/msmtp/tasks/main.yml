@@ -8,7 +8,7 @@
 
 - name: msmtp | config
   tags:
-    config
+    - config
   template:
     src: msmtprc.j2
     dest: /etc/msmtprc
@@ -16,6 +16,8 @@
 
 - name: msmtp | service
   tags:
-    service
+    - service
   service:
     name: msmtp
+    state: started
+    enabled: yes
