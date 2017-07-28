@@ -5,5 +5,5 @@
     - password
   user:
     name: "{{ item }}"
-    password: "{{ lookup('password', '/dev/null') }}"
-  with_items: random_pw
+    password: "{{ lookup('password', '/dev/null length=32') }}"
+  with_items: "{{ random_pw }}"
