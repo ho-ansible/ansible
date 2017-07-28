@@ -1,0 +1,6 @@
+---
+
+- name: passwd.yml | Reset passwords
+  hosts: all
+  roles:
+  - { role: password, tags: [password] }
