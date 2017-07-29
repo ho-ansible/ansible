@@ -7,6 +7,7 @@ dependencies:
   - { role: bash, tags: [bash] }
   - { role: cron, tags: [cron] }
   - { role: ntp, tags: [ntp], when: ansible_virtualization_type != 'openvz' }
+  - { role: msmtp, tags: [msmtp, mail] }
   - { role: rsyslog, tags: [rsyslog] }
   - { role: logrotate, tags: [logrotate] }
   - { role: tinc, tags: [tinc, vpn] }
