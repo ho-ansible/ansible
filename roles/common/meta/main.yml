@@ -2,13 +2,13 @@
 dependencies:
   - { role: sudo, tags: [sudo] }
   - { role: basepkgs, tags: [basepkgs] }
-  - { role: cron, tags: [cron] }
-  - { role: bash, tags: [bash] }
   - { role: ssh, tags: [ssh] }
-  - { role: tinc, tags: [tinc, vpn] }
+  - { role: iptables, tags: [iptables] }
+  - { role: bash, tags: [bash] }
+  - { role: cron, tags: [cron] }
   - { role: ntp, tags: [ntp], when: ansible_virtualization_type != 'openvz' }
   - { role: rsyslog, tags: [rsyslog] }
-  - { role: iptables, tags: [iptables] }
-  - { role: burp, tags: [burp, backup] }
   - { role: logrotate, tags: [logrotate] }
+  - { role: tinc, tags: [tinc, vpn] }
+  - { role: burp, tags: [burp, backup] }
 
