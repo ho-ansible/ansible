@@ -1,8 +1,0 @@
----
-- name: restart msmtp
-  tags:
-  - service
-  service:
-    name: msmtp
-    state: restarted
-

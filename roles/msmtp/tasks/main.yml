@@ -17,12 +17,3 @@
   with_items:
     - msmtprc
     - aliases
-  notify: restart msmtp
-
-- name: msmtp | service
-  tags:
-    - service
-  service:
-    name: msmtp
-    state: started
-    enabled: yes
