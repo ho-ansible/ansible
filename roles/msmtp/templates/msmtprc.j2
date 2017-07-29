@@ -12,4 +12,4 @@ from {{ msmtp_login }}
 user {{ msmtp_login }}
 password {{ msmtp_pw }}
 
-account default: gmail
+account default: {{ msmtp_host }}
