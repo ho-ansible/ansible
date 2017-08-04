@@ -16,8 +16,6 @@
     state: absent
   with_items: "{{remove_pkgs}}"
 
-- include: upgrade.yml
-
 - name: Install packages
   tags:
   - package
