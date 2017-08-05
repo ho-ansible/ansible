@@ -49,3 +49,8 @@ export EDITOR="/usr/bin/vi"
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
+
+# Symlink ssh agent socket to standard place
+if [[ ! -S ~/.ssh/agent.sock && -S "$SSH_AUTH_SOCK" ]]; then
+	ln -sf $SSH_AUTH_SOCK ~/.ssh/agent.sock
+fi
