@@ -6,31 +6,33 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+PROMPT_DIRTRIM=2
 HISTCONTROL=ignoreboth
 HISTSIZE=1000
 HISTFILESIZE=2000
 shopt -s histappend
 shopt -s checkwinsize
 
-# set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
+# Identify chroot environment
+if [ -z "$chroot" ] && [ -r /etc/debian_chroot ]; then
+	chroot="($(cat /etc/debian_chroot))"
 fi
 
-# If this is an xterm set the title to user@host:dir
+# Set title of graphical terminal window
 case "$TERM" in
 screen*|xterm*|rxvt*)
-        PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${debian_chroot:+($debian_chroot)}${PWD}\007"'
+	PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}: ${chroot}${PWD/#$HOME/\~}\007"'
         ;;
 esac
 
+# Set shell prompt, with color if available
 tput=/usr/bin/tput
 if [ -x $tput ] && $tput setaf 1 >&/dev/null; then
-        PS1='${debian_chroot:+($debian_chroot)}<$?>\h \[\033[36m\]\W \[\033[30;47m\]\!\[\033[0m\]\$ '
+        PS1='${chroot}<$?>\h \[\033[36m\]\w \[\033[30;47m\]\!\[\033[0m\]\$ '
         alias ls='ls --color=auto'
         alias grep='grep --colour=auto'
 else
-        PS1='${debian_chroot:+($debian_chroot)}<$?>\h \W \!\$ '
+        PS1='${chroot}<$?>\h \w \!\$ '
 fi
 unset tput
 
