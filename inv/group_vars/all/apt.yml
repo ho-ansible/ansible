@@ -3,6 +3,7 @@ stop_services: []
 #- apache2
 
 remove_pkgs:
+- cron
 - apache2
 - apache2-doc
 - apache2-utils
@@ -36,6 +37,7 @@ remove_pkgs:
 - w3m
 
 install_pkgs:
+- systemd-cron
 - locales
 - git
 - less
