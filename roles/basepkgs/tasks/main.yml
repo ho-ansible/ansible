@@ -8,14 +8,6 @@
     state: stopped
   with_items: "{{stop_services}}"
 
-- name: Clean unneeded packages
-  tags:
-  - package
-  package:
-    name: "{{item}}"
-    state: absent
-  with_items: "{{remove_pkgs}}"
-
 - name: Install packages
   tags:
   - package
@@ -23,4 +15,12 @@
     name: "{{item}}"
     state: latest
   with_items: "{{install_pkgs}}"
+
+- name: Clean unneeded packages
+  tags:
+  - package
+  package:
+    name: "{{item}}"
+    state: absent
+  with_items: "{{remove_pkgs}}"
 
