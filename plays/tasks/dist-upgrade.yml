@@ -1,0 +1,19 @@
+---
+
+- include: update.yml
+
+- name: Update sources.list
+  replace:
+    path: /etc/sources.list
+    regexp: '{{ dist_old }}'
+    replace: '{{ dist_new }}'
+
+- name: Safe upgrade
+  apt:
+    update_cache: yes
+    upgrade: safe
+
+- name: Dist upgrade
+  apt:
+    upgrade: dist
+
