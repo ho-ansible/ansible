@@ -17,12 +17,12 @@
 - name: setup.yml | Provision new VPS
   hosts: all
   vars:
-  - ansible_user: root
-  - ansible_port: 22
-  - ansible_ssh_extra_args: "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+    - ansible_user: root
+    - ansible_port: 22
+    - ansible_ssh_extra_args: "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
   tasks:
     - include: tasks/update.yml
     - include: tasks/randpw.yml
   roles:
-  - { role: sudo, tags: [new,sudo] }
-  - { role: ssh, tags: [new,ssh] }
+    - { role: sudo, tags: [new,sudo] }
+    - { role: ssh, tags: [new,ssh] }
