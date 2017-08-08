@@ -1,0 +1,11 @@
+---
+# Run once for each new host
+# TODO: headless genkeys and file output properly
+
+- name: tinc | generate host keys
+  tags:
+    - tinc
+    - crypt
+    - new
+  local_action: command /usr/sbin/tinc generate-keys 4096
+
