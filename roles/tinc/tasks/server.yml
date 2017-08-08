@@ -6,6 +6,8 @@
   - crypt
   copy:
     src: .private/hosts
-    dest: "/etc/tinc/{{ tinc_net }}/"
+    dest: "/etc/tinc/{{ tinc_net }}/hosts/{{ item | regex_replace('^_') }}"
     mode: 0640
+    with_fileglob:
+      - "pub/_*"
 

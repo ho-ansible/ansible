@@ -76,21 +76,21 @@
   - config
   - crypt
   copy:
-    src: ".private/keys/{{ item.src }}"
+    src: "keys/{{ item.src }}/_{{ inventory_hostname }}"
     dest: "/etc/tinc/{{ tinc_net }}/{{ item.dest }}"
     mode: 0400
   notify: restart tinc
   with_items:
-  - { src: "{{ inventory_hostname }}.priv", dest: "rsa_key.priv" }
-  - { src: "{{ inventory_hostname }}-ED.priv", dest: "ed25519_key.priv" }
+  - { src: "rsa", dest: "rsa_key.priv" }
+  - { src: "ed", dest: "ed25519_key.priv" }
 
 - name: tinc VPN | public keys
   tags:
   - config
   - crypt
   copy:
-    src: ".private/hosts/{{ item }}"
-    dest: "/etc/tinc/{{ tinc_net }}/hosts/"
+    src: "keys/pub/_{{ item }}"
+    dest: "/etc/tinc/{{ tinc_net }}/hosts/{{ item }}"
     mode: 0640
   with_items:
   - tinc1
