@@ -1,13 +1,14 @@
 ---
 dependencies:
-  - { role: sudo, tags: [sudo] }
-  - { role: basepkgs, tags: [basepkgs] }
-  - { role: ssh, tags: [ssh] }
-  - { role: iptables, tags: [iptables] }
+  - { role: sudo, tags: [sudo, login] }
+  - { role: basepkgs, tags: [basepkgs, apt] }
+  - { role: ssh, tags: [ssh, login] }
+  - { role: iptables, tags: [iptables, firewall] }
   - { role: bash, tags: [bash] }
   - { role: msmtp, tags: [msmtp, mail] }
-  - { role: rsyslog, tags: [rsyslog] }
-  - { role: logrotate, tags: [logrotate] }
+  - { role: rsyslog, tags: [rsyslog, log] }
+  - { role: logrotate, tags: [logrotate, log] }
+  - { role: timesync, tags: [timesync, systemd, ntp, time] }
   - { role: tinc, tags: [tinc, vpn] }
   - { role: burp, tags: [burp, backup] }
 
