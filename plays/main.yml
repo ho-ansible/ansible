@@ -21,6 +21,11 @@
   roles:
   - { role: dnsmasq, tags: [dns, dnsmasq] }
 
+- name: main.yml | NTP servers
+  hosts: ntp
+  roles:
+  - { role: ntp, tags: [ntp] }
+
 - name: main.yml | Web servers
   hosts: www
   roles:
