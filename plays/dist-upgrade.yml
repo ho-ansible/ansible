@@ -1,11 +1,8 @@
 ---
-- name: Upgrade to new Debian release
+- name: Upgrade Debian release 
   hosts: linux
-  vars:
-    - release_old: "jessie"
-    - release_new: "stretch"
-  when: ansible_distribution_release == "{{ release_old }}"
   tasks: 
     - include: tasks/update.yml
+      when: ansible_distribution_release == release_old
     - include: tasks/dist-upgrade.yml
-
+      when: ansible_distribution_release == release_old
