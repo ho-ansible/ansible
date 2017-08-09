@@ -1,0 +1,18 @@
+---
+
+- name: copy misc config
+  tags:
+    - config
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  with_items:
+    - { src: htoprc, dest: /etc/ }
+    - { src: 50unattended-upgrades, dest: /etc/apt/apt.conf.d/ }
+
+- name: generate locales
+  tags:
+    - config
+    - locales
+  locale_gen:
+    name: en_US.UTF-8
