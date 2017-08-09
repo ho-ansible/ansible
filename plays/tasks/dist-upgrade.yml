@@ -1,12 +1,10 @@
 ---
 
-- include: update.yml
-
 - name: Update sources.list
   replace:
-    path: /etc/sources.list
-    regexp: '{{ dist_old }}'
-    replace: '{{ dist_new }}'
+    path: /etc/apt/sources.list
+    regexp: '{{ release_old }}'
+    replace: '{{ release_new }}'
 
 - name: Safe upgrade
   apt:
@@ -16,4 +14,5 @@
 - name: Dist upgrade
   apt:
     upgrade: dist
+    autoremove: yes
 
