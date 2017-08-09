@@ -1,3 +1,0 @@
----
-dependencies:
-  - { role: cron, tags: ["logrotate", "cron"] }
