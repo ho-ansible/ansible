@@ -1,0 +1,5 @@
+# auto-upgrade Win64 client:
+wget burp-win64-installer-*.exe
+rm -fr /cygdrive/c/Program\ Files/Burp/bin-old
+mv /cygdrive/c/Program\ Files/Burp/bin /cygdrive/c/Program\ Files/Burp/bin-old
+./burp-win64-installer-*.exe /S
