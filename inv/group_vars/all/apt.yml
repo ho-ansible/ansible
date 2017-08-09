@@ -4,11 +4,10 @@ stop_services: []
 
 remove_pkgs:
 - cron
+- at
 - apache2
 - apache2-doc
 - apache2-utils
-- apache2.2-common
-- apache2.2-bin
 - bind9
 - bind9utils
 - isc-dhcp-common
@@ -22,7 +21,6 @@ remove_pkgs:
 - telnet
 - samba
 - samba-common
-- portmap
 - rpcbind
 - sasl2-bin
 - xinetd
