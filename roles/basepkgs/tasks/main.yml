@@ -22,5 +22,6 @@
   package:
     name: "{{item}}"
     state: absent
+    purge: yes
   with_items: "{{remove_pkgs}}"
 
