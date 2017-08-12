@@ -6,3 +6,5 @@
       when: ansible_distribution_release == release_old
     - include: tasks/dist-upgrade.yml
       when: ansible_distribution_release == release_old
+    - command: shutdown -r +1
+      when: ansible_virtualization_type != 'openvz'
