@@ -1,0 +1,12 @@
+## /etc/systemd/resolved.conf
+# systemd-resolved runs a local DNS resolver
+# ln -sf /lib/systemd/resolv.conf /etc/
+# {{ ansible_managed }}
+
+[Resolve]
+DNS={{ preferred_dns }}
+FallbackDNS={{ fallback_dns }}
+Domains=~.
+LLMNR=false
+MulticastDNS=false
+DNSSEC=false
