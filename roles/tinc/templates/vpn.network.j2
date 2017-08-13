@@ -1,0 +1,17 @@
+## /etc/systemd/network/{{ tinc_net }}.network
+# per-link config of systemd-network
+# {{ ansible_managed }}
+
+[Match]
+Name={{ tinc_net }}
+
+[Network]
+Description="tinc VPN {{ tinc_net }}"
+DHCP=yes
+Domains=~.
+
+[DHCP]
+UseDomains=true
+CriticalConnection=true
+RouteMetric=200
+
