@@ -8,8 +8,8 @@ dependencies:
   - { role: msmtp, tags: [msmtp, mail] }
   - { role: rsyslog, tags: [rsyslog, log] }
   - { role: logrotate, tags: [logrotate, log] }
-  - { role: timesync, tags: [timesync, systemd, ntp, time], when: ansible_virtualization_type != 'openvz' }
-  - { role: systemd-resolved, tags: [resolver] }
+  - { role: systemd-timesync, tags: [timesync, systemd, ntp, time], when: ansible_virtualization_type != 'openvz' }
+  - { role: systemd-resolved, tags: [resolver, systemd] }
   - { role: tinc, tags: [tinc, vpn] }
   - { role: burp, tags: [burp, backup] }
 
