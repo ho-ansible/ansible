@@ -56,6 +56,13 @@
   - tinc.service
   - tinc@.service
 
+- name: tinc VPN | systemd-networkd config
+  tags:
+  - config
+  template:
+    src: vpn.network.j2
+    dest: "/etc/systemd/network/{{ tinc_net }}.network"
+
 - name: tinc VPN | config
   tags:
   - config
