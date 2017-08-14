@@ -24,8 +24,6 @@
   with_items:
   - openssl
   - liblzo2-2
-  - dhcpcd5
-  - resolvconf
   notify: restart tinc
 
 - name: tinc VPN | directories
