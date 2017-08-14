@@ -21,6 +21,6 @@
   tags:
     - resolve
   file:
-    src: /usr/lib/systemd/resolv.conf
+    src: /lib/systemd/resolv.conf
     dest: /etc/
     state: link
