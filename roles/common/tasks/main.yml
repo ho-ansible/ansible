@@ -17,10 +17,3 @@
   locale_gen:
     name: en_US.UTF-8
 
-- name: enable systemd-resolved
-  tags:
-    - resolve
-  file:
-    src: /usr/lib/systemd/resolv.conf
-    dest: /etc/
-    state: link

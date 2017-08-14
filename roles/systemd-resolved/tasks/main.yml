@@ -1,0 +1,27 @@
+---
+
+- name: systemd-resolved | enable
+  tags:
+    - resolver
+    - config
+  template:
+    src: resolved.conf.j2
+    dest: /etc/systemd/resolved.conf
+  notify: restart systemd-resolved
+
+- name: systemd-resolved | enable
+  tags:
+    - resolver
+  file:
+    src: /usr/lib/systemd/resolv.conf
+    dest: /etc/
+    state: link
+
+- name: systemd-resolved | service
+  tags:
+    - resolver
+    - service
+  service:
+    name: systemd-resolved
+    state: started
+    enabled: yes
