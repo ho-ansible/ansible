@@ -14,7 +14,7 @@
     - resolver
   file:
     src: /lib/systemd/resolv.conf
-    dest: /etc/
+    dest: /etc/resolv.conf
     state: link
 
 - name: systemd-resolved | service
