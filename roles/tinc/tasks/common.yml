@@ -33,7 +33,7 @@
     dest: "{{ item }}"
     state: directory
   with_items:
-  - "/etc/tinc/{{ tinc_net }}/hosts"
+  - "/etc/tinc/{{ tinc_name }}/hosts"
 
 - name: tinc VPN | binaries (v1.1)
   tags:
@@ -61,14 +61,14 @@
   - config
   template:
     src: vpn.network.j2
-    dest: "/etc/systemd/network/20-{{ tinc_net }}.network"
+    dest: "/etc/systemd/network/20-{{ tinc_name }}.network"
 
 - name: tinc VPN | config
   tags:
   - config
   template:
     src: "{{ item }}.j2"
-    dest: "/etc/tinc/{{ tinc_net }}/{{ item }}"
+    dest: "/etc/tinc/{{ tinc_name }}/{{ item }}"
     mode: 0700
   with_items:
   - tinc.conf
@@ -82,7 +82,7 @@
   - crypt
   copy:
     src: "keys/{{ item.src }}/_{{ inventory_hostname }}"
-    dest: "/etc/tinc/{{ tinc_net }}/{{ item.dest }}"
+    dest: "/etc/tinc/{{ tinc_name }}/{{ item.dest }}"
     mode: 0400
   notify: restart tinc
   with_items:
@@ -95,7 +95,7 @@
   - crypt
   copy:
     src: "keys/pub/_{{ item }}"
-    dest: "/etc/tinc/{{ tinc_net }}/hosts/{{ item }}"
+    dest: "/etc/tinc/{{ tinc_name }}/hosts/{{ item }}"
     mode: 0640
   with_items:
   - tinc1
@@ -112,7 +112,7 @@
     enabled: yes
   with_items:
   - tinc
-  - "tinc@{{ tinc_net }}"
+  - "tinc@{{ tinc_name }}"
 
 # on Windows:
 # + install new TAP device

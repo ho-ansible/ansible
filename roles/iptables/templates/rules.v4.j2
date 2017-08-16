@@ -20,9 +20,9 @@
 # Allow VPN
 -A INPUT -p udp --dport {{ tinc_port }} -j ACCEPT
 -A INPUT -p tcp --dport {{ tinc_port }} -j ACCEPT
--A INPUT -i {{ tinc_net }} -j ACCEPT
--A FORWARD -i {{ tinc_net }} -j ACCEPT
--A FORWARD -o {{ tinc_net }} -j ACCEPT
+-A INPUT -i {{ tinc_name }} -j ACCEPT
+-A FORWARD -i {{ tinc_name }} -j ACCEPT
+-A FORWARD -o {{ tinc_name }} -j ACCEPT
 
 {% if 'www' in group_names %}
 # Allow HTTP/S

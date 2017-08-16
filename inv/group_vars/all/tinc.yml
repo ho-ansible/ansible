@@ -1,2 +1,3 @@
 ---
-tinc_net: ho
+tinc_name: ho
+tinc_net: 10.100.1

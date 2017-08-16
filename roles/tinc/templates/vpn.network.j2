@@ -1,12 +1,12 @@
-## /etc/systemd/network/20-{{ tinc_net }}.network
+## /etc/systemd/network/20-{{ tinc_name }}.network
 # per-link config of systemd-network
 # {{ ansible_managed }}
 
 [Match]
-Name={{ tinc_net }}
+Name={{ tinc_name }}
 
 [Network]
-Description="tinc VPN {{ tinc_net }}"
+Description="tinc VPN {{ tinc_name }}"
 
 {% if 'tinc' in cname | default("") %}
 Address=10.100.1.{{ cname | regex_replace('^.*tinc(\\d+).*$', '\\1') }}/24
