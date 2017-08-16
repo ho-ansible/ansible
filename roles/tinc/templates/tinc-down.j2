@@ -3,5 +3,4 @@
 # {{ansible_managed}}
 # Cleanup link config before shutting down tinc VPN connection
 
-dhcpcd -k $INTERFACE
 ip link set $INTERFACE down
