@@ -29,3 +29,7 @@ LocalDiscovery = yes
 PingInterval = 120
 PingTimeout = 10
 MaxTimeout = 300
+
+{% if 'android' in group_names %}
+ScriptsInterpreter = /system/bin/sh
+{% endif %}
