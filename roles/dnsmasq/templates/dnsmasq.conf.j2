@@ -29,10 +29,10 @@ no-resolv		# only use specified servers
 servers-file=/etc/dnsmasq.servers
 
 # DHCP
-domain={{ tinc_name }}.vpn,10.100.1.0/24,local
+domain={{ tinc_name }}.vpn,{{ tinc_subnet }}.0/24,local
 
 {% if 'tinc1' in cname %}
-dhcp-range=interface:{{ tinc_name }},10.100.1.128,10.100.1.250,255.255.255.0,3h
+dhcp-range=interface:{{ tinc_name }},{{ tinc_subnet }}.128,{ tinc_subnet }}.250,255.255.255.0,3h
 dhcp-range=::100:1,::100:ffff,constructor:eth0,3h
 
 dhcp-hostsfile=/etc/dnsmasq.hosts
@@ -40,7 +40,7 @@ dhcp-optsfile=/etc/dnsmasq.opts
 
 dhcp-authoritative
 auth-zone={{ tinc_name }}.vpn,{{ tinc_name }}/6
-#auth-sec-servers=10.100.1.2
+#auth-sec-servers={{ tinc_subnet }}.2
 
 localmx			# Mailhost is this server
 dhcp-generate-names	# Use MAC to make a name if not supplied by client

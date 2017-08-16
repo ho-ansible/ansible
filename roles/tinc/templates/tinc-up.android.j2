@@ -65,4 +65,4 @@ redirectDNS() {
   $nat -I OUTPUT -j $chain
 }
 
-redirectDNS 10.100.1.1
+redirectDNS {{ tinc_subnet }}.1
