@@ -1,6 +1,6 @@
 ---
 
-- name: systemd-resolved | enable
+- name: systemd-resolved | config
   tags:
     - resolver
     - config
