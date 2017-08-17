@@ -1,0 +1,7 @@
+---
+- name: restart systemd-networkd
+  tags:
+  - service
+  service:
+    name: systemd-networkd
+    state: restarted

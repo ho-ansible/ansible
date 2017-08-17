@@ -1,0 +1,18 @@
+---
+
+- name: systemd-networkd | disable stable interface names
+  tags:
+    - network
+  file:
+    src: /dev/null
+    dest: /etc/systemd/network/99-default.link
+    state: link
+
+- name: systemd-networkd | service
+  tags:
+    - network
+    - service
+  service:
+    name: systemd-networkd
+    state: started
+    enabled: yes
