@@ -35,6 +35,7 @@ remove_pkgs:
 - exim4-base
 - exim4-config
 - w3m
+- resolvconf
 
 install_pkgs:
 - systemd-cron
