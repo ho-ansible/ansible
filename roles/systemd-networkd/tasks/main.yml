@@ -8,6 +8,19 @@
     dest: /etc/systemd/network/
   notify: update initramfs
 
+- name: systemd-networkd | remove dhcp clients
+  tags:
+    - network
+    - package
+  package:
+    name: "{{ item }}"
+    state: absent
+    purge: yes
+  with_items:
+    - isc-dhcp-common
+    - isc-dhcp-client
+    - dhcpcd5
+
 - name: systemd-networkd | service
   tags:
     - network
