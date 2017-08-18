@@ -25,7 +25,6 @@ remove_pkgs:
 - tcsh
 - fetchmail
 - w3m
-- resolvconf
 
 install_pkgs:
 - systemd-cron

@@ -1,5 +1,14 @@
 ---
 
+- name: systemd-resolved | remove resolvconf
+  tags:
+    - resolver
+    - package
+  package:
+    name: resolvconf
+    state: absent
+    purge: yes
+
 - name: systemd-resolved | config
   tags:
     - resolver
