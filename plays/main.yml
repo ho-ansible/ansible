@@ -2,7 +2,9 @@
 - name: main.yml | Common setup
   hosts: linux
   roles:
-  - common
+    - common
+  tasks:
+    - include: tasks/update.yml
 
 - name: main.yml | TMux hosts
   hosts: tmux
