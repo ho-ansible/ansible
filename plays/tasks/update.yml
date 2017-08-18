@@ -1,27 +1,21 @@
 ---
 
-- name: install aptitude
-  tags:
-  - package
-  package:
-    name: aptitude
-
 - name: Upgrade packages (Debian)
   when: ansible_os_family == "Debian"
   tags:
-  - package
-  - update
+    - package
+    - update
   apt:
     autoclean: yes
     update_cache: yes
     cache_valid_time: 86400
-    upgrade: full
+    upgrade: dist
 
 - name: Upgrade packages (RedHat)
   when: ansible_os_family == "RedHat"
   tags:
-  - package
-  - update
+    - package
+    - update
   yum:
     update_cache: yes
     name: '*'
