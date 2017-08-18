@@ -5,3 +5,10 @@
   service:
     name: systemd-networkd
     state: restarted
+
+- name: update initramfs
+  tags:
+    - initramfs
+    - boot
+    - kernel
+  command: update-initramfs -u
