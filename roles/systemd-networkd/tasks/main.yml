@@ -4,8 +4,8 @@
   tags:
     - network
   copy:
-    src: /dev/null
-    dest: /etc/systemd/network/99-default.link
+    src: 99-default.link
+    dest: /etc/systemd/network/
   notify: update initramfs
 
 - name: systemd-networkd | service
