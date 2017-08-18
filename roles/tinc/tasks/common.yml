@@ -81,13 +81,11 @@
   - config
   - crypt
   copy:
-    src: "keys/{{ item.src }}/_{{ inventory_hostname }}"
-    dest: "/etc/tinc/{{ tinc_name }}/{{ item.dest }}"
+    src: "{{ item }}"
+    dest: "/etc/tinc/{{ tinc_name }}/{{ item | regex_replace('^keys/(.*)/_.*$', '\\1') }}_key.priv"
     mode: 0400
   notify: restart tinc
-  with_items:
-  - { src: "rsa", dest: "rsa_key.priv" }
-  - { src: "ed", dest: "ed25519_key.priv" }
+  with_fileglob: "keys/[re]*/_{{ inventory_hostname }}"
 
 - name: tinc VPN | public keys
   tags:
