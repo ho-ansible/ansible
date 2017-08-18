@@ -22,13 +22,8 @@ remove_pkgs:
 - sasl2-bin
 - xinetd
 - update-inetd
-- sendmail-base
-- sendmail-cf
-- sendmail-doc
 - tcsh
 - fetchmail
-- exim4-base
-- exim4-config
 - w3m
 - resolvconf
 

@@ -2,12 +2,29 @@
 
 - name: msmtp | package
   tags:
+    - mail
     - package
   package:
     name: msmtp-mta
 
+- name: msmtp | remove other MTAs
+  tags:
+    - mail
+    - package
+  package:
+    name: "{{ item }}"
+    state: absent
+    purge: yes
+  with_items:
+    - sendmail-base
+    - sendmail-cf
+    - sendmail-doc
+    - exim4-base
+    - exim4-config
+
 - name: msmtp | config
   tags:
+    - mail
     - config
   template:
     src: "{{ item }}.j2"
