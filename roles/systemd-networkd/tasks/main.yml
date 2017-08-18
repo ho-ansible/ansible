@@ -4,8 +4,8 @@
   tags:
     - network
   copy:
-    src: 99-default.link
-    dest: /etc/systemd/network/
+    content: ""
+    dest: /etc/systemd/network/99-default.link
   notify: update initramfs
 
 - name: systemd-networkd | remove dhcp clients
