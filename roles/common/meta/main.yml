@@ -1,16 +1,16 @@
 ---
 dependencies:
   - { role: sudo, tags: [sudo, login] }
-  - { role: basepkgs, tags: [basepkgs, apt] }
   - { role: ssh, tags: [ssh, login] }
+  - { role: basepkgs, tags: [basepkgs, apt] }
   - { role: iptables, tags: [iptables, firewall] }
+  - { role: systemd-networkd, tags: [network, systemd] }
   - { role: bash, tags: [bash] }
+  - { role: systemd-resolved, tags: [resolver, systemd] }
   - { role: msmtp, tags: [msmtp, mail] }
+  - { role: tinc, tags: [tinc, vpn] }
   - { role: rsyslog, tags: [rsyslog, log] }
   - { role: logrotate, tags: [logrotate, log] }
-  - { role: systemd-networkd, tags: [network, systemd] }
-  - { role: systemd-timesyncd, tags: [timesync, systemd, ntp, time], when: ansible_virtualization_type != 'openvz' }
-  - { role: systemd-resolved, tags: [resolver, systemd] }
-  - { role: tinc, tags: [tinc, vpn] }
   - { role: burp, tags: [burp, backup] }
+  - { role: systemd-timesyncd, tags: [timesync, systemd, ntp, time], when: ansible_virtualization_type != 'openvz' }
 
