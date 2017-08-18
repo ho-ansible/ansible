@@ -7,10 +7,11 @@ Name={{ tinc_name }}
 
 [Network]
 Description="tinc VPN {{ tinc_name }}"
+LinkLocalAddressing=no
 
 {% if 'tinc' in cname | default("") %}
 Address={{ tinc_subnet }}.{{ cname | regex_replace('^.*tinc(\\d+).*$', '\\1') }}/24
-Gateway={{ tinc_subnet }}.1
+#Gateway={{ tinc_subnet }}.1
 DNS={{ tinc_subnet }}.1
 Domains={{ tinc_name }}.vpn
 IPForward=yes
