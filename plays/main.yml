@@ -4,13 +4,6 @@
   roles:
   - common
 
-#- name: main.yml | Windows hosts
-#  hosts: win
-#  roles:
-# - { role: tinc, tags: [tinc, vpn] }
-# - { role: ssh, tags: [ssh] }
-# - { role: burp, tags: [burp, backup] }
-
 - name: main.yml | TMux hosts
   hosts: tmux
   roles:

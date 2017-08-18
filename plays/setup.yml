@@ -10,7 +10,6 @@
 # ansible-playbook -k -l HOST plays/setup.yml
 #   (if NAT, add '-e ansible_port=NATPORT')
 # ansible-playbook -l HOST plays/main.yml
-# dpkg-reconfigure -u --frontend=teletype locales
 # Create entry on burp server
 # Manually set CNAME in DNS
 
