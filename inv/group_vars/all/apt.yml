@@ -49,3 +49,4 @@ install_pkgs:
 - python-apt
 - aptitude
 - unattended-upgrades
+- policykit-1
