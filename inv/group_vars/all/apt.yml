@@ -12,6 +12,7 @@ remove_pkgs:
 - bind9utils
 - isc-dhcp-common
 - isc-dhcp-client
+- dhcpcd5
 - finger
 - ftp
 - lynx
