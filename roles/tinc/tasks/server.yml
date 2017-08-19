@@ -8,6 +8,5 @@
     src: "{{ item }}"
     dest: "/etc/tinc/{{ tinc_name }}/hosts/{{ item | regex_replace('^.*/_') }}"
     mode: 0640
-  with_fileglob:
-    - "keys/pub/_*"
+  with_fileglob: "keys/pub/_*"
 
