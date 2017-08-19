@@ -25,6 +25,7 @@
     src: /lib/systemd/resolv.conf
     dest: /etc/resolv.conf
     state: link
+    force: yes
 
 - name: systemd-resolved | service
   tags:
