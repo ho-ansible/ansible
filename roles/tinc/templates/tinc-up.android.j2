@@ -1,13 +1,12 @@
 #! /system/bin/sh
 # cloud://data/Files/tinc/tinc-up
 # Link configuration once VPN is up
-# + dhcpcd adds default route (w/o -G) to "main" table
+# + dhcpcd adds default route to "main" table
 # + but in "ip rule", main table has lowest priority
 
 echo "Starting DHCP client on $INTERFACE"
 ip link set $INTERFACE up
-# dhcpcd -bA $INTERFACE
-dhcptool $INTERFACE &
+udhcpc -i $INTERFACE -x hostname:$NAME -s /data/local/udhcpc-script.sh -p /data/local/udhcpc.pid &
 
 tid=100
 
@@ -65,4 +64,4 @@ redirectDNS() {
   $nat -I OUTPUT -j $chain
 }
 
-redirectDNS 10.100.1.1
+redirectDNS {{ tinc_subnet }}.1

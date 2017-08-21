@@ -1,0 +1,15 @@
+defaults
+logfile /var/log/msmtp
+aliases /etc/aliases
+auth
+tls
+port 587
+tls_trust_file /etc/ssl/certs/ca-certificates.crt
+
+account {{ msmtp_host }}
+host {{ msmtp_host }}
+from {{ msmtp_login }}
+user {{ msmtp_login }}
+password {{ msmtp_pw }}
+
+account default: {{ msmtp_host }}

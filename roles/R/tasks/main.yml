@@ -5,13 +5,13 @@
   - apt
   apt_key:
     keyserver: keys.gnupg.net
-    id: 6212B7B7931C4BB16280BA1306F90DE5381BA480
+    id: "{{ cran_key }}"
 
 - name: R | repository (CRAN)
   tags:
   - apt
   apt_repository:
-    repo: 'deb http://ftp.osuosl.org/pub/cran/bin/linux/debian jessie-cran3/'
+    repo: "deb http://{{ cran_mirror }}/bin/linux/debian {{ ansible_distribution_release }}-{{ cran_ver }}/"
     filename: 'cran'
 
 - name: R | Install packages
@@ -23,6 +23,7 @@
   with_items:
   - r-base
   - r-base-dev
+  - libopenblas-base
 
 # /usr/bin/Rscript -e 'install.packages("tidyverse", repos="http://cran.us.r-project.org")'
 

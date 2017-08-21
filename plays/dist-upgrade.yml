@@ -1,0 +1,8 @@
+---
+- name: Upgrade Debian release 
+  hosts: linux
+  tasks: 
+    - include: tasks/update.yml
+      when: ansible_distribution_release == release_old
+    - include: tasks/dist-upgrade.yml
+      when: ansible_distribution_release == release_old

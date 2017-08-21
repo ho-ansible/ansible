@@ -6,31 +6,33 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+PROMPT_DIRTRIM=2
 HISTCONTROL=ignoreboth
 HISTSIZE=1000
 HISTFILESIZE=2000
 shopt -s histappend
 shopt -s checkwinsize
 
-# set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
+# Identify chroot environment
+if [ -z "$chroot" ] && [ -r /etc/debian_chroot ]; then
+	chroot="($(cat /etc/debian_chroot))"
 fi
 
-# If this is an xterm set the title to user@host:dir
+# Set title of graphical terminal window
 case "$TERM" in
 screen*|xterm*|rxvt*)
-        PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${debian_chroot:+($debian_chroot)}${PWD}\007"'
+	PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}: ${chroot}${PWD/#$HOME/\~}\007"'
         ;;
 esac
 
+# Set shell prompt, with color if available
 tput=/usr/bin/tput
 if [ -x $tput ] && $tput setaf 1 >&/dev/null; then
-        PS1='${debian_chroot:+($debian_chroot)}<$?>\h \[\033[36m\]\W \[\033[30;47m\]\!\[\033[0m\]\$ '
+        PS1='${chroot}<$?>\h \[\033[36m\]\w \[\033[30;47m\]\!\[\033[0m\]\$ '
         alias ls='ls --color=auto'
         alias grep='grep --colour=auto'
 else
-        PS1='${debian_chroot:+($debian_chroot)}<$?>\h \W \!\$ '
+        PS1='${chroot}<$?>\h \w \!\$ '
 fi
 unset tput
 
@@ -50,19 +52,7 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-# if the command-not-found package is installed, use it
-if [ -x /usr/lib/command-not-found -o -x /usr/share/command-not-found/command-not-found ]; then
-        function command_not_found_handle {
-                # check because c-n-f could've been removed in the meantime
-                if [ -x /usr/lib/command-not-found ]; then
-                   /usr/bin/python /usr/lib/command-not-found -- "$1"
-                   return $?
-                elif [ -x /usr/share/command-not-found/command-not-found ]; then
-                   /usr/bin/python /usr/share/command-not-found/command-not-found -- "$1"
-                   return $?
-                else
-                   printf "%s: command not found\n" "$1" >&2
-                   return 127
-                fi
-        }
+# Symlink ssh agent socket to standard place
+if [[ ! -S ~/.ssh/agent.sock && -S "$SSH_AUTH_SOCK" ]]; then
+	ln -sf $SSH_AUTH_SOCK ~/.ssh/agent.sock
 fi

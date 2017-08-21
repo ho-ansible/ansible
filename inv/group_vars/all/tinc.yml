@@ -1,2 +1,3 @@
 ---
-tinc_net: ho
+tinc_name: ho
+tinc_subnet: 10.100.1

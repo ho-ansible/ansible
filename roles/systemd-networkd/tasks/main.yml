@@ -1,0 +1,33 @@
+---
+
+- name: systemd-networkd | disable stable interface names
+  tags:
+    - network
+  copy:
+    content: ""
+    dest: /etc/systemd/network/99-default.link
+  notify: 
+    - update initramfs
+    - restart systemd-networkd
+
+- name: systemd-networkd | remove dhcp clients
+  tags:
+    - network
+    - package
+  package:
+    name: "{{ item }}"
+    state: absent
+    purge: yes
+  with_items:
+    - isc-dhcp-common
+    - isc-dhcp-client
+    - dhcpcd5
+
+- name: systemd-networkd | service
+  tags:
+    - network
+    - service
+  service:
+    name: systemd-networkd
+    state: started
+    enabled: yes

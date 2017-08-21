@@ -1,5 +1,5 @@
 ##
-# /etc/tinc/{{ tinc_net }}/tinc.conf
+# /etc/tinc/{{ tinc_name }}/tinc.conf
 # {{ ansible_managed }}
 # Configuration for tinc mesh VPN
 
@@ -18,14 +18,29 @@ ConnectTo = tinc2
 
 Mode = switch
 
-{% if 'win' not in group_names %}
+{% if 'win' in group_names %}
+{% else %}
+{%   if 'android' in group_names %}
+Device = /dev/tun
+{%   else %}
 Device = /dev/net/tun
+{%   endif %}
 PriorityInheritance = yes
 {% endif %}
 
 DeviceStandby = yes
 ProcessPriority = high
 LocalDiscovery = yes
+ReplayWindow = 32
+MACLength = 8
+
 PingInterval = 120
 PingTimeout = 10
 MaxTimeout = 300
+
+Compression = 10
+IndirectData = yes
+
+{% if 'android' in group_names %}
+ScriptsInterpreter = /system/bin/sh
+{% endif %}

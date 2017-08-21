@@ -1,0 +1,18 @@
+---
+
+- name: Update sources.list
+  replace:
+    path: /etc/apt/sources.list
+    regexp: '{{ release_old }}'
+    replace: '{{ release_new }}'
+
+- name: Safe upgrade
+  apt:
+    update_cache: yes
+    upgrade: safe
+
+- name: Dist upgrade
+  apt:
+    upgrade: dist
+    autoremove: yes
+

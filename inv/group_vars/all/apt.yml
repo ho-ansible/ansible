@@ -1,16 +1,13 @@
 stop_services: []
-#- sendmail
-#- apache2
 
 remove_pkgs:
+- cron
+- at
 - apache2
 - apache2-doc
 - apache2-utils
-- apache2.2-common
-- apache2.2-bin
 - bind9
 - bind9utils
-- isc-dhcp-common
 - finger
 - ftp
 - lynx
@@ -21,21 +18,16 @@ remove_pkgs:
 - telnet
 - samba
 - samba-common
-- portmap
 - rpcbind
 - sasl2-bin
 - xinetd
 - update-inetd
-- sendmail-base
-- sendmail-cf
-- sendmail-doc
 - tcsh
 - fetchmail
-- exim4-base
-- exim4-config
 - w3m
 
 install_pkgs:
+- systemd-cron
 - locales
 - git
 - less
@@ -48,3 +40,4 @@ install_pkgs:
 - python-apt
 - aptitude
 - unattended-upgrades
+- policykit-1

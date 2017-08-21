@@ -6,9 +6,9 @@
 {
 {% for host in groups['xnbd-server'] %}
   "nbd{{ loop.index0 }}": {
-    "host": "{{ hostvars[host]['ansible_' ~ tinc_net]['ipv4']['address'] }}",
+    "host": "{{ hostvars[host]['ansible_' ~ tinc_name]['ipv4']['address'] }}",
     "port": {{ xnbd_port }},
     "name": "0"
-  }{{ ',' if not loop.last }}
+  }{{ ',' if not loop.last else '' }}
 {% endfor %}
 }

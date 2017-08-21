@@ -1,0 +1,37 @@
+---
+
+- name: systemd-resolved | remove resolvconf
+  tags:
+    - resolver
+    - package
+  package:
+    name: resolvconf
+    state: absent
+    purge: yes
+
+- name: systemd-resolved | config
+  tags:
+    - resolver
+    - config
+  template:
+    src: resolved.conf.j2
+    dest: /etc/systemd/resolved.conf
+  notify: restart systemd-resolved
+
+- name: systemd-resolved | enable
+  tags:
+    - resolver
+  file:
+    src: /lib/systemd/resolv.conf
+    dest: /etc/resolv.conf
+    state: link
+    force: yes
+
+- name: systemd-resolved | service
+  tags:
+    - resolver
+    - service
+  service:
+    name: systemd-resolved
+    state: started
+    enabled: yes

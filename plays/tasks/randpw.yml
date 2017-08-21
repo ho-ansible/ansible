@@ -1,0 +1,8 @@
+---
+
+- name: set random root password
+  tags:
+    - password
+  user:
+    name: root
+    password: "{{ lookup('password', '/dev/null length=32') | password_hash('sha512') }}"
