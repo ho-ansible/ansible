@@ -34,6 +34,7 @@
     state: directory
   with_items:
   - "/etc/tinc/{{ tinc_name }}/hosts"
+  notify: restart tinc
 
 - name: tinc VPN | binaries (v1.1)
   tags:
@@ -45,6 +46,7 @@
   with_items:
   - tinc
   - tincd
+  notify: restart tinc
 
 - name: tinc VPN | systemd unit files
   tags:
@@ -55,6 +57,7 @@
   with_items:
   - tinc.service
   - tinc@.service
+  notify: restart tinc
 
 - name: tinc VPN | systemd-networkd config
   tags:
@@ -62,6 +65,7 @@
   template:
     src: vpn.network.j2
     dest: "/etc/systemd/network/20-{{ tinc_name }}.network"
+  notify: restart tinc
 
 - name: tinc VPN | config
   tags:
