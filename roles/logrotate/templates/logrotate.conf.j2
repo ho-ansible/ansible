@@ -1,6 +1,8 @@
 ## /etc/logrotate.conf
 
 olddir old
+createolddir 0750 root adm
+rotate 50
 size 10M
 compress
 delaycompress
