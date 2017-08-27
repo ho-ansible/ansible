@@ -10,7 +10,7 @@
   tags:
   - apt
   apt_repository:
-    repo: 'deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main'
+    repo: 'deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main'
     filename: 'postgresql'
 
 - name: PostgreSQL | packages
