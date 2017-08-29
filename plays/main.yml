@@ -46,12 +46,7 @@
   roles:
   - { role: R, tags: [R] }
 
-- name: main.yml | xnbd servers
-  hosts: xnbd-server
+- name: main.yml | xnbd 
+  hosts: xnbd
   roles:
-  - { role: xnbd, tags: [xnbd,nbd,xnbd-server] }
-
-- name: main.yml | xnbd clients
-  hosts: xnbd-client
-  roles:
-  - { role: xnbd, tags: [xnbd,nbd,xnbd-client] }
+  - { role: xnbd, tags: [xnbd,nbd] }
