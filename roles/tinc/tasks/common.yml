@@ -65,6 +65,7 @@
   template:
     src: vpn.network.j2
     dest: "/etc/systemd/network/20-{{ tinc_name }}.network"
+  when: ansible_virtualization_type != 'openvz'
   notify: restart tinc
 
 - name: tinc VPN | config

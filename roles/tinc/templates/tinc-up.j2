@@ -5,3 +5,7 @@
 # Addressing (e.g., DHCP) is done by systemd-networkd: /etc/systemd/network/*.network
 
 ip link set $INTERFACE up
+
+{% if ansible_virtualization_type == 'openvz' %}
+dhcpcd -L $INTERFACE &
+{% endif %}
