@@ -26,6 +26,14 @@
   - liblzo2-2
   notify: restart tinc
 
+- name: tinc VPN | dhcpcd
+  tags:
+  - package
+  package:
+    name: dhcpcd5
+  when: ansible_virtualization_type == 'openvz'
+  notify: restart tinc
+
 - name: tinc VPN | directories
   tags:
   - dir
