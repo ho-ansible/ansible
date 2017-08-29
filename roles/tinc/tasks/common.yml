@@ -73,7 +73,7 @@
   template:
     src: vpn.network.j2
     dest: "/etc/systemd/network/20-{{ tinc_name }}.network"
-  when: ansible_virtualization_type != 'openvz'
+  when: (ansible_virtualization_type != 'openvz') or ('vpn' in group_names)
   notify: restart tinc
 
 - name: tinc VPN | systemd-networkd config (OpenVZ)
@@ -82,7 +82,7 @@
   file:
     path: "/etc/systemd/network/20-{{ tinc_name }}.network"
     state: absent
-  when: ansible_virtualization_type == 'openvz'
+  when: (ansible_virtualization_type == 'openvz') and ('vpn' not in group_names)
   notify: restart tinc
 
 - name: tinc VPN | config
