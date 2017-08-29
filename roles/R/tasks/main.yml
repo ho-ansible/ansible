@@ -11,7 +11,7 @@
   tags:
   - apt
   apt_repository:
-    repo: "deb http://{{ cran_mirror }}/bin/linux/debian {{ ansible_distribution_release }}-{{ cran_ver }}/"
+    repo: "deb {{ cran_mirror }}/bin/linux/debian {{ ansible_distribution_release }}-{{ cran_ver }}/"
     filename: 'cran'
 
 - name: R | Install packages
