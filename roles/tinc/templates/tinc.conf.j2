@@ -31,15 +31,13 @@ PriorityInheritance = yes
 DeviceStandby = yes
 ProcessPriority = high
 LocalDiscovery = yes
-ReplayWindow = 32
+ReplayWindow = 64
 MACLength = 8
 
-PingInterval = 120
 PingTimeout = 10
 MaxTimeout = 300
 
 Compression = 10
-IndirectData = yes
 
 {% if 'android' in group_names %}
 ScriptsInterpreter = /system/bin/sh
