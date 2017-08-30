@@ -2,7 +2,7 @@
 
 - name: Burp server | unprivileged user
   tags:
-  - user
+    - user
   user:
     name: "{{ burp_user }}"
     shell: /bin/false
@@ -11,26 +11,28 @@
 
 - name: Burp server | config
   tags:
-  - server
-  - config
+    - server
+    - config
   template:
     src: server.conf.j2
     dest: /etc/burp/server.conf
     owner: "{{ burp_user }}"
+  notify: restart burp
 
 - name: Burp server | DH params
   tags:
-  - server
-  - crypt
+    - server
+    - crypt
   copy:
     src: _dhfile.pem
     dest: /etc/burp/keys/dhfile.pem
     mode: 0400
     owner: "{{ burp_user }}"
+  notify: restart burp
 
 - name: Burp server | directories
   tags:
-  - dir
+    - dir
   file:
     path: "{{ item }}"
     state: directory
@@ -38,21 +40,22 @@
     group: "{{ burp_user }}"
     mode: 0750
   with_items:
-  - "{{ burp_data_dir }}"
-  - "{{ burp_pid_dir }}"
+    - "{{ burp_data_dir }}"
+    - "{{ burp_pid_dir }}"
 
 - name: Burp server | systemd service
   tags:
-  - server
-  - systemd
+    - server
+    - systemd
   copy:
     src: burp.service
     dest: /etc/systemd/system
+  notify: restart burp
 
 - name: Burp server | service
   tags:
-  - server
-  - service
+    - server
+    - service
   service:
     name: burp
     state: started

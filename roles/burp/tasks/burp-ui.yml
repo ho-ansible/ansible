@@ -1,32 +1,48 @@
 ---
 
-- name: Burp | web UI prerequisites
+- name: Burp web UI | packages
   tags:
-  - package
+    - package
   package:
     name: "{{ item }}"
-    state: latest
   with_items:
-  - python-pip
-  - libpython-dev
-  - libffi-dev
-  - libssl-dev
+    - python-pip
+    - libpython-dev
+    - libffi-dev
+    - libssl-dev
 
-- name: Burp | web UI
+- name: Burp web UI | packages (pip)
   tags:
-  - package
+    - package
   pip:
     name: "{{ item }}"
     state: latest
   with_items:
-  - markupsafe
-  - alembic
-  - functools32
-  - "burp-ui[sql]"
+    - markupsafe
+    - alembic
+    - functools32
+    - "burp-ui[sql]"
+  notify: restart burp-ui
 
-- name: Burp | web UI config
+- name: Burp web UI | config
   tags:
-  - config
+    - config
   template:
     src: burpui.cfg.j2
     dest: /etc/burp/burpui.cfg
+  notify: restart burp-ui
+
+- name: Burp web UI | systemd service
+  tags:
+    - systemd
+  copy:
+    src: burp-ui.service
+    dest: /etc/systemd/system
+  notify: restart burp-ui
+
+- name: Burp web UI | service
+  tags:
+    - service
+  service:
+    name: burp-ui
+    state: started

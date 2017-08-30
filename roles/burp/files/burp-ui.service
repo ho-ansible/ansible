@@ -1,0 +1,10 @@
+[Unit]
+Description = Web interface to burp backup server
+After = burp.service
+
+[Service]
+ExecStart = /usr/local/bin/burp-ui -l /var/log/burp-ui.log
+
+[Install]
+WantedBy = multi-user.target
+
