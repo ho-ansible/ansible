@@ -1,10 +1,11 @@
 ## /etc/nginx/nginx-php
 ## To use: put "include nginx-php;" in server{} block
+# {{ ansible_managed }}
 
 index index.php index.html;
 
 location ~ \.php(?:$|/) {
-	fastcgi_pass unix:/var/run/php-fpm.sock;
+	fastcgi_pass unix:/var/run/php/php{{ php_ver }}-fpm.sock;
 	fastcgi_split_path_info ^(.+\.php)(/.*)$;
 	fastcgi_index index.php;
 	fastcgi_intercept_errors on;
