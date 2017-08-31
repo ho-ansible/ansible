@@ -71,16 +71,6 @@
     group: www-data
     mode: 0750
 
-- name: Nginx | default site index.html
-  tags:
-  - site
-  template:
-    src: index.html.j2
-    dest: /var/www/html/index.html
-    group: www-data
-    mode: 0640
-  notify: restart nginx
-
 - name: Nginx | enable default site
   tags:
   - site
