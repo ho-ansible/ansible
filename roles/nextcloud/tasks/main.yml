@@ -13,6 +13,8 @@
   - php-gd
   - php-apcu
   - php-xml
+  - php-mbstring
+  - php-zip
   - ffmpeg
 
 - name: nextCloud | installation (git)
