@@ -3,5 +3,5 @@
   tags:
   - service
   service:
-    name: php-fpm
+    name: php{{ php_ver }}-fpm
     state: restarted

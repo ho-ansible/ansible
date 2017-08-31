@@ -14,20 +14,20 @@
 - name: PHP-FPM | config
   tags:
   - config
-  copy:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
+  template:
+    src: "{{ item.src }}.j2"
+    dest: "{{ item.dest }}/{{ item.src }}"
   with_items:
   - { src: nginx-php, dest: /etc/nginx/ }
-  - { src: php.ini, dest: /etc/php/fpm/ }
-  - { src: php-fpm.conf, dest: /etc/php/fpm/ }
-  - { src: www.conf, dest: /etc/php/fpm/pool.d/ }
+  - { src: php.ini, dest: "/etc/php/{{ php_ver }}/fpm/" }
+  - { src: php-fpm.conf, dest: "/etc/php/{{ php_ver }}/fpm/" }
+  - { src: www.conf, dest: "/etc/php/{{ php_ver }}/fpm/pool.d/" }
   notify: restart php-fpm
 
 - name: PHP-FPM | service
   tags:
   - service
   service:
-    name: php-fpm
+    name: "php{{ php_ver }}-fpm"
     state: started
     enabled: yes
