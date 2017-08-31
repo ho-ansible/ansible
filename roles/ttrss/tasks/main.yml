@@ -7,10 +7,10 @@
     name: "{{ item }}"
     state: present
   with_items:
-  - php5-cli
-  - php5-gd
-  - php5-curl
-  - php5-pgsql
+  - php-cli
+  - php-gd
+  - php-curl
+  - php-pgsql
 
 - name: tt-RSS | git clone
   tags:

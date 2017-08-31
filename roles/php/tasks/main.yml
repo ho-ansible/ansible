@@ -7,9 +7,9 @@
     name: "{{ item }}"
     state: latest
   with_items:
-  - php5-fpm
-  - php5-sqlite
-  - php5-apcu
+  - php-fpm
+  - php-sqlite3
+  - php-apcu
 
 - name: PHP-FPM | config
   tags:
@@ -19,15 +19,15 @@
     dest: "{{ item.dest }}"
   with_items:
   - { src: nginx-php, dest: /etc/nginx/ }
-  - { src: php.ini, dest: /etc/php5/fpm/ }
-  - { src: php-fpm.conf, dest: /etc/php5/fpm/ }
-  - { src: www.conf, dest: /etc/php5/fpm/pool.d/ }
+  - { src: php.ini, dest: /etc/php/fpm/ }
+  - { src: php-fpm.conf, dest: /etc/php/fpm/ }
+  - { src: www.conf, dest: /etc/php/fpm/pool.d/ }
   notify: restart php-fpm
 
 - name: PHP-FPM | service
   tags:
   - service
   service:
-    name: php5-fpm
+    name: php-fpm
     state: started
     enabled: yes

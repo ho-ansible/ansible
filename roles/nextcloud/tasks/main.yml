@@ -8,10 +8,10 @@
     name: "{{ item }}"
     state: installed
   with_items:
-  - php5-pgsql
-  - php5-curl
-  - php5-gd
-  - php5-apcu
+  - php-pgsql
+  - php-curl
+  - php-gd
+  - php-apcu
   - ffmpeg
 
 - name: nextCloud | installation (git)
