@@ -35,15 +35,16 @@
     src: config.php.j2
     dest: "{{ cloud_www_dir }}/config/config.php"
 
-- name: nextCloud | mimetype config
+- name: nextCloud | copy config (MIME, PHP)
   tags:
   - config
   copy:
-    src: "{{ item }}"
-    dest: "{{ cloud_www_dir }}/config/"
+    src: "{{ item.src }}"
+    dest: "{{ cloud_www_dir }}/{{ item.dest }}"
   with_items:
-  - mimetypemapping.json
-  - mimetypealiases.json
+  - { src: mimetypemapping.json, dest: config/ }
+  - { src: mimetypealiases.json, dest: config/ }
+  - { src: user.ini, dest: .user.ini }
 
 - name: nextCloud | secure file perms
   tags:
