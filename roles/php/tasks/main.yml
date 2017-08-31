@@ -9,7 +9,6 @@
   with_items:
   - php-fpm
   - php-sqlite3
-  - php-apcu
 
 - name: PHP-FPM | config
   tags:

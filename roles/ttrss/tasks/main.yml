@@ -11,6 +11,8 @@
   - php-gd
   - php-curl
   - php-pgsql
+  - php-mbstring
+  - php-xml
 
 - name: tt-RSS | git clone
   tags:

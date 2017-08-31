@@ -12,6 +12,7 @@
   - php-curl
   - php-gd
   - php-apcu
+  - php-xml
   - ffmpeg
 
 - name: nextCloud | installation (git)
