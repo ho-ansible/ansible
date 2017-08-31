@@ -1,14 +1,10 @@
-## Nginx master config
+## Nginx default server config
+
 server {
-	listen 80 default;
-	listen [::]:80 default ipv6only=on;
-
-	root /var/www/html;
-	index index.html index.htm;
-
-	location / {
-		try_files $uri $uri/ /index.html;
-	}
+	listen 80 default_server;
+	listen [::]:80 default_server;
+	listen 443 ssl http2 default_server;
+	listen [::]:443 ssl http2 default_server;
 
         location /nginx_status {
                 stub_status on;
@@ -18,4 +14,5 @@ server {
                 deny all;
         }
 
+	return 444;
 }
