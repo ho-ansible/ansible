@@ -28,19 +28,16 @@ $fw add rule name=tinc dir=in action=allow localport=655 protocol=UDP
 
 # Configure service
 tinc
-Start-Service -Name tinc
+net start tinc
 
 ###### Enable PowerShell Remoting
 # http://docs.ansible.com/ansible/latest/intro_windows.html
 # https://github.com/ansible/ansible/blob/devel/examples/scripts/ConfigureRemotingForAnsible.ps1
-Enable-PSRemoting -Force -SkipNetworkProfileCheck -ErrorAction Stop
+Enable-PSRemoting -Force -SkipNetworkProfileCheck
 
-$psrule = 'rule name="Allow WinRM HTTPS"'
-$fwrule = $fw show $psrule
-If ($fwrule.count -ge 5) {
-  $fw del $psrule
-}
-$fw add $psrule dir=in action=allow localport=5986 protocol=TCP $vpnonly
+$fw del rule name=all localport=5985 protocol=TCP
+$fw del rule name=all localport=5986 protocol=TCP
+$fw add rule name=WinRM dir=in action=allow localport=5985 protocol=TCP $vpnonly
 
 ###### Cygwin SSH
 
