@@ -33,7 +33,7 @@ Start-Service -Name tinc
 ###### Enable PowerShell Remoting
 # http://docs.ansible.com/ansible/latest/intro_windows.html
 # https://github.com/ansible/ansible/blob/devel/examples/scripts/ConfigureRemotingForAnsible.ps1
-Enable-PSRemoting -Force -ErrorAction Stop
+Enable-PSRemoting -Force -SkipNetworkProfileCheck -ErrorAction Stop
 
 $psrule = 'rule name="Allow WinRM HTTPS"'
 $fwrule = $fw show $psrule
