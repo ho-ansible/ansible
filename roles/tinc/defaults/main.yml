@@ -1,5 +1,5 @@
 ---
-tinc_version: "1.1pre14"
+tinc_version: "1.1pre14-71-g92fdabc4"
 tinc_name: vpn
 tinc_subnet: 192.168.2
 tinc_port: 655
