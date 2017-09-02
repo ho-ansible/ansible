@@ -34,6 +34,7 @@ net start tinc
 # http://docs.ansible.com/ansible/latest/intro_windows.html
 # https://github.com/ansible/ansible/blob/devel/examples/scripts/ConfigureRemotingForAnsible.ps1
 Enable-PSRemoting -Force -SkipNetworkProfileCheck
+#winrm s winrm/config/listener?Address=*+Transport=HTTP @{Enabled="false"}
 
 $fw del rule name=all localport=5985 protocol=TCP
 $fw del rule name=all localport=5986 protocol=TCP
