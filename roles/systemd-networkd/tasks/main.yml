@@ -22,6 +22,7 @@
     - isc-dhcp-common
     - isc-dhcp-client
     - dhcpcd5
+  when: ansible_virtualization_type != 'openvz'
 
 - name: systemd-networkd | service
   tags:
