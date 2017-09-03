@@ -1,16 +1,16 @@
 ---
 
-- name: journald | server | config
+- name: journald | server | dirs
   tags:
-    - config
-  template:
-    src: journal-remote.conf.j2
-    dest: /etc/systemd/journal-remote.conf
-  notify: restart journal
+    - systemd
+  file:
+    path: /var/log/journal/remote
+    state: directory
+    group: systemd-journal-remote
 
-- name: journald | server | socket
+- name: journald | server | service
   tags:
     - service
   service:
-    name: systemd-journal-remote.socket
+    name: systemd-journal-remote
     enabled: yes

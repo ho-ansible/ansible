@@ -1,14 +1,20 @@
 ---
 
-- name: journald | remote (packages)
+- name: journald | remote | package
   tags:
     - package
     - systemd
   package:
-    name: "{{ item }}"
-  with_items:
-    - systemd-journal-remote
+    name: systemd-journal-remote
   notify: restart journal
+
+- name: journald | dirs
+  tags:
+    - systemd
+  file:
+    path: /var/log/journal
+    state: directory
+    group: systemd-journal
 
 - name: journald | service
   tags:

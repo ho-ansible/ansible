@@ -9,3 +9,8 @@
   service:
     name: systemd-journal-upload
     status: restarted
+
+- name: restart journal-remote
+  service:
+    name: systemd-journal-remote
+    status: restarted
