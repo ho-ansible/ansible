@@ -1,0 +1,6 @@
+## /etc/systemd/journal-upload.conf
+# {{ ansible_managed }}
+# systemd-journal-remote: client/uploader config
+
+[Upload]
+URL=http://{{ log_server }}:19532

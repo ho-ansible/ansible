@@ -1,0 +1,20 @@
+---
+
+- name: journald | remote (packages)
+  tags:
+    - package
+    - systemd
+  package:
+    name: "{{ item }}"
+  with_items:
+    - systemd-journal-remote
+  notify: restart journal
+
+- name: journald | service
+  tags:
+    - service
+    - systemd
+  service: 
+    name: systemd-journald
+    state: started
+    enabled: yes

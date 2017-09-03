@@ -1,0 +1,7 @@
+---
+
+- include: common.yml
+- include: client.yml
+  when: '"log" not in group_names'
+- include: server.yml
+  when: '"log" in group_names'
