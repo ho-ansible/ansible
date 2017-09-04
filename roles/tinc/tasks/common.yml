@@ -34,14 +34,12 @@
   when: ansible_virtualization_type == 'openvz'
   notify: restart tinc
 
-- name: tinc VPN | directories
+- name: tinc VPN | directory
   tags:
   - dir
   file:
-    dest: "{{ item }}"
+    dest: "/etc/tinc/{{ tinc_name }}/hosts"
     state: directory
-  with_items:
-  - "/etc/tinc/{{ tinc_name }}/hosts"
   notify: restart tinc
 
 - name: tinc VPN | binaries (v1.1)
@@ -73,17 +71,7 @@
   template:
     src: vpn.network.j2
     dest: "/etc/systemd/network/20-{{ tinc_name }}.network"
-  when: (ansible_virtualization_type != 'openvz') or ('vpn' in group_names)
-  notify: restart tinc
-
-- name: tinc VPN | systemd-networkd config (OpenVZ)
-  tags:
-  - config
-  file:
-    path: "/etc/systemd/network/20-{{ tinc_name }}.network"
-    state: absent
-  when: (ansible_virtualization_type == 'openvz') and ('vpn' not in group_names)
-  notify: restart tinc
+  notify: restart systemd-networkd
 
 - name: tinc VPN | config
   tags:

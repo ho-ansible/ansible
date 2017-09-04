@@ -12,12 +12,11 @@ IPv6AcceptRA=no
 
 {% if 'tinc' in cname | default("") %}
 Address={{ tinc_subnet }}.{{ cname | regex_replace('^.*tinc(\\d+).*$', '\\1') }}/24
-#Gateway={{ tinc_subnet }}.1
 #DNS={{ tinc_subnet }}.1
 Domains={{ tinc_name }}.vpn
 IPForward=yes
 
-{% else %}
+{% elif ansible_virtualization_type != 'openvz' %}
 Domains=~.
 DHCP=yes
 
@@ -25,4 +24,9 @@ DHCP=yes
 UseDomains=true
 RouteMetric=400
 UseHostname=false
+
+{% else %}
+[Link]
+Unmanaged=yes
+
 {% endif %}
