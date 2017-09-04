@@ -48,8 +48,10 @@ localmx			# Mailhost is this server
 dhcp-generate-names	# Use MAC to make a name if not supplied by client
 
 # CNAMEs
-cname=burp,10.100.1.8
+cname=tinc1,{{ tinc_subnet }}.1
+cname=tinc2,{{ tinc_subnet }}.2
+cname=burp,{{ tinc_subnet }}.8
 cname=backup,burp
-cname=log,10.10.1.1
+cname=log,{{ tinc_subnet }}.1
 
 {% endif %}
