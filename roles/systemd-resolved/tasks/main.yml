@@ -23,7 +23,7 @@
   template:
     src: resolved.conf.j2
     dest: /etc/systemd/resolved.conf
-  notify: restart systemd-resolved
+  notify: restart resolved
 
 - name: systemd-resolved | enable
   tags:

@@ -1,5 +1,5 @@
 ---
-- name: restart systemd-resolved
+- name: restart resolved
   tags:
   - service
   service:

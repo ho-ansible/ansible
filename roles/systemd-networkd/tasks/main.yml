@@ -8,7 +8,7 @@
     dest: /etc/systemd/network/99-default.link
   notify: 
     - update initramfs
-    - restart systemd-networkd
+    - restart networkd
 
 - name: systemd-networkd | remove dhcp clients
   tags:

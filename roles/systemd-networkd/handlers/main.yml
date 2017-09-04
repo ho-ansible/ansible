@@ -1,5 +1,5 @@
 ---
-- name: restart systemd-networkd
+- name: restart networkd
   tags:
   - service
   service:
