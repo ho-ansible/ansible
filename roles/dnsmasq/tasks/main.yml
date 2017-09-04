@@ -7,20 +7,6 @@
     name: dnsmasq
     state: present
 
-- name: DNSmasq | config (copy)
-  tags:
-  - config
-  copy:
-    src : "{{ item.src  }}"
-    dest: "{{ item.dest }}"
-    owner: dnsmasq
-    mode: 0440
-  with_items: 
-  - { src: _dnsmasq.hosts, dest: /etc/dnsmasq.hosts }
-  - { src: dnsmasq.opts, dest: /etc/ }
-  - { src: dnsmasq.servers, dest: /etc/ }
-  notify: restart dnsmasq
-
 - name: DNSmasq | config (template)
   tags:
   - config
@@ -33,13 +19,27 @@
   - { src: dnsmasq.conf, dest: /etc/dnsmasq.conf }
   notify: restart dnsmasq
 
+- name: DNSmasq | config (copy)
+  tags:
+  - config
+  copy:
+    src : "{{ item.src  }}"
+    dest: "{{ item.dest }}"
+    owner: dnsmasq
+    mode: 0440
+  with_items: 
+  - { src: _dnsmasq.hosts, dest: /etc/dnsmasq.hosts }
+  - { src: dnsmasq.opts, dest: /etc/ }
+  - { src: dnsmasq.servers, dest: /etc/ }
+  notify: reload dnsmasq
+
 - name: DNSmasq | adblock list
   tags:
   - config
   get_url:
     url : "https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn/hosts"
     dest: "/etc/adblock.hosts"
-  notify: restart dnsmasq
+  notify: reload dnsmasq
 
 - name: DNSMasq | service
   tags:

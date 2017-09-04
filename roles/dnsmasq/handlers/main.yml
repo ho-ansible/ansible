@@ -6,3 +6,10 @@
     name: dnsmasq
     state: restarted
 
+- name: reload dnsmasq
+  tags:
+  - service
+  service:
+    name: dnsmasq
+    state: reloaded
+
