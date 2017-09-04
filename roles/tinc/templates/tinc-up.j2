@@ -6,6 +6,36 @@
 
 ip link set $INTERFACE up
 
+# Save static routes to VPN servers
+
+gethost() {
+  host -t a $1 | awk '/has address/ {i++} i>0 {print $4}'
+}
+
+getroute() {
+  rt=$(ip ro get $1 | head -n 1)
+  echo "${rt#$1}"
+}
+
+saveroute() {
+    for ip in $(gethost $node); do
+      old_rt=$(getroute $ip)
+      case "$old_rt" in
+        (*error*) echo "No route: $old_rt";;
+        (*) echo "Static route: $ip $old_rt"
+          ip ro add $ip $old_rt;;
+      esac
+    done
+  done
+}
+
+vpnhosts() {
+  hostdir="/etc/tinc/{{ tinc_name }}/hosts"
+  grep 'Address =' $hostdir/* | awk '{print $3}' | sort -u
+}
+
+saveroute $(vpnhosts)
+
 {% if ansible_virtualization_type == 'openvz' %}
 dhcpcd -L $INTERFACE &
 {% endif %}
