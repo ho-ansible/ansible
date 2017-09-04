@@ -21,6 +21,7 @@ stop-dns-rebind		# Reject private IPs from upstream servers
 rebind-localhost-ok	# ... except for 127.0.0.0/8 (for ad/spam blockers)
 filterwin2k		# Filter useless requests from Windows
 expand-hosts		# Add domain to names from /etc/hosts
+conntrack		# Accting: inbound req + outbound upstream
 cache-size=200		# Number of DNS results
 #local-ttl=600		# Clients cache DNS results for this long
 
@@ -46,7 +47,8 @@ localmx			# Mailhost is this server
 dhcp-generate-names	# Use MAC to make a name if not supplied by client
 
 # CNAMEs
-cname=backup,burp,10.100.1.8
+cname=burp,10.100.1.8
+cname=backup,burp
 cname=log,10.10.1.1
 
 {% endif %}
