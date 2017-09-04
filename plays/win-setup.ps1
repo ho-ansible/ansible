@@ -8,7 +8,8 @@ $vpnonly = 'localip=10.100.1.0/24 remoteip=10.100.1.0/24'
 
 ###### tinc VPN
 
-$tincURL = 'https://www.tinc-vpn.org/packages/windows/tinc-1.1pre14-install.exe'
+$tincVer = '1.1pre15'
+$tincURL = "https://www.tinc-vpn.org/packages/windows/tinc-$tincVer-install.exe"
 $tincEXE = 'tinc-install.exe'
 
 # Install tinc
