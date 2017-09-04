@@ -33,6 +33,14 @@
   - { src: dnsmasq.conf, dest: /etc/dnsmasq.conf }
   notify: restart dnsmasq
 
+- name: DNSmasq | adblock list
+  tags:
+  - config
+  get_url:
+    url : "https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn/hosts"
+    dest: "/etc/adblock.hosts"
+  notify: restart dnsmasq
+
 - name: DNSMasq | service
   tags:
   - service

@@ -38,6 +38,7 @@ dhcp-range=::100:1,::100:ffff,constructor:eth0,3h
 
 dhcp-hostsfile=/etc/dnsmasq.hosts
 dhcp-optsfile=/etc/dnsmasq.opts
+addn-hosts=/etc/adblock.hosts	# in /etc/hosts format
 
 dhcp-authoritative
 auth-zone={{ tinc_name }}.vpn,{{ tinc_name }}/6
