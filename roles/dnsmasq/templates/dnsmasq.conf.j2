@@ -45,4 +45,8 @@ auth-zone={{ tinc_name }}.vpn,{{ tinc_name }}/6
 localmx			# Mailhost is this server
 dhcp-generate-names	# Use MAC to make a name if not supplied by client
 
+# CNAMEs
+cname=backup,burp,10.100.1.8
+cname=log,10.10.1.1
+
 {% endif %}
