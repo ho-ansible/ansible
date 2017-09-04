@@ -123,8 +123,3 @@
   with_items:
   - tinc
   - "tinc@{{ tinc_name }}"
-
-# on Windows:
-# + install new TAP device
-# + run as admin: "tincd -n ho"
-# + it will install as service
