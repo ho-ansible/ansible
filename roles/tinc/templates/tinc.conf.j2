@@ -32,12 +32,15 @@ PriorityInheritance = yes
 DeviceStandby = yes
 ProcessPriority = high
 LocalDiscovery = yes
+
+# for tinc-1.0 connections
 ReplayWindow = 64
 MACLength = 8
 
 PingTimeout = 10
 MaxTimeout = 300
 
+# host config
 Compression = 10
 
 {% if 'android' in group_names %}
