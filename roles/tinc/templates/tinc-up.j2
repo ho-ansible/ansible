@@ -36,6 +36,6 @@ vpnhosts() {
 
 # saveroute $(vpnhosts)
 
-{% if ansible_virtualization_type == 'openvz' %}
+{% if ansible_virtualization_type == 'openvz' and 'vpn' not in group_names %}
 dhcpcd -L $INTERFACE &
 {% endif %}
