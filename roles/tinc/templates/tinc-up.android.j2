@@ -4,9 +4,9 @@
 # + dhcpcd adds default route to "main" table
 # + but in "ip rule", main table has lowest priority
 
-echo "Starting DHCP client on $INTERFACE"
 ip link set $INTERFACE up
-udhcpc -i $INTERFACE -x hostname:$NAME -s /data/local/udhcpc-script.sh -p /data/local/udhcpc.pid &
+
+tincdir="/sdcard/Android/tinc"
 
 tid=100
 
@@ -44,7 +44,11 @@ saveroute() {
   done
 }
 
-saveroute tinc1.seanho.com tinc2.seanho.com
+vpnhosts() {
+  grep 'Address =' $tincdir/hosts/* | awk '{print $3}' | sort -u
+}
+
+saveroute $(vpnhosts)
 
 echo "Enabling default gateway via VPN"
 ip ru add pri 18600 lookup main
@@ -65,3 +69,8 @@ redirectDNS() {
 }
 
 redirectDNS {{ tinc_subnet }}.1
+
+echo "Starting DHCP client on $INTERFACE"
+udhcpc -Rb -i $INTERFACE -x hostname:$NAME \
+  -s /data/local/udhcpc-script.sh \
+  -p /data/local/udhcpc.pid &

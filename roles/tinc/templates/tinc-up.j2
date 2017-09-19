@@ -8,6 +8,8 @@ ip link set $INTERFACE up
 
 # Save static routes to VPN servers
 
+hostdir="/etc/tinc/{{ tinc_name }}/hosts"
+
 gethost() {
   host -t a $1 | awk '/has address/ {i++} i>0 {print $4}'
 }
@@ -30,7 +32,6 @@ saveroute() {
 }
 
 vpnhosts() {
-  hostdir="/etc/tinc/{{ tinc_name }}/hosts"
   grep 'Address =' $hostdir/* | awk '{print $3}' | sort -u
 }
 
