@@ -22,10 +22,16 @@ cd tap-win64
 addtap.bat
 cd ..
 
-# Configure the network interface and firewall
+# Configure the network interface
 netsh interface set interface name = "Ethernet 2" newname = "TincVPN"
 Set-NetConnectionProfile -InterfaceAlias TincVPN -NetworkCategory Private
+
+# Configure firewall
 $fw add rule name=tinc dir=in action=allow localport=655 protocol=UDP
+
+# Routing / DNS metric
+Set-NetIPInterface TincVPN -InterfaceMetric 400
+# -AddressFamily IPv4 IPv6? 
 
 # Configure service
 tinc
