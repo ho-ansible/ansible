@@ -11,11 +11,20 @@
     - apt
   apt_repository:
     repo: "deb https://deb.nodesource.com/{{ node_ver }} {{ ansible_distribution_release }} main"
-    filename: 'nodejs'
+    filename: nodejs
 
 - name: nodejs | package
   tags:
     - package
   package:
-    name: "nodejs"
+    name: nodejs
     state: latest
+
+- name: nodejs | update npm
+  tags:
+    - package
+  npm:
+    name: npm
+    global: yes
+    state: latest
+
