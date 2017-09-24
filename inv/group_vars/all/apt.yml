@@ -27,6 +27,7 @@ remove_pkgs:
 - w3m
 
 install_pkgs:
+- apt-transport-https
 - systemd-cron
 - locales
 - git
