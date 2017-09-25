@@ -1,0 +1,9 @@
+##
+# /etc/defaults/distcc
+# {{ ansible_managed }}
+
+ALLOWEDNETS="10.100.1.0/24"
+LISTENER="{{ vars['ansible_' ~ tinc_name]['ipv4']['address'] }}"
+NICE="5"
+ZEROCONF=""
+JOBS=""
