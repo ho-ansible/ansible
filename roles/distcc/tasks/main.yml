@@ -1,0 +1,17 @@
+---
+
+- name: distcc | packages
+  tags:
+    - package
+  package:
+    name: "{{ item }}"
+  with_items:
+    - ccache
+    - distcc-pump
+
+- name: distcc | service
+  tags:
+    - service
+  service:
+    name: distcc
+    state: started
