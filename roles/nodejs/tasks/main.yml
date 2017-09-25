@@ -12,6 +12,7 @@
   apt_repository:
     repo: "deb https://deb.nodesource.com/{{ node_ver }} {{ ansible_distribution_release }} main"
     filename: nodejs
+    update_cache: yes
 
 - name: nodejs | package
   tags:
