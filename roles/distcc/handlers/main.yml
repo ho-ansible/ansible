@@ -1,0 +1,7 @@
+---
+- name: restart distcc
+  tags:
+  - service
+  service:
+    name: distcc
+    state: restarted
