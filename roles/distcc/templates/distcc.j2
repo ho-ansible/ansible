@@ -1,9 +1,10 @@
 ##
 # /etc/defaults/distcc
 # {{ ansible_managed }}
+# DistCC worker (server) config
 
 ALLOWEDNETS="10.100.1.0/24"
-LISTENER="{{ vars['ansible_' ~ tinc_name]['ipv4']['address'] }}"
+LISTENER="{{ vars['ansible_' ~ tinc_name]['ipv4']['address'] }} --log-level info"
 NICE="5"
 ZEROCONF=""
 JOBS=""
