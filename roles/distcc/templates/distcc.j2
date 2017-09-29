@@ -4,7 +4,7 @@
 # DistCC worker (server) config
 
 ALLOWEDNETS="10.100.1.0/24"
-LISTENER="{{ vars['ansible_' ~ tinc_name]['ipv4']['address'] }} --log-level info"
+LISTENER="{{ vars['ansible_' ~ tinc_name]['ipv4']['address'] }} --log-level=warning"
 NICE="5"
 ZEROCONF=""
 JOBS=""
