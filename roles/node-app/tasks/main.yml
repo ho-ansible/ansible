@@ -1,0 +1,44 @@
+---
+
+- name: Node.js app | git clone
+  tags:
+  - package
+  - git
+  git:
+    repo: "{{ node_repo }}"
+    dest: "/var/www/{{ node_name }}"
+    depth: 1
+  notify: restart node-app
+
+- name: Node.js app | nginx host
+  tags:
+    - config
+  template:
+    src: node.nginx.j2
+    dest: /etc/nginx/sites-available/node-app
+  notify: restart node-app
+
+- name: Node.js app | enable nginx host
+  tags:
+    - config
+  file:
+    src: /etc/nginx/sites-available/node-app
+    dest: /etc/nginx/sites-enabled/
+    type: link
+  notify: restart node-app
+
+- name: Node.js app | systemd service
+  tags:
+    - systemd
+  template:
+    src: node.service.j2
+    dest: /etc/systemd/system/node.service
+  notify: restart node-app
+
+- name: Node.js app | service
+  tags:
+    - service
+  service:
+    name: node-app
+    state: started
+    enabled: true

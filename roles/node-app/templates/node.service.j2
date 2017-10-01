@@ -1,0 +1,14 @@
+[Unit]
+Description="{{ node_description }}"
+Documentation="{{ node_repo }}"
+After=network.target
+
+[Service]
+Environment=NODE_PORT={{ node_localport }}
+Type=simple
+User=www-data
+ExecStart=node /var/www/{{ node_name }}
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,7 @@
+---
+- name: restart node-app
+  tags:
+  - service
+  service:
+    name: node-app
+    state: restarted
