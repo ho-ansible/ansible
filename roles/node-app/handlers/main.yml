@@ -3,5 +3,5 @@
   tags:
   - service
   service:
-    name: node-app
+    name: node
     state: restarted

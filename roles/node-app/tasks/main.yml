@@ -42,6 +42,6 @@
   tags:
     - service
   service:
-    name: node-app
+    name: node
     state: started
     enabled: true
