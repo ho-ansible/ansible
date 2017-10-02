@@ -2,13 +2,20 @@
 
 - name: Node.js app | git clone
   tags:
-  - package
-  - git
+    - package
+    - git
   git:
     repo: "{{ node_repo }}"
     dest: "/var/www/{{ node_name }}"
     depth: 1
   notify: restart node-app
+
+- name: Node.js app | npm install
+  tags:
+    - npm
+    - package
+  npm:
+    install: yes
 
 - name: Node.js app | nginx host
   tags:

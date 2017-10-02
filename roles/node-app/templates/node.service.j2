@@ -1,13 +1,13 @@
 [Unit]
-Description="{{ node_description }}"
-Documentation="{{ node_repo }}"
+Description={{ node_description }}
+Documentation={{ node_repo }}
 After=network.target
 
 [Service]
-Environment=NODE_PORT={{ node_localport }}
+Environment=PORT={{ node_localport }} ADDR=127.0.0.1
 Type=simple
 User=www-data
-ExecStart=node /var/www/{{ node_name }}/server.js
+ExecStart=/usr/bin/npm start
 Restart=on-failure
 
 [Install]
