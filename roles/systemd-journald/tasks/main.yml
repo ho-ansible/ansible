@@ -1,7 +1,7 @@
 ---
 
-- include: common.yml
-- include: client.yml
+- import_tasks: common.yml
+- include_tasks: client.yml
   when: '"log" not in group_names'
-- include: server.yml
+- include_tasks: server.yml
   when: '"log" in group_names'

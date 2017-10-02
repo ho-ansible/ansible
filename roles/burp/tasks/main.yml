@@ -1,8 +1,8 @@
 ---
-- include: client.yml
-- include: server.yml
+- import_tasks: client.yml
+- include_tasks: server.yml
   when: "'backup' in group_names"
-- include: burp-ui.yml
+- include_tasks: burp-ui.yml
   when: "'backup' in group_names"
-- include: bedup.yml
+- include_tasks: bedup.yml
   when: "'backup' in group_names"

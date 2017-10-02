@@ -19,8 +19,8 @@
     - ansible_port: 22
     - ansible_ssh_extra_args: "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
   tasks:
-    - include: tasks/update.yml
-    - include: tasks/randpw.yml
+    - import_tasks: tasks/update.yml
+    - import_tasks: tasks/randpw.yml
   roles:
     - { role: sudo, tags: [new,sudo] }
     - { role: ssh, tags: [new,ssh] }

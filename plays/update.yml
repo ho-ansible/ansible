@@ -2,4 +2,4 @@
 - name: Update all packages
   hosts: linux
   tasks: 
-    - include: tasks/update.yml
+    - import_tasks: tasks/update.yml
