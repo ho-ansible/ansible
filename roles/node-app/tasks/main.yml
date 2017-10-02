@@ -1,5 +1,14 @@
 ---
 
+- name: Node.js app | user
+  tags:
+    - user
+  user:
+    name: "{{ node_user }}"
+    groups: "www-data"
+    shell: /bin/false
+    system: yes
+
 - name: Node.js app | git clone
   tags:
     - package
@@ -9,13 +18,6 @@
     dest: "/var/www/{{ node_name }}"
     depth: 1
   notify: restart node-app
-
-- name: Node.js app | npm install
-  tags:
-    - npm
-    - package
-  npm:
-    install: yes
 
 - name: Node.js app | nginx host
   tags:

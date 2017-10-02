@@ -6,7 +6,7 @@ After=network.target
 [Service]
 Environment=PORT={{ node_localport }} ADDR=127.0.0.1
 Type=simple
-User=www-data
+User={{ node_user }}
 ExecStart=/usr/bin/npm start
 Restart=on-failure
 
