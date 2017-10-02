@@ -7,7 +7,7 @@ After=network.target
 Environment=NODE_PORT={{ node_localport }}
 Type=simple
 User=www-data
-ExecStart=node /var/www/{{ node_name }}
+ExecStart=node /var/www/{{ node_name }}/server.js
 Restart=on-failure
 
 [Install]
