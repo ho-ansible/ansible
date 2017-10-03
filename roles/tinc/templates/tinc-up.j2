@@ -20,6 +20,7 @@ getroute() {
 }
 
 saveroute() {
+  for node in $@; do
     for ip in $(gethost $node); do
       old_rt=$(getroute $ip)
       case "$old_rt" in
