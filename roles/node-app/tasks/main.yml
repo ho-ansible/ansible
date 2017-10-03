@@ -15,7 +15,7 @@
     - git
   git:
     repo: "{{ node_repo }}"
-    dest: "/var/www/{{ node_name }}"
+    dest: "/home/{{ node_user }}/{{ node_name }}"
     depth: 1
   notify: restart node-app
 
