@@ -126,6 +126,7 @@
     dest: /etc/nginx/sites-available/{{ item }}
   with_items:
   - nextcloud
+  notify: reload nginx
 
 - name: nextCloud | nginx site enabled
   tags:
@@ -136,6 +137,7 @@
     state: link
   with_items:
   - nextcloud
+  notify: reload nginx
 
 - name: nextCloud | DB user
   tags:

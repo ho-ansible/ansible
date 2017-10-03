@@ -69,6 +69,7 @@
     dest: /etc/nginx/sites-available/{{ item }}
   with_items:
   - tt-rss
+  notify: reload nginx
 
 - name: tt-RSS | nginx site enabled
   tags:
@@ -79,6 +80,7 @@
     state: link
   with_items:
   - tt-rss
+  notify: reload nginx
 
 - name: tt-RSS | updater service
   tags:
