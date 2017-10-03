@@ -19,6 +19,15 @@
     depth: 1
   notify: restart node-app
 
+- name: Node.js app | repo perms
+  tags:
+    - permissions
+  file:
+    path: "/home/{{ node_user }}/{{ node_name }}"
+    owner: "{{ node_user }}"
+    group: "{{ node_user }}"
+    recurse: yes
+
 - name: Node.js app | nginx host
   tags:
     - config
