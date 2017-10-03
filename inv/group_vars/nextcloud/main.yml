@@ -1,6 +1,5 @@
 ---
 cloud_server: cloud.seanho.com
-cloud_port: 4343
 cloud_www_dir: /var/www/nextcloud
 cloud_data_dir: /mnt/data/cloud
 cloud_cache_dir: /var/cache/nginx
