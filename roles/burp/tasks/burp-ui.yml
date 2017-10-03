@@ -32,6 +32,23 @@
     dest: /etc/burp/burpui.cfg
   notify: restart burp-ui
 
+- name: Burp web UI | nginx host
+  tags:
+    - config
+  template:
+    src: burp.nginx.j2
+    dest: /etc/nginx/sites-available/burp
+  notify: reload nginx
+
+- name: Burp web UI | enable nginx host
+  tags:
+    - config
+  file:
+    src: /etc/nginx/sites-available/burp
+    dest: /etc/nginx/sites-enabled/burp
+    state: link
+  notify: reload nginx
+
 - name: Burp web UI | systemd service
   tags:
     - systemd

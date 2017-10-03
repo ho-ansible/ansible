@@ -1,0 +1,6 @@
+server {
+        listen {{ vars['ansible_' ~ tinc_name]['ipv4']['address'] }}:{{ burpui_port }};
+
+        server_name {{ ttrss_host }};
+        proxy_pass http://localhost:5000
+}
