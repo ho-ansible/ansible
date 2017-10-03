@@ -47,7 +47,7 @@
   - { role: R, tags: [R] }
 
 - name: main.yml | Node.js servers
-  hosts: node-app
+  hosts: node
   roles:
   - { role: node-app, tags: [node, nodejs] }
 
