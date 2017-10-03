@@ -1,7 +1,7 @@
 ---
-node_name: reveal-multiplex
-node_description: "Reveal.js multiplex server"
-node_repo: https://github.com/seanho00/reveal-multiplex
-node_hostname: mp.seanho.com
+node_name: myapp
+node_description: "My Node.js app"
+node_repo: https://github.com/seanho00/myapp
+node_hostname: myapp.example.com
 node_localport: 8080
 node_user: node
