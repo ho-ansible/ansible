@@ -31,11 +31,9 @@
 - name: systemd-resolved | enable
   tags:
     - resolver
-  file:
-    src: /lib/systemd/resolv.conf
-    dest: /etc/resolv.conf
-    state: link
-    force: yes
+  copy:
+    src: resolv.conf
+    dest: /etc/
 
 - name: systemd-resolved | service
   tags:
