@@ -1,0 +1,8 @@
+##
+# /etc/default/dnsmasq
+# Debian config for /etc/init.d/dnsmasq
+# {{ ansible_managed }}
+
+ENABLED=1
+#CONFIG_DIR=/etc/dnsmasq.d,.dpkg-dist,.dpkg-old,.dpkg-new
+IGNORE_RESOLVCONF=yes
