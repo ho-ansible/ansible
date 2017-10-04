@@ -1,2 +1,3 @@
 ---
 burp_data_dir: /mnt/data/burp
+burpui_host: burp.{{ tinc_name }}.vpn
