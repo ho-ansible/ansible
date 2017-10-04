@@ -10,6 +10,13 @@
     - { src: htoprc, dest: /etc/ }
     - { src: 50unattended-upgrades, dest: /etc/apt/apt.conf.d/ }
 
+- name: set timezone
+  tags:
+    - config
+    - time
+  timezone:
+    name: America/Vancouver
+
 - name: generate locales
   tags:
     - config
