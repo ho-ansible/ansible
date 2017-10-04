@@ -1,0 +1,21 @@
+---
+
+- name: Kaltura Linux | APT key
+  tags:
+    - apt
+  apt_key:
+    id: 7BD9BF62
+    url: "{{ kaltura_repo }}/kaltura-deb.gpg.key"
+
+- name: Kaltura Linux | repository
+  tags:
+    - apt
+  apt_repository:
+    repo: "deb [arch=amd64] {{ kaltura_repo }} {{ kaltura_release }} main"
+    filename: 'kaltura'
+
+- name: Kaltura Linux | nginx package
+  tags:
+    - package
+  package:
+    name: kaltura-nginx
