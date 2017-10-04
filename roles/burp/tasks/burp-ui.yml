@@ -19,7 +19,6 @@
     state: latest
   with_items:
     - markupsafe
-    - alembic
     - functools32
     - "burp-ui[sql]"
   notify: restart burp-ui
