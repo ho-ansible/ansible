@@ -1,8 +1,8 @@
 server {
-        listen {{ vars['ansible_' ~ tinc_name]['ipv4']['address'] }}:{{ ttrss_port }};
+  listen {{ vars['ansible_' ~ tinc_name]['ipv4']['address'] }}:{{ ttrss_port }};
 
-        server_name {{ ttrss_host }};
-        root {{ ttrss_www }};
+  server_name {{ ttrss_host }};
+  root {{ ttrss_www }};
 
-        include nginx-php;
+  include nginx-php;
 }
