@@ -1,3 +1,4 @@
 ---
 tinc_name: ho
 tinc_subnet: 10.100.1
+tinc_domain: {{ tinc_name }}.vpn.
