@@ -9,6 +9,7 @@ Name={{ tinc_name }}
 Description="tinc VPN {{ tinc_name }}"
 LinkLocalAddressing=no
 IPv6AcceptRA=no
+LLMNR=false
 
 {% if 'tinc' in cname | default("") %}
 Address={{ tinc_subnet }}.{{ cname | regex_replace('^.*tinc(\\d+).*$', '\\1') }}/24
@@ -26,7 +27,5 @@ RouteMetric=400
 UseHostname=false
 
 {% else %}
-[Link]
-Unmanaged=yes
-
+# /etc/tinc/{{ tinc_name}}/tinc-up calls dhcpcd
 {% endif %}
