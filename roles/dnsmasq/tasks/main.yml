@@ -4,8 +4,10 @@
   tags:
   - package
   package:
-    name: dnsmasq
-    state: present
+    name: "{{ item }}"
+  with_items:
+    - dnsmasq
+    - dnsmasq-utils
 
 - name: DNSmasq | config (template)
   tags:
