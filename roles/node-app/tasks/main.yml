@@ -34,7 +34,7 @@
   template:
     src: node.nginx.j2
     dest: /etc/nginx/sites-available/node-app
-  notify: restart node-app
+  notify: restart nginx
 
 - name: Node.js app | enable nginx host
   tags:
@@ -43,7 +43,7 @@
     src: /etc/nginx/sites-available/node-app
     dest: /etc/nginx/sites-enabled/node-app
     state: link
-  notify: restart node-app
+  notify: restart nginx
 
 - name: Node.js app | systemd service
   tags:
