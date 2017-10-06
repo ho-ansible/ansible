@@ -13,12 +13,12 @@
   tags:
   - config
   template:
-    src : "{{ item.src  }}.j2"
-    dest: "{{ item.dest }}"
+    src : "{{ item  }}.j2"
+    dest: "/etc/{{ item }}"
     owner: dnsmasq
     mode: 0440
   with_items:
-  - { src: dnsmasq.conf, dest: /etc/dnsmasq.conf }
+    - dnsmasq.conf
   notify: restart dnsmasq
 
 - name: DNSmasq | config (copy)
