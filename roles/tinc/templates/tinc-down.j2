@@ -3,4 +3,8 @@
 # {{ansible_managed}}
 # Cleanup link config before shutting down tinc VPN connection
 
+{% if ansible_virtualization_type == 'openvz' and 'vpn' not in group_names %}
+dhcpcd -k $INTERFACE 
+{% endif %}
+
 ip link set $INTERFACE down
