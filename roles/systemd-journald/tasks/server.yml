@@ -3,6 +3,13 @@
 - name: journald | server | dirs
   tags:
     - systemd
+  template:
+    src: journal.conf.j2
+    dest: /etc/systemd/journal.conf.j2
+
+- name: journald | server | dirs
+  tags:
+    - systemd
   file:
     path: /var/log/journal/remote
     state: directory
