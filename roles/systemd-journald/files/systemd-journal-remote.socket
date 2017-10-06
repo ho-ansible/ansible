@@ -1,0 +1,12 @@
+##
+# /etc/systemd/system/sockets.target.wants/systemd-journal-remote.socket
+# receiving server config
+
+[Unit]
+Description=Journal Remote Sink Socket
+
+[Socket]
+ListenStream=19532
+
+[Install]
+WantedBy=sockets.target

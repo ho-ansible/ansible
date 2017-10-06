@@ -8,6 +8,13 @@
     state: directory
     group: systemd-journal-remote
 
+- name: journald | server | socket config
+  tags:
+    - systemd
+  copy:
+    src: systemd-journal-remote.socket
+    dest: /etc/systemd/system/sockets.target.wants/
+
 - name: journald | server | service
   tags:
     - service
