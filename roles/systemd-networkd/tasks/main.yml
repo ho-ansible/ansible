@@ -10,20 +10,6 @@
     - update initramfs
     - restart networkd
 
-- name: systemd-networkd | remove dhcp clients
-  tags:
-    - network
-    - package
-  package:
-    name: "{{ item }}"
-    state: absent
-    purge: yes
-  with_items:
-    - isc-dhcp-common
-    - isc-dhcp-client
-    - dhcpcd5
-  when: ansible_virtualization_type != 'openvz'
-
 - name: systemd-networkd | service
   tags:
     - network
