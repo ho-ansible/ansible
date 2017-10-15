@@ -95,6 +95,7 @@
   with_items:
   - "{{ cloud_data_dir }}"
   - "{{ cloud_cache_dir }}"
+  - "{{ cloud_temp_dir }}"
 
 - name: nextCloud | cron
   tags:
