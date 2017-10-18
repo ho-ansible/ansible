@@ -17,3 +17,5 @@ burp_server_CN: burp
 burp_restore_clients: []
 
 burp_pw: ''
+
+burp_offsite: '/mnt/offsite'

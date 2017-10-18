@@ -43,6 +43,17 @@
     - "{{ burp_data_dir }}"
     - "{{ burp_pid_dir }}"
 
+- name: Burp server | cron | offsite backup
+  tags:
+    - cron
+  cron:
+    name: 'burp offsite storage cron'
+    cron_file: burp_offsite
+    user: root
+    minute: 12
+    hour: 3
+    job: "mountpoint {{ burp_offsite }} && rsync -PaCHq --delete-after --bwlimit 5M {{ burp_data_dir }} {{ burp_offsite }}"
+
 - name: Burp server | systemd service
   tags:
     - server
