@@ -12,6 +12,7 @@ remove_pkgs:
 - ftp
 - lynx
 - lynx-cur
+- postfix
 - procmail
 - screen
 - tcpdump
