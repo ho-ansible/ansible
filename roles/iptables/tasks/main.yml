@@ -4,8 +4,11 @@
   tags:
   - package
   package:
-    name: iptables-persistent
+    name: "{{ item }}"
     state: present
+  with_items:
+    - iptables-persistent
+    - ipset
 
 - name: Firewall | IPv4 ruleset
   tags:
