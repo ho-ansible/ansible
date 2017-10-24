@@ -30,18 +30,20 @@
 -A INPUT -p tcp --dport 443 -j ACCEPT
 {% endif %}
 
-# Allow SSH
-{% for ssh_host in ssh_whitelist %}
--A INPUT -p tcp -m state --state NEW --dport {{ ssh_port }} -s {{ ssh_host }} -j ACCEPT
-{% else %}
--A INPUT -p tcp -m state --state NEW --dport {{ ssh_port }} -j ACCEPT
-{% endif %}
+{% set ssh_rule = '-A INPUT -p tcp -m state --state NEW --dport ' ~ ssh_port %}
 
 {% if 0 %}
-# Rate-limit SSH logins
--A INPUT -p tcp -m tcp --dport {{ ssh_port }} -m state --state NEW -m recent --set --name DEFAULT --rsource
--A INPUT -p tcp -m tcp --dport {{ ssh_port }} -m state --state NEW -m recent --update --seconds 60 --hitcount 3 --name DEFAULT --rsource -j DROP
+# Rate-limit new SSH connections
+{{ ssh_rule }} -m recent --set --name DEFAULT --rsource
+{{ ssh_rule }} -m recent --update --seconds 60 --hitcount 3 --name DEFAULT --rsource -j DROP
 {% endif %}
+
+# Allow SSH
+{% for ssh_host in ssh_whitelist %}
+{{ ssh_rule }} -s {{ ssh_host }} -j ACCEPT
+{% else %}
+{{ ssh_rule }} -j ACCEPT
+{% endfor %}
 
 # Allow DHCP client
 -A INPUT -p udp --dport 68 -j ACCEPT
