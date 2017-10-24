@@ -6,7 +6,6 @@
     - systemd
   package:
     name: systemd-journal-remote
-  notify: restart journal
 
 - name: journald | storage dir
   tags:
