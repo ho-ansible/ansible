@@ -1,26 +1,12 @@
 ---
 
-- name: journald | server | dirs
-  tags:
-    - systemd
-  template:
-    src: journal.conf.j2
-    dest: /etc/systemd/journal.conf.j2
-
-- name: journald | server | dirs
+- name: journald | server | storage dir
   tags:
     - systemd
   file:
     path: /var/log/journal/remote
     state: directory
     group: systemd-journal-remote
-
-- name: journald | server | socket config
-  tags:
-    - systemd
-  copy:
-    src: systemd-journal-remote.socket
-    dest: /etc/systemd/system/sockets.target.wants/
 
 - name: journald | server | service
   tags:

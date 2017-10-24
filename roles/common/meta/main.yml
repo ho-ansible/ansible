@@ -9,7 +9,7 @@ dependencies:
   - { role: bash, tags: [bash] }
   - { role: msmtp, tags: [msmtp, mail] }
   - { role: tinc, tags: [tinc, vpn] }
-  - { role: systemd-journald, tags: [log, systemd] }
+  - { role: systemd-journald, tags: [log, journal, systemd] }
   - { role: rsyslog, tags: [rsyslog, log] }
   - { role: logrotate, tags: [logrotate, log] }
   - { role: burp, tags: [burp, backup] }

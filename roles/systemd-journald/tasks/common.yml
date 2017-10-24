@@ -1,6 +1,6 @@
 ---
 
-- name: journald | remote | package
+- name: journald | package
   tags:
     - package
     - systemd
@@ -8,7 +8,7 @@
     name: systemd-journal-remote
   notify: restart journal
 
-- name: journald | dirs
+- name: journald | storage dir
   tags:
     - systemd
   file:
