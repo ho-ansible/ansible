@@ -1,0 +1,14 @@
+##
+# /etc/systemd/system/systemd-journal-remote.socket
+# {{ ansible_managed }}
+
+[Unit]
+Description=Journal Remote Sink Socket
+
+[Socket]
+ListenStream=19532
+BindIPv6Only=both
+BindToDevice=tinc_{{ tinc_name }}
+
+[Install]
+WantedBy=sockets.target
