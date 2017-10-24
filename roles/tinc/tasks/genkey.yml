@@ -7,5 +7,5 @@
     - tinc
     - crypt
     - new
-  local_action: command /usr/sbin/tinc generate-keys 4096
+  local_action: command /usr/sbin/tinc --batch -c /tmp generate-keys 4096
 
