@@ -1,9 +1,9 @@
-## /etc/systemd/network/20-{{ tinc_name }}.network
+## /etc/systemd/network/20-tinc_{{ tinc_name }}.network
 # per-link config of systemd-network
 # {{ ansible_managed }}
 
 [Match]
-Name={{ tinc_name }}
+Name=tinc_{{ tinc_name }}
 
 [Network]
 Description="tinc VPN {{ tinc_name }}"
@@ -27,6 +27,6 @@ RouteMetric=400
 UseHostname=false
 
 {% else %}
-# /etc/tinc/{{ tinc_name}}/tinc-up calls dhcpcd
+# {{ tinc_dir }}/tinc-up calls dhcpcd
 DHCP=no
 {% endif %}

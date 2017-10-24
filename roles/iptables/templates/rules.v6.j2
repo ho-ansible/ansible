@@ -20,9 +20,9 @@
 # Allow VPN
 -A INPUT -p udp --dport {{ tinc_port }} -j ACCEPT
 -A INPUT -p tcp --dport {{ tinc_port }} -j ACCEPT
--A INPUT -i {{ tinc_name }} -j ACCEPT
--A FORWARD -i {{ tinc_name }} -j ACCEPT
--A FORWARD -o {{ tinc_name }} -j ACCEPT
+-A INPUT -i tinc_* -j ACCEPT
+-A FORWARD -i tinc_* -j ACCEPT
+-A FORWARD -o tinc_* -j ACCEPT
 
 {% if 'www' in group_names %}
 # Allow HTTP/S
@@ -56,7 +56,7 @@
 -A FORWARD -p icmpv6 -j ACCEPT
 
 # IPv6 Forwarding
-#-A FORWARD -m state --state NEW -i {{ tinc_name }} -o venet0 -s <subnet-prefix>::/48 -j ACCEPT
+#-A FORWARD -m state --state NEW -i tinc_{{ tinc_name }} -o venet0 -s <subnet-prefix>::/48 -j ACCEPT
 #-A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
 
 COMMIT

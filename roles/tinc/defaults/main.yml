@@ -1,6 +1,7 @@
 ---
 tinc_version: "1.1pre15"
-tinc_name: tinc
+tinc_name: vpn
 tinc_domain: "{{ tinc_name }}.vpn"
 tinc_subnet: 192.168.2
 tinc_port: 655
+tinc_dir: "/etc/tinc/tinc_{{ tinc_name }}"

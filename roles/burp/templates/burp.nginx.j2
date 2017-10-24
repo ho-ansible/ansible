@@ -1,5 +1,5 @@
 server {
-  listen {{ vars['ansible_' ~ tinc_name]['ipv4']['address'] }}:80;
+  listen {{ vars['ansible_tinc_' ~ tinc_name]['ipv4']['address'] }}:80;
 
   server_name {{ burpui_host }};
 

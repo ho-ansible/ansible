@@ -38,7 +38,7 @@
   tags:
   - dir
   file:
-    dest: "/etc/tinc/{{ tinc_name }}/hosts"
+    dest: "{{ tinc_dir }}/hosts"
     state: directory
   notify: restart tinc
 
@@ -70,7 +70,7 @@
   - config
   template:
     src: vpn.network.j2
-    dest: "/etc/systemd/network/20-{{ tinc_name }}.network"
+    dest: "/etc/systemd/network/20-tinc_{{ tinc_name }}.network"
   notify:
     - restart networkd
     - restart tinc
@@ -80,7 +80,7 @@
   - config
   template:
     src: "{{ item }}.j2"
-    dest: "/etc/tinc/{{ tinc_name }}/{{ item }}"
+    dest: "{{ tinc_dir }}/{{ item }}"
     mode: 0700
   with_items:
   - tinc.conf
@@ -94,7 +94,7 @@
   - crypt
   copy:
     src: "{{ item }}"
-    dest: "/etc/tinc/{{ tinc_name }}/{{ item | regex_replace('^.*/([^/]*)/_[^/]*$', '\\1') }}_key.priv"
+    dest: "{{ tinc_dir }}/{{ item | regex_replace('^.*/([^/]*)/_[^/]*$', '\\1') }}_key.priv"
     mode: 0400
   with_fileglob: 
     - "keys/rsa/_{{ inventory_hostname }}"
@@ -107,7 +107,7 @@
   - crypt
   copy:
     src: "keys/pub/_{{ item }}"
-    dest: "/etc/tinc/{{ tinc_name }}/hosts/{{ item }}"
+    dest: "{{ tinc_dir }}/hosts/{{ item }}"
     mode: 0640
   with_items:
   - tinc1
@@ -124,4 +124,4 @@
     enabled: yes
   with_items:
   - tinc
-  - "tinc@{{ tinc_name }}"
+  - "tinc@tinc_{{ tinc_name }}"
