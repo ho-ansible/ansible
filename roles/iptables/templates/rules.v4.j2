@@ -30,12 +30,11 @@
 -A INPUT -p tcp --dport 443 -j ACCEPT
 {% endif %}
 
-{% if 1 %}
 # Allow SSH
--A INPUT -p tcp -m state --state NEW --dport {{ ssh_port }} -j ACCEPT
+{% for ssh_host in ssh_whitelist %}
+-A INPUT -p tcp -m state --state NEW --dport {{ ssh_port }} -s {{ ssh_host }} -j ACCEPT
 {% else %}
-# Allow SSH from whitelist
--A INPUT -p tcp -m state --state NEW --dport {{ ssh_port }} -m set --match-set ssh src -j ACCEPT
+-A INPUT -p tcp -m state --state NEW --dport {{ ssh_port }} -j ACCEPT
 {% endif %}
 
 {% if 0 %}
