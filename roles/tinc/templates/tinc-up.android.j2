@@ -37,6 +37,7 @@ saveroute() {
       old_rt=$(getroute $ip)
       case "$old_rt" in
         (*error*) echo "No route: $old_rt";;
+        (*unreachable*) echo "No route: $old_rt";;
         (*) echo "Static route: $ip $old_rt"
           ip ro add table $tid $ip $old_rt;;
       esac
