@@ -9,3 +9,8 @@
   service:
     name: systemd-journal-remote
     status: restarted
+
+- name: restart journal-remote socket
+  service:
+    name: systemd-journal-remote.socket
+    status: restarted
