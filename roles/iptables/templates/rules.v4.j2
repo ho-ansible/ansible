@@ -66,6 +66,7 @@ COMMIT
 
 {% if 'gw' in group_names %}
 -A POSTROUTING -o {{ ansible_default_ipv4.interface }} -j SNAT --to {{ ansible_default_ipv4.address }}
+-A POSTROUTING -o {{ tinc_name }} -j SNAT --to {{ vars['ansible_' ~ tinc_name]['ipv4']['address'] }}
 {% endif %}
 
 COMMIT
