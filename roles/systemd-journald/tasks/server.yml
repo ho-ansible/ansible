@@ -1,6 +1,6 @@
 ---
 
-- name: journald | server | socket config
+- name: journald | server | config
   tags:
     - config
     - systemd
@@ -9,6 +9,7 @@
     dest: "/etc/systemd/system/{{ item }}"
   with_items:
     - systemd-journal-remote.socket
+    - systemd-journal-remote.service
   notify: restart journal-remote
 
 - name: journald | server | storage dir
