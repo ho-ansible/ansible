@@ -2,11 +2,11 @@
 dependencies:
   - { role: sudo, tags: [sudo, login] }
   - { role: ssh, tags: [ssh, login] }
-  - { role: basepkgs, tags: [basepkgs, apt] }
   - { role: iptables, tags: [iptables, firewall] }
+  - { role: basepkgs, tags: [basepkgs, apt] }
   - { role: systemd-networkd, tags: [network, systemd] }
-  - { role: bash, tags: [bash] }
   - { role: systemd-resolved, tags: [resolver, systemd] }
+  - { role: bash, tags: [bash] }
   - { role: msmtp, tags: [msmtp, mail] }
   - { role: tinc, tags: [tinc, vpn] }
   - { role: rsyslog, tags: [rsyslog, log] }
