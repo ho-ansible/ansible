@@ -1,6 +1,6 @@
 ---
 - name: Decommission old tinc config
-  hosts: all
+  hosts: linux
   tasks:
     - name: Shutdown service
       service:
