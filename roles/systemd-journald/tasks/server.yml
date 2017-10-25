@@ -20,7 +20,7 @@
   file:
     path: /var/log/journal/remote
     state: directory
-    group: systemd-journal-remote
+    owner: systemd-journal-remote
 
 - name: journald | server | service
   tags:
