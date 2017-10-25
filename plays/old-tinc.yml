@@ -1,10 +1,10 @@
 ---
 - name: Decommission old tinc config
-  hosts: !vpn
+  hosts: all
   tasks:
     - name: Shutdown service
       service:
-        name: "tinc\@{{ tinc_name }}"
+        name: "tinc@{{ tinc_name }}"
         state: stopped
         enabled: no
     - name: Remove files
