@@ -30,11 +30,6 @@ server {
 
 	fastcgi_cache CLOUD;		# Enable PHP caching
 
-	types {
-		application/x-mpegURL m3u8;
-		application/dash+xml mpd;        
-	}
-
 	error_page 403 /core/templates/403.php;
 	error_page 404 /core/templates/404.php;
 	rewrite ^/.well-known/carddav /remote.php/carddav/ permanent;
