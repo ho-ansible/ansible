@@ -10,7 +10,9 @@
   with_items:
     - systemd-journal-remote.socket
     - systemd-journal-remote.service
-  notify: restart journal-remote
+  notify:
+    - restart journald
+    - restart journal-remote
 
 - name: journald | server | storage dir
   tags:

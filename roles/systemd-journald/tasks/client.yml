@@ -6,7 +6,9 @@
   template:
     src: journal-upload.conf.j2
     dest: /etc/systemd/journal-upload.conf
-  notify: restart journal-upload
+  notify: 
+    - restart journald
+    - restart journal-upload
 
 - name: journald | client | service
   tags:
