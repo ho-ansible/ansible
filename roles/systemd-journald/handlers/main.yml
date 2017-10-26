@@ -3,14 +3,14 @@
 - name: restart journald
   service:
     name: systemd-journald
-    status: restarted
+    state: restarted
 
 - name: restart journal-upload
   service:
     name: systemd-journal-upload
-    status: restarted
+    state: restarted
 
 - name: restart journal-remote
   service:
     name: systemd-journal-remote.socket
-    status: restarted
+    state: restarted
