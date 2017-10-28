@@ -4,5 +4,8 @@ server {
   server_name {{ ttrss_host }};
   root {{ ttrss_www }};
 
-  include nginx-php;
+  index index.php index.html;
+  location ~ \.php(?:$|/) {
+    include php-fpm;
+  }
 }

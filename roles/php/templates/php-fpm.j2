@@ -1,0 +1,23 @@
+## /etc/nginx/php-fpm
+# To use:
+# server {
+#   index index.php index.html;
+#   location ~ \.php(?:$|/) {
+#     include php-fpm;
+#   }
+# }
+# {{ ansible_managed }}
+
+fastcgi_pass php-handler;
+fastcgi_split_path_info ^(.+\.php)(/.*)$;
+fastcgi_index index.php;
+fastcgi_intercept_errors on;
+
+if (!-f $document_root$fastcgi_script_name) {
+	return 404;
+}
+
+include fastcgi_params;
+fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+fastcgi_param PATH_INFO $fastcgi_path_info;
+fastcgi_param modHeadersAvailable true;         #Avoid sending security headers twice

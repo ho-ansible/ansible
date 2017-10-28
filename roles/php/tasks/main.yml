@@ -17,7 +17,8 @@
     src: "{{ item.src }}.j2"
     dest: "{{ item.dest }}/{{ item.src }}"
   with_items:
-  - { src: nginx-php, dest: /etc/nginx/ }
+  - { src: php-fpm, dest: /etc/nginx }
+  - { src: php-handler.conf, dest: /etc/nginx/conf.d }
   - { src: php.ini, dest: "/etc/php/{{ php_ver }}/fpm/" }
   - { src: php-fpm.conf, dest: "/etc/php/{{ php_ver }}/fpm/" }
   - { src: www.conf, dest: "/etc/php/{{ php_ver }}/fpm/pool.d/" }
