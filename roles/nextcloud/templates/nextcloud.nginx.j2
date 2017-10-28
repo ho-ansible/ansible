@@ -50,8 +50,8 @@ server {
 	location / {
 		rewrite ^ /index.php$uri;
 	}
-	location /remote {
-		rewrite ^ /remote.php$uri;
+	location ~ ^/remote/(.*)$ {
+		rewrite ^ /remote.php/$1;
 	}
 
 	location ~ ^/(?:updater|ocs-provider)(?:$|/) {
