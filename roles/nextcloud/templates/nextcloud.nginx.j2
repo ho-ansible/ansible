@@ -32,7 +32,10 @@ server {
 
 	error_page 403 /core/templates/403.php;
 	error_page 404 /core/templates/404.php;
-	rewrite ^/.well-known/(card|cal)dav /remote.php/dav/ permanent;
+
+	rewrite ^/.well-known/(.*dav)($|/) /$1 permanent;
+	rewrite ^/(webdav|dav|caldav|calendar|carddav|contacts|files)($|/) /remote/$1;
+	rewrite ^/remote/(.*)$ /remote.php/$1;
 
 	location = /robots.txt {
 		allow all;
@@ -40,18 +43,12 @@ server {
 		access_log off;
 	}
 
-	location ~ ^/(?:build|tests|config|lib|3rdparty|templates|data)/ {
-		deny all;
-	}
-	location ~ ^/(?:\.|autotest|occ|issue|indie|db_|console) {
+	location ~ ^/(\.|autotest|occ|issue|indie|db_|console|build|tests|config|lib|3rdparty|templates|data)/ {
 		deny all;
 	}
 
 	location / {
 		rewrite ^ /index.php$uri;
-	}
-	location ~ ^/remote/(.*)$ {
-		rewrite ^ /remote.php/$1;
 	}
 
 	location ~ ^/(?:updater|ocs-provider)(?:$|/) {
