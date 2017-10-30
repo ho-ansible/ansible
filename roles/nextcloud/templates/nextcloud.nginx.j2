@@ -24,6 +24,9 @@ server {
 	server_name {{ cloud_server }};
 	root {{ cloud_www_dir }};
 
+	access_log /var/log/nginx/nc-access.log
+	error_log  /var/log/nginx/nc-error.log
+
 	# See php.ini: upload_max_filesize, post_max_size, max_execution_time, max_input_time
 	client_max_body_size 10G;
 	fastcgi_buffers 64 4K;
@@ -34,8 +37,8 @@ server {
 	error_page 404 /core/templates/404.php;
 
 	rewrite ^/.well-known/(.*dav)($|/) /$1 permanent;
-	rewrite ^/(webdav|dav|caldav|calendar|carddav|contacts|files)($|/) /remote/$1;
-	rewrite ^/remote/(.*)$ /remote.php/$1;
+	rewrite ^/(webdav|dav|caldav|calendar|carddav|contacts|files)($|/) /remote.php/$1 redirect;
+	rewrite ^/remote/(.*)$ /remote.php/$1 redirect;
 
 	location = /robots.txt {
 		allow all;
@@ -48,7 +51,7 @@ server {
 	}
 
 	location / {
-		rewrite ^ /index.php$uri;
+		rewrite ^ /index.php$uri last;
 	}
 
 	location ~ ^/(?:updater|ocs-provider)(?:$|/) {
