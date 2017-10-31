@@ -24,7 +24,7 @@ server {
 	server_name {{ cloud_server }};
 	root {{ cloud_www_dir }};
 
-	access_log /var/log/nginx/nc-access.log;
+	access_log /var/log/nginx/nc-access.log combined gzip=9;
 	error_log  /var/log/nginx/nc-error.log error;
 
 	# See php.ini: upload_max_filesize, post_max_size, max_execution_time, max_input_time
