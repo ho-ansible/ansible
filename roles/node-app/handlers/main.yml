@@ -3,5 +3,5 @@
   tags:
   - service
   service:
-    name: node
+    name: "node-{{ node_name }}"
     state: restarted

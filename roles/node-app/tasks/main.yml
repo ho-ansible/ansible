@@ -33,15 +33,15 @@
     - config
   template:
     src: node.nginx.j2
-    dest: /etc/nginx/sites-available/node-app
+    dest: "/etc/nginx/sites-available/node-{{ node_name }}"
   notify: restart nginx
 
 - name: Node.js app | enable nginx host
   tags:
     - config
   file:
-    src: /etc/nginx/sites-available/node-app
-    dest: /etc/nginx/sites-enabled/node-app
+    src: "/etc/nginx/sites-available/node-{{ node_name }}"
+    dest: "/etc/nginx/sites-enabled/node-{{ node_name }}"
     state: link
   notify: restart nginx
 
@@ -50,7 +50,7 @@
     - systemd
   template:
     src: node.service.j2
-    dest: /etc/systemd/system/node.service
+    dest: "/etc/systemd/system/node-{{ node_name }}.service"
   notify: restart node-app
 
 - name: Node.js app | refresh systemd
@@ -60,6 +60,6 @@
   tags:
     - service
   service:
-    name: node
+    name: "node-{{ node_name }}"
     state: started
     enabled: true
