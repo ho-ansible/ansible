@@ -1,7 +1,7 @@
 ---
-- name: restart node-app
+- name: restart node
   tags:
-  - service
+    - service
   service:
-    name: "node-{{ node_name }}"
+    name: node
     state: restarted

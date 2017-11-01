@@ -1,0 +1,19 @@
+##
+# /lib/systemd/system/node.service
+# Template/master service for all node apps
+
+[Unit]
+Description=Node.js app server
+Documentation=https://nodejs.org/
+After=network.target
+Wants=network.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/bin/true
+ExecReload=/bin/true
+
+[Install]
+WantedBy=multi-user.target
+

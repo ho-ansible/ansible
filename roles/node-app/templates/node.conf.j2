@@ -1,0 +1,15 @@
+##
+# {{ node_config_dir }}/node.conf
+# Node.js app server
+# Instance-specific systemd service settings
+# {{ ansible_managed }}
+
+[Unit]
+Description={{ node_description }}
+Documentation={{ node_repo }}
+
+[Service]
+User={{ node_user }}
+WorkingDirectory=/home/{{ node_user }}/{{ node_name }}
+Environment=PORT={{ node_localport }} ADDR={{ node_localaddr }}
+
