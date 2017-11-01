@@ -1,6 +1,6 @@
 ---
 
-- name: copy misc config
+- name: common | copy misc config
   tags:
     - config
   copy:
@@ -10,14 +10,21 @@
     - { src: htoprc, dest: /etc/ }
     - { src: 50unattended-upgrades, dest: /etc/apt/apt.conf.d/ }
 
-- name: set timezone
+- name: common | set hostname
+  tags:
+    - config
+    - hostname
+  hostname:
+    name: "{{ inventory_hostname }}"
+
+- name: common | set timezone
   tags:
     - config
     - time
   timezone:
     name: America/Vancouver
 
-- name: generate locales
+- name: common | generate locales
   tags:
     - config
     - locales
