@@ -1,0 +1,8 @@
+---
+shiny_ver: 1.5.5.872
+shiny_user: shiny
+shiny_passwd: ''
+shiny_host: shiny
+shiny_localport: 3838
+
+shiny_url: "https://download3.rstudio.org/ubuntu-12.04/amd64/shiny-server-{{ shiny_ver }}-amd64.deb"

@@ -1,0 +1,47 @@
+---
+
+- name: shiny | install deb package
+  tags:
+    - package
+  apt:
+    deb: "{{ shiny_url }}"
+
+- name: shiny | config
+  tags:
+    - config
+  template:
+    src: "{{ item }}.j2"
+    dest: "/etc/shiny-server/{{ item }}"
+  with_items:
+    - shiny-server.conf
+  notify: restart shiny
+
+- name: shiny | nginx site
+  tags:
+    - site
+  template:
+    src: "{{ item }}.nginx.j2"
+    dest: /etc/nginx/sites-available/{{ item }}
+  with_items:
+    - shiny
+  notify: restart shiny
+
+- name: shiny | enable nginx site
+  tags:
+    - site
+  file:
+    src: "/etc/nginx/sites-available/{{ item }}"
+    dest: "/etc/nginx/sites-enabled/{{ item }}"
+    state: link
+  with_items:
+    - shiny
+  notify: restart shiny
+
+- name: shiny | service
+  tags:
+    - service
+  service:
+    name: shiny-server
+    state: started
+    enabled: yes
+

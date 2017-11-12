@@ -1,0 +1,15 @@
+##
+# /etc/shiny-server/shiny-server.conf
+# Server config for R Shiny Server
+# {{ ansible_managed }}
+
+run_as {{ shiny_user }};
+
+server {
+  listen 127.0.0.1:{{ shiny_localport }};
+
+  location / {
+    site_dir /home/{{ shiny_user }};
+    log_dir /var/log/shiny;
+  }
+}

@@ -1,0 +1,19 @@
+##
+# /etc/nginx/sites-available/shiny
+# Nginx config for R Shiny Server
+# {{ ansible_managed }}
+
+server {
+  listen {{ vars['ansible_tinc_' ~ tinc_name]['ipv4']['address'] }}:80;
+
+  server_name {{ shiny_host }};
+
+  location / {
+    proxy_pass http://localhost:{{ shiny_localport }};
+    proxy_redirect http://localhost:{{ shiny_localport }}/ /;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "upgrade";
+    proxy_read_timeout 2w;
+  }
+}
