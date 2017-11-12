@@ -1,0 +1,5 @@
+---
+dependencies:
+  - { role: R, tags: [rstudio] }
+  - { role: nginx, tags: [rstudio] }
+

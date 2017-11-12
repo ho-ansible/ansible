@@ -1,0 +1,7 @@
+---
+rstudio_ver: 1.1.383
+rstudio_user: rstudio
+rstudio_passwd: ''
+rstudio_group: rstudio_users
+rstudio_host: rstudio
+rstudio_localport: 8787

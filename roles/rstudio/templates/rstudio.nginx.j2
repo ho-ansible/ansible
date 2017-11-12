@@ -1,0 +1,19 @@
+##
+# /etc/nginx/sites-available/rstudio
+# Nginx config for RStudio Server
+# {{ ansible_managed }}
+
+server {
+  listen {{ vars['ansible_tinc_' ~ tinc_name]['ipv4']['address'] }}:80;
+
+  server_name {{ rstudio_host }};
+
+  location / {
+    proxy_pass http://localhost:{{ rstudio_localport }};
+    proxy_redirect http://localhost:{{ rstudio_localport }}/ /;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "upgrade";
+    proxy_read_timeout 2w;
+  }
+}

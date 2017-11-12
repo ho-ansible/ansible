@@ -1,0 +1,5 @@
+---
+- name: restart rstudio
+  service:
+    name: rstudio-server
+    state: restarted
