@@ -5,3 +5,5 @@ rstudio_passwd: ''
 rstudio_group: rstudio_users
 rstudio_host: rstudio
 rstudio_localport: 8787
+
+rstudio_url: "https://download2.rstudio.org/rstudio-server-{{ rstudio_ver }}-amd64.deb"

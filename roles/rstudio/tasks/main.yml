@@ -4,7 +4,7 @@
   tags:
     - package
   apt:
-    deb: 'https://download2.rstudio.org/rstudio-server-{{ rstudio_ver }}-{{ ansible_architecture | replace("x86_64", "amd64") }}.deb'
+    deb: "{{ rstudio_url }}"
 
 - name: rstudio | user group
   tags:
