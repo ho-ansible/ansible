@@ -1,0 +1,10 @@
+---
+# Playbook assigning role to inventory group
+- name: node-app | Node.js app servers
+  hosts: node
+  roles:
+  - role: node-app
+    tags: 
+      - node
+      - nodejs
+

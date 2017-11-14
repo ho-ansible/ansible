@@ -1,0 +1,10 @@
+---
+# Playbook assigning role to inventory group
+- name: xnbd | Network block device clients/servers
+  hosts: xnbd
+  roles:
+  - role: xnbd
+    tags: 
+      - xnbd
+      - nbd
+

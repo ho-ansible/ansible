@@ -1,0 +1,7 @@
+---
+# Playbook assigning role to inventory group
+- name: common | Linux hosts
+  hosts: linux
+  roles:
+  - role: common
+

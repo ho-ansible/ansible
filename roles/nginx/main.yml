@@ -1,0 +1,10 @@
+---
+# Playbook assigning role to inventory group
+- name: nginx | Web servers
+  hosts: www
+  roles:
+  - role: nginx
+    tags: 
+      - www
+      - nginx
+

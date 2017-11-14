@@ -1,0 +1,10 @@
+---
+# Playbook assigning role to inventory group
+- name: ttrss | RSS news reader
+  hosts: news
+  roles:
+  - role: ttrss
+    tags: 
+      - news
+      - ttrss
+

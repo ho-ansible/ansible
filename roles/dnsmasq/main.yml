@@ -1,0 +1,10 @@
+---
+# Playbook assigning role to inventory group
+- name: dnsmasq | DNS servers
+  hosts: dns
+  roles:
+  - role: dnsmasq
+    tags: 
+      - dns
+      - dnsmasq
+

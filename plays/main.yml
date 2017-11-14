@@ -1,57 +1,19 @@
 ---
-- name: main.yml | Common setup
+# Playbook invoking role-specific plays
+
+- name: Update packages
   hosts: linux
-  roles:
-    - common
   tasks:
     - import_tasks: tasks/update.yml
 
-- name: main.yml | TMux hosts
-  hosts: tmux
-  roles:
-  - { role: tmux, tags: [tmux] }
-
-- name: main.yml | DNS servers
-  hosts: dns
-  roles:
-  - { role: dnsmasq, tags: [dns, dnsmasq] }
-
-- name: main.yml | Web servers
-  hosts: www
-  roles:
-  - { role: nginx, tags: [www, nginx] }
-
-- name: main.yml | PHP app servers
-  hosts: php
-  roles:
-  - { role: php, tags: [php] }
-
-- name: main.yml | RSS news server
-  hosts: news
-  roles:
-  - { role: ttrss, tags: [news, ttrss] }
-
-- name: main.yml | nextCloud servers
-  hosts: nextcloud
-  roles:
-  - { role: nextcloud, tags: [nextcloud] }
-
-- name: main.yml | R servers
-  hosts: R
-  roles:
-  - { role: R, tags: [R] }
-
-- name: main.yml | RStudio servers
-  hosts: rstudio
-  roles:
-  - { role: rstudio, tags: [rstudio] }
-
-- name: main.yml | Node.js servers
-  hosts: node
-  roles:
-  - { role: node-app, tags: [node, nodejs] }
-
-- name: main.yml | xnbd 
-  hosts: xnbd
-  roles:
-  - { role: xnbd, tags: [xnbd,nbd] }
+- import_playbook: ../roles/common/main.yml
+- import_playbook: ../roles/dnsmasq/main.yml
+- import_playbook: ../roles/tmux/main.yml
+- import_playbook: ../roles/nginx/main.yml
+- import_playbook: ../roles/php/main.yml
+- import_playbook: ../roles/ttrss/main.yml
+- import_playbook: ../roles/nextcloud/main.yml
+- import_playbook: ../roles/R/main.yml
+- import_playbook: ../roles/rstudio/main.yml
+- import_playbook: ../roles/node-app/main.yml
+- import_playbook: ../roles/xnbd/main.yml

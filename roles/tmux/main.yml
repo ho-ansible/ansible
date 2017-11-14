@@ -1,0 +1,9 @@
+---
+# Playbook assigning role to inventory group
+- name: tmux | Terminal servers
+  hosts: tmux
+  roles:
+  - role: tmux
+    tags: 
+      - tmux
+

@@ -1,0 +1,9 @@
+---
+# Playbook assigning role to inventory group
+- name: PHP | PHP app servers
+  hosts: php
+  roles:
+  - role: php
+    tags: 
+      - php
+

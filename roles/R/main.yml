@@ -1,0 +1,9 @@
+---
+# Playbook assigning role to inventory group
+- name: R | Statistics compute servers
+  hosts: R
+  roles:
+  - role: R
+    tags: 
+      - R
+

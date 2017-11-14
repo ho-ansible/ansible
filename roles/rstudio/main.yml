@@ -1,0 +1,9 @@
+---
+# Playbook assigning role to inventory group
+- name: rstudio | Web IDE for R
+  hosts: rstudio
+  roles:
+  - role: rstudio
+    tags: 
+      - rstudio
+

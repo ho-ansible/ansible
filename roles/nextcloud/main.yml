@@ -1,0 +1,9 @@
+---
+# Playbook assigning role to inventory group
+- name: nextcloud | File servers
+  hosts: nextcloud
+  roles:
+  - role: nextcloud
+    tags: 
+      - nextcloud
+
