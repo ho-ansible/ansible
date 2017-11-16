@@ -101,18 +101,30 @@
     - "keys/ed25519/_{{ inventory_hostname }}"
   notify: restart tinc
 
-- name: tinc VPN | public keys
+- name: tinc VPN | server public keys
   tags:
-  - config
-  - crypt
+    - config
+    - crypt
   copy:
     src: "keys/pub/_{{ item }}"
     dest: "{{ tinc_dir }}/hosts/{{ item }}"
     mode: 0640
   with_items:
-  - tinc1
-  - tinc2
-  - "{{ inventory_hostname }}"
+    - tinc1
+    - tinc2
+  notify: restart tinc
+
+- name: tinc VPN | client public key
+  tags:
+    - config
+    - crypt
+  copy:
+    src: "keys/pub/_{{ item }}"
+    dest: "{{ tinc_dir }}/hosts/{{ item }}"
+    mode: 0640
+  with_items:
+    - "{{ inventory_hostname }}"
+  when: '"vpn" not in group_names'
   notify: restart tinc
 
 - name: tinc VPN | service
