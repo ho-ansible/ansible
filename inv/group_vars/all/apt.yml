@@ -1,8 +1,6 @@
 stop_services: []
 
 remove_pkgs:
-- cron
-- at
 - apache2
 - apache2-doc
 - apache2-utils
@@ -29,7 +27,6 @@ remove_pkgs:
 
 install_pkgs:
 - apt-transport-https
-- systemd-cron
 - locales
 - git
 - less

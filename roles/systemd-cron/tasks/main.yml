@@ -1,0 +1,36 @@
+---
+
+- name: systemd-cron | remove standard cron
+  tags:
+    - package
+  package:
+    name: "{{ item }}"
+    state: absent
+    purge: yes
+  with_items:
+    - cron
+    - mcron
+    - anacron
+    - at
+
+- name: systemd-cron | package
+  tags:
+    - package
+  package:
+    name: systemd-cron
+
+- name: systemd-cron | cron.target
+  tags:
+    - systemd
+    - config
+  file:
+    src: cron.target
+    dest: /etc/systemd/system/
+
+- name: systemd-cron | enable cron.target
+  tags:
+    - service
+    - systemd
+  service:
+    name: cron.target
+    enabled: yes
