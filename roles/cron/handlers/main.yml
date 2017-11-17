@@ -1,3 +1,0 @@
----
-- name: reload crontab
-  command: "crontab /etc/crontab"
