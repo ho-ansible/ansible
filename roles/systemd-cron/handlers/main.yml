@@ -1,0 +1,6 @@
+---
+
+- name: restart systemd-cron
+  service:
+    name: cron.target
+    state: restarted

@@ -23,9 +23,10 @@
   tags:
     - systemd
     - config
-  file:
+  copy:
     src: cron.target
     dest: /etc/systemd/system/
+  notify: restart systemd-cron
 
 - name: systemd-cron | enable cron.target
   tags:
@@ -33,4 +34,6 @@
     - systemd
   service:
     name: cron.target
+    state: started
     enabled: yes
+    daemon_reload: yes
