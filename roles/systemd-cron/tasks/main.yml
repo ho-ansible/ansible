@@ -28,6 +28,16 @@
     dest: /etc/systemd/system/
   notify: restart systemd-cron
 
+- name: systemd-cron | mask cron-hourly
+  tags:
+    - systemd
+    - config
+  file:
+    src: /dev/null
+    dest: /etc/systemd/system/cron-hourly.timer
+    state: link
+  notify: restart systemd-cron
+
 - name: systemd-cron | enable cron.target
   tags:
     - service
