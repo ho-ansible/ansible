@@ -6,14 +6,16 @@
   tasks:
     - import_tasks: tasks/update.yml
 
-- import_playbook: ../roles/common/main.yml
-- import_playbook: ../roles/dnsmasq/main.yml
-- import_playbook: ../roles/tmux/main.yml
-- import_playbook: ../roles/nginx/main.yml
-- import_playbook: ../roles/php/main.yml
-- import_playbook: ../roles/ttrss/main.yml
-- import_playbook: ../roles/nextcloud/main.yml
-- import_playbook: ../roles/R/main.yml
-- import_playbook: ../roles/rstudio/main.yml
-- import_playbook: ../roles/node-app/main.yml
-- import_playbook: ../roles/xnbd/main.yml
+- import_playbook: "{{ item }}.yml"
+  with_items:
+    - common
+    - dns
+    - tmux
+    - www
+    - php
+    - news
+    - nextcloud
+    - R
+    - rstudio
+    - node
+    - xnbd
