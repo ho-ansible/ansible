@@ -12,7 +12,7 @@ cname = {{ inventory_hostname }}
 
 pidfile = /var/run/burp.pid
 autoupgrade_dir = /etc/burp/upgrade/
-autoupgrade_os = {{ ansible_distribution }}
+autoupgrade_os = {{ ansible_system }}-{{ ansible_architecture }}
 
 syslog = 0
 stdout = 1
