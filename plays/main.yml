@@ -1,18 +1,13 @@
 ---
-# Playbook invoking role-specific plays
-
-- name: Update packages
-  hosts: linux
-  tasks:
-    - import_tasks: tasks/update.yml
+# Master playbook invoking role-specific plays
 
 - import_playbook: "{{ item }}.yml"
   with_items:
+    - update
     - common
     - dns
     - tmux
     - www
-    - php
     - news
     - nextcloud
     - R
