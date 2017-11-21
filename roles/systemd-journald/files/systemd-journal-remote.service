@@ -1,6 +1,5 @@
 ##
 # /etc/systemd/system/systemd-journal-remote.service
-# {{ ansible_managed }}
 
 [Unit]
 Description=Journal Remote Sink Service
@@ -12,6 +11,7 @@ ExecStart=/lib/systemd/systemd-journal-remote --listen-http=-3 --output=/var/log
 User=systemd-journal-remote
 Group=systemd-journal-remote
 WatchdogSec=3min
+Restart=on-failure
 PrivateTmp=yes
 PrivateDevices=yes
 PrivateNetwork=yes

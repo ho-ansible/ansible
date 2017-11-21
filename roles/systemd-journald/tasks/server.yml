@@ -9,9 +9,17 @@
     dest: "/etc/systemd/system/{{ item }}"
   with_items:
     - systemd-journal-remote.socket
-    - systemd-journal-remote.service
   notify:
     - restart journald
+    - restart journal-remote
+
+- name: journald | server | service file
+  tags:
+    - service
+  copy:
+    src: systemd-journal-remote.service
+    dest: /etc/systemd/system/
+  notify: 
     - restart journal-remote
 
 - name: journald | server | storage dir

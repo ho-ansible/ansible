@@ -4,13 +4,16 @@
   service:
     name: systemd-journald
     state: restarted
+    daemon_reload: yes
 
 - name: restart journal-upload
   service:
     name: systemd-journal-upload
     state: restarted
+    daemon_reload: yes
 
 - name: restart journal-remote
   service:
     name: systemd-journal-remote.socket
     state: restarted
+    daemon_reload: yes

@@ -10,6 +10,15 @@
     - restart journald
     - restart journal-upload
 
+- name: journald | client | service file
+  tags:
+    - service
+  copy:
+    src: systemd-journal-upload.service
+    dest: /etc/systemd/system/
+  notify: 
+    - restart journal-upload
+
 - name: journald | client | service
   tags:
     - service
