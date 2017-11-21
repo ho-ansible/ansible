@@ -6,7 +6,6 @@
     - { role: sudo, tags: [sudo, login] }
     - { role: ssh, tags: [ssh, login] }
     - { role: tinc, tags: [tinc, vpn] }
-    - { role: iptables, tags: [iptables, firewall] }
     - { role: basepkgs, tags: [basepkgs, apt] }
     - { role: systemd-networkd, tags: [network, systemd] }
     - { role: systemd-resolved, tags: [resolver, systemd] }
@@ -18,4 +17,5 @@
     - { role: burp, tags: [burp, backup] }
     - { role: systemd-cron, tags: [cron, systemd] }
     - { role: systemd-timesyncd, tags: [timesync, systemd, ntp, time], when: ansible_virtualization_type != 'openvz' }
+    - { role: iptables, tags: [iptables, firewall] }
 
