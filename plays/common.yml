@@ -3,6 +3,7 @@
 - name: common | Linux hosts
   hosts: linux
   roles:
+    - { role: common, tags: [common] }
     - { role: sudo, tags: [sudo, login] }
     - { role: ssh, tags: [ssh, login] }
     - { role: tinc, tags: [tinc, vpn] }
