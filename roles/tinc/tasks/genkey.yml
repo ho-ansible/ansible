@@ -1,11 +1,23 @@
 ---
 # Run once for each new host
-# TODO: headless genkeys and file output properly
 
-- name: tinc | generate host keys
-  tags:
-    - tinc
-    - crypt
-    - new
+- name: tinc genkey | clear old tmpfiles
+  local_action: "command rm -fr /tmp/{{ item }}"
+  with_items:
+    - ed25519_key.pub
+    - ed25519_key.priv
+    - rsa_key.pub
+    - rsa_key.priv
+
+- name: tinc genkey | new host keys
   local_action: command /usr/sbin/tinc --batch -c /tmp generate-keys 4096
 
+- name: tinc genkey | concat public keys
+  local_action: "command cat /tmp/ed25519_key.pub /tmp/rsa_key.pub > /tmp/pub_key.priv"
+
+- name: tinc genkey | save new keys
+  local_action: "command mv /tmp/{{ item }}_key.priv {{ tinc_keystore }}/{{ item }}/_{{ inventory_hostname }}"
+  with_items:
+    - ed25519
+    - rsa
+    - pub
