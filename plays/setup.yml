@@ -10,6 +10,7 @@
 # Manually set CNAME in DNS
 
 - name: setup | config access
+  hosts: all
   vars:
     - ansible_user: root
     - ansible_port: 22
