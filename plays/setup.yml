@@ -3,17 +3,13 @@
 # Spin up new VM: get IP and root password
 # Add HOST to inv/_master.yml: HOST ansible_host=IP
 # Add HOST to inv/_roles.yml as needed
-# /usr/sbin/tinc --batch -c /tmp/ generate-keys 4096
-#   roles/tinc/files/.private/{hosts/HOST,keys/HOST.priv}
-# ansible-playbook -l vpn -t vpn plays/main.yml
 # ansible-playbook -k -l HOST plays/setup.yml
 #   (if NAT, add '-e ansible_port=NATPORT')
 # ansible-playbook -l HOST plays/main.yml
 # Create entry on burp server
 # Manually set CNAME in DNS
 
-- name: setup.yml | Provision new VPS
-  hosts: all
+- name: setup | config access
   vars:
     - ansible_user: root
     - ansible_port: 22
@@ -21,6 +17,7 @@
   tasks:
     - import_tasks: tasks/update.yml
     - import_tasks: tasks/randpw.yml
+    - import_tasks: ../roles/tinc/tasks/genkey.yml
   roles:
     - { role: sudo, tags: [new,sudo] }
     - { role: ssh, tags: [new,ssh] }

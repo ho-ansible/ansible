@@ -13,7 +13,7 @@
   local_action: command /usr/sbin/tinc --batch -c /tmp generate-keys 4096
 
 - name: tinc genkey | concat public keys
-  local_action: "command cat /tmp/ed25519_key.pub /tmp/rsa_key.pub > /tmp/pub_key.priv"
+  local_action: "shell cat /tmp/ed25519_key.pub /tmp/rsa_key.pub > /tmp/pub_key.priv"
 
 - name: tinc genkey | save new keys
   local_action: "command mv /tmp/{{ item }}_key.priv {{ tinc_keystore }}/{{ item }}/_{{ inventory_hostname }}"
@@ -21,3 +21,11 @@
     - ed25519
     - rsa
     - pub
+
+- name: tinc | push host public key to VPN servers
+  copy:
+    src: "keys/pub/_{{ inventory_hostname }}"
+    dest: "/etc/tinc/{{ tinc_name }}/hosts/{{ inventory_hostname }}"
+  delegate_to: "{{ item }}"
+  with_items: "{{ groups['vpn'] }}"
+
