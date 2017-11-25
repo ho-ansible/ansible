@@ -2,7 +2,10 @@
 # Run once for each new host
 
 - name: tinc genkey | clear old tmpfiles
-  local_action: "command rm -fr /tmp/{{ item }}"
+  local_action:
+    module: file
+    src: "/tmp/{{ item }}"
+    state: absent
   with_items:
     - ed25519_key.pub
     - ed25519_key.priv
@@ -25,7 +28,7 @@
 - name: tinc | push host public key to VPN servers
   copy:
     src: "keys/pub/_{{ inventory_hostname }}"
-    dest: "/etc/tinc/{{ tinc_name }}/hosts/{{ inventory_hostname }}"
+    dest: "{{ tinc_dir }}/hosts/{{ inventory_hostname }}"
   delegate_to: "{{ item }}"
   with_items: "{{ groups['vpn'] }}"
 
