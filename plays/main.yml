@@ -1,16 +1,14 @@
 ---
 # Master playbook invoking role-specific plays
 
-- import_playbook: "{{ item }}.yml"
-  with_items:
-    - update
-    - common
-    - dns
-    - tmux
-    - www
-    - news
-    - nextcloud
-    - R
-    - rstudio
-    - node
-    - xnbd
+- import_playbook: update.yml
+- import_playbook: common.yml
+- import_playbook: dns.yml
+- import_playbook: tmux.yml
+- import_playbook: www.yml
+- import_playbook: news.yml
+- import_playbook: nextcloud.yml
+- import_playbook: R.yml
+- import_playbook: rstudio.yml
+- import_playbook: node.yml
+- import_playbook: xnbd.yml
