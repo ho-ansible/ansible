@@ -29,8 +29,9 @@
 - name: tinc VPN | dhcpcd (OpenVZ)
   tags:
   - package
-  package:
+  apt:
     name: dhcpcd5
+    install_recommends: no
   when: ansible_virtualization_type == 'openvz'
   notify: restart tinc
 
