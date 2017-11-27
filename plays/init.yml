@@ -13,7 +13,4 @@
 - name: init | one-time initialization
   hosts: all
   tasks:
-    - import_tasks: tasks/update.yml
     - import_tasks: tasks/randpw.yml
-  roles:
-    - { role: tinc, tags: [new,tinc] }
