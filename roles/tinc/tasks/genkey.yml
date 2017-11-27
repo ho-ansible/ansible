@@ -4,7 +4,7 @@
 - name: tinc genkey | clear old tmpfiles
   local_action:
     module: file
-    src: "/tmp/{{ item }}"
+    path: "/tmp/{{ item }}"
     state: absent
   with_items:
     - ed25519_key.pub
