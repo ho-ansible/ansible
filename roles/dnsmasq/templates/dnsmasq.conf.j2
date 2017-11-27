@@ -44,6 +44,7 @@ dhcp-authoritative
 auth-zone={{ tinc_domain }},tinc_{{ tinc_name }}/6
 #auth-sec-servers={{ tinc_subnet }}.2
 
+quiet-dhcp		# don't log DHCP traffic
 localmx			# Mailhost is this server
 dhcp-generate-names	# Use MAC to make a name if not supplied by client
 
