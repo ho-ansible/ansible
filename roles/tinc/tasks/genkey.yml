@@ -16,14 +16,17 @@
   local_action: command /usr/sbin/tinc --batch -c /tmp generate-keys 4096
 
 - name: tinc genkey | concat public keys
-  local_action: "shell cat /tmp/ed25519_key.pub /tmp/rsa_key.pub > /tmp/pub_key.priv"
+  local_action: 
+    module: assemble
+    src: /tmp
+    dest: "{{ tinc_keystore }}/pub/_{{ inventory_hostname }}"
+    regexp: "(ed25519|rsa)_key.pub"
 
-- name: tinc genkey | save new keys
+- name: tinc genkey | store private keys
   local_action: "command mv /tmp/{{ item }}_key.priv {{ tinc_keystore }}/{{ item }}/_{{ inventory_hostname }}"
   with_items:
     - ed25519
     - rsa
-    - pub
 
 - name: tinc | push host public key to VPN servers
   copy:
