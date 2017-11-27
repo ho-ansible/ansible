@@ -1,11 +1,5 @@
 ---
-# Create tinc host key if needed
-
-- name: tinc genkey | check for existing key
-  local_action:
-    module: stat
-    path: "{{ tinc_keystore }}/pub/_{{ inventory_hostname }}"
-  register: pubkey
+# Create tinc host key 
 
 - name: tinc genkey | clear old tmpfiles
   local_action:
