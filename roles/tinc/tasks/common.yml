@@ -56,8 +56,6 @@
   notify: restart tinc
 
 - name: tinc VPN | systemd unit files
-  tags:
-  - init
   copy:
     src: "{{ item }}"
     dest: /lib/systemd/system/
