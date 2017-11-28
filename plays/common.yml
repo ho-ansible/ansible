@@ -6,15 +6,15 @@
     - { role: common, tags: [common] }
     - { role: sudo, tags: [sudo, login] }
     - { role: ssh, tags: [ssh, login] }
-    - { role: tinc, tags: [tinc, vpn] }
     - { role: basepkgs, tags: [basepkgs, apt] }
+    - { role: msmtp, tags: [msmtp, mail] }
+    - { role: tinc, tags: [tinc, vpn] }
     - { role: systemd-networkd, tags: [network, systemd] }
     - { role: systemd-resolved, tags: [resolver, systemd] }
     - { role: systemd-journald, tags: [log, journal, systemd] }
     - { role: rsyslog, tags: [rsyslog, log] }
     - { role: logrotate, tags: [logrotate, log] }
     - { role: bash, tags: [bash] }
-    - { role: msmtp, tags: [msmtp, mail] }
     - { role: burp, tags: [burp, backup] }
     - { role: systemd-cron, tags: [cron, systemd] }
     - { role: systemd-timesyncd, tags: [timesync, systemd, ntp, time], when: ansible_virtualization_type != 'openvz' }
