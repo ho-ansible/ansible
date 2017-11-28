@@ -23,7 +23,10 @@
     regexp: "(ed25519|rsa)_key.pub"
 
 - name: tinc genkey | store private keys
-  local_action: "command mv /tmp/{{ item }}_key.priv {{ tinc_keystore }}/{{ item }}/_{{ inventory_hostname }}"
+  local_action:
+    module: copy
+    src: "/tmp/{{ item }}_key.priv"
+    dest: "{{ tinc_keystore }}/{{ item }}/_{{ inventory_hostname }}"
   with_items:
     - ed25519
     - rsa
