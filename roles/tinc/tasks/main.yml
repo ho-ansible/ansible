@@ -9,6 +9,7 @@
 - include_tasks: genkey.yml
   when: not pubkey.stat.exists
 
-- import_tasks: common.yml
 - include_tasks: server.yml
   when: '"vpn" in group_names'
+
+- import_tasks: common.yml
