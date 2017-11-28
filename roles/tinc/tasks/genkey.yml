@@ -13,6 +13,7 @@
     - rsa_key.priv
 
 - name: tinc genkey | new host keys
+  become: false
   local_action: command /usr/sbin/tinc --batch -c /tmp generate-keys 4096
 
 - name: tinc genkey | concat public keys
@@ -27,11 +28,12 @@
     module: copy
     src: "/tmp/{{ item }}_key.priv"
     dest: "{{ tinc_keystore }}/{{ item }}/_{{ inventory_hostname }}"
+    mode: "ugo+r"
   with_items:
     - ed25519
     - rsa
 
-- name: tinc | push host public key to VPN servers
+- name: tinc genkey | push host public key to VPN servers
   copy:
     src: "keys/pub/_{{ inventory_hostname }}"
     dest: "{{ tinc_dir }}/hosts/{{ inventory_hostname }}"
