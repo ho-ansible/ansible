@@ -7,9 +7,9 @@
   register: pubkey
 
 - include_tasks: genkey.yml
-  when: not pubkey.stat.exists
+  when: not pubkey.stat.exists and vpn not in group_names
 
 - include_tasks: server.yml
-  when: '"vpn" in group_names'
+  when: vpn in group_names
 
 - import_tasks: common.yml
