@@ -17,6 +17,7 @@
   local_action: command /usr/sbin/tinc --batch -c /tmp generate-keys 4096
 
 - name: tinc genkey | concat public keys
+  become: false
   local_action: 
     module: assemble
     src: /tmp
@@ -24,6 +25,7 @@
     regexp: "(ed25519|rsa)_key.pub"
 
 - name: tinc genkey | store private keys
+  become: false
   local_action:
     module: copy
     src: "/tmp/{{ item }}_key.priv"
