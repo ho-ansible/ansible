@@ -28,7 +28,7 @@
     module: copy
     src: "/tmp/{{ item }}_key.priv"
     dest: "{{ tinc_keystore }}/{{ item }}/_{{ inventory_hostname }}"
-    mode: "400"
+    mode: 0400
   with_items:
     - ed25519
     - rsa
