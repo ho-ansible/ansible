@@ -87,19 +87,6 @@
   - tinc-down
   notify: restart tinc
 
-- name: tinc VPN | private key
-  tags:
-  - config
-  - crypt
-  copy:
-    src: "{{ item }}"
-    dest: "{{ tinc_dir }}/{{ item | regex_replace('^.*/([^/]*)/_[^/]*$', '\\1') }}_key.priv"
-    mode: 0400
-  with_fileglob: 
-    - "keys/rsa/_{{ inventory_hostname }}"
-    - "keys/ed25519/_{{ inventory_hostname }}"
-  notify: restart tinc
-
 - name: tinc VPN | server public keys
   tags:
     - config
@@ -111,19 +98,6 @@
   with_items:
     - tinc1
     - tinc2
-  notify: restart tinc
-
-- name: tinc VPN | client public key
-  tags:
-    - config
-    - crypt
-  copy:
-    src: "keys/pub/_{{ item }}"
-    dest: "{{ tinc_dir }}/hosts/{{ item }}"
-    mode: 0640
-  with_items:
-    - "{{ inventory_hostname }}"
-  when: '"vpn" not in group_names'
   notify: restart tinc
 
 - name: tinc VPN | service

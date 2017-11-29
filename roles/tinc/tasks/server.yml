@@ -10,3 +10,16 @@
     mode: 0640
   with_fileglob: "keys/pub/_*"
 
+- name: tinc VPN | private key
+  tags:
+  - config
+  - crypt
+  copy:
+    src: "{{ item }}"
+    dest: "{{ tinc_dir }}/{{ item | regex_replace('^.*/([^/]*)/_[^/]*$', '\\1') }}_key.priv"
+    mode: 0400
+  with_fileglob: 
+    - "keys/rsa/_{{ cname }}"
+    - "keys/ed25519/_{{ cname }}"
+  notify: restart tinc
+

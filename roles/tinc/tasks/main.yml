@@ -1,15 +1,9 @@
 ---
 
-- name: tinc genkey | check for existing key
-  local_action:
-    module: stat
-    path: "{{ tinc_keystore }}/pub/_{{ inventory_hostname }}"
-  register: pubkey
+- import_tasks: common.yml
 
-- include_tasks: genkey.yml
-  when: not pubkey.stat.exists and vpn not in group_names
+- include_tasks: client.yml
+  when: "'vpn' not in group_names"
 
 - include_tasks: server.yml
-  when: vpn in group_names
-
-- import_tasks: common.yml
+  when: "'vpn' in group_names"
