@@ -6,4 +6,6 @@ tinc_subnet: 192.168.2
 tinc_port: 655
 tinc_dir: "/etc/tinc/tinc_{{ tinc_name }}"
 tinc_mode: switch
+tinc_connect:
+  - vpn1
 tinc_keystore: "../roles/tinc/files/keys"

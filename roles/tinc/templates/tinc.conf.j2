@@ -11,8 +11,9 @@ Name = {{ cname }}
 Name = {{ inventory_hostname }}
 {% endif %}
 
-ConnectTo = tinc1
-ConnectTo = tinc2
+{% for host in tinc_connect %}
+ConnectTo = {{ host }}
+{% endfor %}
 AutoConnect = yes
 
 Mode = {{ tinc_mode }}
