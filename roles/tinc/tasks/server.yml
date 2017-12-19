@@ -5,10 +5,11 @@
     - config
     - crypt
   copy:
-    src: "{{ item }}"
-    dest: "{{ tinc_dir }}/hosts/{{ item | dirname | regex_replace('^.*/([^/]+)$', '\\1') }}"
+    src: "keys/{{ item.path }}"
+    dest: "{{ tinc_dir }}/hosts/{{ item.path | dirname | regex_replace('^.*/([^/]+)$', '\\1') }}"
     mode: 0640
-  with_fileglob: "keys/*/pub.key"
+  with_filetree: keys
+  when: item.path | basename == 'pub.key'
 
 - name: tinc VPN server | private key
   tags:
