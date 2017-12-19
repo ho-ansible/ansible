@@ -92,7 +92,7 @@
     - config
     - crypt
   copy:
-    src: "keys/pub/_{{ item }}"
+    src: "keys/{{ item }}/pub.key"
     dest: "{{ tinc_dir }}/hosts/{{ item }}"
     mode: 0640
   with_items:

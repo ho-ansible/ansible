@@ -6,20 +6,20 @@
     - crypt
   copy:
     src: "{{ item }}"
-    dest: "{{ tinc_dir }}/hosts/{{ item | regex_replace('^.*/_') }}"
+    dest: "{{ tinc_dir }}/hosts/{{ item | dirname | regex_replace('^.*/([^/]+)$', '\\1') }}"
     mode: 0640
-  with_fileglob: "keys/pub/_*"
+  with_fileglob: "keys/*/pub.key"
 
-- name: tinc VPN | private key
+- name: tinc VPN server | private key
   tags:
   - config
   - crypt
   copy:
-    src: "{{ item }}"
-    dest: "{{ tinc_dir }}/{{ item | regex_replace('^.*/([^/]*)/_[^/]*$', '\\1') }}_key.priv"
+    src: "keys/{{ cname }}/{{ item }}.key"
+    dest: "{{ tinc_dir }}/{{ item }}_key.priv"
     mode: 0400
-  with_fileglob: 
-    - "keys/rsa/_{{ cname }}"
-    - "keys/ed25519/_{{ cname }}"
+  with_items: 
+    - rsa
+    - ed25519
   notify: restart tinc
 
