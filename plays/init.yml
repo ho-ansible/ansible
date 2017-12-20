@@ -12,5 +12,7 @@
 
 - name: init | one-time initialization
   hosts: all
+  vars:
+    - ansible_ssh_extra_args: "-o StrictHostKeyChecking=no"
   tasks:
     - import_tasks: tasks/randpw.yml
