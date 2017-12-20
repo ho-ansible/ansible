@@ -1,5 +1,12 @@
 ---
 
+- name: OpenSSH | package
+  tags:
+  - package
+  package:
+    name: openssh-server
+  notify: restart ssh
+
 - name: OpenSSH | config
   tags:
   - config
@@ -9,14 +16,6 @@
   with_items:
   - sshd_config
   - ssh_config
-  notify: restart ssh
-
-- name: OpenSSH | package
-  tags:
-  - package
-  package:
-    name: openssh-server
-    state: latest
   notify: restart ssh
 
 - name: OpenSSH | service
