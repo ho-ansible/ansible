@@ -5,4 +5,4 @@
     - password
   user:
     name: root
-    password: "{{ lookup('password', '/dev/null length=32') | password_hash('sha512') }}"
+    password: "{{ lookup('password', pw_store + '/' + inventory_hostname + ' encrypt=no length=32') | password_hash('sha512') }}"
