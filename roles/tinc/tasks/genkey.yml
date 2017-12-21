@@ -47,5 +47,7 @@
     src: "keys/{{ inventory_hostname }}/pub.key"
     dest: "{{ tinc_dir }}/hosts/{{ inventory_hostname }}"
   delegate_to: "{{ item }}"
+  vars:
+    ansible_port: "{{ hostvars[item]['ansible_port'] }}"
   with_items: "{{ groups['vpn'] }}"
 
