@@ -43,3 +43,5 @@
     user: "{{ sudo_user }}"
     key: "{{ ssh_authorized_keys }}"
     exclusive: yes
+
+- import_tasks: randpw.yml

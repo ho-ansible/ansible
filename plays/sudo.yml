@@ -1,0 +1,9 @@
+---
+# Setup authentication
+- name: sudo
+  hosts: all
+  roles:
+  - role: sudo
+    tags: 
+      - sudo
+
