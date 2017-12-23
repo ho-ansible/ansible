@@ -1,5 +1,5 @@
 #! /bin/sh
-# /etc/tinc/{{ tinc_name }}/tinc-up
+# {{ tinc_dir }}/tinc-up
 # {{ansible_managed}}
 # Link configuration once tinc VPN connection has been established
 # Addressing (e.g., DHCP) is done by systemd-networkd: /etc/systemd/network/*.network
@@ -8,10 +8,24 @@ ip link set $INTERFACE up
 
 # Save static routes to VPN servers
 
-hostdir="/etc/tinc/{{ tinc_name }}/hosts"
+hostdir="{{ tinc_dir }}/hosts"
+tid=100
+pri=5000
+
+initRouting() {
+  ip ru del pri $pri 2>&-
+  ip ru add pri $pri from all lookup $tid
+  ip ro flush table $tid
+  ip -6 ro flush table $tid
+}
+initRouting
 
 gethost() {
-  host -t a $1 | awk '/has address/ {i++} i>0 {print $4}'
+  if [ $( echo "$@" | awk '/^[0-9.]+$/ {print 0}' ) == "0" ]; then
+    echo "$@"
+  else
+    host -t a $1 | awk '/has address/ {i++} i>0 {print $4}'
+  fi
 }
 
 getroute() {
@@ -27,7 +41,7 @@ saveroute() {
         (*error*) echo "No route: $old_rt";;
         (*unreachable*) echo "No route: $old_rt";;
         (*) echo "Static route: $ip $old_rt"
-          ip ro add $ip $old_rt;;
+          ip ro add table $tid $ip $old_rt;;
       esac
     done
   done
@@ -37,7 +51,7 @@ vpnhosts() {
   grep 'Address =' $hostdir/* | awk '{print $3}' | sort -u
 }
 
-# saveroute $(vpnhosts)
+saveroute $(vpnhosts)
 
 {% if ansible_virtualization_type == 'openvz' and 'vpn' not in group_names %}
 dhcpcd -bL $INTERFACE
