@@ -1,10 +1,11 @@
 ---
 tinc_version: "1.1pre15"
+tinc_prefix: tinc_
 tinc_name: vpn
 tinc_domain: "{{ tinc_name }}.vpn"
 tinc_subnet: 192.168.2
 tinc_port: 655
-tinc_dir: "/etc/tinc/tinc_{{ tinc_name }}"
+tinc_dir: "/etc/tinc/{{ tinc_prefix }}{{ tinc_name }}"
 tinc_mode: switch
 tinc_connect:
   - vpn1

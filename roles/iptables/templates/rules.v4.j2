@@ -20,9 +20,9 @@
 # Allow VPN
 -A INPUT -p udp --dport {{ tinc_port }} -j ACCEPT
 -A INPUT -p tcp --dport {{ tinc_port }} -j ACCEPT
--A INPUT -i tinc_+ -j ACCEPT
--A FORWARD -i tinc_+ -j ACCEPT
--A FORWARD -o tinc_+ -j ACCEPT
+-A INPUT -i {{ tinc_prefix }}+ -j ACCEPT
+-A FORWARD -i {{ tinc_prefix }}+ -j ACCEPT
+-A FORWARD -o {{ tinc_prefix }}+ -j ACCEPT
 
 {% if 'www' in group_names %}
 # Allow HTTP/S
@@ -66,7 +66,7 @@ COMMIT
 
 {% if 'gw' in group_names %}
 -A POSTROUTING -o {{ ansible_default_ipv4.interface }} -j SNAT --to {{ ansible_default_ipv4.address }}
--A POSTROUTING -o tinc_{{ tinc_name }} -j MASQUERADE
+-A POSTROUTING -o {{ tinc_prefix }}{{ tinc_name }} -j MASQUERADE
 {% endif %}
 
 COMMIT
