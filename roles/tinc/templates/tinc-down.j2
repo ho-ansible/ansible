@@ -8,7 +8,6 @@ pri=5000
 
 ip ru del pri $pri
 ip ro flush table $tid
-ip -6 ro flush table $tid
 
 {% if ansible_virtualization_type == 'openvz' and 'vpn' not in group_names %}
 dhcpcd -k $INTERFACE 
