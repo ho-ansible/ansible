@@ -21,10 +21,10 @@ initRouting() {
 initRouting
 
 gethost() {
-  if [ $( echo "$@" | awk '/^[0-9.]+$/ {print 0}' ) == "0" ]; then
-    echo "$@"
-  else
+  if [ $( echo "$@" | tr -d '[0-9a-f.:]' ) ]; then
     host -t a $1 | awk '/has address/ {i++} i>0 {print $4}'
+  else
+    echo "$@"
   fi
 }
 
