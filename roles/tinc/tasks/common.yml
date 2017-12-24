@@ -32,7 +32,7 @@
   apt:
     name: dhcpcd5
     install_recommends: no
-  when: ansible_virtualization_type == 'openvz'
+  when: tinc_use_dhcpcd
   notify: restart tinc
 
 - name: tinc VPN | disable resolvconf hook
@@ -42,7 +42,7 @@
     path: /etc/dhcpcd.conf
     line: "nohook resolv.conf"
     create: yes
-  when: ansible_virtualization_type == 'openvz'
+  when: tinc_use_dhcpcd
 
 - name: tinc VPN | directory
   tags:

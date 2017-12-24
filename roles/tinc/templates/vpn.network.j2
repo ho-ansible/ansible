@@ -13,11 +13,17 @@ LLMNR=false
 
 {% if 'tinc' in cname | default("") %}
 Address={{ tinc_subnet }}.{{ cname | regex_replace('^.*tinc(\\d+).*$', '\\1') }}/24
+{% if 'dns' not in group_names %}
 DNS={{ tinc_subnet }}.1
+{% endif %}
 Domains={{ tinc_domain }}
 IPForward=yes
+{% endif %}
 
-{% elif ansible_virtualization_type != 'openvz' %}
+{% if tinc_use_dhcpcd %}
+# {{ tinc_dir }}/tinc-up calls dhcpcd
+DHCP=no
+{% else %}
 Domains=~.
 DHCP=yes
 
@@ -25,8 +31,4 @@ DHCP=yes
 UseDomains=true
 RouteMetric=400
 UseHostname=false
-
-{% else %}
-# {{ tinc_dir }}/tinc-up calls dhcpcd
-DHCP=no
 {% endif %}
