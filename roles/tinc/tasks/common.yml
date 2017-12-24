@@ -35,6 +35,15 @@
   when: ansible_virtualization_type == 'openvz'
   notify: restart tinc
 
+- name: tinc VPN | disable resolvconf hook
+  tags:
+  - resolv
+  lineinfile:
+    path: /etc/dhcpcd.conf
+    line: "nohook resolv.conf"
+    create: yes
+  when: ansible_virtualization_type == 'openvz'
+
 - name: tinc VPN | directory
   tags:
   - dir
