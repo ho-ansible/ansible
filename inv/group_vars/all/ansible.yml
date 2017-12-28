@@ -1,4 +1,0 @@
----
-ansible_port: "{{ ssh_port }}"
-ansible_user: seanho
-sudo_user: seanho

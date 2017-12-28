@@ -1,7 +1,0 @@
----
-tinc_name: ho
-tinc_domain: ho.vpn
-tinc_subnet: 10.100.1
-tinc_connect:
-  - tinc1
-  - tinc2
