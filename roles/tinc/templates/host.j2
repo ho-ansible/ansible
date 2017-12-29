@@ -1,14 +1,14 @@
 # Tinc host config
 # {{ ansible_managed }}
 
-{% for addr in tinc_addresses %}
+{% for addr in tinc_addresses | default("") %}
 Address = {{ addr }}
 {% endfor %}
 
-{% for subnet in tinc_subnets %}
+{% for subnet in tinc_subnets | default("") %}
 Subnet = {{ subnet }}
 {% endfor %}
 
-{%= tinc_ed25519_pub %}
+{{ tinc_ed25519_pub }}
 
-{%= tinc_rsa_pub %}
+{{ tinc_rsa_pub }}
