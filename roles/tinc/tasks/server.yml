@@ -20,7 +20,7 @@
     - config
     - crypt
   copy:
-    src: "{{ tinc_keydir }}/{{ item }}_key.priv"
+    src: "{{ tinc_keystore }}/{{ tinc_hostname }}/{{ item }}_key.priv"
     dest: "{{ tinc_dir }}"
     mode: 0400
   with_items: 

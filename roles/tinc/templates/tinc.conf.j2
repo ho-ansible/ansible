@@ -5,8 +5,8 @@
 
 Port = {{ tinc_port }}
 
-{% if 'tinc' in cname | default("") %}
-Name = {{ cname }}
+{% if tinc_hostname %}
+Name = {{ tinc_hostname }}
 {% else %}
 Name = {{ inventory_hostname }}
 {% endif %}
