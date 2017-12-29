@@ -104,8 +104,8 @@
     dest: "{{ tinc_dir }}/hosts/{{ item }}"
     mode: 0640
   vars:
-    tinc_addresses: "{{ lookup( 'file', tinc_keystore + '/' + item + '/addresses.txt' ) }}"
-    tinc_subnets: "{{ lookup( 'file', tinc_keystore + '/' + item + '/subnets.txt' ) }}"
+    tinc_addresses: "{{ lookup( 'file', tinc_keystore + '/' + item + '/addresses.yml' ) | from_yaml }}"
+    tinc_subnets: "{{ lookup( 'file', tinc_keystore + '/' + item + '/subnets.yml' ) | from_yaml }}"
     tinc_ed25519_pub: "{{ lookup( 'file', tinc_keystore + '/' + item + '/ed25519_key.pub' ) }}"
     tinc_rsa_pub: "{{ lookup( 'file', tinc_keystore + '/' + item + '/rsa_key.pub' ) }}"
   with_items:
