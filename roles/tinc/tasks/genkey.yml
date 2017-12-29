@@ -1,53 +1,26 @@
 ---
 # Create tinc host key 
 
-- name: tinc genkey | clear old tmpfiles
-  local_action:
+- name: tinc genkey | host dir in keystore
+  become: false
+  local_action: 
     module: file
-    path: "/tmp/{{ item }}"
-    state: absent
-  with_items:
-    - ed25519_key.pub
-    - ed25519_key.priv
-    - rsa_key.pub
-    - rsa_key.priv
+    path: "{{ tinc_keydir }}"
+    state: directory
+    mode: 0400
 
 - name: tinc genkey | new host keys
   become: false
-  local_action: command /usr/sbin/tinc --batch -c /tmp generate-keys 4096
-
-- name: tinc genkey | create dir in keystore
-  become: false
-  local_action: 
-    module: file
-    path: "{{ tinc_keystore }}/{{ inventory_hostname }}"
-    state: directory
-
-- name: tinc genkey | concat public keys
-  become: false
-  local_action: 
-    module: assemble
-    src: /tmp
-    dest: "{{ tinc_keystore }}/{{ inventory_hostname }}/pub.key"
-    regexp: "(ed25519|rsa)_key.pub"
-
-- name: tinc genkey | store private keys
-  become: false
-  local_action:
-    module: copy
-    src: "/tmp/{{ item }}_key.priv"
-    dest: "{{ tinc_keystore }}/{{ inventory_hostname }}/{{ item }}.key"
-    mode: 0400
-  with_items:
-    - ed25519
-    - rsa
+  local_action: "command /usr/sbin/tinc --batch -c {{ tinc_keydir }} generate-keys 4096"
 
 - name: tinc genkey | push host public key to VPN servers
-  copy:
-    src: "keys/{{ inventory_hostname }}/pub.key"
+  template:
+    src: host.j2
     dest: "{{ tinc_dir }}/hosts/{{ inventory_hostname }}"
   delegate_to: "{{ item }}"
   vars:
+    tinc_ed25519_pub: "{{ lookup( 'file', tinc_keydir + '/ed25519_key.pub' ) }}"
+    tinc_rsa_pub: "{{ lookup( 'file', tinc_keydir + '/rsa_key.pub' ) }}"
     ansible_port: "{{ hostvars[item]['ansible_port'] }}"
   with_items: "{{ groups['vpn'] }}"
 

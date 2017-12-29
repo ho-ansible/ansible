@@ -1,15 +1,17 @@
 ---
 tinc_version: "1.1pre15"
-tinc_prefix: tinc_
 tinc_name: vpn
 tinc_domain: "{{ tinc_name }}.vpn"
 tinc_subnet: 192.168.2
 tinc_port: 655
-tinc_dir: "/etc/tinc/{{ tinc_prefix }}{{ tinc_name }}"
 tinc_mode: switch
 tinc_connect:
   - vpn1
 tinc_keystore: "../.private/tinc/keys"
+
+tinc_prefix: tinc_
+tinc_dir: "/etc/tinc/{{ tinc_prefix }}{{ tinc_name }}"
+tinc_keydir: "{{ tinc_keystore }}/{{ inventory_hostname }}"
 
 # https://bugs.freedesktop.org/show_bug.cgi?id=84373
 systemd_broken_dhcp: "{{ ansible_kernel | version_compare('3.7', '<') }}"

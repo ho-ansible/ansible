@@ -3,19 +3,19 @@
 - name: tinc VPN | check for existing key
   local_action:
     module: stat
-    path: "{{ tinc_keystore }}/{{ inventory_hostname }}/pub.key"
-  register: pubkey
+    path: "{{ tinc_keydir }}"
+  register: keydir
 
 - include_tasks: genkey.yml
-  when: "not pubkey.stat.exists and not 'vpn' in group_names"
+  when: "not keydir.stat.exists and not 'vpn' in group_names"
 
 - name: tinc VPN | private key
   tags:
-  - config
-  - crypt
+    - config
+    - crypt
   copy:
-    src: "keys/{{ inventory_hostname }}/{{ item }}.key"
-    dest: "{{ tinc_dir }}/{{ item }}_key.priv"
+    src: "{{ tinc_keydir }}/{{ item }}_key.priv"
+    dest: "{{ tinc_dir }}"
     mode: 0400
   with_items:
     - rsa
@@ -26,9 +26,12 @@
   tags:
     - config
     - crypt
-  copy:
-    src: "keys/{{ inventory_hostname }}/pub.key"
+  template:
+    src: "host.j2"
     dest: "{{ tinc_dir }}/hosts/{{ inventory_hostname }}"
     mode: 0640
+  vars:
+    tinc_ed25519_pub: "{{ lookup( 'file', tinc_keydir + '/ed25519_key.pub' ) }}"
+    tinc_rsa_pub: "{{ lookup( 'file', tinc_keydir + '/rsa_key.pub' ) }}"
   notify: restart tinc
 

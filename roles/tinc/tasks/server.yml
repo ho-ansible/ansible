@@ -4,20 +4,24 @@
   tags:
     - config
     - crypt
-  copy:
-    src: "keys/{{ item.path }}"
-    dest: "{{ tinc_dir }}/hosts/{{ item.path | dirname | regex_replace('^.*/([^/]+)$', '\\1') }}"
+  template:
+    src: host.j2
+    dest: "{{ tinc_dir }}/hosts/{{ item }}"
     mode: 0640
-  with_filetree: keys
-  when: item.path | basename == 'pub.key'
+  vars:
+    tinc_addresses: "{{ lookup( 'file', tinc_keystore + '/' + item + '/addresses.txt' ) }}"
+    tinc_subnets: "{{ lookup( 'file', tinc_keystore + '/' + item + '/subnets.txt' ) }}"
+    tinc_ed25519_pub: "{{ lookup( 'file', tinc_keystore + '/' + item + '/ed25519_key.pub' ) }}"
+    tinc_rsa_pub: "{{ lookup( 'file', tinc_keystore + '/' + item + '/rsa_key.pub' ) }}"
+  with_items: "{{ lookup( 'fileglob', tinc_keystore ) }}"
 
 - name: tinc VPN server | private key
   tags:
-  - config
-  - crypt
+    - config
+    - crypt
   copy:
-    src: "keys/{{ cname }}/{{ item }}.key"
-    dest: "{{ tinc_dir }}/{{ item }}_key.priv"
+    src: "{{ tinc_keydir }}/{{ item }}_key.priv"
+    dest: "{{ tinc_dir }}"
     mode: 0400
   with_items: 
     - rsa
