@@ -19,6 +19,8 @@
     dest: "{{ tinc_dir }}/hosts/{{ inventory_hostname }}"
   delegate_to: "{{ item }}"
   vars:
+    tinc_addresses: "{{ lookup( 'file', tinc_keydir + '/addresses.txt' ) }}"
+    tinc_subnets: "{{ lookup( 'file', tinc_keydir + '/subnets.txt' ) }}"
     tinc_ed25519_pub: "{{ lookup( 'file', tinc_keydir + '/ed25519_key.pub' ) }}"
     tinc_rsa_pub: "{{ lookup( 'file', tinc_keydir + '/rsa_key.pub' ) }}"
     ansible_port: "{{ hostvars[item]['ansible_port'] }}"
