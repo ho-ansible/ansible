@@ -7,7 +7,6 @@
     module: file
     path: "{{ tinc_keydir }}"
     state: directory
-    mode: 0400
 
 - name: tinc genkey | new host keys
   become: false
