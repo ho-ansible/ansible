@@ -6,14 +6,16 @@
     - crypt
   template:
     src: host.j2
-    dest: "{{ tinc_dir }}/hosts/{{ item }}"
+    dest: "{{ tinc_dir }}/hosts/{{ item | basename }}"
     mode: 0640
   vars:
-    tinc_addresses: "{{ lookup( 'file', tinc_keystore + '/' + item + '/addresses.yml' ) | from_yaml }}"
-    tinc_subnets: "{{ lookup( 'file', tinc_keystore + '/' + item + '/subnets.yml' ) | from_yaml }}"
-    tinc_ed25519_pub: "{{ lookup( 'file', tinc_keystore + '/' + item + '/ed25519_key.pub' ) }}"
-    tinc_rsa_pub: "{{ lookup( 'file', tinc_keystore + '/' + item + '/rsa_key.pub' ) }}"
-  with_items: "{{ lookup( 'fileglob', tinc_keystore ) }}"
+    tinc_keydir: "{{ item }}"
+    tinc_addresses: "{{ lookup( 'file', tinc_keydir + '/addresses.yml' ) | from_yaml }}"
+    tinc_subnets: "{{ lookup( 'file', tinc_keydir + '/subnets.yml' ) | from_yaml }}"
+    tinc_ed25519_pub: "{{ lookup( 'file', tinc_keydir + '/ed25519_key.pub' ) }}"
+    tinc_rsa_pub: "{{ lookup( 'file', tinc_keydir + '/rsa_key.pub' ) }}"
+  with_filetree: "{{ tinc_keystore }}"
+  when: item.state == 'directory'
 
 - name: tinc VPN server | private key
   tags:
