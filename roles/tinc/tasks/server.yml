@@ -6,10 +6,10 @@
     - crypt
   template:
     src: host.j2
-    dest: "{{ tinc_dir }}/hosts/{{ item | basename }}"
+    dest: "{{ tinc_dir }}/hosts/{{ item.path }}"
     mode: 0640
   vars:
-    tinc_keydir: "{{ item }}"
+    tinc_keydir: "{{ tinc_keystore + '/' + item.path }}"
     tinc_addresses: "{{ lookup( 'file', tinc_keydir + '/addresses.yml' ) | from_yaml }}"
     tinc_subnets: "{{ lookup( 'file', tinc_keydir + '/subnets.yml' ) | from_yaml }}"
     tinc_ed25519_pub: "{{ lookup( 'file', tinc_keydir + '/ed25519_key.pub' ) }}"
