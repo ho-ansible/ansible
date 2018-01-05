@@ -9,8 +9,8 @@ mostly for Debian VPS.
 + name for new host (e.g., `HOST`)
 
 ## Inventory
-+ Add to `inv/_master.yml`: HOST ansible_host=IP
-+ Add HOST to `inv/_roles.yml` as needed
++ Add to `inv/master.yml`: HOST ansible_host=IP
++ Add HOST to `inv/roles.yml` as needed
 
 ## SSH/sudo access
 + ansible-playbook -k -l HOST plays/access.yml
