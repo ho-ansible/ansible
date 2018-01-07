@@ -21,7 +21,7 @@ IPForward=yes
 {% endif %}
 
 {% if systemd_broken_dhcp or 'vpn' in group_names %}
-# {{ tinc_dir }}/tinc-up calls dhcpcd
+# use dhcpcd if needed, see {{ tinc_dir }}/tinc-up
 DHCP=no
 {% else %}
 Domains=~.
