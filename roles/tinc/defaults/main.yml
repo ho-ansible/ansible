@@ -16,4 +16,4 @@ tinc_keydir: "{{ tinc_keystore }}/{{ inventory_hostname }}"
 
 # https://bugs.freedesktop.org/show_bug.cgi?id=84373
 systemd_broken_dhcp: "{{ ansible_kernel | version_compare('3.7', '<') }}"
-tinc_use_dhcpcd: "{{ systemd_broken_dhcp and ('vpn' not in group_names) }}"
+tinc_use_dhcpcd: "{{ systemd_broken_dhcp and 'vpn' not in group_names }}"
