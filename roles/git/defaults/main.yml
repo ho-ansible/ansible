@@ -1,4 +1,4 @@
 ---
 git_user: git
-git_repos: ""
+git_repos: "https://github.com/seanho00/ansible"
 ssh_authorized_keys: ""
