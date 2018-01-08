@@ -5,7 +5,6 @@
   - package
   package:
     name: "{{ item }}"
-    state: present
   with_items:
   - sudo
 
@@ -14,7 +13,6 @@
   - group
   group:
     name: "{{ item }}"
-    state: present
   with_items:
   - sudo
   - adm
@@ -26,7 +24,6 @@
     dest: /etc/sudoers
     regexp: '^%sudo'
     line: "%sudo   ALL=(ALL:ALL) NOPASSWD: ALL"
-    state: present
 
 - name: sudo | user
   tags:
