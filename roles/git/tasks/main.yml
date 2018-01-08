@@ -1,0 +1,33 @@
+---
+
+- name: git server | packages
+  tags:
+    - package
+  package:
+    name: "{{ item }}"
+  with_items:
+  - git
+
+- name: git server | git user
+  tags:
+    - user
+  user:
+    name: "{{ git_user }}"
+    shell: /usr/bin/git-shell
+
+- name: git server | SSH keys
+  tags:
+    - ssh
+  authorized_key:
+    user: "{{ git_user }}"
+    key: "{{ ssh_authorized_keys }}"
+    exclusive: yes
+
+- name: git server | repos
+  tags:
+    - git
+  git:
+    repo: "{{ item }}"
+    dest: "{{ item | basename }}"
+    bare: yes
+  with_items: "{{ git_repos }}"

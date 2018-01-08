@@ -1,0 +1,8 @@
+---
+# Playbook assigning role to inventory group
+- name: git | source repository servers
+  hosts: git
+  roles:
+  - role: git
+    tags: 
+      - git
