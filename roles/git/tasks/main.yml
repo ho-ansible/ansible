@@ -31,3 +31,11 @@
     dest: "{{ item | basename }}"
     bare: yes
   with_items: "{{ git_repos }}"
+
+- name: git server | permissions
+  file:
+    path: "/home/{{ git_user }}"
+    recursive: yes
+    owner: "{{ git_user }}"
+    group: "{{ git_user }}"
+    mode: o=
