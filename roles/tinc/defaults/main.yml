@@ -8,7 +8,7 @@ tinc_mode: switch
 tinc_connect:
   - vpn1
 tinc_hostname: ""
-tinc_keystore: "../.private/tinc/keys"
+tinc_keystore: "../inv/.tinc/keys"
 
 tinc_prefix: tinc_
 tinc_dir: "/etc/tinc/{{ tinc_prefix }}{{ tinc_name }}"

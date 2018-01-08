@@ -20,8 +20,8 @@ Domains={{ tinc_domain }}
 IPForward=yes
 {% endif %}
 
-{% if tinc_use_dhcpcd %}
-# {{ tinc_dir }}/tinc-up calls dhcpcd
+{% if systemd_broken_dhcp or 'vpn' in group_names %}
+# use dhcpcd if needed, see {{ tinc_dir }}/tinc-up
 DHCP=no
 {% else %}
 Domains=~.
