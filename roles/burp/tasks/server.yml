@@ -19,12 +19,12 @@
     owner: "{{ burp_user }}"
   notify: restart burp
 
-- name: Burp server | DH params
+- name: Burp server | Diffie-Hellman params
   tags:
     - server
     - crypt
   copy:
-    src: _dhfile.pem
+    content: "{{ burp_dhparams }}"
     dest: /etc/burp/keys/dhfile.pem
     mode: 0400
     owner: "{{ burp_user }}"
@@ -71,7 +71,3 @@
     name: burp
     state: started
     daemon_reload: yes
-
-# Restore /etc/burp/CA/ dir from backups
-# TODO #21: store keys in ansible?
-

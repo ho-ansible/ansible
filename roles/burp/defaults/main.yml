@@ -15,6 +15,7 @@ burp_ca_name: burp
 burp_server_CN: burp
 
 burp_restore_clients: []
+burp_dhparams: ''
 
 burp_pw: ''
 
