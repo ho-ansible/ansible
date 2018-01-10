@@ -14,21 +14,14 @@
     - server
     - config
   template:
-    src: server.conf.j2
-    dest: /etc/burp/server.conf
+    src: "{{ item.src }}.j2"
+    dest: "{{ item.dest }}/{{ item.src }}"
     owner: "{{ burp_user }}"
-  notify: restart burp
-
-- name: Burp server | Diffie-Hellman params
-  tags:
-    - server
-    - crypt
-  copy:
-    content: "{{ burp_dhparams }}"
-    dest: /etc/burp/keys/dhfile.pem
     mode: 0400
-    owner: "{{ burp_user }}"
   notify: restart burp
+  with_items:
+    - { src: server.conf, dest: /etc/burp }
+    - { src: dhfile.pem, dest: /etc/burp/keys }
 
 - name: Burp server | directories
   tags:
