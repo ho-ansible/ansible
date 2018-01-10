@@ -47,7 +47,6 @@
   - nginx.conf
   - conf.d
   - ssl
-  - sites-available
   notify: restart nginx
 
 - name: Nginx | log archive dir
@@ -60,15 +59,20 @@
     group: adm
     mode: 0750
 
+- name: Nginx | default site
+  copy:
+    src: default.nginx
+    dest: /etc/nginx/sites-available/0default
+  notify: reload nginx
+
 - name: Nginx | enable default site
   tags:
   - site
   file:
-    src: /etc/nginx/sites-available/{{ item }}
-    dest: /etc/nginx/sites-enabled/{{ item }}
+    src: /etc/nginx/sites-available/0default
+    dest: /etc/nginx/sites-enabled/0default
     state: link
-  with_items:
-  - 0default
+  notify: reload nginx
 
 - name: Nginx | service
   tags:
