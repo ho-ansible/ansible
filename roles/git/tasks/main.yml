@@ -28,14 +28,14 @@
     - git
   git:
     repo: "{{ item }}"
-    dest: "{{ item | basename }}"
+    dest: "/home/{{ git_user }}/{{ item | basename }}"
     bare: yes
   with_items: "{{ git_repos }}"
 
 - name: git server | permissions
   file:
     path: "/home/{{ git_user }}"
-    recursive: yes
+    recurse: yes
     owner: "{{ git_user }}"
     group: "{{ git_user }}"
     mode: o=
