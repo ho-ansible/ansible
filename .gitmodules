@@ -1,0 +1,3 @@
+[submodule "inv"]
+	path = inv
+	url = ssh://git@git.seanho.com:26/home/git/inv
