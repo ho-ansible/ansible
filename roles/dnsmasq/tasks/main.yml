@@ -19,6 +19,8 @@
     mode: 0440
   with_items:
     - dnsmasq.conf
+    - dnsmasq.hosts
+    - dnsmasq.servers
   notify: restart dnsmasq
 
 - name: DNSmasq | config (copy)
@@ -30,9 +32,7 @@
     owner: dnsmasq
     mode: 0440
   with_items: 
-    - { src: _dnsmasq.hosts, dest: /etc/dnsmasq.hosts }
     - { src: dnsmasq.opts, dest: /etc/ }
-    - { src: dnsmasq.servers, dest: /etc/ }
     - { src: dnsmasq, dest: /etc/default/ }
   notify: reload dnsmasq
 
