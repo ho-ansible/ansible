@@ -1,0 +1,7 @@
+---
+
+site_repo: "https://github.com/seanho00/ansible"
+site_name: ansible
+
+site_config: "../inv/.sites/{{ site_name }}"
+site_dir: "/var/www/{{ site_name }}"
