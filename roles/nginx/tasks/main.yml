@@ -46,8 +46,12 @@
   with_items:
   - nginx.conf
   - conf.d
-  - ssl
   notify: restart nginx
+
+- name: nginx | SSL cert
+  copy:
+    src: "{{ nginx_keystore }}"
+    dest: /etc/nginx/ssl
 
 - name: Nginx | log archive dir
   tags:
