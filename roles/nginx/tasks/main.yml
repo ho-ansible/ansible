@@ -44,14 +44,10 @@
     src: "{{ item }}"
     dest: "/etc/nginx/"
   with_items:
-  - nginx.conf
-  - conf.d
+    - nginx.conf
+    - conf.d
+    - "{{ nginx_keystore }}"
   notify: restart nginx
-
-- name: nginx | SSL cert
-  copy:
-    src: "{{ nginx_keystore }}"
-    dest: /etc/nginx/ssl
 
 - name: Nginx | log archive dir
   tags:
