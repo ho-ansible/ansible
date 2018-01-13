@@ -6,6 +6,8 @@ Description=Journal Remote Upload Service
 Documentation=man:systemd-journal-upload(8)
 Wants=network-online.target
 After=network-online.target
+BindsTo=tinc.service
+After=tinc.service
 
 [Service]
 ExecStart=/lib/systemd/systemd-journal-upload --save-state

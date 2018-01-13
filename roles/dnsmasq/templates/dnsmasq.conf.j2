@@ -2,7 +2,7 @@
 # See "/usr/sbin/dnsmasq --help" or "man 8 dnsmasq" for details.
 # {{ansible_managed}}
 
-interface=tinc_{{ tinc_name }}	# listen (+ lo)
+interface={{ tinc_prefix }}{{ tinc_name }}	# listen (+ lo)
 # bind-dynamic
 
 user=dnsmasq	# Drop privs
@@ -32,7 +32,7 @@ servers-file=/etc/dnsmasq.servers
 # DHCP
 domain={{ tinc_domain }},{{ tinc_subnet }}.0/24,local
 
-{% if 'tinc1' in cname %}
+{% if 'tinc1' in tinc_hostname %}
 dhcp-range=interface:tinc_{{ tinc_name }},{{ tinc_subnet }}.128,{{ tinc_subnet }}.250,255.255.255.0,3h
 dhcp-range=::100:1,::100:ffff,constructor:{{ ansible_default_ipv4.interface }},3h
 
@@ -41,17 +41,15 @@ dhcp-optsfile=/etc/dnsmasq.opts
 addn-hosts=/etc/adblock.hosts	# in /etc/hosts format
 
 dhcp-authoritative
-auth-zone={{ tinc_domain }},tinc_{{ tinc_name }}/6
+auth-zone={{ tinc_domain }},{{ tinc_prefix }}{{ tinc_name }}/6
 #auth-sec-servers={{ tinc_subnet }}.2
 
 quiet-dhcp		# don't log DHCP traffic
 localmx			# Mailhost is this server
 dhcp-generate-names	# Use MAC to make a name if not supplied by client
 
-# CNAMEs
-cname=burp,bhs4
-cname=backup,burp
-cname=ttrss,bhs4
-cname=news,ttrss
+{% for alias, target in dnsmasq_cnames %}
+cname={{ alias }},{{ target }}
+{% endfor %}
 
 {% endif %}
