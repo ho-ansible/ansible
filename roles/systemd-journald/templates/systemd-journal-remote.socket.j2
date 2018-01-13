@@ -6,10 +6,10 @@
 Description=Journal Remote Sink Socket
 
 [Socket]
-ListenStream={{ vars['ansible_tinc_' ~ tinc_name]['ipv4']['address'] }}:19532
+ListenStream={{ vars['ansible_' ~ tinc_prefix ~ tinc_name]['ipv4']['address'] }}:19532
 FreeBind=true
 BindIPv6Only=both
-BindToDevice=tinc_{{ tinc_name }}
+BindToDevice={{ tinc_prefix }}{{ tinc_name }}
 
 [Install]
 WantedBy=sockets.target
