@@ -48,10 +48,8 @@ quiet-dhcp		# don't log DHCP traffic
 localmx			# Mailhost is this server
 dhcp-generate-names	# Use MAC to make a name if not supplied by client
 
-# CNAMEs
-cname=burp,bhs4
-cname=backup,burp
-cname=ttrss,bhs4
-cname=news,ttrss
+{% for alias, target in dnsmasq_cnames %}
+cname={{ alias }},{{ target }}
+{% endfor %}
 
 {% endif %}
