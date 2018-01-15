@@ -2,4 +2,4 @@
 - name: Update all packages
   hosts: linux
   tasks: 
-    - import_tasks: "tasks/update_{{ ansible_os_family }}.yml"
+    - include_tasks: "tasks/update_{{ ansible_os_family }}.yml"
