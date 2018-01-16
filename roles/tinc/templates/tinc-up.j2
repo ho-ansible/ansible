@@ -1,8 +1,7 @@
 #! /bin/sh
 # {{ tinc_dir }}/tinc-up
 # {{ansible_managed}}
-# Link configuration once tinc VPN connection has been established
-# Addressing (e.g., DHCP) is done by systemd-networkd: /etc/systemd/network/*.network
+# Link configuration once tun/tap interface is created
 
 ip link set $INTERFACE up
 
@@ -54,4 +53,6 @@ saveroute $(vpnhosts)
 
 {% if tinc_use_dhcpcd %}
 dhcpcd -bL $INTERFACE
+{% else %}
+# DHCP handled by systemd-networkd: see /etc/systemd/network/*.network
 {% endif %}
