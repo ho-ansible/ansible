@@ -3,6 +3,15 @@
 # {{ansible_managed}}
 # Link configuration once tun/tap interface is created
 
+# Persistent MAC address
+MACfile="{{ tinc_dir }}/mac"
+MAC=$(cat "$MACfile" 2>&-)
+if [ -z "$MAC" ]; then
+  cat /sys/class/net/$INTERFACE/address > "$MACfile"
+else
+  ip link set $INTERFACE $MAC
+fi
+
 ip link set $INTERFACE up
 
 # Save static routes to VPN servers
