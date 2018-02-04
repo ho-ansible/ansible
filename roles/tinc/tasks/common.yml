@@ -101,16 +101,14 @@
     - config
   template:
     src: host.j2
-    dest: "{{ tinc_dir }}/hosts/{{ item }}"
+    dest: "{{ tinc_dir }}/hosts/{{ hostvars[item]['tinc_hostname'] }}"
     mode: 0640
   vars:
-    tinc_addresses: "{{ lookup( 'file', tinc_keystore + '/' + item + '/addresses.yml' ) | from_yaml }}"
-    tinc_subnets: "{{ lookup( 'file', tinc_keystore + '/' + item + '/subnets.yml' ) | from_yaml }}"
-    tinc_ed25519_pub: "{{ lookup( 'file', tinc_keystore + '/' + item + '/ed25519_key.pub' ) }}"
-    tinc_rsa_pub: "{{ lookup( 'file', tinc_keystore + '/' + item + '/rsa_key.pub' ) }}"
-  with_items:
-    - tinc1
-    - tinc2
+    tinc_addresses:   "{{ hostvars[item]['tinc_addresses']   }}"
+    tinc_subnets:     "{{ hostvars[item]['tinc_subnets']     }}"
+    tinc_ed25519_pub: "{{ hostvars[item]['tinc_ed25519_pub'] }}"
+    tinc_rsa_pub:     "{{ hostvars[item]['tinc_rsa_pub']     }}"
+  with_items: "groups['vpn']"
   notify: restart tinc
 
 - name: tinc VPN | service

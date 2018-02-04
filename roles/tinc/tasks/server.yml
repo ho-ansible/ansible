@@ -1,28 +1,26 @@
 ---
 
-- name: tinc VPN server | all public keys
+- name: tinc VPN server | all client pubkeys
   tags:
     - config
     - crypt
   template:
     src: host.j2
-    dest: "{{ tinc_dir }}/hosts/{{ item.path }}"
+    dest: "{{ tinc_dir }}/hosts/{{ item }}"
     mode: 0640
   vars:
-    tinc_keydir: "{{ tinc_keystore + '/' + item.path }}"
-    tinc_addresses: "{{ lookup( 'file', tinc_keydir + '/addresses.yml' ) | from_yaml }}"
-    tinc_subnets: "{{ lookup( 'file', tinc_keydir + '/subnets.yml' ) | from_yaml }}"
-    tinc_ed25519_pub: "{{ lookup( 'file', tinc_keydir + '/ed25519_key.pub' ) }}"
-    tinc_rsa_pub: "{{ lookup( 'file', tinc_keydir + '/rsa_key.pub' ) }}"
-  with_filetree: "{{ tinc_keystore }}"
-  when: item.state == 'directory'
+    tinc_addresses:   "{{ hostvars[item]['tinc_addresses']   }}"
+    tinc_subnets:     "{{ hostvars[item]['tinc_subnets']     }}"
+    tinc_ed25519_pub: "{{ hostvars[item]['tinc_ed25519_pub'] }}"
+    tinc_rsa_pub:     "{{ hostvars[item]['tinc_rsa_pub']     }}"
+  with: "{{ groups['all'] | difference(groups['vpn']) }}"
 
 - name: tinc VPN server | private key
   tags:
     - config
     - crypt
   copy:
-    src: "{{ tinc_keystore }}/{{ tinc_hostname }}/{{ item }}_key.priv"
+    src: "{{ tinc_keydir }}/{{ item }}_key.priv"
     dest: "{{ tinc_dir }}"
     mode: 0400
   with_items: 

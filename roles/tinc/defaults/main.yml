@@ -14,6 +14,11 @@ tinc_prefix: tinc_
 tinc_dir: "/etc/tinc/{{ tinc_prefix }}{{ tinc_name }}"
 tinc_keydir: "{{ tinc_keystore }}/{{ inventory_hostname }}"
 
+tinc_addresses: []
+tinc_subnets: []
+tinc_ed25519_pub: "{{ lookup( 'file', tinc_keydir + '/ed25519_key.pub' ) }}"
+tinc_rsa_pub:     "{{ lookup( 'file', tinc_keydir + '/rsa_key.pub'     ) }}"
+
 # https://bugs.freedesktop.org/show_bug.cgi?id=84373
 systemd_broken_dhcp: "{{ ansible_kernel | version_compare('3.7', '<') }}"
 tinc_use_dhcpcd: "{{ systemd_broken_dhcp and 'vpn' not in group_names }}"

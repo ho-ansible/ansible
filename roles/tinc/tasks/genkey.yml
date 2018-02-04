@@ -8,16 +8,6 @@
     path: "{{ tinc_keydir }}"
     state: directory
 
-- name: tinc genkey | host config
-  become: false
-  local_action:
-    module: file
-    path: "{{ tinc_keydir + '/' + item }}"
-    state: file
-  with_items:
-    - addresses.yml
-    - subnets.yml
-
 - name: tinc genkey | new host keys
   become: false
   local_action: "command /usr/sbin/tinc --batch -c {{ tinc_keydir }} generate-keys 4096"
@@ -28,10 +18,6 @@
     dest: "{{ tinc_dir }}/hosts/{{ inventory_hostname }}"
   delegate_to: "{{ item }}"
   vars:
-    tinc_addresses: "{{ lookup( 'file', tinc_keydir + '/addresses.yml' ) | from_yaml }}"
-    tinc_subnets: "{{ lookup( 'file', tinc_keydir + '/subnets.yml' ) | from_yaml }}"
-    tinc_ed25519_pub: "{{ lookup( 'file', tinc_keydir + '/ed25519_key.pub' ) }}"
-    tinc_rsa_pub: "{{ lookup( 'file', tinc_keydir + '/rsa_key.pub' ) }}"
     ansible_port: "{{ hostvars[item]['ansible_port'] }}"
   with_items: "{{ groups['vpn'] }}"
 
