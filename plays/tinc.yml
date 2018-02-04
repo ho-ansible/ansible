@@ -1,0 +1,10 @@
+---
+# Playbook assigning role to inventory group
+- name: tinc | VPN
+  hosts: linux
+  roles:
+  - role: tinc
+    tags: 
+      - vpn
+      - tinc
+
