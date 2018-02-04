@@ -108,7 +108,7 @@
     tinc_subnets:     "{{ hostvars[item]['tinc_subnets']     }}"
     tinc_ed25519_pub: "{{ hostvars[item]['tinc_ed25519_pub'] }}"
     tinc_rsa_pub:     "{{ hostvars[item]['tinc_rsa_pub']     }}"
-  with_items: "groups['vpn']"
+  with_items: "{{ groups['vpn'] }}"
   notify: restart tinc
 
 - name: tinc VPN | service
