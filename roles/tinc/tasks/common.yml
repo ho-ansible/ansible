@@ -104,10 +104,10 @@
     dest: "{{ tinc_dir }}/hosts/{{ hostvars[item]['tinc_hostname'] }}"
     mode: 0640
   vars:
-    tinc_addresses:   "{{ hostvars[item]['tinc_addresses']   }}"
-    tinc_subnets:     "{{ hostvars[item]['tinc_subnets']     }}"
-    tinc_ed25519_pub: "{{ hostvars[item]['tinc_ed25519_pub'] }}"
-    tinc_rsa_pub:     "{{ hostvars[item]['tinc_rsa_pub']     }}"
+    tinc_addresses: "{{ hostvars[item]['tinc_addresses'] }}"
+    tinc_subnets:   "{{ hostvars[item]['tinc_subnets']   }}"
+    tinc_ed25519:   "{{ hostvars[item]['tinc_ed25519']   }}"
+    tinc_rsa:       "{{ hostvars[item]['tinc_rsa']       }}"
   with_items: "{{ groups['vpn'] }}"
   notify: restart tinc
 
