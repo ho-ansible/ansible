@@ -8,17 +8,14 @@ tinc_mode: switch
 tinc_connect:
   - vpn1
 tinc_hostname: ""
-tinc_keystore: "../inv/.tinc/keys"
 
 tinc_prefix: tinc_
 tinc_dir: "/etc/tinc/{{ tinc_prefix }}{{ tinc_name }}"
+
+tinc_keystore: "~/.tinc/keys"
 tinc_keydir: "{{ tinc_keystore }}/{{ inventory_hostname }}"
 
-tinc_ed25519: "{{ lookup( 'file', tinc_keydir + '/ed25519_key.pub' ) }}"
-tinc_rsa:     "{{ lookup( 'file', tinc_keydir + '/rsa_key.pub'     ) }}"
 tinc_addresses: []
 tinc_subnets: []
-
-# https://bugs.freedesktop.org/show_bug.cgi?id=84373
-systemd_broken_dhcp: "{{ ansible_kernel | version_compare('3.7', '<') }}"
-tinc_use_dhcpcd: "{{ systemd_broken_dhcp and 'vpn' not in group_names }}"
+tinc_ed25519: ""
+tinc_rsa: ""
