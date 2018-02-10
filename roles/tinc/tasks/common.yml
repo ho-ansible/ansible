@@ -96,6 +96,29 @@
   - tinc-down
   notify: restart tinc
 
+- name: tinc VPN | private key
+  tags:
+    - config
+    - crypt
+  copy:
+    src: "{{ tinc_keydir }}/{{ item }}_key.priv"
+    dest: "{{ tinc_dir }}"
+    mode: 0400
+  with_items: 
+    - rsa
+    - ed25519
+  notify: restart tinc
+
+- name: tinc VPN | public key
+  tags:
+    - config
+    - crypt
+  template:
+    src: "host.j2"
+    dest: "{{ tinc_dir }}/hosts/{{ inventory_hostname }}"
+    mode: 0640
+  notify: restart tinc
+
 - name: tinc VPN | server public keys
   tags:
     - config
@@ -106,9 +129,8 @@
   vars:
     tinc_addresses: "{{ hostvars[item]['tinc_addresses'] }}"
     tinc_subnets:   "{{ hostvars[item]['tinc_subnets']   }}"
-    tinc_ed25519:   "{{ hostvars[item]['tinc_ed25519']   }}"
-    tinc_rsa:       "{{ hostvars[item]['tinc_rsa']       }}"
-  with_items: "{{ groups['vpn'] }}"
+    tinc_keydir:    "{{ tinc_keystore + '/' + item }}"
+  with_items: "{{ groups['vpn'] | difference([inventory_hostname]) }}"
   notify: restart tinc
 
 - name: tinc VPN | service

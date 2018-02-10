@@ -1,9 +1,15 @@
 ---
 
-- import_tasks: common.yml
+- name: tinc VPN | check for existing key
+  local_action:
+    module: stat
+    path: "{{ tinc_keydir }}"
+  register: keydir
 
-- include_tasks: client.yml
-  when: "'vpn' not in group_names"
+- include_tasks: genkey.yml
+  when: "not keydir.stat.exists and not 'vpn' in group_names"
+
+- import_tasks: common.yml
 
 - include_tasks: server.yml
   when: "'vpn' in group_names"
