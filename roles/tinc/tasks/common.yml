@@ -109,28 +109,8 @@
     - ed25519
   notify: restart tinc
 
-- name: tinc VPN | public key
-  tags:
-    - config
-    - crypt
-  template:
-    src: "host.j2"
-    dest: "{{ tinc_dir }}/hosts/{{ inventory_hostname }}"
-    mode: 0640
-  notify: restart tinc
-
-- name: tinc VPN | server public keys
-  tags:
-    - config
-  template:
-    src: host.j2
-    dest: "{{ tinc_dir }}/hosts/{{ hostvars[item]['tinc_hostname'] }}"
-    mode: 0640
-  vars:
-    tinc_addresses: "{{ hostvars[item]['tinc_addresses'] }}"
-    tinc_subnets:   "{{ hostvars[item]['tinc_subnets']   }}"
-    tinc_keydir:    "{{ tinc_keystore + '/' + item }}"
-  with_items: "{{ groups['vpn'] | difference([inventory_hostname]) }}"
+- include_tasks: hostconf.yml
+  with_items: "{{ groups['vpn'] | union([inventory_hostname]) | unique }}"
   notify: restart tinc
 
 - name: tinc VPN | service
