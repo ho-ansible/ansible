@@ -9,7 +9,7 @@ MAC=$(cat "$MACfile" 2>&-)
 if [ -z "$MAC" ]; then
   cat /sys/class/net/$INTERFACE/address > "$MACfile"
 else
-  ip link set $INTERFACE $MAC
+  ip link set $INTERFACE address $MAC
 fi
 
 ip link set $INTERFACE up
