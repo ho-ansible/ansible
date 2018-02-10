@@ -59,7 +59,7 @@ vpnhosts() {
   grep 'Address =' $hostdir/* | awk '{print $3}' | sort -u
 }
 
-saveroute $(vpnhosts)
+saveroute $(vpnhosts) || true
 
 {% if tinc_use_dhcpcd %}
 dhcpcd -bL $INTERFACE
