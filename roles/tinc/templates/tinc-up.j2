@@ -3,8 +3,10 @@
 # {{ansible_managed}}
 # Link configuration once tun/tap interface is created
 
+tincdir="{{ tinc_dir }}"
+
 # Persistent MAC address
-MACfile="{{ tinc_dir }}/mac"
+MACfile="$tincdir/mac"
 MAC=$(cat "$MACfile" 2>&-)
 if [ -z "$MAC" ]; then
   cat /sys/class/net/$INTERFACE/address > "$MACfile"
@@ -16,7 +18,7 @@ ip link set $INTERFACE up
 
 # Save static routes to VPN servers
 
-hostdir="{{ tinc_dir }}/hosts"
+hostdir="$tincdir/hosts"
 tid=100
 pri=5000
 
@@ -28,38 +30,44 @@ initRouting() {
 }
 initRouting
 
-gethost() {
-  if [ $( echo "$@" | tr -d '[0-9a-f.:]' ) ]; then
-    host -t a $1 | awk '/has address/ {i++} i>0 {print $4}'
-  else
-    echo "$@"
-  fi
-}
-
 getroute() {
   rt=$(ip ro get $1 | head -n 1)
   echo "${rt#$1}"
 }
 
 saveroute() {
-  for node in $@; do
-    for ip in $(gethost $node); do
-      old_rt=$(getroute $ip)
-      case "$old_rt" in
-        (*error*) echo "No route: $old_rt";;
-        (*unreachable*) echo "No route: $old_rt";;
-        (*) echo "Static route: $ip $old_rt"
-          ip ro add table $tid $ip $old_rt;;
-      esac
-    done
+  for ip in $@; do
+    old_rt=$(getroute $ip)
+    case "$old_rt" in
+      (*error*) echo "No route: $old_rt";;
+      (*unreachable*) echo "No route: $old_rt";;
+      (*) echo "Static route: $ip $old_rt"
+        ip ro add table $tid $ip $old_rt;;
+    esac
   done
 }
 
 vpnhosts() {
-  grep 'Address =' $hostdir/* | awk '{print $3}' | sort -u
+  grep 'ConnectTo =' "$tincdir/tinc.conf" | awk '{print $3}' 
 }
 
-saveroute $(vpnhosts) || true
+vpnaddr() {
+  while read host; do
+    grep 'Address =' "$tincdir/hosts/$host" | awk '{print $3}' 
+  done
+}
+
+getip() {
+  while read host; do
+    if [ $( echo "$host" | tr -d '[0-9a-f.:]' ) ]; then
+      host -t a $host | awk '/has address/ {i++} i>0 {print $4}'
+    else
+      echo "$host"
+    fi
+  done
+}
+
+saveroute $(vpnhosts | vpnaddr | getip | sort -u) || true
 
 {% if tinc_use_dhcpcd %}
 dhcpcd -bL $INTERFACE
