@@ -24,6 +24,7 @@ initRouting() {
   ip ru del pri $pri 2>&-
   ip ru add pri $pri from all lookup $tid
   ip ro flush table $tid
+  ip -6 ro flush table $tid
 }
 initRouting
 

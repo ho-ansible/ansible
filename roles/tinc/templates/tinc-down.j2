@@ -8,6 +8,7 @@ pri=5000
 
 ip ru del pri $pri
 ip ro flush table $tid
+ip -6 ro flush table $tid
 
 {% if tinc_use_dhcpcd %}
 dhcpcd -k $INTERFACE 
