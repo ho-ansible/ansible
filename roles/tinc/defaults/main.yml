@@ -10,10 +10,10 @@ tinc_connect:
 tinc_hostname: ""
 
 tinc_prefix: tinc_
-tinc_dir: "/etc/tinc/{{ tinc_prefix }}{{ tinc_name }}"
+tinc_dir: "{{ '/etc/tinc/' + tinc_prefix + tinc_name }}"
 
-tinc_keystore: "~/.tinc/keys"
-tinc_keydir: "{{ tinc_keystore }}/{{ inventory_hostname }}"
+tinc_keystore: "{{ inventory_dir + '/.tinc/keys' }}"
+tinc_keydir: "{{ tinc_keystore + '/' + inventory_hostname }}"
 
 tinc_addresses: []
 tinc_subnets: []
