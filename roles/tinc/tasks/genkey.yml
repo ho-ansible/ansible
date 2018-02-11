@@ -13,9 +13,10 @@
   local_action: "command /usr/sbin/tinc --batch -c {{ tinc_keydir }} generate-keys 4096"
 
 - name: tinc genkey | push host public key to VPN servers
-  include_tasks: hostconf.yml item=inventory_hostname
+  include_tasks: hostconf.yml
   delegate_to: "{{ item }}"
   vars:
+    host: "{{ inventory_hostname }}"
     ansible_port: "{{ hostvars[item]['ansible_port'] }}"
   with_items: "{{ groups['vpn'] }}"
 

@@ -110,6 +110,8 @@
   notify: restart tinc
 
 - include_tasks: hostconf.yml
+  vars:
+    host: "{{ item }}"
   with_items: "{{ groups['vpn'] | union([inventory_hostname]) | unique }}"
   notify: restart tinc
 

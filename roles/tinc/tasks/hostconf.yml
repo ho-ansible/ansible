@@ -6,12 +6,12 @@
     - crypt
   template:
     src: host.j2
-    dest: "{{ tinc_dir }}/hosts/{{ hostvars[item]['tinc_hostname'] | default(item) }}"
+    dest: "{{ tinc_dir }}/hosts/{{ hostvars[host]['tinc_hostname'] | default(host) }}"
     mode: 0640
   vars:
-    tinc_addresses: "{{ hostvars[item]['tinc_addresses'] }}"
-    tinc_subnets:   "{{ hostvars[item]['tinc_subnets']   }}"
-    tinc_keydir:    "{{ tinc_keystore + '/' + item }}"
+    tinc_addresses: "{{ hostvars[host]['tinc_addresses'] }}"
+    tinc_subnets:   "{{ hostvars[host]['tinc_subnets']   }}"
+    tinc_keydir:    "{{ tinc_keystore + '/' + host }}"
     tinc_ed25519:   "{{ lookup('file', tinc_keydir + '/ed25519_key.pub') }}"
     tinc_rsa:       "{{ lookup('file', tinc_keydir + '/rsa_key.pub'    ) }}"
 

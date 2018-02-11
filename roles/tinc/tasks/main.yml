@@ -12,5 +12,7 @@
 - import_tasks: common.yml
 
 - include_tasks: hostconf.yml
+  vars:
+    host: "{{ item }}"
   with_items: "{{ groups['all'] | difference(groups['vpn']) }}"
   when: "'vpn' in group_names"
