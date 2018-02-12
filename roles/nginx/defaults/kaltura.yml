@@ -1,3 +1,0 @@
----
-kaltura_repo: http://installrepo.kaltura.org/repo/apt/{{ ansible_distribution | lower }}
-kaltura_release: mercury

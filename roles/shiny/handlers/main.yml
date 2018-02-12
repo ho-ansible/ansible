@@ -1,5 +1,0 @@
----
-- name: restart shiny
-  service:
-    name: shiny-server
-    state: restarted

@@ -1,5 +1,0 @@
----
-dependencies:
-  - { role: R, tags: [R] }
-  - { role: nginx, tags: [nginx] }
-

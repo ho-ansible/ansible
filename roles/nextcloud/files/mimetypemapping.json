@@ -1,5 +1,0 @@
-{
-  "m3u8": ["application/vnd.apple.mpegurl"],
-  "ts": ["video/mp2ts"],
-  "mpd": ["application/dash+xml"]
-}

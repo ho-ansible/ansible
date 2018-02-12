@@ -1,7 +1,0 @@
----
-- name: restart node
-  tags:
-    - service
-  service:
-    name: node
-    state: restarted

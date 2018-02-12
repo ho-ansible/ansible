@@ -1,6 +1,0 @@
----
-- import_tasks: client.yml
-- include_tasks: server.yml
-  when: "'backup' in group_names"
-- include_tasks: burp-ui.yml
-  when: "'backup' in group_names"

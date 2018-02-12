@@ -1,4 +1,0 @@
----
-dependencies:
-  - { role: php, tags: ["php"] }
-  - { role: postgres, tags: ["postgres", "db"] }

@@ -1,9 +1,0 @@
----
-node_name: myapp
-node_description: "My Node.js app"
-node_repo: https://github.com/seanho00/myapp
-node_hostname: myapp.example.com
-node_localport: 8080
-node_localaddr: 127.0.0.1
-node_user: node
-node_config_dir: "/etc/systemd/system/node@{{ node_name }}.service.d/"

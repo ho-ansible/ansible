@@ -1,5 +1,0 @@
----
-postgresql_version: 9.6
-postgresql_dir: "/etc/postgresql/{{ postgresql_version }}/main"
-postgresql_user: postgres
-postgresql_dump: "{{ postgresql_dir }}/pg_dumpall.sql.gz"

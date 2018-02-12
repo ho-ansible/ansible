@@ -1,8 +1,0 @@
----
-
-- name: restart tt-rss
-  tags:
-  - service
-  service:
-    name: tt-rss
-    state: restarted

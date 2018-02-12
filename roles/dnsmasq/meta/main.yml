@@ -1,3 +1,0 @@
----
-dependencies:
-  - { role: tinc, tags: [dns, dnsmasq, tinc, vpn] }

@@ -1,9 +1,0 @@
-server {
-  listen {{ vars['ansible_tinc_' ~ tinc_name]['ipv4']['address'] }}:80;
-
-  server_name {{ burpui_host }};
-
-  location / {
-    proxy_pass http://localhost:{{ burpui_localport }};
-  }
-}

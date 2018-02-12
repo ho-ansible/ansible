@@ -1,7 +1,0 @@
----
-ttrss_host: ttrss.example.com
-ttrss_port: 443
-ttrss_url: "https://{{ ttrss_host }}:{{ ttrss_port }}/"
-ttrss_www: /var/www/tt-rss
-ttrss_user: ttrss
-ttrss_db_pw: ''

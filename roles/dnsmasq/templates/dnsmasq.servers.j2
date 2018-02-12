@@ -1,6 +1,0 @@
-##
-# /etc/dnsmasq.servers
-# {{ ansible_managed }}
-{% for srv in dnsmasq_servers %}
-server={{ srv }}
-{% endfor %}

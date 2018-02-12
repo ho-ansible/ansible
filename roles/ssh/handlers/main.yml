@@ -1,7 +1,0 @@
----
-- name: restart ssh
-  tags:
-  - service
-  service:
-    name: ssh
-    state: restarted

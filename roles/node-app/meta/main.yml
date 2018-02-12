@@ -1,4 +1,0 @@
----
-dependencies:
-  - { role: nodejs, tags: [node, nodejs] }
-  - { role: nginx, tags: [nginx, www] }

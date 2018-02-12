@@ -1,8 +1,0 @@
-# /etc/rsyslog.conf
-
-$ModLoad imuxsock
-$ModLoad imklog
-$ModLoad omrelp
-
-*.*     -/var/log/messages;RSYSLOG_TraditionalFileFormat
-*.*     :omrelp:{{ log_server }}:{{ log_port }}

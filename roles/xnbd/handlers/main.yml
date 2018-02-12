@@ -1,5 +1,0 @@
----
-- name: restart xnbd
-  service:
-    name: xnbd-common
-    state: restarted

@@ -1,9 +1,0 @@
-##
-# /etc/rstudio/rserver.conf
-# Server config for RStudio Server
-# {{ ansible_managed }}
-
-www-address=127.0.0.1
-www-port={{ rstudio_localport }}
-
-auth-required-user-group={{ rstudio_group }}

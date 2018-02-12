@@ -1,7 +1,0 @@
----
-- name: restart php-fpm
-  tags:
-  - service
-  service:
-    name: php{{ php_ver }}-fpm
-    state: restarted

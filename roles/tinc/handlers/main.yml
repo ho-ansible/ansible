@@ -1,7 +1,0 @@
----
-- name: restart tinc
-  tags:
-  - service
-  service:
-    name: tinc
-    state: restarted

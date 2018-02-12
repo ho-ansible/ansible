@@ -1,7 +1,0 @@
----
-
-- name: initramfs | packages
-  package:
-    name: "{{ item }}"
-  with_items:
-    - dropbear-initramfs

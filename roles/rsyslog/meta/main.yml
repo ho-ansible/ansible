@@ -1,6 +1,0 @@
----
-dependencies:
-  - role: logrotate
-    tags:
-    - log
-    when: '"log" in group_names'

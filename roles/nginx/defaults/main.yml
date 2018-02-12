@@ -1,3 +1,0 @@
----
-# ssl.crt, ssl.key, dhparam.pem (see files/nginx.conf)
-nginx_keystore: "../inv/.nginx/ssl"

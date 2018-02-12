@@ -1,5 +1,0 @@
-# Extra options to be passed to tincd.
-# EXTRA="-d"
-
-# Use our binaries (v1.1) rather than package
-DAEMON="/usr/local/sbin/tincd"
