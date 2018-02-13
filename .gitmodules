@@ -94,9 +94,6 @@
 [submodule "roles/systemd-timesyncd"]
 	path = roles/systemd-timesyncd
 	url = ssh://git@github.com/ho-ansible/systemd-timesyncd
-[submodule "roles/tahoe"]
-	path = roles/tahoe
-	url = ssh://git@github.com/ho-ansible/tahoe
 [submodule "roles/tinc"]
 	path = roles/tinc
 	url = ssh://git@github.com/ho-ansible/tinc
