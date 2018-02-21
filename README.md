@@ -9,16 +9,16 @@ mostly for Debian VPS.
 + name for new host (e.g., `HOST`)
 
 ## Inventory
-+ Add to `inv/master.yml`: HOST ansible_host=IP
-+ Add HOST to `inv/roles.yml` as needed
++ Add to `inv/*.yml`: HOST ansible_host=IP
++ Add HOST to groups as needed
 
 ## SSH/sudo access
-+ ansible-playbook -k -l HOST plays/access.yml
++ `ansible-playbook -k -l HOST plays/access.yml`
 + if NAT, add `-e ansible_port=NATPORT`
 
 ## Setup
-+ ansible-playbook -l HOST plays/main.yml
++ `ansible-playbook -l HOST plays/main.yml`
 
 ## Manual setup
 + Create entry on burp server
-+ Manually set CNAME in DNS
++ Add DNS records: A, AAAA, CNAME
