@@ -8,7 +8,6 @@
     - { role: ssh, tags: [ssh, login] }
     - { role: basepkgs, tags: [basepkgs, apt] }
     - { role: msmtp, tags: [msmtp, mail] }
-    - { role: tinc, tags: [tinc, vpn] }
     - { role: systemd-networkd, tags: [network, systemd] }
     - { role: systemd-resolved, tags: [resolver, systemd] }
     - { role: systemd-journald, tags: [log, journal, systemd] }
