@@ -1,0 +1,17 @@
+#!/bin/sh
+## /etc/grub.d/90-debian-iso
+## Create grub boot menu entries for each Debian netinstall ISO in /boot
+
+for iso in /boot/*.iso; do cat <<__END__
+
+menuentry \"Debian ISO: ${iso##*/}\" {
+  loopback loop $iso
+  linux (loop)/install.amd/vmlinuz vga=788 \
+    auto=true file=/boot/preseed.cfg DEBCONF_DEBUG=5 \
+    -- quiet
+  initrd (loop)/install.amd/initrd.gz
+}
+
+__END__
+done
+
