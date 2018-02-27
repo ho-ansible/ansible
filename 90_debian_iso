@@ -4,7 +4,7 @@
 
 for iso in /boot/*.iso; do cat <<__END__
 
-menuentry \"Debian ISO: ${iso##*/}\" {
+menuentry "Debian ISO: ${iso##*/}" {
   loopback loop $iso
   linux (loop)/install.amd/vmlinuz vga=788 \
     auto=true file=/boot/preseed.cfg DEBCONF_DEBUG=5 \
