@@ -2,6 +2,11 @@
 ## /etc/grub.d/90-debian-iso
 ## Create grub boot menu entries for each Debian netinstall ISO in /boot
 
+## TODO pull network config from current or /etc/network/interfaces
+##   and store as kernel cmdline options:
+## Installer can pull DHCP, but installed system needs
+## network at initramfs stage, for dropbear cryptoroot remote unlock
+
 for iso in /boot/*.iso; do cat <<__END__
 
 menuentry "Debian ISO: ${iso##*/}" {
