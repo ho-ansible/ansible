@@ -3,7 +3,7 @@
 - name: tinc
   hosts: linux
   tasks:
-    - include_vars: "../inv/.tinc/networks/{{ item }}.yml"
+    - include_vars: "{{ inventory_dir }}/.tinc/networks/{{ item }}.yml"
     - include_role: tinc
       tags:
         - vpn
