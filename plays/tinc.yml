@@ -1,0 +1,12 @@
+---
+# Playbook assigning role to inventory group
+- name: tinc
+  hosts: linux
+  tasks:
+    - include_vars: "../inv/.tinc/networks/{{ item }}.yml"
+    - include_role: tinc
+      tags:
+        - vpn
+        - tinc
+        - "{{ item }}"
+      with_items: tinc_networks
