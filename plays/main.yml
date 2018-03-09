@@ -13,3 +13,4 @@
 - import_playbook: rstudio.yml
 - import_playbook: node.yml
 - import_playbook: xnbd.yml
+- import_playbook: distcc.yml

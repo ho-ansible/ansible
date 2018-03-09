@@ -1,0 +1,9 @@
+---
+# Playbook assigning role to inventory group
+- name: distcc | worker for remote compile
+  hosts: distcc
+  roles:
+  - role: distcc
+    tags: 
+      - distcc
+
