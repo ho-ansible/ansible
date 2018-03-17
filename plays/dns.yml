@@ -1,11 +1,14 @@
 ---
 # Playbook assigning role to inventory group
-- import_playbook: tinc.yml
 - name: dnsmasq | DNS servers
   hosts: dns
+  tasks:
+    - include_tasks: tasks/tinc-role.yml
+      with_items: "{{ tinc_networks }}"
+      loop_control:
+        loop_var: tinc_name
   roles:
-  - role: dnsmasq
-    tags: 
-      - dns
-      - dnsmasq
-
+    - role: dnsmasq
+      tags: 
+        - dns
+        - dnsmasq
