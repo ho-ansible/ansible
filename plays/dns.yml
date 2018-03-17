@@ -1,5 +1,6 @@
 ---
 # Playbook assigning role to inventory group
+- import_playbook: tinc.yml
 - name: dnsmasq | DNS servers
   hosts: dns
   roles:
