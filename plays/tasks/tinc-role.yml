@@ -1,8 +1,9 @@
 ---
+- set_fact: "{{ tinc_cfg }}"
+
 - debug:
     msg: "{{ tinc_name }}"
-  vars: "{{ tinc_cfg }}"
 
-- name: "tinc {{ tinc_cfg.tinc_name }} | role"
-  include_role:
-    name: tinc
+#- name: "tinc {{ tinc_cfg.tinc_name }} | role"
+#  include_role:
+#    name: tinc

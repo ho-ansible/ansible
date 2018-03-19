@@ -1,5 +1,6 @@
----
+#! /usr/bin/env ansible-playbook
 # Playbook assigning role to inventory group
+---
 - name: nginx | Web servers
   hosts: www
   roles:

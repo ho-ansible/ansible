@@ -1,5 +1,6 @@
----
+#! /usr/bin/env ansible-playbook
 # Setup authentication
+---
 - name: sudo
   hosts: all
   roles:

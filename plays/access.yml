@@ -1,5 +1,6 @@
----
+#! /usr/bin/env ansible-playbook
 # Config ssh/sudo access so subsequent plays can run as usual
+---
 
 - name: access | config ansible access
   hosts: all
