@@ -17,7 +17,7 @@ mostly for Debian VPS.
 + if NAT, add `-e ansible_port=NATPORT`
 
 ## Setup
-+ `ansible-playbook -l HOST plays/main.yml`
++ `ansible-playbook -l HOST site.yml`
 
 ## Manual setup
 + Create entry on burp server
