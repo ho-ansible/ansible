@@ -5,8 +5,11 @@
     - vpn
     - tinc
   hosts: linux
+  vars:
+    myvars: "{{ hostvars[inventory_hostname] | to_json | from_json }}"
+    q_tinc: "keys(@)[?starts_with(@, 'tinc_cfg_')]"
   tasks:
     - include_tasks: tasks/tinc-role.yml
-      with_items: "{{ tinc_networks }}"
+      with_items: "{{ myvars | json_query(q_tinc) | map('extract', myvars) | list }}"
       loop_control:
-        loop_var: tinc_name
+        loop_var: tinc_cfg

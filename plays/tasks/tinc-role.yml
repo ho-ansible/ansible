@@ -1,7 +1,8 @@
 ---
-- name: "tinc {{ tinc_name }} | vars"
-  include_vars: "{{ inventory_dir }}/.tinc/networks/{{ tinc_name }}.yml"
+- debug:
+    msg: "{{ tinc_name }}"
+  vars: "{{ tinc_cfg }}"
 
-- name: "tinc {{ tinc_name }} | role"
+- name: "tinc {{ tinc_cfg.tinc_name }} | role"
   include_role:
     name: tinc
