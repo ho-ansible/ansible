@@ -1,6 +1,9 @@
 [submodule "inv"]
 	path = inv
 	url = ssh://git@git.seanho.com:26/home/git/inv
+[submodule "roles/initramfs"]
+	path = roles/initramfs
+	url = ssh://git@github.com/ho-ansible/initramfs
 [submodule "roles/basepkgs"]
 	path = roles/basepkgs
 	url = ssh://git@github.com/ho-ansible/basepkgs
@@ -25,9 +28,6 @@
 [submodule "roles/git"]
 	path = roles/git
 	url = ssh://git@github.com/ho-ansible/git
-[submodule "roles/initramfs"]
-	path = roles/initramfs
-	url = ssh://git@github.com/ho-ansible/initramfs
 [submodule "roles/iptables"]
 	path = roles/iptables
 	url = ssh://git@github.com/ho-ansible/iptables
