@@ -103,3 +103,6 @@
 [submodule "roles/xnbd"]
 	path = roles/xnbd
 	url = ssh://git@github.com/ho-ansible/xnbd
+[submodule "roles/rsyslog-server"]
+	path = roles/rsyslog-server
+	url = ssh://git@github.com/ho-ansible/rsyslog-server
