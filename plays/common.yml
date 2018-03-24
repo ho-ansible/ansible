@@ -7,16 +7,16 @@
     - { role: common, tags: [common] }
     - { role: sudo, tags: [sudo, login] }
     - { role: ssh, tags: [ssh, login] }
+    - { role: bash, tags: [bash] }
     - { role: basepkgs, tags: [basepkgs, apt] }
     - { role: msmtp, tags: [msmtp, mail] }
     - { role: systemd-networkd, tags: [network, systemd] }
     - { role: systemd-resolved, tags: [resolver, systemd] }
-    - { role: systemd-journald, tags: [log, journal, systemd] }
     - { role: rsyslog, tags: [rsyslog, log] }
     - { role: logrotate, tags: [logrotate, log] }
-    - { role: bash, tags: [bash] }
     - { role: burp, tags: [burp, backup] }
     - { role: systemd-cron, tags: [cron, systemd] }
     - { role: systemd-timesyncd, tags: [timesync, systemd, ntp, time], when: ansible_virtualization_type != 'openvz' }
+    - { role: systemd-journald, tags: [log, journal, systemd] }
     - { role: iptables, tags: [iptables, firewall] }
 
