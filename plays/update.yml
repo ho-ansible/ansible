@@ -1,7 +1,15 @@
 #! /usr/bin/env ansible-playbook
 ---
 - name: Update all packages
-  hosts: linux
+  hosts: debian
   gather_facts: false
   tasks: 
-    - include_tasks: "tasks/update_{{ ansible_os_family }}.yml"
+    - name: Upgrade packages (Debian)
+      tags:
+        - package
+        - update
+      apt:
+        autoclean: yes
+        update_cache: yes
+        cache_valid_time: 86400
+        upgrade: dist
