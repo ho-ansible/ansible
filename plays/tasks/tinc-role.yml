@@ -1,8 +1,6 @@
 ---
-- set_fact: "{{ tinc_cfg }}"
-
 - debug:
-    msg: "{{ tinc_name }}"
+    msg: "{{ tinc_cfg.tinc_mode | d('none', true) }}"
 
 #- name: "tinc {{ tinc_cfg.tinc_name }} | role"
 #  include_role:
