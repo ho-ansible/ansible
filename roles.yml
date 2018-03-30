@@ -1,38 +1,40 @@
 ---
 # ansible-galaxy install -r roles.yml
 
-- src: https://github.com/ho-ansible/basepkgs
-- src: https://github.com/ho-ansible/bash
-- src: https://github.com/ho-ansible/burp
-- src: https://github.com/ho-ansible/cloudflare
-- src: https://github.com/ho-ansible/common
-- src: https://github.com/ho-ansible/distcc
-- src: https://github.com/ho-ansible/dnsmasq
-- src: https://github.com/ho-ansible/git
-- src: https://github.com/ho-ansible/initramfs
-- src: https://github.com/ho-ansible/iptables
-- src: https://github.com/ho-ansible/logrotate
-- src: https://github.com/ho-ansible/msmtp
-- src: https://github.com/ho-ansible/nextcloud
-- src: https://github.com/ho-ansible/nginx
-- src: https://github.com/ho-ansible/nginx-site
-- src: https://github.com/ho-ansible/node-app
-- src: https://github.com/ho-ansible/nodejs
-- src: https://github.com/ho-ansible/ntp
-- src: https://github.com/ho-ansible/php
-- src: https://github.com/ho-ansible/postgres
-- src: https://github.com/ho-ansible/R
-- src: https://github.com/ho-ansible/rstudio
-- src: https://github.com/ho-ansible/rsyslog
-- src: https://github.com/ho-ansible/shiny
-- src: https://github.com/ho-ansible/ssh
-- src: https://github.com/ho-ansible/sudo
-- src: https://github.com/ho-ansible/systemd-cron
-- src: https://github.com/ho-ansible/systemd-journald
-- src: https://github.com/ho-ansible/systemd-networkd
-- src: https://github.com/ho-ansible/systemd-resolved
-- src: https://github.com/ho-ansible/systemd-timesyncd
-- src: https://github.com/ho-ansible/tinc
-- src: https://github.com/ho-ansible/tmux
-- src: https://github.com/ho-ansible/ttrss
-- src: https://github.com/ho-ansible/xnbd
+roles_base: "https://github.com/ho-ansible"
+
+- src: "{{ roles_base }}/basepkgs"
+- src: "{{ roles_base }}/bash"
+- src: "{{ roles_base }}/burp"
+- src: "{{ roles_base }}/cloudflare"
+- src: "{{ roles_base }}/common"
+- src: "{{ roles_base }}/distcc"
+- src: "{{ roles_base }}/dnsmasq"
+- src: "{{ roles_base }}/git"
+- src: "{{ roles_base }}/initramfs"
+- src: "{{ roles_base }}/iptables"
+- src: "{{ roles_base }}/logrotate"
+- src: "{{ roles_base }}/msmtp"
+- src: "{{ roles_base }}/nextcloud"
+- src: "{{ roles_base }}/nginx"
+- src: "{{ roles_base }}/nginx-site"
+- src: "{{ roles_base }}/node-app"
+- src: "{{ roles_base }}/nodejs"
+- src: "{{ roles_base }}/ntp"
+- src: "{{ roles_base }}/php"
+- src: "{{ roles_base }}/postgres"
+- src: "{{ roles_base }}/R"
+- src: "{{ roles_base }}/rstudio"
+- src: "{{ roles_base }}/rsyslog"
+- src: "{{ roles_base }}/shiny"
+- src: "{{ roles_base }}/ssh"
+- src: "{{ roles_base }}/sudo"
+- src: "{{ roles_base }}/systemd-cron"
+- src: "{{ roles_base }}/systemd-journald"
+- src: "{{ roles_base }}/systemd-networkd"
+- src: "{{ roles_base }}/systemd-resolved"
+- src: "{{ roles_base }}/systemd-timesyncd"
+- src: "{{ roles_base }}/tinc"
+- src: "{{ roles_base }}/tmux"
+- src: "{{ roles_base }}/ttrss"
+- src: "{{ roles_base }}/xnbd"
