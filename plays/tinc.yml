@@ -1,16 +1,15 @@
 #! /usr/bin/env ansible-playbook
-# Playbook assigning role to inventory group
+# Loop over tinc networks
 ---
+
 - name: tinc
   tags:
     - vpn
     - tinc
   hosts: linux
   vars:
-    myvars: "{{ hostvars[inventory_hostname] | to_json | from_json }}"
-    q_tinc: "keys(@)[?starts_with(@, 'tinc_cfg_')]"
   tasks:
-    - include_tasks: tasks/tinc-role.yml
-      with_items: "{{ myvars | json_query(q_tinc) | map('extract', myvars) | list }}"
+    - include_role: name=tinc
+      with_items: "{{ vars.keys() | select('search', '^tinc_subnet_') | map('regex_replace', '^tinc_subnet_') | list }}"
       loop_control:
-        loop_var: tinc_cfg
+        loop_var: tinc_network

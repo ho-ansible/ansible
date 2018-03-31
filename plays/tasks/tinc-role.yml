@@ -1,7 +1,0 @@
----
-- debug:
-    msg: "{{ tinc_cfg.tinc_mode | d('none', true) }}"
-
-#- name: "tinc {{ tinc_cfg.tinc_name }} | role"
-#  include_role:
-#    name: tinc
