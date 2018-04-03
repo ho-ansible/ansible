@@ -1,7 +1,7 @@
 #! /usr/bin/env ansible-playbook
 # Playbook assigning role to inventory group
 ---
-- name: www | nginx sites
+- name: nginx-site | static websites
   hosts: nginx-site
   roles:
   - role: nginx-site
