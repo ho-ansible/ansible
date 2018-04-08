@@ -2,7 +2,6 @@
 # Master playbook invoking role-specific plays
 ---
 - import_playbook: plays/update.yml
-- import_playbook: plays/tinc.yml
 - import_playbook: plays/common.yml
 - import_playbook: plays/dns.yml
 - import_playbook: plays/tmux.yml
