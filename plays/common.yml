@@ -1,6 +1,7 @@
 #! /usr/bin/env ansible-playbook
 # Playbook assigning role to inventory group
 ---
+
 - name: common | Linux hosts
   hosts: linux
   roles:
@@ -20,3 +21,4 @@
     - { role: systemd-timesyncd, tags: [timesync, systemd, ntp, time], when: ansible_virtualization_type != 'openvz' }
     - { role: systemd-journald, tags: [log, journal, systemd] }
 
+- import_playbook: tinc.yml
