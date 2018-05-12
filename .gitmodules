@@ -103,3 +103,6 @@
 [submodule "roles/xnbd"]
 	path = roles/xnbd
 	url = ssh://git@github.com/ho-ansible/xnbd
+[submodule "roles/gitea"]
+	path = roles/gitea
+	url = ssh://git@github.com/ho-ansible/gitea
