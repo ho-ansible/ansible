@@ -10,6 +10,7 @@
   tasks:
     - include_role:
         name: tinc
+        allow_duplicates: no
       with_items: "{{ vars.keys() | select('search', '^tinc_subnet_') | map('regex_replace', '^tinc_subnet_') | list }}"
       loop_control:
         loop_var: tinc_network
