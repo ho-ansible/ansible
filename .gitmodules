@@ -109,3 +109,6 @@
 [submodule "roles/burp-server"]
 	path = roles/burp-server
 	url = ssh://git@github.com/ho-ansible/burp-server
+[submodule "roles/burp-ui"]
+	path = roles/burp-ui
+	url = ssh://git@github.com/ho-ansible/burp-ui
