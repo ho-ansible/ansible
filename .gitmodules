@@ -106,3 +106,6 @@
 [submodule "roles/gitea"]
 	path = roles/gitea
 	url = ssh://git@github.com/ho-ansible/gitea
+[submodule "roles/burp-server"]
+	path = roles/burp-server
+	url = ssh://git@github.com/ho-ansible/burp-server
