@@ -5,3 +5,4 @@
   hosts: backup
   roles:
     - role: burp-server
+    - role: burp-ui
