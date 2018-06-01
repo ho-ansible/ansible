@@ -20,5 +20,3 @@
     - { role: systemd-cron, tags: [cron, systemd] }
     - { role: systemd-timesyncd, tags: [timesync, systemd, ntp, time], when: ansible_virtualization_type != 'openvz' }
     - { role: systemd-journald, tags: [log, journal, systemd] }
-
-- import_playbook: tinc.yml
