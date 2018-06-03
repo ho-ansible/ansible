@@ -1,9 +1,9 @@
 #! /usr/bin/env ansible-playbook
 # Playbook assigning role to inventory group
 ---
-- name: git | source repository servers
+- name: git | gitea servers
   hosts: git
   roles:
-  - role: git
+  - role: gitea
     tags: 
       - git
