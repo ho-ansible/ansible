@@ -1,0 +1,20 @@
+#cloud-config
+
+package_upgrade: true
+packages: python-apt
+
+users:
+  name: {{ ansible_user }}
+  sudo: ALL=(ALL) NOPASSWD:ALL
+  lock_password: true
+  ssh_authorized_keys: {{ ssh_keys }}
+  ssh_import_id: gh-{{ github_user }}
+
+runcmd:
+ - [ sed, '/etc/ssh/sshd_config' ]
+
+timezone: {{ timezone }}
+
+phone_home:
+  url: http://example.com/$INSTANCE_ID/
+# pub_key_dsa pub_key_rsa pub_key_ecdsa instance_id hostname fdqn
