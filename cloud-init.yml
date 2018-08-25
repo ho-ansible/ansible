@@ -11,7 +11,9 @@ users:
   ssh_import_id: gh-{{ github_user }}
 
 runcmd:
- - [ sed, '-ie', '/Port /s/^.*$/Port {{ ansible_port }}/', '/etc/ssh/sshd_config' ]
+  - [ wget, '-O', /etc/ssh/sshd_config, 'https://f.seanho.com/vps/sshd_config' ]
+runcmd:
+  - [ sed, '-ie', '/Port /s/^.*$/Port {{ ansible_port }}/', '/etc/ssh/sshd_config' ]
 
 timezone: {{ timezone }}
 
