@@ -1,12 +1,12 @@
 #cloud-config
 
-package_upgrade: true
+package_upgrade: True
 packages: python-apt
 
 users:
   name: {{ ansible_user }}
   sudo: ALL=(ALL) NOPASSWD:ALL
-  lock_password: true
+  lock_passwd: True
   ssh_authorized_keys: {{ ssh_keys }}
   ssh_import_id: gh-{{ github_user }}
 
