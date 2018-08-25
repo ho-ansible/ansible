@@ -5,6 +5,7 @@ packages: python-apt
 
 users:
   name: {{ ansible_user }}
+  groups: sudo
   sudo: ALL=(ALL) NOPASSWD:ALL
   lock_passwd: True
   ssh_authorized_keys: {{ ssh_keys }}
