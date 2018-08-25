@@ -11,7 +11,7 @@ users:
   ssh_import_id: gh-{{ github_user }}
 
 runcmd:
- - [ sed, '/etc/ssh/sshd_config' ]
+ - [ sed, '-ie', '/Port /s/^.*$/Port {{ ansible_port }}/', '/etc/ssh/sshd_config' ]
 
 timezone: {{ timezone }}
 
