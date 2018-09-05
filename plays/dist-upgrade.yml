@@ -18,5 +18,5 @@
           apt:
             upgrade: dist
             autoremove: yes
-      when: "{{ ansible_distribution_release == release_old }}"
+      when: ansible_distribution_release == release_old
 
