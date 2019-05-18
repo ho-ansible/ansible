@@ -2,7 +2,7 @@
 # Playbook forcing restart
 ---
 - name: xnbd-restart | Restart network block device servers
-  hosts: xnbd-server
+  hosts: xnbd_server
   gather_facts: false
   tasks:
     - name: Restart xnbd

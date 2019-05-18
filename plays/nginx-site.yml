@@ -2,7 +2,7 @@
 # Playbook assigning role to inventory group
 ---
 - name: nginx-site | static websites
-  hosts: nginx-site
+  hosts: nginx_site
   roles:
   - role: nginx-site
     tags: 
