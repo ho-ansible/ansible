@@ -112,3 +112,6 @@
 [submodule "roles/burp-ui"]
 	path = roles/burp-ui
 	url = ssh://git@github.com/ho-ansible/burp-ui
+[submodule "roles/k3s"]
+	path = roles/k3s
+	url = ssh://git@github.com/ho-ansible/k3s
