@@ -15,4 +15,3 @@
 - import_playbook: plays/shiny.yml
 - import_playbook: plays/node.yml
 - import_playbook: plays/xnbd.yml
-- import_playbook: plays/distcc.yml
