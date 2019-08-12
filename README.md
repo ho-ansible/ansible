@@ -22,3 +22,7 @@ mostly for Debian VPS.
 ## Manual setup
 + Create entry on burp server
 + Add DNS records: A, AAAA, CNAME
+
+## SSH jump host
+If the ansible host cannot reach the target host directly, try:
++ `site.yml -l HOST --ssh-common-args '-o ProxyCommand="ssh -W %h:%p -q JUMPHOST"'`
