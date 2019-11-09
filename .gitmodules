@@ -115,3 +115,6 @@
 [submodule "roles/k3s"]
 	path = roles/k3s
 	url = ssh://git@github.com/ho-ansible/k3s
+[submodule "roles/template"]
+	path = roles/template
+	url = ssh://git@github.com/ho-ansible/template
