@@ -118,3 +118,6 @@
 [submodule "roles/template"]
 	path = roles/template
 	url = ssh://git@github.com/ho-ansible/template
+[submodule "roles/wireguard"]
+	path = roles/wireguard
+	url = ssh://git@github.com/ho-ansible/wireguard
