@@ -4,5 +4,5 @@
   hosts: all
   gather_facts: true
   tasks: 
-  - name: Check host connection
+  - name: Gather facts
     setup:
