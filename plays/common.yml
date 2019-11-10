@@ -7,6 +7,7 @@
   roles:
     - { role: common, tags: [common] }
     - { role: sudo, tags: [sudo, login] }
+    - { role: password, tags: [password, login] }
     - { role: iptables, tags: [iptables, firewall] }
     - { role: ssh, tags: [ssh, login] }
     - { role: bash, tags: [bash] }
