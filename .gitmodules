@@ -121,3 +121,6 @@
 [submodule "roles/wireguard"]
 	path = roles/wireguard
 	url = ssh://git@github.com/ho-ansible/wireguard
+[submodule "roles/password"]
+	path = roles/password
+	url = ssh://git@github.com/ho-ansible/password
