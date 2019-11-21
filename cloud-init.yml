@@ -1,0 +1,23 @@
+#cloud-config
+
+package_upgrade: True
+packages: python-apt
+
+users:
+  name: {{ ansible_user }}
+  groups: sudo
+  sudo: ALL=(ALL) NOPASSWD:ALL
+  lock_passwd: True
+  ssh_authorized_keys: {{ ssh_keys }}
+  ssh_import_id: gh-{{ github_user }}
+
+runcmd:
+  - [ wget, '-O', /etc/ssh/sshd_config, 'https://f.seanho.com/vps/sshd_config' ]
+runcmd:
+  - [ sed, '-ie', '/Port /s/^.*$/Port {{ ansible_port }}/', '/etc/ssh/sshd_config' ]
+
+timezone: {{ timezone }}
+
+phone_home:
+  url: http://example.com/$INSTANCE_ID/
+# pub_key_dsa pub_key_rsa pub_key_ecdsa instance_id hostname fdqn

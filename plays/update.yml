@@ -1,7 +1,7 @@
 #! /usr/bin/env ansible-playbook
 ---
 - name: Update all packages
-  hosts: debian
+  hosts: linux
   gather_facts: false
   tasks: 
     - name: Upgrade packages (Debian)
@@ -13,3 +13,4 @@
         update_cache: yes
         cache_valid_time: 86400
         upgrade: dist
+

@@ -7,6 +7,7 @@
   roles:
     - { role: common, tags: [common] }
     - { role: sudo, tags: [sudo, login] }
+    - { role: user, tags: [user, password, login] }
     - { role: iptables, tags: [iptables, firewall] }
     - { role: ssh, tags: [ssh, login] }
     - { role: bash, tags: [bash] }
@@ -19,6 +20,4 @@
     - { role: burp, tags: [burp, backup] }
     - { role: systemd-cron, tags: [cron, systemd] }
     - { role: systemd-timesyncd, tags: [timesync, systemd, ntp, time], when: ansible_virtualization_type != 'openvz' }
-    - { role: systemd-journald, tags: [log, journal, systemd] }
-
-- import_playbook: tinc.yml
+#    - { role: systemd-journald, tags: [log, journal, systemd] }

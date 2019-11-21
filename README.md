@@ -13,11 +13,11 @@ mostly for Debian VPS.
 + Add HOST to groups as needed
 
 ## SSH/sudo access
-+ `ansible-playbook -k -l HOST plays/access.yml`
++ `plays/access.yml -k -l HOST`
 + if NAT, add `-e ansible_port=NATPORT`
 
 ## Setup
-+ `ansible-playbook -l HOST site.yml`
++ `site.yml -l HOST`
 
 ## Manual setup
 + Create entry on burp server

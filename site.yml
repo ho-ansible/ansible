@@ -3,13 +3,16 @@
 ---
 - import_playbook: plays/update.yml
 - import_playbook: plays/common.yml
+- import_playbook: plays/tinc.yml
+- import_playbook: plays/wireguard.yml
 - import_playbook: plays/dns.yml
 - import_playbook: plays/tmux.yml
+- import_playbook: plays/burp.yml
 - import_playbook: plays/nginx-site.yml
 - import_playbook: plays/news.yml
 - import_playbook: plays/nextcloud.yml
 - import_playbook: plays/R.yml
 - import_playbook: plays/rstudio.yml
+- import_playbook: plays/shiny.yml
 - import_playbook: plays/node.yml
 - import_playbook: plays/xnbd.yml
-- import_playbook: plays/distcc.yml

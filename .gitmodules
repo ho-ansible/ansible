@@ -103,3 +103,24 @@
 [submodule "roles/xnbd"]
 	path = roles/xnbd
 	url = ssh://git@github.com/ho-ansible/xnbd
+[submodule "roles/gitea"]
+	path = roles/gitea
+	url = ssh://git@github.com/ho-ansible/gitea
+[submodule "roles/burp-server"]
+	path = roles/burp-server
+	url = ssh://git@github.com/ho-ansible/burp-server
+[submodule "roles/burp-ui"]
+	path = roles/burp-ui
+	url = ssh://git@github.com/ho-ansible/burp-ui
+[submodule "roles/k3s"]
+	path = roles/k3s
+	url = ssh://git@github.com/ho-ansible/k3s
+[submodule "roles/template"]
+	path = roles/template
+	url = ssh://git@github.com/ho-ansible/template
+[submodule "roles/wireguard"]
+	path = roles/wireguard
+	url = ssh://git@github.com/ho-ansible/wireguard
+[submodule "roles/user"]
+	path = roles/user
+	url = ssh://git@github.com/ho-ansible/user

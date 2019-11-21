@@ -1,0 +1,12 @@
+#! /usr/bin/env ansible-playbook
+# Playbook forcing restart
+---
+- name: xnbd-restart | Restart network block device servers
+  hosts: xnbd_server
+  gather_facts: false
+  tasks:
+    - name: Restart xnbd
+      service:
+        name: xnbd-common
+        state: restarted
+
