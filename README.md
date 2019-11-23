@@ -3,22 +3,24 @@ Ansible roles for VM configuration,
 mostly for Debian VPS.
 
 ## Prerequisites
-+ IP address
-+ default root password
++ Host registered in DNS
++ Known root password
 + sshd listening on port 22
-+ name for new host (e.g., `HOST`)
 
 ## Inventory
-+ Add to `inv/*.yml`: HOST ansible_host=IP
-+ Add HOST to groups as needed
++ Add to `inv/master.yml` under appropriate group:
+  + VPN_ID is an incremental counter
+```
+$HOST vpn_id=$VPN_ID
+```
++ Add to other groups as needed
 
 ## SSH/sudo access
-+ `plays/access.yml -k -l HOST`
-+ if NAT, add `-e ansible_port=NATPORT`
++ `plays/access.yml -k -l $HOST`
++ if NAT, add `-e ansible_port=$NATPORT`
 
 ## Setup
-+ `site.yml -l HOST`
++ `site.yml -l $HOST`
 
 ## Manual setup
 + Create entry on burp server
-+ Add DNS records: A, AAAA, CNAME
