@@ -1,7 +1,7 @@
 #! /usr/bin/env ansible-playbook
 ---
 - name: Refresh fact cache
-  hosts: all
+  hosts: linux
   gather_facts: true
   tasks: 
   - name: Gather facts
