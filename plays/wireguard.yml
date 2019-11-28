@@ -2,7 +2,7 @@
 # Playbook assigning role to inventory group
 ---
 - name: wireguard | VPN nodes
-  hosts: wg
+  hosts: linux
   roles:
   - role: wireguard
     tags: 
