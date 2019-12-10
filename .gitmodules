@@ -124,3 +124,6 @@
 [submodule "roles/user"]
 	path = roles/user
 	url = ssh://git@github.com/ho-ansible/user
+[submodule "roles/systemd"]
+	path = roles/systemd
+	url = ssh://git@github.com/ho-ansible/systemd
