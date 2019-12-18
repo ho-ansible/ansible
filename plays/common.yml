@@ -14,7 +14,7 @@
     - { role: basepkgs, tags: [basepkgs, apt] }
     - { role: msmtp, tags: [msmtp, mail] }
     - { role: systemd-networkd, tags: [network, systemd] }
-    - { role: systemd-resolved, tags: [resolver, systemd] }
+    - { role: systemd-resolved, tags: [dns, resolver, systemd] }
     - { role: rsyslog, tags: [rsyslog, log] }
     - { role: logrotate, tags: [logrotate, log] }
     - { role: burp, tags: [burp, backup] }
