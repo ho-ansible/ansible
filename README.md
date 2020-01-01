@@ -6,6 +6,7 @@ mostly for Debian VPS.
 + Host registered in DNS
 + Known root password
 + sshd listening on port 22
++ python2 installed
 
 ## Inventory
 + Add to `inv/master.yml` under appropriate group:
