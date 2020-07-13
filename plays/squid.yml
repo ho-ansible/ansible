@@ -1,0 +1,8 @@
+#! /usr/bin/env ansible-playbook
+# Playbook assigning role to inventory group
+---
+- name: squid | proxy servers
+  hosts: proxy
+  roles:
+    - role: squid
+
