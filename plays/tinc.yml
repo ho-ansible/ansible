@@ -6,7 +6,7 @@
   tags:
     - vpn
     - tinc
-  hosts: linux
+  hosts: tinc_nodes_ho:tinc_nodes_ho1
   tasks:
     - include_role:
         name: tinc
