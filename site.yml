@@ -12,7 +12,4 @@
 - import_playbook: plays/news.yml
 - import_playbook: plays/nextcloud.yml
 - import_playbook: plays/R.yml
-- import_playbook: plays/rstudio.yml
-- import_playbook: plays/shiny.yml
 - import_playbook: plays/node.yml
-- import_playbook: plays/xnbd.yml
