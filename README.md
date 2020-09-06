@@ -18,7 +18,7 @@ $HOST vpn_id=$VPN_ID
 
 ## SSH/sudo access
 + `plays/access.yml -k -l $HOST`
-+ if NAT, add `-e ansible_port=$NATPORT`
++ if ssh listening on non-standard port (e.g., NAT), add `-e ansible_port=$SSHPORT`
 
 ## Setup
 + `site.yml -l $HOST`
