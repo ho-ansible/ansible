@@ -3,11 +3,11 @@
 ---
 - import_playbook: plays/update.yml
 - import_playbook: plays/common.yml
-- import_playbook: plays/wireguard.yml
-- import_playbook: plays/dns.yml
-- import_playbook: plays/tmux.yml
+- import_playbook: roles/wireguard/plays/main.yml
+- import_playbook: roles/dns/plays/main.yml
+- import_playbook: roles/tmux/plays/main.yml
 - import_playbook: plays/burp.yml
-- import_playbook: plays/k3s.yml
+- import_playbook: roles/k3s/plays/main.yml
 - import_playbook: plays/nginx-site.yml
 - import_playbook: plays/news.yml
 - import_playbook: plays/nextcloud.yml
