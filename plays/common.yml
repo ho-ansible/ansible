@@ -6,11 +6,11 @@
   hosts: linux
   roles:
     - { role: common, tags: [common] }
+    - { role: bash, tags: [bash] }
     - { role: sudo, tags: [sudo, login] }
     - { role: user, tags: [user, password, login] }
     - { role: iptables, tags: [iptables, firewall] }
     - { role: ssh, tags: [ssh, login] }
-    - { role: bash, tags: [bash] }
     - { role: basepkgs, tags: [basepkgs, apt] }
     - { role: msmtp, tags: [msmtp, mail] }
     - { role: systemd-networkd, tags: [network, systemd] }
