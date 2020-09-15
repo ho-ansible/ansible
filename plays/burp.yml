@@ -1,8 +1,0 @@
-#! /usr/bin/env ansible-playbook
-# Playbook assigning role to inventory group
----
-- name: burp backup servers
-  hosts: backup
-  roles:
-    - role: burp-server
-    - role: burp-ui

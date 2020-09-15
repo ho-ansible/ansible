@@ -4,9 +4,10 @@
 - import_playbook: plays/update.yml
 - import_playbook: plays/common.yml
 - import_playbook: roles/wireguard/plays/main.yml
-- import_playbook: roles/dns/plays/main.yml
+- import_playbook: roles/dnsmasq/plays/main.yml
 - import_playbook: roles/tmux/plays/main.yml
-- import_playbook: plays/burp.yml
+- import_playbook: roles/burp-server/plays/main.yml
+- import_playbook: roles/burp-ui/plays/main.yml
 - import_playbook: roles/k3s/plays/main.yml
 - import_playbook: plays/nginx-site.yml
 - import_playbook: plays/news.yml
