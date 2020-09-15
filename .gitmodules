@@ -3,133 +3,133 @@
 	url = ssh://git@git.seanho.com:26/home/git/inv
 [submodule "roles/basepkgs"]
 	path = roles/basepkgs
-	url = ssh://git@github.com/ho-ansible/basepkgs
+	url = https://github.com/ho-ansible/basepkgs
 [submodule "roles/bash"]
 	path = roles/bash
-	url = ssh://git@github.com/ho-ansible/bash
+	url = https://github.com/ho-ansible/bash
 [submodule "roles/burp"]
 	path = roles/burp
-	url = ssh://git@github.com/ho-ansible/burp
+	url = https://github.com/ho-ansible/burp
 [submodule "roles/cloudflare"]
 	path = roles/cloudflare
-	url = ssh://git@github.com/ho-ansible/cloudflare
+	url = https://github.com/ho-ansible/cloudflare
 [submodule "roles/common"]
 	path = roles/common
-	url = ssh://git@github.com/ho-ansible/common
+	url = https://github.com/ho-ansible/common
 [submodule "roles/distcc"]
 	path = roles/distcc
-	url = ssh://git@github.com/ho-ansible/distcc
+	url = https://github.com/ho-ansible/distcc
 [submodule "roles/dnsmasq"]
 	path = roles/dnsmasq
-	url = ssh://git@github.com/ho-ansible/dnsmasq
+	url = https://github.com/ho-ansible/dnsmasq
 [submodule "roles/git"]
 	path = roles/git
-	url = ssh://git@github.com/ho-ansible/git
+	url = https://github.com/ho-ansible/git
 [submodule "roles/iptables"]
 	path = roles/iptables
-	url = ssh://git@github.com/ho-ansible/iptables
+	url = https://github.com/ho-ansible/iptables
 [submodule "roles/logrotate"]
 	path = roles/logrotate
-	url = ssh://git@github.com/ho-ansible/logrotate
+	url = https://github.com/ho-ansible/logrotate
 [submodule "roles/msmtp"]
 	path = roles/msmtp
-	url = ssh://git@github.com/ho-ansible/msmtp
+	url = https://github.com/ho-ansible/msmtp
 [submodule "roles/nextcloud"]
 	path = roles/nextcloud
-	url = ssh://git@github.com/ho-ansible/nextcloud
+	url = https://github.com/ho-ansible/nextcloud
 [submodule "roles/nginx"]
 	path = roles/nginx
-	url = ssh://git@github.com/ho-ansible/nginx
+	url = https://github.com/ho-ansible/nginx
 [submodule "roles/nginx-site"]
 	path = roles/nginx-site
-	url = ssh://git@github.com/ho-ansible/nginx-site
+	url = https://github.com/ho-ansible/nginx-site
 [submodule "roles/node-app"]
 	path = roles/node-app
-	url = ssh://git@github.com/ho-ansible/node-app
+	url = https://github.com/ho-ansible/node-app
 [submodule "roles/nodejs"]
 	path = roles/nodejs
-	url = ssh://git@github.com/ho-ansible/nodejs
+	url = https://github.com/ho-ansible/nodejs
 [submodule "roles/ntp"]
 	path = roles/ntp
-	url = ssh://git@github.com/ho-ansible/ntp
+	url = https://github.com/ho-ansible/ntp
 [submodule "roles/php"]
 	path = roles/php
-	url = ssh://git@github.com/ho-ansible/php
+	url = https://github.com/ho-ansible/php
 [submodule "roles/postgres"]
 	path = roles/postgres
-	url = ssh://git@github.com/ho-ansible/postgres
+	url = https://github.com/ho-ansible/postgres
 [submodule "roles/R"]
 	path = roles/R
-	url = ssh://git@github.com/ho-ansible/R
+	url = https://github.com/ho-ansible/R
 [submodule "roles/rstudio"]
 	path = roles/rstudio
-	url = ssh://git@github.com/ho-ansible/rstudio
+	url = https://github.com/ho-ansible/rstudio
 [submodule "roles/rsyslog"]
 	path = roles/rsyslog
-	url = ssh://git@github.com/ho-ansible/rsyslog
+	url = https://github.com/ho-ansible/rsyslog
 [submodule "roles/shiny"]
 	path = roles/shiny
-	url = ssh://git@github.com/ho-ansible/shiny
+	url = https://github.com/ho-ansible/shiny
 [submodule "roles/ssh"]
 	path = roles/ssh
-	url = ssh://git@github.com/ho-ansible/ssh
+	url = https://github.com/ho-ansible/ssh
 [submodule "roles/sudo"]
 	path = roles/sudo
-	url = ssh://git@github.com/ho-ansible/sudo
+	url = https://github.com/ho-ansible/sudo
 [submodule "roles/systemd-cron"]
 	path = roles/systemd-cron
-	url = ssh://git@github.com/ho-ansible/systemd-cron
+	url = https://github.com/ho-ansible/systemd-cron
 [submodule "roles/systemd-journald"]
 	path = roles/systemd-journald
-	url = ssh://git@github.com/ho-ansible/systemd-journald
+	url = https://github.com/ho-ansible/systemd-journald
 [submodule "roles/systemd-networkd"]
 	path = roles/systemd-networkd
-	url = ssh://git@github.com/ho-ansible/systemd-networkd
+	url = https://github.com/ho-ansible/systemd-networkd
 [submodule "roles/systemd-resolved"]
 	path = roles/systemd-resolved
-	url = ssh://git@github.com/ho-ansible/systemd-resolved
+	url = https://github.com/ho-ansible/systemd-resolved
 [submodule "roles/systemd-timesyncd"]
 	path = roles/systemd-timesyncd
-	url = ssh://git@github.com/ho-ansible/systemd-timesyncd
+	url = https://github.com/ho-ansible/systemd-timesyncd
 [submodule "roles/tinc"]
 	path = roles/tinc
-	url = ssh://git@github.com/ho-ansible/tinc
+	url = https://github.com/ho-ansible/tinc
 [submodule "roles/tmux"]
 	path = roles/tmux
-	url = ssh://git@github.com/ho-ansible/tmux
+	url = https://github.com/ho-ansible/tmux
 [submodule "roles/ttrss"]
 	path = roles/ttrss
-	url = ssh://git@github.com/ho-ansible/ttrss
+	url = https://github.com/ho-ansible/ttrss
 [submodule "roles/xnbd"]
 	path = roles/xnbd
-	url = ssh://git@github.com/ho-ansible/xnbd
+	url = https://github.com/ho-ansible/xnbd
 [submodule "roles/gitea"]
 	path = roles/gitea
-	url = ssh://git@github.com/ho-ansible/gitea
+	url = https://github.com/ho-ansible/gitea
 [submodule "roles/burp-server"]
 	path = roles/burp-server
-	url = ssh://git@github.com/ho-ansible/burp-server
+	url = https://github.com/ho-ansible/burp-server
 [submodule "roles/burp-ui"]
 	path = roles/burp-ui
-	url = ssh://git@github.com/ho-ansible/burp-ui
+	url = https://github.com/ho-ansible/burp-ui
 [submodule "roles/k3s"]
 	path = roles/k3s
-	url = ssh://git@github.com/ho-ansible/k3s
+	url = https://github.com/ho-ansible/k3s
 [submodule "roles/template"]
 	path = roles/template
-	url = ssh://git@github.com/ho-ansible/template
+	url = https://github.com/ho-ansible/template
 [submodule "roles/wireguard"]
 	path = roles/wireguard
-	url = ssh://git@github.com/ho-ansible/wireguard
+	url = https://github.com/ho-ansible/wireguard
 [submodule "roles/user"]
 	path = roles/user
-	url = ssh://git@github.com/ho-ansible/user
+	url = https://github.com/ho-ansible/user
 [submodule "roles/systemd"]
 	path = roles/systemd
-	url = ssh://git@github.com/ho-ansible/systemd
+	url = https://github.com/ho-ansible/systemd
 [submodule "roles/squid"]
 	path = roles/squid
-	url = ssh://git@github.com/ho-ansible/squid
+	url = https://github.com/ho-ansible/squid
 [submodule "roles/vim"]
 	path = roles/vim
 	url = https://github.com/ho-ansible/vim
