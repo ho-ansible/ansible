@@ -12,5 +12,5 @@
 - import_playbook: plays/nginx-site.yml
 - import_playbook: plays/news.yml
 - import_playbook: plays/nextcloud.yml
-- import_playbook: plays/R.yml
+- import_playbook: roles/R/plays/main.yml
 - import_playbook: plays/node.yml
