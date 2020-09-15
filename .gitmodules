@@ -130,3 +130,6 @@
 [submodule "roles/squid"]
 	path = roles/squid
 	url = ssh://git@github.com/ho-ansible/squid
+[submodule "roles/vim"]
+	path = roles/vim
+	url = https://github.com/ho-ansible/vim
