@@ -1,5 +1,0 @@
-- name: cloudflare.yml | Set DNS records
-  hosts: all
-  roles:
-    - { role: cloudflare, tags: [cloudflare, dns] }
-

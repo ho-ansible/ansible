@@ -9,8 +9,9 @@
 - import_playbook: roles/burp-server/plays/main.yml
 - import_playbook: roles/burp-ui/plays/main.yml
 - import_playbook: roles/k3s/plays/main.yml
-- import_playbook: plays/nginx-site.yml
-- import_playbook: plays/news.yml
-- import_playbook: plays/nextcloud.yml
+- import_playbook: roles/squid/plays/main.yml
+- import_playbook: roles/nginx-site/plays/main.yml
+- import_playbook: roles/ttrss/plays/main.yml
+- import_playbook: roles/nextcloud/plays/main.yml
 - import_playbook: roles/R/plays/main.yml
-- import_playbook: plays/node.yml
+- import_playbook: roles/node-app/plays/main.yml
