@@ -2,23 +2,22 @@
 # Playbook assigning role to inventory group
 ---
 
-- name: common | Linux hosts
+- name: linux | Basic setup for Linux hosts
   hosts: linux
   roles:
-    - { role: common, tags: [common] }
-    - { role: bash, tags: [bash] }
-    - { role: sudo, tags: [sudo, login] }
-    - { role: user, tags: [user, password, login] }
-    - { role: iptables, tags: [iptables, firewall] }
-    - { role: ssh, tags: [ssh, login] }
-    - { role: basepkgs, tags: [basepkgs, apt] }
-    - { role: vim, tags: [vim] }
-    - { role: msmtp, tags: [msmtp, mail] }
-    - { role: systemd-networkd, tags: [network, systemd] }
-    - { role: systemd-resolved, tags: [dns, resolver, systemd] }
-    - { role: rsyslog, tags: [rsyslog, log] }
-    - { role: logrotate, tags: [logrotate, log] }
-    - { role: burp, tags: [burp, backup] }
-    - { role: systemd-cron, tags: [cron, systemd] }
-    - { role: systemd-timesyncd, tags: [timesync, systemd, ntp, time], when: ansible_virtualization_type != 'openvz' }
-#    - { role: systemd-journald, tags: [log, journal, systemd] }
+  - { role: common, tags: [common] }
+  - { role: bash, tags: [bash] }
+  - { role: sudo, tags: [sudo, login] }
+  - { role: user, tags: [user, password, login] }
+  - { role: iptables, tags: [iptables, firewall] }
+  - { role: ssh, tags: [ssh, login] }
+  - { role: basepkgs, tags: [basepkgs, apt] }
+  - { role: vim, tags: [vim] }
+  - { role: msmtp, tags: [msmtp, mail] }
+  - { role: systemd-networkd, tags: [network, systemd] }
+  - { role: systemd-resolved, tags: [dns, resolver, systemd] }
+  - { role: rsyslog, tags: [rsyslog, log] }
+  - { role: logrotate, tags: [logrotate, log] }
+  - { role: burp, tags: [burp, backup] }
+  - { role: systemd-cron, tags: [cron, systemd] }
+  - { role: systemd-timesyncd, tags: [timesync, systemd, ntp, time], when: ansible_virtualization_type != 'openvz' }

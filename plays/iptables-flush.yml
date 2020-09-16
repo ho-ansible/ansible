@@ -5,8 +5,8 @@
 - name: iptables-flush
   hosts: linux
   pre_tasks:
-    - import_tasks: ../roles/iptables/tasks/flush.yml
+  - import_tasks: ../roles/iptables/tasks/flush.yml
   roles:
-    - { role: iptables, tags: [flush] }
-    - { role: ssh, tags: [flush] }
+  - role: iptables
+  - role: ssh
 

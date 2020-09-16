@@ -3,8 +3,8 @@
 - name: reboot
   hosts: linux:!pi
   tasks:
-    - name: reboot
-      shell: sleep 2 && shutdown -r now "ansible reboot"
-      async: 1
-      poll: 0
-      ignore_errors: true
+  - name: reboot
+    shell: sleep 2 && shutdown -r now "ansible reboot"
+    async: 1
+    poll: 0
+    ignore_errors: true

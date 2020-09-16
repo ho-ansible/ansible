@@ -4,13 +4,13 @@
   hosts: linux
   gather_facts: false
   tasks: 
-    - name: Upgrade packages (Debian)
-      tags:
-        - package
-        - update
-      apt:
-        autoclean: yes
-        update_cache: yes
-        cache_valid_time: 86400
-        upgrade: dist
+  - name: Upgrade packages (Debian)
+    tags:
+    - package
+    - update
+    apt:
+      autoclean: yes
+      update_cache: yes
+      cache_valid_time: 86400
+      upgrade: dist
 
