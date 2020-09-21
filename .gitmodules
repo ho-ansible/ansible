@@ -133,3 +133,6 @@
 [submodule "roles/vim"]
 	path = roles/vim
 	url = https://github.com/ho-ansible/vim
+[submodule "roles/helm"]
+	path = roles/helm
+	url = https://github.com/ho-ansible/helm
