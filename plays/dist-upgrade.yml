@@ -1,7 +1,7 @@
 #! /usr/bin/env ansible-playbook
 ---
 - name: Upgrade Debian release 
-  hosts: linux
+  hosts: debian
   tasks: 
   - name: Change release
     block:
