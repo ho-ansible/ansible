@@ -10,11 +10,14 @@ mostly for Debian VPS.
 
 ## Inventory
 + Add to `inv/master.yml` under appropriate group:
-  + VPN_ID is an incremental counter
+```
+$HOST
+```
++ Add to groups in `inv/roles.yml` as needed
+  + e.g., if part of VPN, add last quartet of VPN IP:
 ```
 $HOST vpn_id=$VPN_ID
 ```
-+ Add to other groups as needed
 
 ## SSH/sudo access
 + `plays/access.yml -k -l $HOST`
