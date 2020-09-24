@@ -13,5 +13,4 @@
 - import_playbook: roles/nginx-site/plays/main.yml
 - import_playbook: roles/ttrss/plays/main.yml
 - import_playbook: roles/nextcloud/plays/main.yml
-- import_playbook: roles/R/plays/main.yml
 - import_playbook: roles/node-app/plays/main.yml
