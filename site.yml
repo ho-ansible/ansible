@@ -7,7 +7,6 @@
 - import_playbook: roles/dnsmasq/plays/main.yml
 - import_playbook: roles/tmux/plays/main.yml
 - import_playbook: roles/burp-server/plays/main.yml
-- import_playbook: roles/burp-ui/plays/main.yml
 - import_playbook: roles/k3s/plays/main.yml
 - import_playbook: roles/squid/plays/main.yml
 - import_playbook: roles/nginx-site/plays/main.yml
