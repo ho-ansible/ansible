@@ -136,3 +136,6 @@
 [submodule "roles/helm"]
 	path = roles/helm
 	url = https://github.com/ho-ansible/helm
+[submodule "roles/dracut"]
+	path = roles/dracut
+	url = https://github.com/ho-ansible/dracut
