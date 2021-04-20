@@ -139,3 +139,6 @@
 [submodule "roles/dracut"]
 	path = roles/dracut
 	url = https://github.com/ho-ansible/dracut
+[submodule "roles/fscrypt"]
+	path = roles/fscrypt
+	url = https://github.com/ho-ansible/fscrypt
