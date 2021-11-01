@@ -5,18 +5,29 @@
   tasks: 
   - name: Change release
     block:
+    - name: Fetch list of sources
+      find:
+        paths:
+        - /etc/apt/sources.list
+        - '/etc/apt/sources.list.d/*'
+        patterns: "*.list"
+        contains: '{{ release_old }}'
+      register: sources_list
     - name: Update sources.list
       replace:
-        path: /etc/apt/sources.list
+        path: '{{ item.path }}'
         regexp: '{{ release_old }}'
         replace: '{{ release_new }}'
-    - name: Safe upgrade
-      apt:
-        update_cache: yes
-        upgrade: safe
+      loop: "{{ sources_list.files }}"
+    - name: Rename /updates to -security (bullseye)
+      replace:
+        path: /etc/apt/sources.list
+        regexp: '{{ release_new }}/updates'
+        replace: '{{ release_new }}-security'
     - name: Dist upgrade
       apt:
+        update_cache: yes
         upgrade: dist
         autoremove: yes
-    when: ansible_distribution_release == release_old and ansible_virtualization_type != "openvz"
+    when: ansible_distribution_release == release_old 
 
