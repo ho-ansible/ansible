@@ -7,11 +7,10 @@
     block:
     - name: Fetch list of sources
       find:
-        paths:
-        - /etc/apt/sources.list
-        - '/etc/apt/sources.list.d/*'
-        patterns: "*.list"
-        contains: '{{ release_old }}'
+        path: /etc/apt
+        pattern: '*.list'
+        recurse: yes
+        contains: '.*{{ release_old }}.*'
       register: sources_list
     - name: Update sources.list
       replace:
