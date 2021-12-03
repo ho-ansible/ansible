@@ -11,11 +11,7 @@
   - ansible_ssh_extra_args: "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
   roles:
   - role: user
-    tags: user
   - role: sudo
-    tags: sudo
   - role: iptables
-    tags: iptables
   - role: ssh
-    tags: ssh
 
