@@ -3,7 +3,13 @@
 ---
 - import_playbook: plays/update.yml
 - import_playbook: plays/linux.yml
+- import_playbook: roles/vim/plays/main.yml
+- import_playbook: roles/systemd-cron/plays/main.yml
+- import_playbook: roles/systemd-timesyncd/plays/main.yml
 - import_playbook: roles/wireguard/plays/main.yml
+- import_playbook: roles/rsyslog/plays/main.yml
+- import_playbook: roles/logrotate/plays/main.yml
+- import_playbook: roles/burp/plays/main.yml
 - import_playbook: roles/dnsmasq/plays/main.yml
 - import_playbook: roles/tmux/plays/main.yml
 - import_playbook: roles/burp-server/plays/main.yml

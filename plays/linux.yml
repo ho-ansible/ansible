@@ -12,12 +12,7 @@
   - { role: iptables, tags: [iptables, firewall] }
   - { role: ssh, tags: [ssh, login] }
   - { role: basepkgs, tags: [basepkgs, apt] }
-  - { role: vim, tags: [vim] }
   - { role: msmtp, tags: [msmtp, mail] }
   - { role: systemd-networkd, tags: [network, systemd] }
   - { role: systemd-resolved, tags: [dns, resolver, systemd] }
-  - { role: rsyslog, tags: [rsyslog, log] }
-  - { role: logrotate, tags: [logrotate, log] }
-  - { role: burp, tags: [burp, backup] }
-  - { role: systemd-cron, tags: [cron, systemd] }
-  - { role: systemd-timesyncd, tags: [timesync, systemd, ntp, time], when: ansible_virtualization_type != 'openvz' }
+
