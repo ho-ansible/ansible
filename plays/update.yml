@@ -4,6 +4,8 @@
   hosts: linux
   gather_facts: false
   tasks: 
+  - name: Gather facts
+    setup:
   - name: Upgrade packages (Debian)
     tags:
     - package
