@@ -142,3 +142,6 @@
 [submodule "roles/fscrypt"]
 	path = roles/fscrypt
 	url = https://github.com/ho-ansible/fscrypt
+[submodule "roles/vscode"]
+	path = roles/vscode
+	url = https://github.com/ho-ansible/vscode
