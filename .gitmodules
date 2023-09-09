@@ -145,3 +145,6 @@
 [submodule "roles/vscode"]
 	path = roles/vscode
 	url = https://github.com/ho-ansible/vscode
+[submodule "roles/haproxy"]
+	path = roles/haproxy
+	url = https://github.com/ho-ansible/haproxy
