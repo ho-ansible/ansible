@@ -1,6 +1,6 @@
 [submodule "inv"]
 	path = inv
-	url = ssh://git@git.seanho.com:26/home/git/inv
+	url = https://code.home.seanho.com/seanho/ansible-inv
 [submodule "roles/basepkgs"]
 	path = roles/basepkgs
 	url = https://github.com/ho-ansible/basepkgs
