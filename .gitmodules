@@ -148,3 +148,6 @@
 [submodule "roles/haproxy"]
 	path = roles/haproxy
 	url = https://github.com/ho-ansible/haproxy
+[submodule "roles/avrdude"]
+	path = roles/avrdude
+	url = https://github.com/ho-ansible/avrdude

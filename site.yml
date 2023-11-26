@@ -19,3 +19,4 @@
 - import_playbook: roles/node-app/plays/main.yml
 - import_playbook: roles/R/plays/main.yml
 - import_playbook: roles/dracut/plays/main.yml
+- import_playbook: roles/avrdude/plays/main.yml
