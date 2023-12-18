@@ -151,3 +151,6 @@
 [submodule "roles/avrdude"]
 	path = roles/avrdude
 	url = https://github.com/ho-ansible/avrdude
+[submodule "roles/softether-server"]
+	path = roles/softether-server
+	url = https://github.com/ho-ansible/softether-server
