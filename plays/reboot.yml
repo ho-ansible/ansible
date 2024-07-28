@@ -1,7 +1,7 @@
 #! /usr/bin/env ansible-playbook
 ---
 - name: reboot
-  hosts: linux:!pi
+  hosts: linux
   tasks:
   - name: reboot
     shell: sleep 2 && shutdown -r now "ansible reboot"
