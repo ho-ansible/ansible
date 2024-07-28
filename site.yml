@@ -14,6 +14,7 @@
 - import_playbook: roles/tmux/plays/main.yml
 - import_playbook: roles/burp-server/plays/main.yml
 - import_playbook: roles/k3s/plays/main.yml
+- import_playbook: roles/sops/plays/main.yml
 - import_playbook: roles/squid/plays/main.yml
 - import_playbook: roles/nodejs/plays/main.yml
 - import_playbook: roles/node-app/plays/main.yml

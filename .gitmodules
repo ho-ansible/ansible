@@ -154,3 +154,6 @@
 [submodule "roles/softether-server"]
 	path = roles/softether-server
 	url = https://github.com/ho-ansible/softether-server
+[submodule "roles/sops"]
+	path = roles/sops
+	url = https://github.com/ho-ansible/sops
