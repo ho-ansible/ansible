@@ -160,3 +160,6 @@
 [submodule "roles/bird"]
 	path = roles/bird
 	url = https://github.com/ho-ansible/bird
+[submodule "roles/wpa_supplicant"]
+	path = roles/wpa_supplicant
+	url = https://github.com/ho-ansible/wpa_supplicant
