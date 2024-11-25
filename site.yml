@@ -6,6 +6,7 @@
 - import_playbook: roles/vim/plays/main.yml
 - import_playbook: roles/systemd-cron/plays/main.yml
 - import_playbook: roles/systemd-timesyncd/plays/main.yml
+- import_playbook: roles/wpa_supplicant/plays/main.yml
 - import_playbook: roles/wireguard/plays/main.yml
 - import_playbook: roles/rsyslog/plays/main.yml
 - import_playbook: roles/logrotate/plays/main.yml
@@ -15,6 +16,7 @@
 - import_playbook: roles/burp-server/plays/main.yml
 - import_playbook: roles/k3s/plays/main.yml
 - import_playbook: roles/haproxy/plays/main.yml
+- import_playbook: roles/bird/plays/main.yml
 - import_playbook: roles/sops/plays/main.yml
 - import_playbook: roles/squid/plays/main.yml
 - import_playbook: roles/nodejs/plays/main.yml
