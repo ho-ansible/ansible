@@ -163,3 +163,6 @@
 [submodule "roles/wpa_supplicant"]
 	path = roles/wpa_supplicant
 	url = https://github.com/ho-ansible/wpa_supplicant
+[submodule "roles/kopia"]
+	path = roles/kopia
+	url = https://github.com/ho-ansible/kopia
