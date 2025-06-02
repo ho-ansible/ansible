@@ -166,3 +166,6 @@
 [submodule "roles/kopia"]
 	path = roles/kopia
 	url = https://github.com/ho-ansible/kopia
+[submodule "roles/firefox"]
+	path = roles/firefox
+	url = https://github.com/ho-ansible/firefox
