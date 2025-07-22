@@ -169,3 +169,6 @@
 [submodule "roles/firefox"]
 	path = roles/firefox
 	url = https://github.com/ho-ansible/firefox
+[submodule "roles/clevis"]
+	path = roles/clevis
+	url = https://github.com/ho-ansible/clevis
