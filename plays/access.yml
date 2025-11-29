@@ -6,9 +6,9 @@
 - name: access | config ansible access
   hosts: all
   vars:
-  - ansible_user: root
-  - ansible_port: 22
-  - ansible_ssh_extra_args: "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+    ansible_user: root
+    ansible_port: 22
+    ansible_ssh_extra_args: "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
   roles:
   - role: user
   - role: sudo
